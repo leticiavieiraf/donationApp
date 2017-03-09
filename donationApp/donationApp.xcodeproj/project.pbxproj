@@ -12,9 +12,14 @@
 		8E9DE4491E70AF4700A0449D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DE4471E70AF4700A0449D /* Main.storyboard */; };
 		8E9DE44B1E70AF4700A0449D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DE44A1E70AF4700A0449D /* Assets.xcassets */; };
 		8E9DE44E1E70AF4700A0449D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DE44C1E70AF4700A0449D /* LaunchScreen.storyboard */; };
+		A46ABF371E70FC950066764C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46ABF361E70FC950066764C /* MainViewController.swift */; };
+		D42330E36DCE15B61119A381 /* Pods_donationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B78C679E15418255774C854 /* Pods_donationApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D31D09B8875ECBB09C657E0 /* Pods-donationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-donationApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-donationApp/Pods-donationApp.release.xcconfig"; sourceTree = "<group>"; };
+		3C8943B3B372EF8EECD134C9 /* Pods-donationApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-donationApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-donationApp/Pods-donationApp.debug.xcconfig"; sourceTree = "<group>"; };
+		6B78C679E15418255774C854 /* Pods_donationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_donationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9DE4401E70AF4600A0449D /* donationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = donationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9DE4431E70AF4600A0449D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E9DE4451E70AF4600A0449D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +27,7 @@
 		8E9DE44A1E70AF4700A0449D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E9DE44D1E70AF4700A0449D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9DE44F1E70AF4700A0449D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A46ABF361E70FC950066764C /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D42330E36DCE15B61119A381 /* Pods_donationApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				8E9DE4421E70AF4600A0449D /* donationApp */,
 				8E9DE4411E70AF4600A0449D /* Products */,
+				C05A245FECEE3C037F4420C0 /* Pods */,
+				D3DB0CEE790B4FD6F255A4BE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +63,56 @@
 		8E9DE4421E70AF4600A0449D /* donationApp */ = {
 			isa = PBXGroup;
 			children = (
+				A46ABF351E70F6AA0066764C /* Storyboard */,
+				A46ABF341E70F68A0066764C /* ViewController */,
+				A46ABF331E70F6800066764C /* Model */,
 				8E9DE4431E70AF4600A0449D /* AppDelegate.swift */,
-				8E9DE4451E70AF4600A0449D /* ViewController.swift */,
-				8E9DE4471E70AF4700A0449D /* Main.storyboard */,
 				8E9DE44A1E70AF4700A0449D /* Assets.xcassets */,
 				8E9DE44C1E70AF4700A0449D /* LaunchScreen.storyboard */,
 				8E9DE44F1E70AF4700A0449D /* Info.plist */,
 			);
 			path = donationApp;
+			sourceTree = "<group>";
+		};
+		A46ABF331E70F6800066764C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A46ABF341E70F68A0066764C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8E9DE4451E70AF4600A0449D /* ViewController.swift */,
+				A46ABF361E70FC950066764C /* MainViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		A46ABF351E70F6AA0066764C /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				8E9DE4471E70AF4700A0449D /* Main.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		C05A245FECEE3C037F4420C0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3C8943B3B372EF8EECD134C9 /* Pods-donationApp.debug.xcconfig */,
+				2D31D09B8875ECBB09C657E0 /* Pods-donationApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D3DB0CEE790B4FD6F255A4BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B78C679E15418255774C854 /* Pods_donationApp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +122,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E9DE4521E70AF4700A0449D /* Build configuration list for PBXNativeTarget "donationApp" */;
 			buildPhases = (
+				1307CA33A660462508B5BC5A /* [CP] Check Pods Manifest.lock */,
 				8E9DE43C1E70AF4600A0449D /* Sources */,
 				8E9DE43D1E70AF4600A0449D /* Frameworks */,
 				8E9DE43E1E70AF4600A0449D /* Resources */,
+				DFB5ADDD2DF89A0FAB1C7B2B /* [CP] Embed Pods Frameworks */,
+				38EDFE1BA481093EA07C6843 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,11 +185,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1307CA33A660462508B5BC5A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		38EDFE1BA481093EA07C6843 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-donationApp/Pods-donationApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DFB5ADDD2DF89A0FAB1C7B2B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-donationApp/Pods-donationApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8E9DE43C1E70AF4600A0449D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A46ABF371E70FC950066764C /* MainViewController.swift in Sources */,
 				8E9DE4461E70AF4600A0449D /* ViewController.swift in Sources */,
 				8E9DE4441E70AF4600A0449D /* AppDelegate.swift in Sources */,
 			);
@@ -258,6 +361,7 @@
 		};
 		8E9DE4531E70AF4700A0449D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C8943B3B372EF8EECD134C9 /* Pods-donationApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = donationApp/Info.plist;
@@ -270,6 +374,7 @@
 		};
 		8E9DE4541E70AF4700A0449D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D31D09B8875ECBB09C657E0 /* Pods-donationApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = donationApp/Info.plist;
@@ -299,6 +404,7 @@
 				8E9DE4541E70AF4700A0449D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
