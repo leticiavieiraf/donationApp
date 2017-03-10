@@ -10,6 +10,7 @@ import UIKit
 import FacebookLogin
 import FBSDKLoginKit
 import FacebookCore
+import FirebaseAuth
 
 class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
 
@@ -25,6 +26,15 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
             print("User IS logged in!")
         }
         
+        
+        if FIRAuth.auth()?.currentUser != nil {
+            // User is signed in.
+            // ...
+        } else {
+            // No user is signed in.
+            // ...
+        }
+        
         loginBtn.delegate = self
         loginBtn.readPermissions = ["public_profile", "email"]
         
@@ -33,22 +43,24 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
     
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
+        //Error
         if(error != nil)
         {
-            print("Error!!!!!")
+            print("Error!!!!! FACEBOOK LOGIN")
             print(error.localizedDescription)
             return
         }
         
+        //Canceled
         if (result.isCancelled) {
             print("User cancelled login.")
             return
         }
         
+        //Success
         if let userToken = result.token
         {
             //Get user access token
-            //let tokenString:String = userToken.tokenString
             
             print("User Logged in Successfully!")
             print(userToken.tokenString)
@@ -56,27 +68,51 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
             print(result.grantedPermissions)
             print(userToken.declinedPermissions)
             
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                
+                if let error = error {
+                    print("Error!!!!! FIREBASE LOGIN")
+                    return
+                }
+                
+                if let user = user {
+                    print("Login successfull firebase!!!")
+                    print(user.email)
+                }
+            }
+            
+            let user = FIRAuth.auth()?.currentUser
             
             //            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("ProtectedPageViewController") as! ProtectedPageViewController
             //            let protectedPageNav = UINavigationController(rootViewController: protectedPage)
             //            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             //            appDelegate.window?.rootViewController = protectedPageNav
+            
         }
-        
     }
     
     public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         
         print("User Logged out Successfully!")
-        //            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("ProtectedPageViewController") as! ProtectedPageViewController
-        //            let protectedPageNav = UINavigationController(rootViewController: protectedPage)
-        //            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        //            appDelegate.window?.rootViewController = protectedPageNav
+        
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
-
 }
         
+
+
+
+
+
+
+
 
 
 

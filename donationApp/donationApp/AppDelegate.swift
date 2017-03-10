@@ -9,6 +9,7 @@
 import UIKit
 import FacebookCore
 import FBSDKLoginKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FBSDKLoginButton.classForCoder()
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        FIRApp.configure()
         
         return true
     }
