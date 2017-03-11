@@ -19,7 +19,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (AccessToken.current == nil) {
+        if AccessToken.current == nil {
             print("User IS NOT logged in!")
             //AccessToken.refreshCurrentToken()
         } else {
@@ -27,11 +27,11 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
         }
         
         
-        if FIRAuth.auth()?.currentUser != nil {
-            // User is signed in.
+        if FIRAuth.auth()?.currentUser == nil {
+            print("Firebase: User IS NOT logged in!")
             // ...
         } else {
-            // No user is signed in.
+            print("Firebase: User IS logged in!")
             // ...
         }
         
