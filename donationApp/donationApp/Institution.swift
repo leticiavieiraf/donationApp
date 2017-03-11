@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-struct Institution: Mappable {
+struct Institution : Mappable {
     
     var name: String!
     var description: String!
