@@ -21,7 +21,6 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBarController?.title = "Minhas doações"
         let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
         self.tabBarController?.navigationItem.rightBarButtonItem = addButton
         
@@ -30,13 +29,32 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
             print("Firebase: User IS NOT logged in!")
             //Redirecionar para Tela de login!
             return
-            
-        } else {
-            donatorUser = DonatorUser(uid: (FIRAuth.auth()?.currentUser?.uid)!,
-                                      email: (FIRAuth.auth()?.currentUser?.email)!,
-                                      name: (FIRAuth.auth()?.currentUser?.displayName)!,
-                                      photoUrl: (FIRAuth.auth()?.currentUser?.photoURL?.absoluteString)!)
         }
+        
+        FIRAuth.auth()!.addStateDidChangeListener { auth, user in
+            guard let user = user else { return }
+            self.donatorUser = DonatorUser(authData: user)
+        }
+        
+        ref.observe(.value, with: { snapshot in
+            
+            //print(snapshot.value)
+            var newItems: [DonationItem] = []
+            
+            for item in snapshot.children {
+                let donationItem = DonationItem(snapshot: item as! FIRDataSnapshot)
+                newItems.append(donationItem)
+            }
+            
+            self.items = newItems
+            self.tableView.reloadData()
+        })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.title = "Minhas Doações"
     }
     
     func showNewDonationPopUp() {
@@ -57,12 +75,14 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         let dateStr = formatter.string(from: date)
         
   
-        let donationItem = DonationItem(name: item, donator: donatorUser, publishDate: dateStr)
-        let groceryItemRef = self.ref.child(item.lowercased())
-        groceryItemRef.setValue(donationItem.toAnyObject())
-
-        //items.append(donationItem)
-        tableView.reloadData()
+        let donationItem = DonationItem(name: item,
+                                        addedByUser: donatorUser.name,
+                                        userEmail: donatorUser.email,
+                                        userPhotoUrl: donatorUser.photoUrl,
+                                        publishDate: dateStr)
+        
+        let donationItemRef = self.ref.child(item.lowercased())//.childByAutoId()
+        donationItemRef.setValue(donationItem.toAnyObject())
     }
     
     // MARK: UITableViewDataSource
@@ -90,8 +110,11 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
       
         if editingStyle == .delete {
-            items.remove(at: indexPath.row)
-            tableView.reloadData()
+            let donationItem = items[indexPath.row]
+            donationItem.ref?.removeValue()
+            
+//          items.remove(at: indexPath.row)
+//          tableView.reloadData()
         }
     }
     

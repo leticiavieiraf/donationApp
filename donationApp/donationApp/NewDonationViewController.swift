@@ -50,6 +50,7 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     // MARK: Save Button
     @IBAction func save(_ sender: Any) {
+        selectedItem = selectedItem == "" ? "Agasalhos" : selectedItem
 
         self.removeAnimate()
         self.delegate?.didPressSaveWithSelectItem(selectedItem)

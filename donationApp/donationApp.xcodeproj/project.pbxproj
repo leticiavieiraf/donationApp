@@ -159,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				A4A1D4511E744A0E00349AF9 /* RequestsViewController.swift */,
+				A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */,
 				A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */,
 				A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */,
 				A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */,
@@ -169,7 +170,6 @@
 		A4A1D4551E744E2600349AF9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";

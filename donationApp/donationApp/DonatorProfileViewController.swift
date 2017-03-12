@@ -12,9 +12,12 @@ class DonatorProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.tabBarController?.title = "Perfil"
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
