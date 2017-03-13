@@ -17,12 +17,12 @@
 		8E9DE44B1E70AF4700A0449D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DE44A1E70AF4700A0449D /* Assets.xcassets */; };
 		8E9DE44E1E70AF4700A0449D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DE44C1E70AF4700A0449D /* LaunchScreen.storyboard */; };
 		A46ABF371E70FC950066764C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46ABF361E70FC950066764C /* MainViewController.swift */; };
+		A48DFDA11E761955006736D5 /* donationapp-c98bd-export (1).json in Resources */ = {isa = PBXBuildFile; fileRef = A48DFDA01E761955006736D5 /* donationapp-c98bd-export (1).json */; };
 		A4A1D4481E7448AE00349AF9 /* MyDonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */; };
 		A4A1D44A1E7448C600349AF9 /* NewDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */; };
 		A4A1D44C1E7448EA00349AF9 /* InstitutionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */; };
 		A4A1D44E1E74492600349AF9 /* DonatorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */; };
 		A4A1D4521E744A0E00349AF9 /* RequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4511E744A0E00349AF9 /* RequestsViewController.swift */; };
-		A4A1D4541E744E1C00349AF9 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4A1D4531E744E1C00349AF9 /* Common.storyboard */; };
 		A4A1D4571E749FE800349AF9 /* DonationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4561E749FE800349AF9 /* DonationItem.swift */; };
 		A4A1D4591E74A00900349AF9 /* DonatorUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4581E74A00900349AF9 /* DonatorUser.swift */; };
 		A4A1D45B1E74A02100349AF9 /* InstitutionUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */; };
@@ -47,12 +47,12 @@
 		8E9DE44D1E70AF4700A0449D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9DE44F1E70AF4700A0449D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A46ABF361E70FC950066764C /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A48DFDA01E761955006736D5 /* donationapp-c98bd-export (1).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "donationapp-c98bd-export (1).json"; path = "../../../../../Downloads/donationapp-c98bd-export (1).json"; sourceTree = "<group>"; };
 		A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDonationViewController.swift; sourceTree = "<group>"; };
 		A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionsViewController.swift; sourceTree = "<group>"; };
 		A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatorProfileViewController.swift; sourceTree = "<group>"; };
 		A4A1D4511E744A0E00349AF9 /* RequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
-		A4A1D4531E744E1C00349AF9 /* Common.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		A4A1D4561E749FE800349AF9 /* DonationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationItem.swift; sourceTree = "<group>"; };
 		A4A1D4581E74A00900349AF9 /* DonatorUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatorUser.swift; sourceTree = "<group>"; };
 		A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionUser.swift; sourceTree = "<group>"; };
@@ -74,6 +74,7 @@
 		8E3305DC1E72EF7A00F7DCA9 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				A48DFDA01E761955006736D5 /* donationapp-c98bd-export (1).json */,
 				8E3305DF1E72F2A700F7DCA9 /* institutions.json */,
 			);
 			name = JSON;
@@ -131,7 +132,6 @@
 			children = (
 				A4A1D4501E74493A00349AF9 /* Donators */,
 				A4A1D44F1E74493600349AF9 /* Institutions */,
-				A4A1D4551E744E2600349AF9 /* Common */,
 				A46ABF361E70FC950066764C /* MainViewController.swift */,
 			);
 			name = ViewController;
@@ -143,7 +143,6 @@
 				8E9DE4471E70AF4700A0449D /* Main.storyboard */,
 				8E62BC761E71DAF9004FE7F1 /* Donators.storyboard */,
 				8E62BC781E71DB0D004FE7F1 /* Institutions.storyboard */,
-				A4A1D4531E744E1C00349AF9 /* Common.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -165,13 +164,6 @@
 				A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */,
 			);
 			name = Donators;
-			sourceTree = "<group>";
-		};
-		A4A1D4551E744E2600349AF9 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Common;
 			sourceTree = "<group>";
 		};
 		A4A1D45C1E74B65300349AF9 /* Protocol */ = {
@@ -268,8 +260,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E62BC791E71DB0D004FE7F1 /* Institutions.storyboard in Resources */,
-				A4A1D4541E744E1C00349AF9 /* Common.storyboard in Resources */,
 				8E62BC771E71DAF9004FE7F1 /* Donators.storyboard in Resources */,
+				A48DFDA11E761955006736D5 /* donationapp-c98bd-export (1).json in Resources */,
 				8E9DE44E1E70AF4700A0449D /* LaunchScreen.storyboard in Resources */,
 				8E9DE44B1E70AF4700A0449D /* Assets.xcassets in Resources */,
 				8E3305E01E72F2A700F7DCA9 /* institutions.json in Resources */,
@@ -469,8 +461,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = donationApp/donationApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = X3L9YG9572;
 				INFOPLIST_FILE = donationApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pucminas.donationApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,8 +478,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = donationApp/donationApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = X3L9YG9572;
 				INFOPLIST_FILE = donationApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pucminas.donationApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

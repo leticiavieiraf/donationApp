@@ -19,89 +19,117 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if AccessToken.current == nil {
-            print("User IS NOT logged in!")
-            //AccessToken.refreshCurrentToken()
-        } else {
-            print("User IS logged in!")
-        }
-        
-        
-        if FIRAuth.auth()?.currentUser == nil {
-            print("Firebase: User IS NOT logged in!")
-            // ...
-        } else {
+        if AccessToken.current != nil && FIRAuth.auth()?.currentUser != nil {
+            print("Facebook: User IS logged in!")
             print("Firebase: User IS logged in!")
-            // ...
+            
+            // Entra como Doador
+            let donatorsTabBarC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+            
+            let donatorsTabBarCNav = UINavigationController(rootViewController: donatorsTabBarC)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = donatorsTabBarCNav
+
+        } else {
+            print("Facebook: User IS NOT logged in!")
+            print("Firebase: User IS NOT logged in!")
         }
-        
+
         loginBtn.delegate = self
         loginBtn.readPermissions = ["public_profile", "email"]
-        
      }
     
-    
+    // Login Facebook
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
         //Error
         if(error != nil)
         {
-            print("Error!!!!! FACEBOOK LOGIN")
-            print(error.localizedDescription)
+            print("Facebook: Login Error!")
+            // Show alert
+            let errorMsg = "Erro ao realizar login no Facebook: " + error.localizedDescription
+            let alert = UIAlertController(title: "Erro",
+                                          message: errorMsg,
+                                          preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Ok",
+                                         style: .default)
+            
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+
             return
         }
         
         //Canceled
         if (result.isCancelled) {
-            print("User cancelled login.")
+            print("Facebook: User cancelled login.")
+            
+            // Show alert
+            let errorMsg = "O login foi cancelado pelo usuário."
+            let alert = UIAlertController(title: "Atenção",
+                                          message: errorMsg,
+                                          preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Ok",
+                                         style: .default)
+            
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
             return
         }
         
         //Success
         if let userToken = result.token
         {
-            //Get user access token
+            print("Facebook: User Logged in Successfully!")
             
-            print("User Logged in Successfully!")
-            print(userToken.tokenString)
-            print(userToken.userID)
-            print(result.grantedPermissions)
-            print(userToken.declinedPermissions)
-            
+            // Login no Firebase!
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-            
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                 
                 if let error = error {
-                    print("Error!!!!! FIREBASE LOGIN")
+                    print("Firebase: Login Error!")
+                    
+                    // Show alert
+                    let errorMsg = "Erro ao realizar login no Firebase: " + error.localizedDescription
+                    let alert = UIAlertController(title: "Erro",
+                                                  message: errorMsg,
+                                                  preferredStyle: .alert)
+                    
+                    let okAction = UIAlertAction(title: "Ok",
+                                                 style: .default)
+                    
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true, completion: nil)
+
                     return
                 }
                 
                 if let user = user {
-                    print("Login successfull firebase!!!")
-                    print(user.email)
+                    print("Firebase: Login successfull")
+                    
+                    // Entra como Doador
+                    let donatorsTabBarC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+                    
+                    let donatorsTabBarCNav = UINavigationController(rootViewController: donatorsTabBarC)
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = donatorsTabBarCNav
                 }
             }
-            
-            let user = FIRAuth.auth()?.currentUser
-            
-            //            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("ProtectedPageViewController") as! ProtectedPageViewController
-            //            let protectedPageNav = UINavigationController(rootViewController: protectedPage)
-            //            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            //            appDelegate.window?.rootViewController = protectedPageNav
-            
         }
     }
     
     public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         
-        print("User Logged out Successfully!")
+        //Nao vai entrar aqui!
+        print("Facebook: User Logged out Successfully!")
         
         let firebaseAuth = FIRAuth.auth()
         do {
             try firebaseAuth?.signOut()
         } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
+            print ("Firebase: Error signing out: %@", signOutError)
         }
     }
 }

@@ -40,14 +40,28 @@
                     <view key="view" contentMode="scaleToFill" id="0qE-cc-sIb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="b1p-yz-nxu">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="b1p-yz-nxu" firstAttribute="top" secondItem="0qE-cc-sIb" secondAttribute="top" id="I8l-Ni-5gq"/>
+                            <constraint firstItem="b1p-yz-nxu" firstAttribute="leading" secondItem="0qE-cc-sIb" secondAttribute="leading" id="OsL-RW-8OF"/>
+                            <constraint firstAttribute="trailing" secondItem="b1p-yz-nxu" secondAttribute="trailing" id="izB-m0-RFa"/>
+                            <constraint firstAttribute="bottom" secondItem="b1p-yz-nxu" secondAttribute="bottom" id="qjT-v5-UN2"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Instituições" id="N1q-jv-iEv"/>
                     <navigationItem key="navigationItem" title="Instituições" id="h2Y-cz-sYo"/>
+                    <connections>
+                        <outlet property="mapView" destination="b1p-yz-nxu" id="hFv-Cz-EiO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SiJ-Fc-REj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2452" y="844"/>
+            <point key="canvasLocation" x="-2452" y="843.32833583208401"/>
         </scene>
         <!--Minhas doações-->
         <scene sceneID="Crd-Rw-Lzz">
@@ -254,19 +268,32 @@
                     <view key="view" contentMode="scaleToFill" id="mig-rI-H1G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBs-Xf-Jbc">
+                                <rect key="frame" x="128" y="382" width="119" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logout:" destination="dLb-Xz-iZE" eventType="touchUpInside" id="oSv-q1-kHx"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KQf-40-aol" firstAttribute="top" secondItem="QBs-Xf-Jbc" secondAttribute="bottom" constant="206" id="Ure-co-mgS"/>
+                            <constraint firstItem="QBs-Xf-Jbc" firstAttribute="centerX" secondItem="mig-rI-H1G" secondAttribute="centerX" id="oks-yS-TsJ"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Perfil" id="JOr-u5-UgU"/>
                     <navigationItem key="navigationItem" title="Perfil" id="x9y-qj-N9s"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eS-IG-GDE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-722" y="825"/>
+            <point key="canvasLocation" x="-722.39999999999998" y="824.43778110944538"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="g59-yI-kb2">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="VKG-Yr-WrN" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarControllerID" automaticallyAdjustsScrollViewInsets="NO" id="VKG-Yr-WrN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Alt-Pi-h1Y">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

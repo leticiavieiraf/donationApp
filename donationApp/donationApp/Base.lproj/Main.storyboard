@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="x4M-lg-ukh">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="x4M-lg-ukh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,6 +37,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="hmx-k3-axf">
+                                <rect key="frame" x="109" y="112" width="156" height="167"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="156" id="tTK-GU-f6x"/>
+                                    <constraint firstAttribute="height" constant="167" id="uyj-s1-Tnq"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venha distribuir sorrisos.." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAn-pJ-Yuv">
                                 <rect key="frame" x="5" y="327" width="365" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -56,30 +63,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Fy-oK-z5E" userLabel="loginBtnView" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="21" y="466" width="332.5" height="53"/>
+                                <rect key="frame" x="20" y="466" width="335" height="53"/>
                                 <color key="backgroundColor" red="0.15511087628154793" green="0.18262892789766333" blue="0.55063957253886009" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="210-Fz-wsE">
-                                <rect key="frame" x="98" y="219" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="COq-Nh-a8e" kind="show" id="Rl3-DI-kaq"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="JAn-pJ-Yuv" secondAttribute="trailing" constant="5" id="7vI-EM-XlH"/>
                             <constraint firstItem="jdz-QY-Hzs" firstAttribute="top" secondItem="JAn-pJ-Yuv" secondAttribute="bottom" constant="5" id="Arl-iU-icQ"/>
-                            <constraint firstAttribute="trailing" secondItem="4Fy-oK-z5E" secondAttribute="trailing" constant="21.5" id="Bib-7t-U6k"/>
+                            <constraint firstAttribute="trailing" secondItem="4Fy-oK-z5E" secondAttribute="trailing" constant="20" id="Bib-7t-U6k"/>
                             <constraint firstItem="JAn-pJ-Yuv" firstAttribute="leading" secondItem="Aex-M0-JmF" secondAttribute="leading" constant="5" id="FAM-dq-chd"/>
                             <constraint firstItem="4Fy-oK-z5E" firstAttribute="top" secondItem="h0Z-Ti-yGl" secondAttribute="bottom" constant="10" id="KCV-gP-xHL"/>
                             <constraint firstItem="h0Z-Ti-yGl" firstAttribute="top" secondItem="jdz-QY-Hzs" secondAttribute="bottom" constant="80" id="Ohs-lU-Pgf"/>
+                            <constraint firstItem="JAn-pJ-Yuv" firstAttribute="top" secondItem="hmx-k3-axf" secondAttribute="bottom" constant="48" id="QBI-gx-KhZ"/>
                             <constraint firstItem="h0Z-Ti-yGl" firstAttribute="centerX" secondItem="Aex-M0-JmF" secondAttribute="centerX" id="Qpn-9p-VJt"/>
                             <constraint firstItem="JAn-pJ-Yuv" firstAttribute="centerY" secondItem="Aex-M0-JmF" secondAttribute="centerY" id="RoW-1z-IEw"/>
                             <constraint firstItem="jdz-QY-Hzs" firstAttribute="leading" secondItem="Aex-M0-JmF" secondAttribute="leading" constant="5" id="StO-DP-2v0"/>
-                            <constraint firstItem="4Fy-oK-z5E" firstAttribute="leading" secondItem="Aex-M0-JmF" secondAttribute="leading" constant="21" id="ozs-ta-x06"/>
+                            <constraint firstItem="hmx-k3-axf" firstAttribute="centerX" secondItem="Aex-M0-JmF" secondAttribute="centerX" id="d5a-Km-MjN"/>
+                            <constraint firstItem="4Fy-oK-z5E" firstAttribute="leading" secondItem="Aex-M0-JmF" secondAttribute="leading" constant="20" id="ozs-ta-x06"/>
                             <constraint firstItem="ZNY-xw-UFE" firstAttribute="top" secondItem="4Fy-oK-z5E" secondAttribute="bottom" constant="148" id="sbI-yn-w5I"/>
                             <constraint firstAttribute="trailing" secondItem="jdz-QY-Hzs" secondAttribute="trailing" constant="5" id="x7C-v4-2oo"/>
                         </constraints>
@@ -102,4 +103,7 @@
             <point key="canvasLocation" x="1371" y="381"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="156" height="167"/>
+    </resources>
 </document>

@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import FacebookLogin
+import FacebookCore
 
 class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSelectionDelegate {
 
@@ -25,30 +27,38 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         self.tabBarController?.navigationItem.rightBarButtonItem = addButton
         
         
-        if FIRAuth.auth()?.currentUser == nil {
+        if AccessToken.current == nil || FIRAuth.auth()?.currentUser == nil {
+            print("Facebook: User IS NOT logged in!")
             print("Firebase: User IS NOT logged in!")
-            //Redirecionar para Tela de login!
-            return
-        }
-        
-        FIRAuth.auth()!.addStateDidChangeListener { auth, user in
-            guard let user = user else { return }
-            self.donatorUser = DonatorUser(authData: user)
-        }
-        
-        ref.observe(.value, with: { snapshot in
             
-            //print(snapshot.value)
-            var newItems: [DonationItem] = []
+            // Redireciona para tela de login
+            let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = loginNav
             
-            for item in snapshot.children {
-                let donationItem = DonationItem(snapshot: item as! FIRDataSnapshot)
-                newItems.append(donationItem)
+        } else {
+         
+            // Busca doações
+            FIRAuth.auth()!.addStateDidChangeListener { auth, user in
+                guard let user = user else { return }
+                self.donatorUser = DonatorUser(authData: user)
             }
             
-            self.items = newItems
-            self.tableView.reloadData()
-        })
+            ref.observe(.value, with: { snapshot in
+                
+                //print(snapshot.value)
+                var newItems: [DonationItem] = []
+                
+                for item in snapshot.children {
+                    let donationItem = DonationItem(snapshot: item as! FIRDataSnapshot)
+                    newItems.append(donationItem)
+                }
+                
+                self.items = newItems
+                self.tableView.reloadData()
+            })
+
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,9 +122,6 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         if editingStyle == .delete {
             let donationItem = items[indexPath.row]
             donationItem.ref?.removeValue()
-            
-//          items.remove(at: indexPath.row)
-//          tableView.reloadData()
         }
     }
     

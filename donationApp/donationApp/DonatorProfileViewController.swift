@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FacebookLogin
+import FacebookCore
 
 class DonatorProfileViewController: UIViewController {
 
@@ -20,20 +23,43 @@ class DonatorProfileViewController: UIViewController {
         self.tabBarController?.title = "Perfil"
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func logout(_ sender: Any) {
+        
+        // Logout Facebook
+        if AccessToken.current != nil {
+            let loginManager = LoginManager()
+            loginManager.logOut()
+        }
+       
+        // Logout Firebase
+        if FIRAuth.auth()?.currentUser == nil {
+            
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+                
+                // Redireciona para tela de login
+                let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = loginNav
+                
+            } catch let signOutError as NSError {
+                //print ("Error signing out: %@", signOutError)
+                
+                // Show alert
+                let errorMsg = "Erro ao realizar logout no Firebase: " + signOutError.localizedDescription
+                let alert = UIAlertController(title: "Erro",
+                                              message: errorMsg,
+                                              preferredStyle: .alert)
+            
+                let okAction = UIAlertAction(title: "Ok",
+                                            style: .default)
+                
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+  
 
 }
