@@ -13,8 +13,19 @@ import FacebookCore
 
 class DonatorProfileViewController: UIViewController {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if AccessToken.current != nil || FIRAuth.auth()?.currentUser != nil {
+            
+            self.nameLabel.text = FIRAuth.auth()?.currentUser?.displayName
+            self.emailLabel.text = FIRAuth.auth()?.currentUser?.email
+            self.load_image(urlString: (FIRAuth.auth()?.currentUser?.photoURL?.absoluteString)!)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -22,7 +33,19 @@ class DonatorProfileViewController: UIViewController {
         
         self.tabBarController?.title = "Perfil"
     }
-
+    
+    func load_image(urlString:String)
+    {
+        let url: URL = URL(string: urlString)!
+        
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: url) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            DispatchQueue.main.async {
+                self.profileImageView.image = UIImage(data: data!)
+            }
+        }
+    }
+    
     @IBAction func logout(_ sender: Any) {
         
         // Logout Facebook
@@ -32,7 +55,7 @@ class DonatorProfileViewController: UIViewController {
         }
        
         // Logout Firebase
-        if FIRAuth.auth()?.currentUser == nil {
+        if FIRAuth.auth()?.currentUser != nil {
             
             let firebaseAuth = FIRAuth.auth()
             do {
