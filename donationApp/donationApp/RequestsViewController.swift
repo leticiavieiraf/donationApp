@@ -19,6 +19,7 @@ class RequestsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.title = "Pedidos"
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
     override func didReceiveMemoryWarning() {

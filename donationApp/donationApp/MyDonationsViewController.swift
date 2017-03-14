@@ -22,10 +22,6 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
-        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
-        
         
         if AccessToken.current == nil || FIRAuth.auth()?.currentUser == nil {
             print("Facebook: User IS NOT logged in!")
@@ -65,6 +61,9 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         super.viewWillAppear(animated)
         
         self.tabBarController?.title = "Minhas Doações"
+        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
+        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
+
     }
     
     func showNewDonationPopUp() {

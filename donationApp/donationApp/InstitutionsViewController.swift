@@ -81,6 +81,7 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         super.viewWillAppear(animated)
         
         self.tabBarController?.title = "Instituições"
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -32,6 +32,7 @@ class DonatorProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.title = "Perfil"
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
     func load_image(urlString:String)
