@@ -2,7 +2,7 @@
 //  DetailInstitutionViewController.swift
 //  donationApp
 //
-//  Created by Natalia Sheila Cardoso de Siqueira on 13/03/17.
+//  Created by Letícia Fernandes on 13/03/17.
 //  Copyright © 2017 PUC. All rights reserved.
 //
 

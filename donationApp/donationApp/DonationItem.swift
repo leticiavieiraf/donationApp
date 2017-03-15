@@ -2,7 +2,7 @@
 //  DonationItem.swift
 //  donationApp
 //
-//  Created by Natalia Sheila Cardoso de Siqueira on 11/03/17.
+//  Created by Letícia Fernandes on 11/03/17.
 //  Copyright © 2017 PUC. All rights reserved.
 //
 
@@ -34,7 +34,7 @@ struct DonationItem {
         let snapshotValue = snapshot.value as! [String: AnyObject]
 //        let snapshotValue = snapshot.value as! [String: Any]
 //        let value = snapshotValue[snapshotValue.keys.first!]
-        //let itemdic = snapshotValue as Dictionary<String, Any>
+//        let itemdic = snapshotValue as Dictionary<String, Any>
         name = snapshotValue["name"] as! String
         addedByUser = snapshotValue["addedByUser"] as! String
         userEmail = snapshotValue["userEmail"] as! String
