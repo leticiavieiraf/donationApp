@@ -14,15 +14,17 @@ struct DonationItem {
     var key: String
     var name: String
     var addedByUser: String
+    var userUid: String
     var userEmail: String
     var userPhotoUrl: String
     var publishDate: String
     var ref: FIRDatabaseReference?
     
-    init (name: String, addedByUser: String, userEmail: String, userPhotoUrl: String, publishDate: String, key: String = "") {
+    init (name: String, addedByUser: String, userUid: String, userEmail: String, userPhotoUrl: String, publishDate: String, key: String = "") {
         self.key = key
         self.name = name
         self.addedByUser = addedByUser
+        self.userUid = userUid
         self.userEmail = userEmail
         self.userPhotoUrl = userPhotoUrl
         self.publishDate = publishDate
@@ -37,6 +39,7 @@ struct DonationItem {
 //        let itemdic = snapshotValue as Dictionary<String, Any>
         name = snapshotValue["name"] as! String
         addedByUser = snapshotValue["addedByUser"] as! String
+        userUid = snapshotValue["userUid"] as! String
         userEmail = snapshotValue["userEmail"] as! String
         userPhotoUrl = snapshotValue["userPhotoUrl"] as! String
         publishDate = snapshotValue["publishDate"] as! String
@@ -47,6 +50,7 @@ struct DonationItem {
         return [
             "name": name,
             "addedByUser": addedByUser,
+            "userUid": userUid,
             "userEmail": userEmail,
             "userPhotoUrl": userPhotoUrl,
             "publishDate": publishDate

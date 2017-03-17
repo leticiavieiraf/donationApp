@@ -78,6 +78,14 @@
 			name = JSON;
 			sourceTree = "<group>";
 		};
+		8E6CE25D1E7C2C4100443C10 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A46ABF361E70FC950066764C /* MainViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		8E72BCB81E76EA9A00CB6CB4 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,9 +153,9 @@
 		A46ABF341E70F68A0066764C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8E6CE25D1E7C2C4100443C10 /* Login */,
 				A4A1D4501E74493A00349AF9 /* Donators */,
 				A4A1D44F1E74493600349AF9 /* Institutions */,
-				A46ABF361E70FC950066764C /* MainViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";

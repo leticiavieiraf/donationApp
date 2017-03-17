@@ -86,11 +86,12 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
   
         let donationItem = DonationItem(name: item,
                                         addedByUser: donatorUser.name,
+                                        userUid: donatorUser.uid,
                                         userEmail: donatorUser.email,
                                         userPhotoUrl: donatorUser.photoUrl,
                                         publishDate: dateStr)
         
-        let donationItemRef = self.ref.child(item.lowercased())//.childByAutoId()
+        let donationItemRef = self.ref.child(donationItem.userUid.lowercased())//.childByAutoId()
         donationItemRef.setValue(donationItem.toAnyObject())
     }
     
