@@ -53,7 +53,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         // Busca doações
         FIRAuth.auth()!.addStateDidChangeListener { auth, user in
             guard let user = user else { return }
-            self.institutionUser = InstitutionUser(authData: user)
+            //self.institutionUser = InstitutionUser(authData: user)
         }
         
         refDonationItems.observe(.value, with: { snapshot in

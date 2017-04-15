@@ -57,12 +57,13 @@ class InstitutionUser : NSObject {
         super.init()
     }
     
-    init(authData: FIRUser) {
-        key = ""
-        uid = authData.uid
-        email = authData.email!
-        ref = nil
-    }
+//    init(authData: FIRUser) {
+//        key = ""
+//        uid = authData.uid
+//        email = authData.email!
+//        name = "x"
+//        ref = nil
+//    }
     
     var title: String? {
     return name
