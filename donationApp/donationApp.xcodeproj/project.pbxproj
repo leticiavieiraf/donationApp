@@ -23,6 +23,7 @@
 		A41C926B1EA14AF10078FE9A /* InstitutionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C926A1EA14AF10078FE9A /* InstitutionProfileViewController.swift */; };
 		A41C926D1EA1618A0078FE9A /* LoginInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C926C1EA1618A0078FE9A /* LoginInstitutionViewController.swift */; };
 		A41C926F1EA18CE40078FE9A /* RegisterInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C926E1EA18CE40078FE9A /* RegisterInstitutionViewController.swift */; };
+		A41C92711EA1F0460078FE9A /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C92701EA1F0460078FE9A /* OrderItem.swift */; };
 		A42AC3E61E7792FA00E4B512 /* DetailInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */; };
 		A46ABF371E70FC950066764C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46ABF361E70FC950066764C /* MainViewController.swift */; };
 		A4A1D4481E7448AE00349AF9 /* MyDonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */; };
@@ -59,6 +60,7 @@
 		A41C926A1EA14AF10078FE9A /* InstitutionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionProfileViewController.swift; sourceTree = "<group>"; };
 		A41C926C1EA1618A0078FE9A /* LoginInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInstitutionViewController.swift; sourceTree = "<group>"; };
 		A41C926E1EA18CE40078FE9A /* RegisterInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInstitutionViewController.swift; sourceTree = "<group>"; };
+		A41C92701EA1F0460078FE9A /* OrderItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
 		A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInstitutionViewController.swift; sourceTree = "<group>"; };
 		A46ABF361E70FC950066764C /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
@@ -149,9 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				8E3578A01E73279C0047D42C /* Institution.swift */,
-				A4A1D4561E749FE800349AF9 /* DonationItem.swift */,
 				A4A1D4581E74A00900349AF9 /* DonatorUser.swift */,
 				A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */,
+				A4A1D4561E749FE800349AF9 /* DonationItem.swift */,
+				A41C92701EA1F0460078FE9A /* OrderItem.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 			files = (
 				8E3578A11E73279C0047D42C /* Institution.swift in Sources */,
 				A46ABF371E70FC950066764C /* MainViewController.swift in Sources */,
+				A41C92711EA1F0460078FE9A /* OrderItem.swift in Sources */,
 				A4A1D45B1E74A02100349AF9 /* InstitutionUser.swift in Sources */,
 				A41C926B1EA14AF10078FE9A /* InstitutionProfileViewController.swift in Sources */,
 				A4A1D4481E7448AE00349AF9 /* MyDonationsViewController.swift in Sources */,
