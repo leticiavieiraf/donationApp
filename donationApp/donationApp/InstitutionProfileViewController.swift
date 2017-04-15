@@ -7,29 +7,80 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FacebookLogin
+import FacebookCore
 
 class InstitutionProfileViewController: UIViewController {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    
+    var institutionUser : InstitutionUser!
+    let refInstitutionUsers = FIRDatabase.database().reference(withPath: "institution-users")
+
+    
+    // MARK: Lyfe Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        if FIRAuth.auth()?.currentUser != nil {
+            
+            let userUID = FIRAuth.auth()?.currentUser!.uid
+            
+            refInstitutionUsers.child(userUID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                self.institutionUser = InstitutionUser(snapshot: snapshot)
+                
+                self.nameLabel.text = self.institutionUser.name
+                self.emailLabel.text = self.institutionUser.email
+                self.addressLabel.text = self.institutionUser.address + ", " + self.institutionUser.district + ", " + self.institutionUser.city + " - " + self.institutionUser.state + ". Cep: " + self.institutionUser.zipCode
+                self.infoLabel.text = self.institutionUser.group
+                self.phoneLabel.text = self.institutionUser.phone
+            })
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.title = "Perfil"
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
-    */
+    
+    // MARK: Firebase method
+    @IBAction func logout(_ sender: Any) {
+        
+        if FIRAuth.auth()?.currentUser != nil {
+            
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+                
+                // Redireciona para tela de login
+                let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = loginNav
+                
+            } catch let signOutError as NSError {
+                
+                // Show alert
+                let errorMsg = "Erro ao realizar logout: " + signOutError.localizedDescription
+                let alert = UIAlertController(title: "Erro",
+                                              message: errorMsg,
+                                              preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: "Ok",
+                                             style: .default)
+                
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+
 
 }

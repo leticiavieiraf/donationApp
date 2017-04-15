@@ -57,13 +57,28 @@ class InstitutionUser : NSObject {
         super.init()
     }
     
-//    init(authData: FIRUser) {
-//        key = ""
-//        uid = authData.uid
-//        email = authData.email!
-//        name = "x"
-//        ref = nil
-//    }
+    init(snapshot: FIRDataSnapshot) {
+        key = snapshot.key
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        uid = snapshotValue["uid"] as! String
+        name = snapshotValue["Name"] as! String
+        info = snapshotValue["description"] as! String
+        email = snapshotValue["e_mail"] as! String
+        password = snapshotValue["password"] as! String
+        registerDate = snapshotValue["registerDate"] as! String
+        contact = snapshotValue["contato"] as! String
+        phone = snapshotValue["telefone"] as! String
+        bank = snapshotValue["banco"] as! String
+        agency = snapshotValue["agencia"] as! String
+        accountNumber = snapshotValue["conta"] as! String
+        address = snapshotValue["endereco"] as! String
+        district = snapshotValue["bairro"] as! String
+        city = snapshotValue["cidade"] as! String
+        state = snapshotValue["estado"] as! String
+        zipCode = snapshotValue["cep"] as! String
+        group = snapshotValue["IDSetor"] as! String
+        ref = snapshot.ref
+    }
     
     var title: String? {
     return name

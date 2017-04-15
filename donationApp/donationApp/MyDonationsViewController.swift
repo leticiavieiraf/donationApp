@@ -23,6 +23,14 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.title = "Minhas Doações"
+        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
+        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
         
         if AccessToken.current == nil || FIRAuth.auth()?.currentUser == nil {
             print("Facebook: User IS NOT logged in!")
@@ -34,33 +42,30 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
             appDelegate.window?.rootViewController = loginNav
             
         } else {
-            loadDonations()
+            if let donUser = self.donatorUser {
+                loadDonationsFrom(donUser.uid)
+            } else {
+                getUserAndLoadDonations()
+            }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.tabBarController?.title = "Minhas Doações"
-        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
-        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
-        
     }
     
     // MARK: Firebase methods
-    func loadDonations() {
+    func getUserAndLoadDonations() {
         
-        // Busca doações
         FIRAuth.auth()!.addStateDidChangeListener { auth, user in
             guard let user = user else { return }
             self.donatorUser = DonatorUser(authData: user)
+            self.loadDonationsFrom(self.donatorUser.uid)
         }
+    }
+    
+    func loadDonationsFrom(_ userUID: String) {
         
-        refDonationItems.observe(.value, with: { snapshot in
-            
+       refDonationItems.child("users-uid").child(userUID.lowercased()).child("donations-id").observe(.value, with: { snapshot in
             var newItems: [DonationItem] = []
             
-            for item in snapshot.children {
+            for item in snapshot.children.allObjects {
                 let donationItem = DonationItem(snapshot: item as! FIRDataSnapshot)
                 newItems.append(donationItem)
             }
@@ -85,7 +90,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
                                         userPhotoUrl: donatorUser.photoUrl,
                                         publishDate: dateStr)
         
-        let donationItemRef = self.refDonationItems.child(donationItem.userUid.lowercased() + " - " + donationItem.name)//.childByAutoId()
+        let donationItemRef = refDonationItems.child("users-uid").child(donationItem.userUid.lowercased()).child("donations-id").childByAutoId()
         donationItemRef.setValue(donationItem.toAnyObject())
     }
     

@@ -16,15 +16,25 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     @IBOutlet weak var tableView: UITableView!
     
-    var items : [DonationItem] = []
+    var items : [OrderItem] = []
     var institutionUser : InstitutionUser!
-    let refDonationItems = FIRDatabase.database().reference(withPath: "order-items")
+    let refOrderItems = FIRDatabase.database().reference(withPath: "order-items")
+    let refInstitutionUsers = FIRDatabase.database().reference(withPath: "institution-users")
     
     // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        if AccessToken.current == nil || FIRAuth.auth()?.currentUser == nil {
+        self.tabBarController?.title = "Meus Pedidos"
+        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewOrderPopUp))
+        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
+        
+        
+        if FIRAuth.auth()?.currentUser == nil {
             print("Facebook: User IS NOT logged in!")
             print("Firebase: User IS NOT logged in!")
             
@@ -34,34 +44,35 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
             appDelegate.window?.rootViewController = loginNav
             
         } else {
-            loadDonations()
+           
+            if let instUser = self.institutionUser {
+                loadOrdersFrom(instUser.uid)
+            } else {
+                getUserAndLoadOrders()
+            }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.tabBarController?.title = "Minhas Doações"
-        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
-        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
         
     }
     
     // MARK: Firebase methods
-    func loadDonations() {
+    func getUserAndLoadOrders() {
         
-        // Busca doações
-        FIRAuth.auth()!.addStateDidChangeListener { auth, user in
-            guard let user = user else { return }
-            //self.institutionUser = InstitutionUser(authData: user)
-        }
+        let userUID = FIRAuth.auth()?.currentUser?.uid
         
-        refDonationItems.observe(.value, with: { snapshot in
+        refInstitutionUsers.child(userUID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            self.institutionUser = InstitutionUser(snapshot: snapshot)
+            self.loadOrdersFrom(self.institutionUser.uid)
+        })
+        
+    }
+    
+    func loadOrdersFrom(_ userUID: String) {
+        
+        refOrderItems.child("users-uid").child(userUID.lowercased()).child("orders-id").observe(.value, with: { (snapshot) in
+            var newItems: [OrderItem] = []
             
-            var newItems: [DonationItem] = []
-            
-            for item in snapshot.children {
-                let orderItem = DonationItem(snapshot: item as! FIRDataSnapshot)
+            for item in snapshot.children.allObjects {
+                let orderItem = OrderItem(snapshot: item as! FIRDataSnapshot)
                 newItems.append(orderItem)
             }
             
@@ -78,27 +89,27 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         let dateStr = formatter.string(from: date)
         
         
-        let orderItem = DonationItem(name: order,
-                                        addedByUser: institutionUser.name,
-                                        userUid: institutionUser.uid,
-                                        userEmail: institutionUser.email,
-                                        userPhotoUrl:"",
-                                        publishDate: dateStr)
+        let orderItem = OrderItem(name: order,
+                                     addedByUser: institutionUser.name,
+                                     userUid: institutionUser.uid,
+                                     userEmail: institutionUser.email,
+                                     userPhotoUrl:"",
+                                     publishDate: dateStr)
         
-        let orderItemRef = self.refDonationItems.child(orderItem.userUid.lowercased() + " - " + orderItem.name)//.childByAutoId()
+        let orderItemRef = refOrderItems.child("users-uid").child(orderItem.userUid.lowercased()).child("orders-id").childByAutoId()
         orderItemRef.setValue(orderItem.toAnyObject())
     }
     
-    // MARK: Popup New Donation
-    func showNewDonationPopUp() {
+    // MARK: Popup New Order
+    func showNewOrderPopUp() {
         
-        let newDonationVC = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "sbPopUpID") as! NewDonationViewController
-        newDonationVC.delegate = self
+        let newOrderVC = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "sbPopUpID") as! NewOrderViewController
+        newOrderVC.delegate = self
         
-        self.addChildViewController(newDonationVC)
-        newDonationVC.view.frame = self.view.frame
-        self.view.addSubview(newDonationVC.view)
-        newDonationVC.didMove(toParentViewController: self)
+        self.addChildViewController(newOrderVC)
+        newOrderVC.view.frame = self.view.frame
+        self.view.addSubview(newOrderVC.view)
+        newOrderVC.didMove(toParentViewController: self)
     }
     
     func didPressSaveWithSelectItem(_ item: String) {

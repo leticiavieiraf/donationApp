@@ -438,52 +438,52 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRm-aG-WiV" userLabel="Container">
-                                <rect key="frame" x="36" y="258" width="303" height="85"/>
+                                <rect key="frame" x="36" y="258" width="303" height="63"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4gJ-zU-gDf" userLabel="iconName">
-                                        <rect key="frame" x="15" y="15" width="13" height="15"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="4gJ-zU-gDf" userLabel="iconName">
+                                        <rect key="frame" x="15" y="11.5" width="18" height="18"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="k4s-ke-fxo"/>
-                                            <constraint firstAttribute="width" constant="13" id="q55-QW-FvG"/>
+                                            <constraint firstAttribute="height" constant="18" id="k4s-ke-fxo"/>
+                                            <constraint firstAttribute="width" constant="18" id="q55-QW-FvG"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mmv-FV-XNP" userLabel="Nome">
-                                        <rect key="frame" x="38" y="13" width="255" height="19.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mmv-FV-XNP" userLabel="Nome">
+                                        <rect key="frame" x="43" y="13" width="250" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Oo-eN-qBa" userLabel="iconEmail">
-                                        <rect key="frame" x="13" y="45" width="19" height="12"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_email" translatesAutoresizingMaskIntoConstraints="NO" id="8Oo-eN-qBa" userLabel="iconEmail">
+                                        <rect key="frame" x="15" y="37" width="18" height="14"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="19" id="6A5-7I-LbI"/>
-                                            <constraint firstAttribute="height" constant="12" id="QlB-W8-LhQ"/>
+                                            <constraint firstAttribute="width" constant="18" id="6A5-7I-LbI"/>
+                                            <constraint firstAttribute="height" constant="14" id="QlB-W8-LhQ"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slh-sc-jba" userLabel="Email">
-                                        <rect key="frame" x="39" y="40.5" width="254" height="19.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slh-sc-jba" userLabel="Email">
+                                        <rect key="frame" x="43" y="36.5" width="250" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.91997247409326421" green="0.91997247409326421" blue="0.91997247409326421" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="slh-sc-jba" firstAttribute="leading" secondItem="8Oo-eN-qBa" secondAttribute="trailing" constant="7" id="1MB-oC-Mdm"/>
-                                    <constraint firstAttribute="height" constant="85" id="6e2-ai-vTl"/>
+                                    <constraint firstItem="slh-sc-jba" firstAttribute="leading" secondItem="8Oo-eN-qBa" secondAttribute="trailing" constant="10" id="1MB-oC-Mdm"/>
+                                    <constraint firstItem="4gJ-zU-gDf" firstAttribute="centerY" secondItem="Mmv-FV-XNP" secondAttribute="centerY" id="8PV-Ti-XKa"/>
                                     <constraint firstAttribute="trailing" secondItem="Mmv-FV-XNP" secondAttribute="trailing" constant="10" id="9xO-TK-pLh"/>
-                                    <constraint firstItem="slh-sc-jba" firstAttribute="top" secondItem="Mmv-FV-XNP" secondAttribute="bottom" constant="8" id="AZp-HI-W1r"/>
+                                    <constraint firstItem="slh-sc-jba" firstAttribute="top" secondItem="Mmv-FV-XNP" secondAttribute="bottom" constant="10" id="AZp-HI-W1r"/>
                                     <constraint firstItem="Mmv-FV-XNP" firstAttribute="top" secondItem="fRm-aG-WiV" secondAttribute="top" constant="13" id="Ox0-bX-zY1"/>
                                     <constraint firstItem="4gJ-zU-gDf" firstAttribute="leading" secondItem="fRm-aG-WiV" secondAttribute="leading" constant="15" id="P3b-tA-pAy"/>
-                                    <constraint firstItem="4gJ-zU-gDf" firstAttribute="top" secondItem="fRm-aG-WiV" secondAttribute="top" constant="15" id="cax-aY-eAV"/>
                                     <constraint firstItem="Mmv-FV-XNP" firstAttribute="leading" secondItem="4gJ-zU-gDf" secondAttribute="trailing" constant="10" id="h33-eG-CPV"/>
-                                    <constraint firstItem="8Oo-eN-qBa" firstAttribute="leading" secondItem="fRm-aG-WiV" secondAttribute="leading" constant="13" id="mxY-JC-0UQ"/>
-                                    <constraint firstItem="8Oo-eN-qBa" firstAttribute="top" secondItem="4gJ-zU-gDf" secondAttribute="bottom" constant="15" id="nYY-ZI-GMN"/>
+                                    <constraint firstItem="8Oo-eN-qBa" firstAttribute="centerY" secondItem="slh-sc-jba" secondAttribute="centerY" id="inq-k9-wp2"/>
+                                    <constraint firstAttribute="bottom" secondItem="slh-sc-jba" secondAttribute="bottom" constant="13" id="mHP-gG-5au"/>
+                                    <constraint firstItem="8Oo-eN-qBa" firstAttribute="leading" secondItem="fRm-aG-WiV" secondAttribute="leading" constant="15" id="mxY-JC-0UQ"/>
                                     <constraint firstAttribute="trailing" secondItem="slh-sc-jba" secondAttribute="trailing" constant="10" id="xc0-eu-1oy"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBs-Xf-Jbc" customClass="DAButton" customModule="donationApp" customModuleProvider="target">
-                                <rect key="frame" x="36" y="393" width="303" height="30"/>
+                                <rect key="frame" x="36" y="371" width="303" height="30"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Logout">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -503,8 +503,8 @@
                                     <action selector="logout:" destination="dLb-Xz-iZE" eventType="touchUpInside" id="oSv-q1-kHx"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="60k-od-HzJ">
-                                <rect key="frame" x="152" y="466" width="70" height="80"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoverde" translatesAutoresizingMaskIntoConstraints="NO" id="60k-od-HzJ">
+                                <rect key="frame" x="152" y="451" width="70" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="rrG-01-0AL"/>
                                     <constraint firstAttribute="width" constant="70" id="xOQ-O5-qNJ"/>
@@ -514,7 +514,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="odT-Pt-9PZ" firstAttribute="centerX" secondItem="mig-rI-H1G" secondAttribute="centerX" id="0SP-wQ-HXl"/>
-                            <constraint firstItem="60k-od-HzJ" firstAttribute="top" secondItem="QBs-Xf-Jbc" secondAttribute="bottom" constant="43" id="CH8-dD-GmT"/>
+                            <constraint firstItem="60k-od-HzJ" firstAttribute="top" secondItem="QBs-Xf-Jbc" secondAttribute="bottom" constant="50" id="CH8-dD-GmT"/>
                             <constraint firstItem="fRm-aG-WiV" firstAttribute="leading" secondItem="mig-rI-H1G" secondAttribute="leadingMargin" constant="20" id="F0J-51-rwy"/>
                             <constraint firstItem="odT-Pt-9PZ" firstAttribute="top" secondItem="Eyv-bb-XDf" secondAttribute="bottom" constant="73" id="JPn-qB-ed7"/>
                             <constraint firstItem="fRm-aG-WiV" firstAttribute="top" secondItem="odT-Pt-9PZ" secondAttribute="bottom" constant="50" id="LCc-aA-taz"/>
@@ -560,6 +560,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="39" height="42"/>
+        <image name="ic_email" width="18" height="13"/>
+        <image name="ic_user" width="18" height="18"/>
+        <image name="logoverde" width="110" height="120"/>
     </resources>
 </document>

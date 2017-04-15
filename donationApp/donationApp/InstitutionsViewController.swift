@@ -24,7 +24,7 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if AccessToken.current == nil || FIRAuth.auth()?.currentUser == nil {
+        if FIRAuth.auth()?.currentUser == nil {
             print("Facebook: User IS NOT logged in!")
             print("Firebase: User IS NOT logged in!")
             
