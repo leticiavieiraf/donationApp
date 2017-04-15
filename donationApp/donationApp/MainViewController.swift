@@ -37,6 +37,8 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
 
         loginBtn.delegate = self
         loginBtn.readPermissions = ["public_profile", "email"]
+        loginBtn.setTitle("Entrar com Facebook", for: .normal)
+        loginBtn.layer.cornerRadius = 4.0
      }
     
     // Login Facebook
@@ -66,7 +68,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
             print("Facebook: User cancelled login.")
             
             // Show alert
-            let errorMsg = "O login foi cancelado pelo usuário."
+            let errorMsg = "O login foi cancelado."
             let alert = UIAlertController(title: "Atenção",
                                           message: errorMsg,
                                           preferredStyle: .alert)
@@ -110,11 +112,10 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
                     print("Firebase: Login successfull")
                     
                     // Successo: Redireciona para o storyboard de Doador
-                    let donatorsTabBarC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
-                    
-                    let donatorsTabBarCNav = UINavigationController(rootViewController: donatorsTabBarC)
+                    let donatorsTabBarController = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+                    let donatorsNavigationController = UINavigationController(rootViewController: donatorsTabBarController)
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.window?.rootViewController = donatorsTabBarCNav
+                    appDelegate.window?.rootViewController = donatorsNavigationController
                 }
             }
         }
@@ -122,7 +123,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
     
     public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         
-        //Nao vai entrar aqui!
+        //Não vai entrar aqui!
         print("Facebook: User Logged out Successfully!")
         
         let firebaseAuth = FIRAuth.auth()

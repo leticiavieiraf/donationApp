@@ -1,27 +1,21 @@
 //
-//  RequestsViewController.swift
+//  InstitutionProfileViewController.swift
 //  donationApp
 //
-//  Created by Letícia Fernandes on 11/03/17.
+//  Created by Letícia Fernandes on 14/04/17.
 //  Copyright © 2017 PUC. All rights reserved.
 //
 
 import UIKit
 
-class RequestsViewController: UIViewController {
+class InstitutionProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Do any additional setup after loading the view.
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.tabBarController?.title = "Pedidos"
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

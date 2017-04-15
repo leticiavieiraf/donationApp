@@ -44,23 +44,23 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
                 
                 var count = 0
                 for item in snapshot.children {
-                    let instit = Institution(snapshot: item as! FIRDataSnapshot)
+                    let institution = Institution(snapshot: item as! FIRDataSnapshot)
                     
-                    if instit.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
+                    if institution.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
                         
-                        let adress = instit.address + " " + instit.district + ", " + instit.city + " - " + instit.state
+                        let adress = institution.address + " " + institution.district + ", " + institution.city + " - " + institution.state
                         self.geolocalisation(fromAddress: adress, onSuccess: { location in
                             
-                            instit.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                            institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
                                                                        longitude: location.coordinate.longitude)
                             
-                            self.mapView.addAnnotation(instit)
+                            self.mapView.addAnnotation(institution)
                             
                             
                             //Set initial location
                             if count == 0 {
                                  let initialLocation = self.mapView.userLocation.location != nil ? self.mapView.userLocation.location :
-                                    CLLocation(latitude: instit.coordinate.latitude, longitude: instit.coordinate.longitude)
+                                    CLLocation(latitude: institution.coordinate.latitude, longitude: institution.coordinate.longitude)
                                 
                                 self.centerMapOnLocation(location: initialLocation!)
                                 count += 1
@@ -70,8 +70,7 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
                         }
                     }
                     
-                    
-                    self.institutions.append(instit)
+                    self.institutions.append(institution)
                 }
             })
         }

@@ -24,7 +24,25 @@ class DonatorProfileViewController: UIViewController {
             
             self.nameLabel.text = FIRAuth.auth()?.currentUser?.displayName
             self.emailLabel.text = FIRAuth.auth()?.currentUser?.email
-            self.load_image(urlString: (FIRAuth.auth()?.currentUser?.photoURL?.absoluteString)!)
+            
+            // Load image profile
+            do {
+                try self.loadProfileImage(urlString: (FIRAuth.auth()?.currentUser?.photoURL?.absoluteString)!);
+                
+            } catch let loadingImageError as NSError {
+                
+                // Show alert
+                let errorMsg = "Erro ao carregar imagem do perfil: " + loadingImageError.localizedDescription
+                let alert = UIAlertController(title: "Erro",
+                                              message: errorMsg,
+                                              preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: "Ok",
+                                             style: .default)
+                
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
     
@@ -35,12 +53,13 @@ class DonatorProfileViewController: UIViewController {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
-    func load_image(urlString:String)
+    func loadProfileImage(urlString:String) throws
     {
         let url: URL = URL(string: urlString)!
-        
+    
         DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            let data = try? Data(contentsOf: url)
+            
             DispatchQueue.main.async {
                 self.profileImageView.image = UIImage(data: data!)
             }
@@ -68,8 +87,7 @@ class DonatorProfileViewController: UIViewController {
                 appDelegate.window?.rootViewController = loginNav
                 
             } catch let signOutError as NSError {
-                //print ("Error signing out: %@", signOutError)
-                
+        
                 // Show alert
                 let errorMsg = "Erro ao realizar logout no Firebase: " + signOutError.localizedDescription
                 let alert = UIAlertController(title: "Erro",

@@ -42,11 +42,9 @@ class Institution : NSObject, MKAnnotation { //Mappable
         self.email = email
         self.contact = contact
         self.phone = phone
-        
         self.bank = bank
         self.agency = agency
         self.accountNumber = accountNumber
-        
         self.address = address
         self.district = district
         self.city = city
