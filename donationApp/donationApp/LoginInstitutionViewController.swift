@@ -17,14 +17,42 @@ class LoginInstitutionViewController: UIViewController {
     @IBOutlet weak var emailErrorImage: UIImageView!
     @IBOutlet weak var passwordErrorImage: UIImageView!
     
-    
     let ref = FIRDatabase.database().reference(withPath: "features")
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    // Entrar
+    @IBAction func logIn(_ sender: Any) {
+        
+        if isEmptyFields() {
+            return
+        }
+        else {
+            FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!) { (user, error) in
+                
+                //Error
+                if let error = error {
+                    print("Firebase: Login Error!")
+                    self.showAlert(withTitle: "Erro", message: "Erro ao realizar login: " + error.localizedDescription)
+                    return
+                }
+                
+                //Success
+                if let user = user {
+                    print("Firebase: Login successfull")
+                    
+                    // Successo: Entra como Instituição
+                    let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+                    let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = institutionsNavigationController
+                }
+            }
+        }
+    }
+
     func isEmptyFields() -> Bool {
         
         var isEmpty : Bool = false;
@@ -46,42 +74,18 @@ class LoginInstitutionViewController: UIViewController {
         return isEmpty
     }
     
-    // Entrar
-    @IBAction func logIn(_ sender: Any) {
+    func showAlert(withTitle: String, message: String) {
         
-        if isEmptyFields() {
-            return
-        }
-        else {
-            FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!) { (user, error) in
-                if let error = error {
-                    print("Firebase: Login Error!")
-                    
-                    // Show alert
-                    let errorMsg = "Erro ao realizar login: " + error.localizedDescription
-                    let alert = UIAlertController(title: "Erro", message: errorMsg, preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "Ok", style: .default)
-                    
-                    alert.addAction(okAction)
-                    self.present(alert, animated: true, completion: nil)
-                    
-                    return
-                }
-                
-                if let user = user {
-                    print("Firebase: Login successfull")
-                    
-                    // Successo: Redireciona para o storyboard de Instituição
-                    let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
-                    let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.window?.rootViewController = institutionsNavigationController
-                }
-            }
-        }
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok",
+                                     style: .default)
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
-
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

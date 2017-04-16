@@ -63,20 +63,22 @@ class RegisterInstitutionViewController: UIViewController {
             var title : String = ""
             var msg : String = ""
             
+            //Error
             if let error = error {
                 print("Firebase: Register Error!")
                 title = "Erro"
                 msg = error.localizedDescription
             }
             
+            //Success
             if let user = user {
                 print("Firebase: Register successfull")
                 title = "Sucesso"
                 msg = "Cadastro realizado com sucesso. "
                 
-                self.insertRegistered(institution, uid:user.uid)
+                self.insertRegisteredUser(institution, uid:user.uid)
             }
-            // Show alert
+            
             let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (okAction) in
                 self.dismiss(animated: true, completion: nil)
@@ -101,7 +103,8 @@ class RegisterInstitutionViewController: UIViewController {
         return foundedInstitution
     }
     
-    func insertRegistered(_ institution: Institution, uid: String) {
+    //Save registered user in database
+    func insertRegisteredUser(_ institution: Institution, uid: String) {
         
         let date = Date()
         let formatter = DateFormatter()

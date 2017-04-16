@@ -42,8 +42,8 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
             appDelegate.window?.rootViewController = loginNav
             
         } else {
-            if let donUser = self.donatorUser {
-                loadDonationsFrom(donUser.uid)
+            if let currentUser = self.donatorUser {
+                loadDonationsFrom(currentUser.uid)
             } else {
                 getUserAndLoadDonations()
             }
@@ -55,14 +55,17 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         
         FIRAuth.auth()!.addStateDidChangeListener { auth, user in
             guard let user = user else { return }
-            self.donatorUser = DonatorUser(authData: user)
-            self.loadDonationsFrom(self.donatorUser.uid)
+            
+            if AccessToken.current != nil {
+                self.donatorUser = DonatorUser(authData: user)
+                self.loadDonationsFrom(self.donatorUser.uid)
+            }
         }
     }
     
     func loadDonationsFrom(_ userUID: String) {
         
-       refDonationItems.child("users-uid").child(userUID.lowercased()).child("donations-id").observe(.value, with: { snapshot in
+       refDonationItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { snapshot in
             var newItems: [DonationItem] = []
             
             for item in snapshot.children.allObjects {
@@ -79,7 +82,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
         let dateStr = formatter.string(from: date)
         
         
@@ -90,7 +93,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
                                         userPhotoUrl: donatorUser.photoUrl,
                                         publishDate: dateStr)
         
-        let donationItemRef = refDonationItems.child("users-uid").child(donationItem.userUid.lowercased()).child("donations-id").childByAutoId()
+        let donationItemRef = refDonationItems.child("users-uid").child(donationItem.userUid.lowercased()).childByAutoId()
         donationItemRef.setValue(donationItem.toAnyObject())
     }
     
@@ -112,7 +115,6 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     
     // MARK: UITableViewDataSource
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return items.count
     }
     

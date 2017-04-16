@@ -27,21 +27,12 @@ class DonatorProfileViewController: UIViewController {
             
             // Load image profile
             do {
-                try self.loadProfileImage(urlString: (FIRAuth.auth()?.currentUser?.photoURL?.absoluteString)!);
+                try self.loadProfileImageWith(urlString: (FIRAuth.auth()?.currentUser?.photoURL?.absoluteString)!)
                 
             } catch let loadingImageError as NSError {
                 
-                // Show alert
-                let errorMsg = "Erro ao carregar imagem do perfil: " + loadingImageError.localizedDescription
-                let alert = UIAlertController(title: "Erro",
-                                              message: errorMsg,
-                                              preferredStyle: .alert)
-                
-                let okAction = UIAlertAction(title: "Ok",
-                                             style: .default)
-                
-                alert.addAction(okAction)
-                self.present(alert, animated: true, completion: nil)
+                print(loadingImageError.localizedDescription)
+                self.profileImageView.image = UIImage(named: "user-big")
             }
         }
     }
@@ -53,7 +44,7 @@ class DonatorProfileViewController: UIViewController {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
-    func loadProfileImage(urlString:String) throws
+    func loadProfileImageWith(urlString:String) throws
     {
         let url: URL = URL(string: urlString)!
     

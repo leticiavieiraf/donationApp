@@ -9,8 +9,6 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
-import FacebookLogin
-import FacebookCore
 
 class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelectionDelegate {
     
@@ -45,8 +43,8 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
             
         } else {
            
-            if let instUser = self.institutionUser {
-                loadOrdersFrom(instUser.uid)
+            if let currentUser = self.institutionUser {
+                loadOrdersFrom(currentUser.uid)
             } else {
                 getUserAndLoadOrders()
             }
@@ -68,7 +66,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     func loadOrdersFrom(_ userUID: String) {
         
-        refOrderItems.child("users-uid").child(userUID.lowercased()).child("orders-id").observe(.value, with: { (snapshot) in
+        refOrderItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { (snapshot) in
             var newItems: [OrderItem] = []
             
             for item in snapshot.children.allObjects {
@@ -85,7 +83,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
         let dateStr = formatter.string(from: date)
         
         
@@ -96,7 +94,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
                                      userPhotoUrl:"",
                                      publishDate: dateStr)
         
-        let orderItemRef = refOrderItems.child("users-uid").child(orderItem.userUid.lowercased()).child("orders-id").childByAutoId()
+        let orderItemRef = refOrderItems.child("users-uid").child(orderItem.userUid.lowercased()).childByAutoId()
         orderItemRef.setValue(orderItem.toAnyObject())
     }
     

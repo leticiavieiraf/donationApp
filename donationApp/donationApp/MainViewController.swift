@@ -19,65 +19,48 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if AccessToken.current != nil && FIRAuth.auth()?.currentUser != nil {
-            print("Facebook: User IS logged in!")
-            print("Firebase: User IS logged in!")
+        if FIRAuth.auth()?.currentUser != nil {
             
-            // Entra como Doador
-            let donatorsTabBarC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
-            
-            let donatorsTabBarCNav = UINavigationController(rootViewController: donatorsTabBarC)
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = donatorsTabBarCNav
-
-        } else {
-            print("Facebook: User IS NOT logged in!")
-            print("Firebase: User IS NOT logged in!")
+            if AccessToken.current != nil {
+                
+                // Entra como Doador
+                let donatorsTabBarC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+                
+                let donatorsTabBarCNav = UINavigationController(rootViewController: donatorsTabBarC)
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = donatorsTabBarCNav
+                
+            } else {
+                
+                // Entra como Instituição
+                let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+                let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = institutionsNavigationController
+            }
         }
-
+        
         loginBtn.delegate = self
         loginBtn.readPermissions = ["public_profile", "email"]
         loginBtn.setTitle("Entrar com Facebook", for: .normal)
         loginBtn.layer.cornerRadius = 4.0
      }
     
-    // Login Facebook
+    // Login com Facebook
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
         //Error
         if(error != nil)
         {
             print("Facebook: Login Error!")
-            // Show alert
-            let errorMsg = "Erro ao realizar login no Facebook: " + error.localizedDescription
-            let alert = UIAlertController(title: "Erro",
-                                          message: errorMsg,
-                                          preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: "Ok",
-                                         style: .default)
-            
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
-
+            self.showAlert(withTitle: "Erro", message: "Erro ao realizar login no Facebook: " + error.localizedDescription)
             return
         }
         
         //Canceled
         if (result.isCancelled) {
             print("Facebook: User cancelled login.")
-            
-            // Show alert
-            let errorMsg = "O login foi cancelado."
-            let alert = UIAlertController(title: "Atenção",
-                                          message: errorMsg,
-                                          preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: "Ok",
-                                         style: .default)
-            
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(withTitle: "Atenção", message: "O login foi cancelado.")
             return
         }
         
@@ -85,38 +68,33 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
         if let userToken = result.token
         {
             print("Facebook: User Logged in Successfully!")
+            logInWithFirebase()
             
-            // Login no Firebase!
-            let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+        }
+    }
+    
+    // Login no Firebase com o Token do Facebook
+    func logInWithFirebase() {
+        
+        let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+            
+            //Error
+            if let error = error {
+                print("Firebase: Login Error!")
+                self.showAlert(withTitle: "Erro", message: "Erro ao realizar login no Firebase: " + error.localizedDescription)
+                return
+            }
+            
+            //Success
+            if let user = user {
+                print("Firebase: Login successfull")
                 
-                if let error = error {
-                    print("Firebase: Login Error!")
-                    
-                    // Show alert
-                    let errorMsg = "Erro ao realizar login no Firebase: " + error.localizedDescription
-                    let alert = UIAlertController(title: "Erro",
-                                                  message: errorMsg,
-                                                  preferredStyle: .alert)
-                    
-                    let okAction = UIAlertAction(title: "Ok",
-                                                 style: .default)
-                    
-                    alert.addAction(okAction)
-                    self.present(alert, animated: true, completion: nil)
-
-                    return
-                }
-                
-                if let user = user {
-                    print("Firebase: Login successfull")
-                    
-                    // Successo: Redireciona para o storyboard de Doador
-                    let donatorsTabBarController = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
-                    let donatorsNavigationController = UINavigationController(rootViewController: donatorsTabBarController)
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.window?.rootViewController = donatorsNavigationController
-                }
+                // Successo: Redireciona para o storyboard de Doador
+                let donatorsTabBarController = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+                let donatorsNavigationController = UINavigationController(rootViewController: donatorsTabBarController)
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = donatorsNavigationController
             }
         }
     }
@@ -133,13 +111,21 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
             print ("Firebase: Error signing out: %@", signOutError)
         }
     }
+    
+    func showAlert(withTitle: String, message: String) {
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok",
+                                     style: .default)
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
         
-
-
-
-
-
 
 
 

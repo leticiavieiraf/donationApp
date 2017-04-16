@@ -34,9 +34,6 @@ struct DonationItem {
     init(snapshot: FIRDataSnapshot) {
         key = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
-//        let snapshotValue = snapshot.value as! [String: Any]
-//        let value = snapshotValue[snapshotValue.keys.first!]
-//        let itemdic = snapshotValue as Dictionary<String, Any>
         name = snapshotValue["name"] as! String
         addedByUser = snapshotValue["addedByUser"] as! String
         userUid = snapshotValue["userUid"] as! String

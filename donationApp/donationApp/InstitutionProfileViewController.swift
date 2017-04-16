@@ -9,8 +9,6 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
-import FacebookLogin
-import FacebookCore
 
 class InstitutionProfileViewController: UIViewController {
 
