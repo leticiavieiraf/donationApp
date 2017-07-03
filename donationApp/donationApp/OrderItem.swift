@@ -2,7 +2,7 @@
 //  OrderItem.swift
 //  donationApp
 //
-//  Created by Natalia Sheila Cardoso de Siqueira on 15/04/17.
+//  Created by Leticia Vieira Fernandes on 15/04/17.
 //  Copyright © 2017 PUC. All rights reserved.
 //
 
@@ -18,7 +18,7 @@ struct OrderItem {
     var userEmail: String
     var userPhotoUrl: String
     var publishDate: String
-    var ref: FIRDatabaseReference?
+    var ref: DatabaseReference?
     
     init (name: String, addedByUser: String, userUid: String, userEmail: String, userPhotoUrl: String, publishDate: String, key: String = "") {
         self.key = key
@@ -31,7 +31,7 @@ struct OrderItem {
         self.ref = nil
     }
     
-    init(snapshot: FIRDataSnapshot) {
+    init(snapshot: DataSnapshot) {
         key = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         name = snapshotValue["name"] as! String

@@ -18,7 +18,7 @@ struct DonationItem {
     var userEmail: String
     var userPhotoUrl: String
     var publishDate: String
-    var ref: FIRDatabaseReference?
+    var ref: DatabaseReference?
     
     init (name: String, addedByUser: String, userUid: String, userEmail: String, userPhotoUrl: String, publishDate: String, key: String = "") {
         self.key = key
@@ -31,7 +31,7 @@ struct DonationItem {
         self.ref = nil
     }
     
-    init(snapshot: FIRDataSnapshot) {
+    init(snapshot: DataSnapshot) {
         key = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         name = snapshotValue["name"] as! String

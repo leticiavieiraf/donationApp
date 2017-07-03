@@ -11,13 +11,14 @@ import FirebaseAuth
 import FirebaseDatabase
 import FacebookLogin
 import FacebookCore
+import SVProgressHUD
 
 class OrdersViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
     var items: [OrderItem] = []
-    let refOrderItems = FIRDatabase.database().reference(withPath: "order-items")
+    let refOrderItems = Database.database().reference(withPath: "order-items")
     
     // MARK: Life Cycle methods
     override func viewDidLoad() {
@@ -30,7 +31,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
         self.tabBarController?.title = "Pedidos"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
         
-        if AccessToken.current == nil || FIRAuth.auth()?.currentUser == nil {
+        if AccessToken.current == nil || Auth.auth().currentUser == nil {
             print("Facebook: User IS NOT logged in!")
             print("Firebase: User IS NOT logged in!")
             
@@ -47,13 +48,16 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     // MARK: Firebase methods
     func loadAllOrders() {
         
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
         refOrderItems.child("users-uid").observe(.value, with: { (snapshot) in
             var count = 0
             var userIdKeys = [String]()
             var orders : [OrderItem] = []
             
             for item in snapshot.children.allObjects {
-                let userId = item as! FIRDataSnapshot
+                let userId = item as! DataSnapshot
                 userIdKeys.append(String(userId.key))
             }
             
@@ -61,7 +65,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
                 self.refOrderItems.child("users-uid").child(userIdKey.lowercased()).observe(.value, with: { (snapshot) in
                     
                     for item in snapshot.children.allObjects {
-                        let orderItem = OrderItem(snapshot: item as! FIRDataSnapshot)
+                        let orderItem = OrderItem(snapshot: item as! DataSnapshot)
                         orders.append(orderItem)
                     }
                     
@@ -69,6 +73,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
                     if count == userIdKeys.count {
                         self.items = orders
                         self.tableView.reloadData()
+                        SVProgressHUD.dismiss()
                     }
                 })
             }
@@ -96,5 +101,4 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 }

@@ -2,7 +2,7 @@
 //  ItemsTableViewCell.swift
 //  donationApp
 //
-//  Created by Natalia Sheila Cardoso de Siqueira on 15/04/17.
+//  Created by Leticia Vieira Fernandes on 15/04/17.
 //  Copyright © 2017 PUC. All rights reserved.
 //
 

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKLoginButton.classForCoder()
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        FIRApp.configure()
+        FirebaseApp.configure()
         
         return true
     }

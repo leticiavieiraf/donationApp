@@ -26,6 +26,8 @@
 		A41C92711EA1F0460078FE9A /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C92701EA1F0460078FE9A /* OrderItem.swift */; };
 		A42AC3E61E7792FA00E4B512 /* DetailInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */; };
 		A4370F681EA2CF53000A20E5 /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4370F671EA2CF53000A20E5 /* ItemsTableViewCell.swift */; };
+		A45EAE721EA467EC00E33DBE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45EAE711EA467EC00E33DBE /* CryptoSwift.framework */; };
+		A45EAE741EA467F600E33DBE /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45EAE731EA467F600E33DBE /* SVProgressHUD.framework */; };
 		A46ABF371E70FC950066764C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46ABF361E70FC950066764C /* MainViewController.swift */; };
 		A4A1D4481E7448AE00349AF9 /* MyDonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */; };
 		A4A1D44A1E7448C600349AF9 /* NewDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */; };
@@ -64,6 +66,8 @@
 		A41C92701EA1F0460078FE9A /* OrderItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
 		A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInstitutionViewController.swift; sourceTree = "<group>"; };
 		A4370F671EA2CF53000A20E5 /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
+		A45EAE711EA467EC00E33DBE /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/donationApp-dprygwyildkcdcbbxuwjsairrndr/Build/Products/Debug-iphonesimulator/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
+		A45EAE731EA467F600E33DBE /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = "Pods/../build/Debug-iphoneos/SVProgressHUD/SVProgressHUD.framework"; sourceTree = "<group>"; };
 		A46ABF361E70FC950066764C /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDonationViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A45EAE741EA467F600E33DBE /* SVProgressHUD.framework in Frameworks */,
+				A45EAE721EA467EC00E33DBE /* CryptoSwift.framework in Frameworks */,
 				D42330E36DCE15B61119A381 /* Pods_donationApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +256,8 @@
 		D3DB0CEE790B4FD6F255A4BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A45EAE731EA467F600E33DBE /* SVProgressHUD.framework */,
+				A45EAE711EA467EC00E33DBE /* CryptoSwift.framework */,
 				6B78C679E15418255774C854 /* Pods_donationApp.framework */,
 			);
 			name = Frameworks;
@@ -535,6 +543,10 @@
 				CODE_SIGN_ENTITLEMENTS = donationApp/donationApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = X3L9YG9572;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SVProgressHUD",
+				);
 				INFOPLIST_FILE = donationApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -552,6 +564,10 @@
 				CODE_SIGN_ENTITLEMENTS = donationApp/donationApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = X3L9YG9572;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SVProgressHUD",
+				);
 				INFOPLIST_FILE = donationApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

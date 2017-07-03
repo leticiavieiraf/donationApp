@@ -2,12 +2,14 @@
 //  LoginInstitutionViewController.swift
 //  donationApp
 //
-//  Created by Natalia Sheila Cardoso de Siqueira on 14/04/17.
+//  Created by Leticia Vieira Fernandes on 14/04/17.
 //  Copyright © 2017 PUC. All rights reserved.
-//
 
 import UIKit
 import Firebase
+import SVProgressHUD
+import CryptoSwift
+import Locksmith
 
 class LoginInstitutionViewController: UIViewController {
     
@@ -17,45 +19,102 @@ class LoginInstitutionViewController: UIViewController {
     @IBOutlet weak var emailErrorImage: UIImageView!
     @IBOutlet weak var passwordErrorImage: UIImageView!
     
-    let ref = FIRDatabase.database().reference(withPath: "features")
+    let ref = Database.database().reference(withPath: "features")
 
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
     }
     
-    // Entrar
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // MARK: Actions
     @IBAction func logIn(_ sender: Any) {
         
         if isEmptyFields() {
             return
         }
         else {
-            FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!) { (user, error) in
+            loginWithFirebase()
+        }
+    }
+    
+    // MARK: Firebase methods
+    func loginWithFirebase() {
+        
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+
+        // Criptografia segura e ideal Hash SHA-256 (PBKDF2)
+        let salt = loadSalt()
+        let saltAndPassword = salt + self.passwordField.text!
+        let password_sha256 = sha256SaltHash(saltAndPassword, salt: salt)
+        
+        Auth.auth().signIn(withEmail: self.emailField.text!, password: password_sha256) { (user, error) in
+            
+            SVProgressHUD.dismiss()
+            
+            //Error
+            if let error = error {
+                print("Firebase: Login Error!")
+                self.showAlert(withTitle: "Erro", message: "Erro ao realizar login: " + error.localizedDescription)
+                return
+            }
+            
+            //Success
+            if let user = user {
+                print("Firebase: Login successfull")
                 
-                //Error
-                if let error = error {
-                    print("Firebase: Login Error!")
-                    self.showAlert(withTitle: "Erro", message: "Erro ao realizar login: " + error.localizedDescription)
-                    return
-                }
-                
-                //Success
-                if let user = user {
-                    print("Firebase: Login successfull")
-                    
-                    // Successo: Entra como Instituição
-                    let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
-                    let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.window?.rootViewController = institutionsNavigationController
-                }
+                // Redireciona para o storyboard de Instituição
+                let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+                let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = institutionsNavigationController
             }
         }
     }
-
+    
+    // MARK: Encryption methods
+    func sha256SaltHash(_ password: String, salt: String) -> String {
+        
+        let bytesPass: Array<UInt8> = Array(password.utf8);
+        let salt: Array<UInt8> = Array(salt.utf8)
+        
+        do {
+            let hashed = try PKCS5.PBKDF2(password: bytesPass, salt: salt, iterations: 4096, variant: .sha256).calculate()
+            let hashedStr = Data(bytes: hashed).toHexString()
+            
+            return hashedStr
+            
+        } catch {
+            print (error)
+        }
+        
+        return password
+    }
+    
+    // MARK: Keychain Access method
+    func loadSalt() -> String {
+        
+        // Reading data from the keychain
+        if let saltDictionary = Locksmith.loadDataForUserAccount(userAccount: self.emailField.text!) {
+            if let userSalt = saltDictionary["userSalt"] {
+              return userSalt as! String
+            }
+        }
+        
+         return ""
+    }
+    
+    // MARK: Validation methods
     func isEmptyFields() -> Bool {
         
-        var isEmpty : Bool = false;
+        var isEmpty: Bool = false;
         
         if let email = self.emailField.text, email.isEmpty {
             self.emailErrorImage.isHidden = false;

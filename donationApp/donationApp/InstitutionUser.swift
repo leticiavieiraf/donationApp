@@ -30,7 +30,7 @@ class InstitutionUser : NSObject {
     var state: String
     var zipCode: String
     var group: String
-    var ref: FIRDatabaseReference?
+    var ref: DatabaseReference?
     
     init(uid: String, name: String, info: String, email: String, password: String, registerDate: String, contact: String, phone: String, bank: String, agency: String, accountNumber: String, address: String, district: String, city: String, state: String, zipCode: String, group: String, key: String = "") {
     
@@ -57,7 +57,7 @@ class InstitutionUser : NSObject {
         super.init()
     }
     
-    init(snapshot: FIRDataSnapshot) {
+    init(snapshot: DataSnapshot) {
         key = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         uid = snapshotValue["uid"] as! String

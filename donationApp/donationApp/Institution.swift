@@ -7,12 +7,11 @@
 //
 
 import Foundation
-//import ObjectMapper
 import Firebase
 import MapKit
 
 
-class Institution : NSObject, MKAnnotation { //Mappable
+class Institution : NSObject, MKAnnotation {
     
     var key: String
     var name: String
@@ -30,7 +29,7 @@ class Institution : NSObject, MKAnnotation { //Mappable
     var zipCode: String
     var group: String
     var coordinate: CLLocationCoordinate2D
-    var ref: FIRDatabaseReference?
+    var ref: DatabaseReference?
     
     init(name: String, info: String, email: String, contact: String, phone: String,
          bank: String, agency: String, accountNumber: String, address: String, district: String,
@@ -65,7 +64,7 @@ class Institution : NSObject, MKAnnotation { //Mappable
         return group
     }
     
-    init(snapshot: FIRDataSnapshot) {
+    init(snapshot: DataSnapshot) {
         key = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         name = snapshotValue["Name"] as! String
@@ -106,43 +105,4 @@ class Institution : NSObject, MKAnnotation { //Mappable
             
         ]
     }
-    
-    
-    
-//    init?(map: Map) {
-//        
-//    }
-//    
-//    mutating func mapping(map: Map) {
-//        name            <- map["Name"]
-//        info            <- map["description"]
-//        email           <- map["e_mail"]
-//        contact         <- map["contato"]
-//        phone           <- map["telefone"]
-//        bank            <- map["banco"]
-//        agency          <- map["agencia"]
-//        accountNumber   <- map["conta"]
-//        address         <- map["endereco"]
-//        district        <- map["bairro"]
-//        city            <- map["cidade"]
-//        state           <- map["estado"]
-//        group           <- map["IDSetor"]
-//        zipCode         <- map["cep"]
-//    }
-    
-//    Once your class implements Mappable, ObjectMapper allows you to easily convert to and from JSON.
-//    
-//    Convert a JSON string to a model object:
-//    
-//    let user = User(JSONString: JSONString)
-//    Convert a model object to a JSON string:
-//    
-//    let JSONString = user.toJSONString(prettyPrint: true)
-//    Alternatively, the Mapper.swift class can also be used to accomplish the above (it also provides extra functionality for other situations):
-//    
-//    // Convert JSON String to Model
-//    let user = Mapper<User>().map(JSONString: JSONString)
-//    // Create JSON String from Model
-//    let JSONString = Mapper().toJSONString(user, prettyPrint: true)
-
 }

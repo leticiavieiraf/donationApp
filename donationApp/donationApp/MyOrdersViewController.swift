@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import SVProgressHUD
 
 class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelectionDelegate {
     
@@ -16,8 +17,8 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     var items : [OrderItem] = []
     var institutionUser : InstitutionUser!
-    let refOrderItems = FIRDatabase.database().reference(withPath: "order-items")
-    let refInstitutionUsers = FIRDatabase.database().reference(withPath: "institution-users")
+    let refOrderItems = Database.database().reference(withPath: "order-items")
+    let refInstitutionUsers = Database.database().reference(withPath: "institution-users")
     
     // MARK: Life Cycle methods
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         self.tabBarController?.navigationItem.rightBarButtonItem = addButton
         
         
-        if FIRAuth.auth()?.currentUser == nil {
+        if Auth.auth().currentUser == nil {
             print("Facebook: User IS NOT logged in!")
             print("Firebase: User IS NOT logged in!")
             
@@ -55,9 +56,15 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     // MARK: Firebase methods
     func getUserAndLoadOrders() {
         
-        let userUID = FIRAuth.auth()?.currentUser?.uid
+        let userUID = Auth.auth().currentUser?.uid
+        
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
         
         refInstitutionUsers.child(userUID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            SVProgressHUD.dismiss()
+            
             self.institutionUser = InstitutionUser(snapshot: snapshot)
             self.loadOrdersFrom(self.institutionUser.uid)
         })
@@ -66,11 +73,17 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     func loadOrdersFrom(_ userUID: String) {
         
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
         refOrderItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { (snapshot) in
+            
+            SVProgressHUD.dismiss()
+            
             var newItems: [OrderItem] = []
             
             for item in snapshot.children.allObjects {
-                let orderItem = OrderItem(snapshot: item as! FIRDataSnapshot)
+                let orderItem = OrderItem(snapshot: item as! DataSnapshot)
                 newItems.append(orderItem)
             }
             
@@ -116,7 +129,6 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     // MARK: UITableViewDataSource
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return items.count
     }
     
@@ -132,7 +144,6 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     }
     
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
         return true
     }
     

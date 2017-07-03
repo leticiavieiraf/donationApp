@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FacebookLogin
 import FacebookCore
+import SVProgressHUD
 
 class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSelectionDelegate {
 
@@ -18,7 +19,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     
     var items : [DonationItem] = []
     var donatorUser : DonatorUser!
-    let refDonationItems = FIRDatabase.database().reference(withPath: "donation-items")
+    let refDonationItems = Database.database().reference(withPath: "donation-items")
     
     // MARK: Life Cycle methods
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
         self.tabBarController?.navigationItem.rightBarButtonItem = addButton
         
-        if AccessToken.current == nil || FIRAuth.auth()?.currentUser == nil {
+        if AccessToken.current == nil || Auth.auth().currentUser == nil {
             print("Facebook: User IS NOT logged in!")
             print("Firebase: User IS NOT logged in!")
             
@@ -53,7 +54,13 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     // MARK: Firebase methods
     func getUserAndLoadDonations() {
         
-        FIRAuth.auth()!.addStateDidChangeListener { auth, user in
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        Auth.auth().addStateDidChangeListener { auth, user in
+            
+            SVProgressHUD.dismiss()
+            
             guard let user = user else { return }
             
             if AccessToken.current != nil {
@@ -64,12 +71,18 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     }
     
     func loadDonationsFrom(_ userUID: String) {
+       
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
         
-       refDonationItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { snapshot in
+        refDonationItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { snapshot in
+            
+            SVProgressHUD.dismiss()
+            
             var newItems: [DonationItem] = []
             
             for item in snapshot.children.allObjects {
-                let donationItem = DonationItem(snapshot: item as! FIRDataSnapshot)
+                let donationItem = DonationItem(snapshot: item as! DataSnapshot)
                 newItems.append(donationItem)
             }
             
@@ -130,7 +143,6 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     }
     
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
         return true
     }
     

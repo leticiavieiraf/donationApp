@@ -12,11 +12,12 @@ import FirebaseAuth
 import FirebaseDatabase
 import FacebookLogin
 import FacebookCore
+import SVProgressHUD
 
 class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    let ref = FIRDatabase.database().reference(withPath: "features")
+    let ref = Database.database().reference(withPath: "features")
     var institutions : [Institution] =  [Institution]()
     var locationManager = CLLocationManager()
     
@@ -24,7 +25,7 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if FIRAuth.auth()?.currentUser == nil {
+        if Auth.auth().currentUser == nil {
             print("Facebook: User IS NOT logged in!")
             print("Firebase: User IS NOT logged in!")
             
@@ -40,11 +41,14 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
             self.locationManager.requestWhenInUseAuthorization()
 
             // Busca Instituições
+            SVProgressHUD.setDefaultStyle(.dark)
+            SVProgressHUD.show()
+            
             ref.observe(.value, with: { snapshot in
                 
                 var count = 0
                 for item in snapshot.children {
-                    let institution = Institution(snapshot: item as! FIRDataSnapshot)
+                    let institution = Institution(snapshot: item as! DataSnapshot)
                     
                     if institution.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
                         
@@ -72,6 +76,8 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
                     
                     self.institutions.append(institution)
                 }
+                
+                SVProgressHUD.dismiss()
             })
         }
     }

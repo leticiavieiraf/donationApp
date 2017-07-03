@@ -9,13 +9,15 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import SVProgressHUD
+import AVFoundation
 
 class DonationsViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
     var items: [DonationItem] = []
-    let refDonationItems = FIRDatabase.database().reference(withPath: "donation-items")
+    let refDonationItems = Database.database().reference(withPath: "donation-items")
 
     // MARK: Life Cycle methods
     override func viewDidLoad() {
@@ -28,7 +30,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         self.tabBarController?.title = "Doações"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     
-        if FIRAuth.auth()?.currentUser == nil {
+        if Auth.auth().currentUser == nil {
             print("Facebook: User IS NOT logged in!")
             print("Firebase: User IS NOT logged in!")
             
@@ -44,14 +46,17 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     
     // MARK: Firebase methods
     func loadDonations() {
-
+        
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
         refDonationItems.child("users-uid").observe(.value, with: { (snapshot) in
             var count = 0
             var userIdKeys = [String]()
             var donations : [DonationItem] = []
             
             for item in snapshot.children.allObjects {
-                let userId = item as! FIRDataSnapshot
+                let userId = item as! DataSnapshot
                 userIdKeys.append(String(userId.key))
             }
             
@@ -59,7 +64,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
                 self.refDonationItems.child("users-uid").child(userIdKey.lowercased()).observe(.value, with: { (snapshot) in
                     
                     for item in snapshot.children.allObjects {
-                        let donationItem = DonationItem(snapshot: item as! FIRDataSnapshot)
+                        let donationItem = DonationItem(snapshot: item as! DataSnapshot)
                         donations.append(donationItem)
                     }
                     
@@ -67,6 +72,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
                     if count == userIdKeys.count {
                         self.items = donations
                         self.tableView.reloadData()
+                        SVProgressHUD.dismiss()
                     }
                 })
             }
@@ -99,8 +105,8 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         
         return cell
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 }

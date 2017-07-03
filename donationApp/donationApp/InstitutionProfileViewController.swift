@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import SVProgressHUD
 
 class InstitutionProfileViewController: UIViewController {
 
@@ -19,18 +20,21 @@ class InstitutionProfileViewController: UIViewController {
     @IBOutlet weak var phoneLabel: UILabel!
     
     var institutionUser : InstitutionUser!
-    let refInstitutionUsers = FIRDatabase.database().reference(withPath: "institution-users")
+    let refInstitutionUsers = Database.database().reference(withPath: "institution-users")
 
     
     // MARK: Lyfe Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if FIRAuth.auth()?.currentUser != nil {
+        if Auth.auth().currentUser != nil {
             
-            let userUID = FIRAuth.auth()?.currentUser!.uid
+            let userUID = Auth.auth().currentUser!.uid
+
+            SVProgressHUD.setDefaultStyle(.dark)
+            SVProgressHUD.show()
             
-            refInstitutionUsers.child(userUID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            refInstitutionUsers.child(userUID).observeSingleEvent(of: .value, with: { (snapshot) in
                 self.institutionUser = InstitutionUser(snapshot: snapshot)
                 
                 self.nameLabel.text = self.institutionUser.name
@@ -38,6 +42,8 @@ class InstitutionProfileViewController: UIViewController {
                 self.addressLabel.text = self.institutionUser.address + ", " + self.institutionUser.district + ", " + self.institutionUser.city + " - " + self.institutionUser.state + ". Cep: " + self.institutionUser.zipCode
                 self.infoLabel.text = self.institutionUser.group
                 self.phoneLabel.text = self.institutionUser.phone
+                
+                SVProgressHUD.dismiss()
             })
         }
     }
@@ -52,11 +58,11 @@ class InstitutionProfileViewController: UIViewController {
     // MARK: Firebase method
     @IBAction func logout(_ sender: Any) {
         
-        if FIRAuth.auth()?.currentUser != nil {
+        if Auth.auth().currentUser != nil {
             
-            let firebaseAuth = FIRAuth.auth()
+            let firebaseAuth = Auth.auth()
             do {
-                try firebaseAuth?.signOut()
+                try firebaseAuth.signOut()
                 
                 // Redireciona para tela de login
                 let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()

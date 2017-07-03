@@ -4,12 +4,12 @@
 //
 //  Created by Letícia Fernandes on 11/03/17.
 //  Copyright © 2017 PUC. All rights reserved.
-//
 
 import UIKit
 import FirebaseAuth
 import FacebookLogin
 import FacebookCore
+import SVProgressHUD
 
 class DonatorProfileViewController: UIViewController {
 
@@ -20,17 +20,18 @@ class DonatorProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if AccessToken.current != nil || FIRAuth.auth()?.currentUser != nil {
+        if AccessToken.current != nil || Auth.auth().currentUser != nil {
             
-            self.nameLabel.text = FIRAuth.auth()?.currentUser?.displayName
-            self.emailLabel.text = FIRAuth.auth()?.currentUser?.email
+            self.nameLabel.text = Auth.auth().currentUser?.displayName
+            self.emailLabel.text = Auth.auth().currentUser?.email
             
             // Load image profile
             do {
-                try self.loadProfileImageWith(urlString: (FIRAuth.auth()?.currentUser?.photoURL?.absoluteString)!)
+                try self.loadProfileImageWith(urlString: (Auth.auth().currentUser?.photoURL?.absoluteString)!)
                 
             } catch let loadingImageError as NSError {
                 
+                SVProgressHUD.dismiss()
                 print(loadingImageError.localizedDescription)
                 self.profileImageView.image = UIImage(named: "user-big")
             }
@@ -48,10 +49,14 @@ class DonatorProfileViewController: UIViewController {
     {
         let url: URL = URL(string: urlString)!
     
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: url)
             
             DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
                 self.profileImageView.image = UIImage(data: data!)
             }
         }
@@ -66,11 +71,11 @@ class DonatorProfileViewController: UIViewController {
         }
        
         // Logout Firebase
-        if FIRAuth.auth()?.currentUser != nil {
+        if Auth.auth().currentUser != nil {
             
-            let firebaseAuth = FIRAuth.auth()
+            let firebaseAuth = Auth.auth()
             do {
-                try firebaseAuth?.signOut()
+                try firebaseAuth.signOut()
                 
                 // Redireciona para tela de login
                 let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()

@@ -1,11 +1,12 @@
 PODS:
-  - Alamofire (4.4.0)
+  - Alamofire (4.5.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - CryptoSwift (0.6.9)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.15)
@@ -14,47 +15,49 @@ PODS:
     - FacebookCore (~> 0.2)
     - FBSDKCoreKit (~> 4.15)
     - FBSDKLoginKit (~> 4.15)
-  - FBSDKCoreKit (4.20.0):
+  - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.20.0):
+  - FBSDKLoginKit (4.24.0):
     - FBSDKCoreKit
-  - Firebase (3.14.0):
-    - Firebase/Core (= 3.14.0)
-  - Firebase/Auth (3.14.0):
+  - Firebase (4.0.3):
+    - Firebase/Core (= 4.0.3)
+  - Firebase/Auth (4.0.3):
     - Firebase/Core
-    - FirebaseAuth (= 3.1.1)
-  - Firebase/Core (3.14.0):
-    - FirebaseAnalytics (= 3.7.0)
-    - FirebaseCore (= 3.5.1)
-  - Firebase/Database (3.14.0):
+    - FirebaseAuth (= 4.0.0)
+  - Firebase/Core (4.0.3):
+    - FirebaseAnalytics (= 4.0.2)
+    - FirebaseCore (= 4.0.3)
+  - Firebase/Database (4.0.3):
     - Firebase/Core
-    - FirebaseDatabase (= 3.1.2)
-  - Firebase/RemoteConfig (3.14.0):
+    - FirebaseDatabase (= 4.0.0)
+  - Firebase/RemoteConfig (4.0.3):
     - Firebase/Core
-    - FirebaseRemoteConfig (= 1.3.4)
-  - Firebase/Storage (3.14.0):
+    - FirebaseRemoteConfig (= 2.0.1)
+  - Firebase/Storage (4.0.3):
     - Firebase/Core
-    - FirebaseStorage (= 1.1.0)
-  - FirebaseAnalytics (3.7.0):
-    - FirebaseCore (~> 3.5)
-    - FirebaseInstanceID (~> 1.0)
+    - FirebaseStorage (= 2.0.0)
+  - FirebaseAnalytics (4.0.2):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseAuth (3.1.1):
-    - FirebaseAnalytics (~> 3.7)
+  - FirebaseAuth (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (3.5.1):
+  - FirebaseCore (4.0.3):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseDatabase (3.1.2):
-    - FirebaseAnalytics (~> 3.7)
-  - FirebaseInstanceID (1.0.9)
-  - FirebaseRemoteConfig (1.3.4):
-    - FirebaseAnalytics (~> 3.7)
-    - FirebaseInstanceID (~> 1.0)
+  - FirebaseDatabase (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
+  - FirebaseInstanceID (2.0.0):
+    - FirebaseCore (~> 4.0)
+  - FirebaseRemoteConfig (2.0.1):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - Protobuf (~> 3.1)
-  - FirebaseStorage (1.1.0):
-    - FirebaseAnalytics (~> 3.7)
+  - FirebaseStorage (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -66,17 +69,20 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GTMSessionFetcher/Core (1.1.8)
-  - ObjectMapper (2.2.5)
-  - Protobuf (3.2.0)
-  - R.swift (3.2.0):
+  - GTMSessionFetcher/Core (1.1.10)
+  - Locksmith (3.0.0)
+  - ObjectMapper (2.2.7)
+  - Protobuf (3.3.0)
+  - R.swift (3.3.0):
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
   - ReachabilitySwift (3)
-  - SwiftyUtils (0.7.0)
+  - SVProgressHUD (2.1.2)
+  - SwiftyUtils (1.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - CryptoSwift
   - FacebookCore
   - FacebookLogin
   - Firebase
@@ -85,35 +91,40 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/RemoteConfig
   - Firebase/Storage
+  - Locksmith
   - ObjectMapper (~> 2.2)
   - R.swift
   - ReachabilitySwift (~> 3)
+  - SVProgressHUD
   - SwiftyUtils
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
-  FBSDKCoreKit: 2d16979b28fe28c2b95af0d275ad5f9703c6c8de
-  FBSDKLoginKit: a9d9391506c687e2304a590bf9312837fce7f375
-  Firebase: 85a581fb04e44f63ae9f4fbc8d6dabf4a4c18653
-  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
-  FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
-  FirebaseCore: 225d40532489835a034b8f4e2c9c87fbf4f615a2
-  FirebaseDatabase: 05c96d7b43a7368dc91c07791adb49683e1738d1
-  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
-  FirebaseRemoteConfig: af3003f4e8daa2bd1d5cf90d3cccc1fe224f8ed9
-  FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
+  FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
+  FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
+  Firebase: 9e33fdfbca37cab635c693883caa90a4475b842b
+  FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
+  FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
+  FirebaseCore: c709067051de07bdaffdc4e735cd7299a23c463a
+  FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
+  FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  FirebaseRemoteConfig: 328244399f64226cfdfa32efee596bb010ef5665
+  FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
-  ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
-  Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
-  R.swift: 207a372a2b5977caef440c696a368009460641d1
+  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
+  ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
+  Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
+  R.swift: bde9704d50ff36820f49e266bc88ef545e1e9b36
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  SwiftyUtils: 87094996d977846e5a9f2cbe653ff28dc15ba187
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwiftyUtils: f48a22d2fa8eece42a11d8bbb4d01a9758dd0602
 
-PODFILE CHECKSUM: 4edbbfab3a4b6d4042fa0e477539ce65c272e0a8
+PODFILE CHECKSUM: 35072ee4bb1bbf384d76c3216ad7800efce33109
 
 COCOAPODS: 1.2.0
