@@ -23,4 +23,5 @@ target 'donationApp' do
   pod 'CryptoSwift'
   pod 'Locksmith'
   pod 'SVProgressHUD'
+  pod 'Kingfisher', '~> 3.0'
 end

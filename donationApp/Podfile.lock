@@ -70,6 +70,7 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.10)
+  - Kingfisher (3.10.3)
   - Locksmith (3.0.0)
   - ObjectMapper (2.2.7)
   - Protobuf (3.3.0)
@@ -91,6 +92,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/RemoteConfig
   - Firebase/Storage
+  - Kingfisher (~> 3.0)
   - Locksmith
   - ObjectMapper (~> 2.2)
   - R.swift
@@ -116,6 +118,7 @@ SPEC CHECKSUMS:
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  Kingfisher: a0ac82dc5bcf0388dd74b294cf2cc13730c63436
   Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
   ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
@@ -125,6 +128,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyUtils: f48a22d2fa8eece42a11d8bbb4d01a9758dd0602
 
-PODFILE CHECKSUM: 35072ee4bb1bbf384d76c3216ad7800efce33109
+PODFILE CHECKSUM: 20e6f2d1b86b1f85e6343fc523b5a7effdf79830
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

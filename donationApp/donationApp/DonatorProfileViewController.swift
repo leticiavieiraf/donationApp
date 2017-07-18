@@ -10,6 +10,7 @@ import FirebaseAuth
 import FacebookLogin
 import FacebookCore
 import SVProgressHUD
+import Kingfisher
 
 class DonatorProfileViewController: UIViewController {
 
@@ -26,15 +27,19 @@ class DonatorProfileViewController: UIViewController {
             self.emailLabel.text = Auth.auth().currentUser?.email
             
             // Load image profile
-            do {
-                try self.loadProfileImageWith(urlString: (Auth.auth().currentUser?.photoURL?.absoluteString)!)
-                
-            } catch let loadingImageError as NSError {
-                
-                SVProgressHUD.dismiss()
-                print(loadingImageError.localizedDescription)
-                self.profileImageView.image = UIImage(named: "user-big")
-            }
+            let url: URL = URL(string: (Auth.auth().currentUser?.photoURL?.absoluteString)!)!
+            let defaultImage = UIImage(named: "ico-default")
+            self.profileImageView.kf.setImage(with: url, placeholder: defaultImage);
+            
+//            do {
+////                try self.loadProfileImageWith(urlString: (Auth.auth().currentUser?.photoURL?.absoluteString)!)
+//                
+//            } catch let loadingImageError as NSError {
+//                
+//                SVProgressHUD.dismiss()
+//                print(loadingImageError.localizedDescription)
+//                self.profileImageView.image = UIImage(named: "user-big")
+//            }
         }
     }
     
@@ -45,22 +50,25 @@ class DonatorProfileViewController: UIViewController {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
-    func loadProfileImageWith(urlString:String) throws
-    {
-        let url: URL = URL(string: urlString)!
-    
-        SVProgressHUD.setDefaultStyle(.dark)
-        SVProgressHUD.show()
-        
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url)
-            
-            DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
-                self.profileImageView.image = UIImage(data: data!)
-            }
-        }
-    }
+//    func loadProfileImageWith(urlString:String) throws
+//    {
+//        let url: URL = URL(string: urlString)!
+//    
+//        SVProgressHUD.setDefaultStyle(.dark)
+//        SVProgressHUD.show()
+//        
+//        DispatchQueue.global().async {
+//            let data = try? Data(contentsOf: url)
+//            
+//            DispatchQueue.main.async {
+//                SVProgressHUD.dismiss()
+//                if let data = data {
+//                    self.profileImageView.image = UIImage(data: data!);
+//                }
+//                
+//            }
+//        }
+//    }
     
     @IBAction func logout(_ sender: Any) {
         
@@ -75,7 +83,13 @@ class DonatorProfileViewController: UIViewController {
             
             let firebaseAuth = Auth.auth()
             do {
+                
+                SVProgressHUD.setDefaultStyle(.dark)
+                SVProgressHUD.show()
+                
                 try firebaseAuth.signOut()
+                
+                SVProgressHUD.dismiss()
                 
                 // Redireciona para tela de login
                 let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
