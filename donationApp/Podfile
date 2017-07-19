@@ -24,4 +24,5 @@ target 'donationApp' do
   pod 'Locksmith'
   pod 'SVProgressHUD'
   pod 'Kingfisher', '~> 3.0'
+  pod 'SwiftGifOrigin', '~> 1.6.1'
 end

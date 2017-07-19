@@ -133,11 +133,11 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "donationCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "donationCell", for: indexPath) as! ItemTableViewCell
         let donationItem = items[indexPath.row]
         
-        cell.textLabel?.text = donationItem.name
-        cell.detailTextLabel?.text = "Publicado em " + donationItem.publishDate
+        cell.labelTitle.text = donationItem.name
+        cell.labelSubtitle?.text = "Publicado em " + donationItem.publishDate
         
         return cell
     }

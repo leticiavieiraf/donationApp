@@ -79,6 +79,7 @@ PODS:
   - R.swift.Library (3.0.2)
   - ReachabilitySwift (3)
   - SVProgressHUD (2.1.2)
+  - SwiftGifOrigin (1.6.1)
   - SwiftyUtils (1.0.0)
 
 DEPENDENCIES:
@@ -98,6 +99,7 @@ DEPENDENCIES:
   - R.swift
   - ReachabilitySwift (~> 3)
   - SVProgressHUD
+  - SwiftGifOrigin (~> 1.6.1)
   - SwiftyUtils
 
 SPEC CHECKSUMS:
@@ -126,8 +128,9 @@ SPEC CHECKSUMS:
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
   SwiftyUtils: f48a22d2fa8eece42a11d8bbb4d01a9758dd0602
 
-PODFILE CHECKSUM: 20e6f2d1b86b1f85e6343fc523b5a7effdf79830
+PODFILE CHECKSUM: dcf9486e26857d4499f52c60f00bcc5df66a7af7
 
 COCOAPODS: 1.2.1
