@@ -1,14 +1,14 @@
 //
-//  ItemTableViewCell.swift
+//  MyItemsTableViewCell.swift
 //  donationApp
 //
-//  Created by Letícia on 19/07/17.
+//  Created by Letícia on 20/07/17.
 //  Copyright © 2017 PUC. All rights reserved.
 //
 
 import UIKit
 
-class ItemTableViewCell: UITableViewCell {
+class MyItemsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelSubtitle: UILabel!
@@ -16,7 +16,7 @@ class ItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

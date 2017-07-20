@@ -94,7 +94,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
         cell.userNameLabel.text = orderItem.addedByUser
         cell.userEmailLabel.text = orderItem.userEmail
         cell.publishDateLabel.text = "Publicado em " + orderItem.publishDate
-        cell.profileImage.image = UIImage(named: "institution-big")
+        cell.profileImageView.image = UIImage(named: "institution-big")
         
         return cell
     }

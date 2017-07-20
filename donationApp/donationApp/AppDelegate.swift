@@ -11,11 +11,12 @@ import FacebookCore
 import FBSDKLoginKit
 import Firebase
 
+let kGeneral = "YW8urJCkA6wMqkoQNoFM6oT6GFOhA"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         

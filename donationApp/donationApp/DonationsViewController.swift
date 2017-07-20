@@ -93,15 +93,15 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         cell.userNameLabel.text = donationItem.addedByUser
         cell.userEmailLabel.text = donationItem.userEmail
         cell.publishDateLabel.text = "Publicado em " + donationItem.publishDate
+        cell.loadImageWith(donationItem.userPhotoUrl)
         
-        do {
-            try cell.loadImageWith(donationItem.userPhotoUrl)
-        
-        } catch let loadingImageError as NSError {
-            
-            print(loadingImageError.localizedDescription)
-            cell.profileImage.image = UIImage(named: "user-big")
-        }
+//        do {
+//            try cell.loadImageWith(donationItem.userPhotoUrl)
+//        
+//        } catch let loadingImageError as NSError {
+//            print(loadingImageError.localizedDescription)
+//            cell.profileImageView.image = UIImage(named: "user-big")
+//        }
         
         return cell
     }

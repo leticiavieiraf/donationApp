@@ -134,7 +134,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "orderCell", for: indexPath) as! ItemTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "orderCell", for: indexPath) as! MyItemsTableViewCell
         let orderItem = items[indexPath.row]
         
         cell.labelTitle?.text = orderItem.name

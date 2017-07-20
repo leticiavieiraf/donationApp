@@ -133,7 +133,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "donationCell", for: indexPath) as! ItemTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "donationCell", for: indexPath) as! MyItemsTableViewCell
         let donationItem = items[indexPath.row]
         
         cell.labelTitle.text = donationItem.name

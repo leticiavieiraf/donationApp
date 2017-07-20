@@ -101,7 +101,7 @@ class RegisterInstitutionViewController: UIViewController {
                 title = "Sucesso"
                 msg = "Cadastro realizado com sucesso. "
                 
-                self.saveSalt()
+                //self.saveSalt()
                 self.insertRegisteredUser(institution, uid:user.uid)
             }
             
@@ -119,16 +119,16 @@ class RegisterInstitutionViewController: UIViewController {
     
     func findInstitutionInResults(_ snapshot : DataSnapshot) -> Institution? {
         
-        var foundedInstitution : Institution? = nil
+        var foundInstitution : Institution? = nil
         
         for item in snapshot.children {
             let institution = Institution(snapshot: item as! DataSnapshot)
             
             if self.emailField.text == institution.email  {
-                foundedInstitution = institution
+                foundInstitution = institution
             }
         }
-        return foundedInstitution
+        return foundInstitution
     }
     
     //Save registered user in database
@@ -184,18 +184,18 @@ class RegisterInstitutionViewController: UIViewController {
     
     // MARK: Keychain Access method
     func saveSalt() {
-        
-        do {
-            // Writing data to the keychain
-            try Locksmith.saveData(data: ["userSalt": self.salt], forUserAccount: self.emailField.text!)
-            
-//            let preferences = UserDefaults.standard
-//            preferences.setValue(self.salt, forKey: "userSalt")
-//            preferences.synchronize()
-          
-        } catch {
-            print(error)
-        }
+//        do {
+//            // Writing data to the keychain
+//            try Locksmith.saveData(data: ["userSalt": self.salt], forUserAccount: self.emailField.text!)
+//            
+//            // Saving data in UserDefaults
+////            let preferences = UserDefaults.standard
+////            preferences.setValue(self.salt, forKey: "userSalt")
+////            preferences.synchronize()
+//          
+//        } catch {
+//            print(error)
+//        }
     }
     
     // MARK: Private methods
