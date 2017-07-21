@@ -38,6 +38,8 @@
 		A4A1D45B1E74A02100349AF9 /* InstitutionUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */; };
 		A4A1D45E1E74B6B300349AF9 /* ItemSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */; };
 		D42330E36DCE15B61119A381 /* Pods_donationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B78C679E15418255774C854 /* Pods_donationApp.framework */; };
+		F31A1D8F1F22871C00EE4FBF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */; };
+		F31A1D911F22A63F00EE4FBF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */; };
 		F348F4D11F215E3F0049227E /* MyItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */; };
 		F3881F391F1FD189003A8925 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3881F381F1FD189003A8925 /* LaunchScreenViewController.swift */; };
 		F3881F3B1F1FE933003A8925 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = F3881F3A1F1FE933003A8925 /* loading.gif */; };
@@ -80,6 +82,8 @@
 		A4A1D4581E74A00900349AF9 /* DonatorUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatorUser.swift; sourceTree = "<group>"; };
 		A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionUser.swift; sourceTree = "<group>"; };
 		A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionDelegate.swift; sourceTree = "<group>"; };
+		F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyItemsTableViewCell.swift; sourceTree = "<group>"; };
 		F3881F381F1FD189003A8925 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		F3881F3A1F1FE933003A8925 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
@@ -166,10 +170,11 @@
 		A4370F661EA2CEF1000A20E5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F348F4CD1F2014790049227E /* Cells */,
+				F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */,
+				F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */,
 				A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */,
 				A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */,
-				A4370F671EA2CF53000A20E5 /* ItemsTableViewCell.swift */,
-				F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -205,7 +210,6 @@
 		A46ABF341E70F68A0066764C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F348F4CD1F2014790049227E /* Cells */,
 				8E6CE25D1E7C2C4100443C10 /* Main (Login) */,
 				A4A1D4501E74493A00349AF9 /* Donator */,
 				A4A1D44F1E74493600349AF9 /* Institution */,
@@ -276,6 +280,8 @@
 		F348F4CD1F2014790049227E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A4370F671EA2CF53000A20E5 /* ItemsTableViewCell.swift */,
+				F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -420,10 +426,12 @@
 				A41C926B1EA14AF10078FE9A /* InstitutionProfileViewController.swift in Sources */,
 				A4A1D4481E7448AE00349AF9 /* MyDonationsViewController.swift in Sources */,
 				A4A1D44A1E7448C600349AF9 /* NewDonationViewController.swift in Sources */,
+				F31A1D8F1F22871C00EE4FBF /* MapViewController.swift in Sources */,
 				A4A1D45E1E74B6B300349AF9 /* ItemSelectionDelegate.swift in Sources */,
 				8E72BCBB1E76EB2100CB6CB4 /* DAButton.swift in Sources */,
 				A41C92691EA14AB40078FE9A /* NewOrderViewController.swift in Sources */,
 				A4A1D44C1E7448EA00349AF9 /* InstitutionsViewController.swift in Sources */,
+				F31A1D911F22A63F00EE4FBF /* DetailViewController.swift in Sources */,
 				A4A1D4591E74A00900349AF9 /* DonatorUser.swift in Sources */,
 				A41C92631EA149800078FE9A /* OrdersViewController.swift in Sources */,
 				8E9DE4441E70AF4600A0449D /* AppDelegate.swift in Sources */,

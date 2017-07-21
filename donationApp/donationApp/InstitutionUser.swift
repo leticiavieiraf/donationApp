@@ -32,6 +32,31 @@ class InstitutionUser : NSObject {
     var group: String
     var ref: DatabaseReference?
     
+    override init() {
+    
+        self.key = ""
+        self.uid = ""
+        self.name = ""
+        self.info = ""
+        self.email = ""
+        self.password = ""
+        self.registerDate = ""
+        self.contact = ""
+        self.phone = ""
+        self.bank = ""
+        self.agency = ""
+        self.accountNumber = ""
+        self.address = ""
+        self.district = ""
+        self.city = ""
+        self.state = ""
+        self.zipCode = ""
+        self.group = ""
+        self.ref = nil
+        
+        super.init()
+    }
+    
     init(uid: String, name: String, info: String, email: String, password: String, registerDate: String, contact: String, phone: String, bank: String, agency: String, accountNumber: String, address: String, district: String, city: String, state: String, zipCode: String, group: String, key: String = "") {
     
         self.key = key

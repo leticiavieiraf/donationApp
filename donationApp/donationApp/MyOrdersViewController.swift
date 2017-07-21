@@ -80,14 +80,14 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
             
             SVProgressHUD.dismiss()
             
-            var newItems: [OrderItem] = []
+            var userItems: [OrderItem] = []
             
             for item in snapshot.children.allObjects {
                 let orderItem = OrderItem(snapshot: item as! DataSnapshot)
-                newItems.append(orderItem)
+                userItems.append(orderItem)
             }
             
-            self.items = newItems
+            self.items = userItems
             self.tableView.reloadData()
         })
     }

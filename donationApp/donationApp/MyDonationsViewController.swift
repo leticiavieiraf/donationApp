@@ -79,14 +79,14 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
             
             SVProgressHUD.dismiss()
             
-            var newItems: [DonationItem] = []
+            var userItems: [DonationItem] = []
             
             for item in snapshot.children.allObjects {
                 let donationItem = DonationItem(snapshot: item as! DataSnapshot)
-                newItems.append(donationItem)
+                userItems.append(donationItem)
             }
             
-            self.items = newItems
+            self.items = userItems
             self.tableView.reloadData()
         })
     }

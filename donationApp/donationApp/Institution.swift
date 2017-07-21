@@ -31,6 +31,30 @@ class Institution : NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var ref: DatabaseReference?
     
+    override init() {
+        
+        self.key = ""
+        self.name = ""
+        self.info = ""
+        self.email = ""
+        self.contact = ""
+        self.phone = ""
+        self.bank = ""
+        self.agency = ""
+        self.accountNumber = ""
+        self.address = ""
+        self.district = ""
+        self.city = ""
+        self.state = ""
+        self.zipCode = ""
+        self.group = ""
+        self.coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        self.ref = nil
+        
+        super.init()
+    }
+    
+    
     init(name: String, info: String, email: String, contact: String, phone: String,
          bank: String, agency: String, accountNumber: String, address: String, district: String,
          city: String, state: String, zipCode: String, group: String, coordinate: CLLocationCoordinate2D, key: String = "") {

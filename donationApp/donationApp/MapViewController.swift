@@ -1,8 +1,8 @@
 //
-//  InstitutionsViewController.swift
+//  MapViewController.swift
 //  donationApp
 //
-//  Created by Letícia Fernandes on 11/03/17.
+//  Created by Letícia on 21/07/17.
 //  Copyright © 2017 PUC. All rights reserved.
 //
 
@@ -14,13 +14,19 @@ import FacebookLogin
 import FacebookCore
 import SVProgressHUD
 
-class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    // outlets
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
+    
+    // variables
+    var detailViewController : DetailViewController = DetailViewController()
+    var selectedInstitution = Institution()
+    
     let ref = Database.database().reference(withPath: "features")
     var institutions : [Institution] =  [Institution]()
     var locationManager = CLLocationManager()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +45,7 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
             self.mapView.delegate = self
             self.locationManager.delegate = self
             self.locationManager.requestWhenInUseAuthorization()
-
+            
             // Busca Instituições
             SVProgressHUD.setDefaultStyle(.dark)
             SVProgressHUD.show()
@@ -56,24 +62,24 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
                         self.geolocalisation(fromAddress: adress, onSuccess: { location in
                             
                             institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
-                                                                       longitude: location.coordinate.longitude)
+                                                                            longitude: location.coordinate.longitude)
                             
                             self.mapView.addAnnotation(institution)
                             
                             
                             //Set initial location
                             if count == 0 {
-                                 let initialLocation = self.mapView.userLocation.location != nil ? self.mapView.userLocation.location :
+                                let initialLocation = self.mapView.userLocation.location != nil ? self.mapView.userLocation.location :
                                     CLLocation(latitude: institution.coordinate.latitude, longitude: institution.coordinate.longitude)
                                 
                                 self.centerMapOnLocation(location: initialLocation!)
                                 count += 1
                                 
                                 /*
-                                let region : MKCoordinateRegion = MKCoordinateRegionMakeWithDistance (self.mapView.userLocation.location!.coordinate, 50, 50);
-                                let adjustedRegion = self.mapView.regionThatFits(region)
-                                self.mapView.setRegion(adjustedRegion, animated:true)
-                                */
+                                 let region : MKCoordinateRegion = MKCoordinateRegionMakeWithDistance (self.mapView.userLocation.location!.coordinate, 50, 50);
+                                 let adjustedRegion = self.mapView.regionThatFits(region)
+                                 self.mapView.setRegion(adjustedRegion, animated:true)
+                                 */
                             }
                         }) { error in
                             print(error)
@@ -87,7 +93,7 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
             })
         }
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -99,7 +105,7 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
     }
-
+    
     
     func geolocalisation(fromAddress address: String, onSuccess: @escaping (_ location: CLLocation) -> (), onFailure: @escaping (_ error: Error) -> ())  {
         
@@ -122,6 +128,16 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
                                                                   regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    // MARK:Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showDetails" {
+            let detailVC = segue.destination as! DetailViewController
+            self.detailViewController = detailVC
+        }
+        
     }
     
     // MARK: - location manager to authorize user location for Maps app
@@ -166,49 +182,26 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        if let annotation = view.annotation as? Institution {
-            //print("Your annotation title: \(annotation.title)");
+        if let tappedInstitution = view.annotation as? Institution {
+            self.detailViewController.institution = tappedInstitution
             
+            containerHeightConstraint.constant = 340;
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+            
+            self.detailViewController.tableView.reloadData()
+            
+            /*
             let detailVC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "detailPopUp") as! DetailInstitutionViewController
             detailVC.institution = annotation
             self.addChildViewController(detailVC)
             detailVC.view.frame = self.view.frame
             self.view.addSubview(detailVC.view)
             detailVC.didMove(toParentViewController: self)
+             
+             //print("Your annotation title: \(annotation.title)");
+            */
         }
     }
-
-    
-    
-    
-    //    func geoCodeAddress(_ address:NSString){
-    //
-    //        let geocoder = CLGeocoder()
-    //        geocoder.geocodeAddressString(address as String, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-    //
-    //            if (error != nil) {
-    //                print(error!.localizedDescription)
-    //            }
-    //            else{
-    //
-    //                if let placemark = placemarks?.first {
-    //
-    //                    print("placemark| \(placemark)")
-    //
-    //                    if let location = placemark.location {
-    //                        print(location)
-    //                    }
-    //                }
-    //                else {
-    //
-    //                     print("invalid address: \(address)")
-    //
-    //                }
-    //            }
-    //            
-    //            } as! CLGeocodeCompletionHandler)
-    //    }
-    //
-    
-    
 }
