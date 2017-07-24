@@ -78,7 +78,7 @@ class RegisterInstitutionViewController: UIViewController {
     func register(_ institution : Institution) {
         
         // Criptografia segura e ideal Hash SHA-256 (PBKDF2)
-        salt = randomString()
+        salt = kGeneral //randomString()
         let saltAndPassword = salt + self.passwordField.text!
         password_sha256 = sha256SaltHash(saltAndPassword, salt: salt)
         
@@ -139,7 +139,7 @@ class RegisterInstitutionViewController: UIViewController {
         formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
         let dateStr = formatter.string(from: date)
     
-        let userInstitution = InstitutionUser(uid: uid,
+        let userInstitution = InstitutionUser(uid: uid.lowercased(),
                                           name: institution.name,
                                           info: institution.info,
                                           email: institution.email,
@@ -167,10 +167,10 @@ class RegisterInstitutionViewController: UIViewController {
     func sha256SaltHash(_ password: String, salt: String) -> String {
         
         let bytesPass: Array<UInt8> = Array(password.utf8);
-        let salt: Array<UInt8> = Array(salt.utf8)
+        let byteSalt: Array<UInt8> = Array(salt.utf8)
         
         do {
-            let hashed = try PKCS5.PBKDF2(password: bytesPass, salt: salt, iterations: 4096, variant: .sha256).calculate()
+            let hashed = try PKCS5.PBKDF2(password: bytesPass, salt: byteSalt, iterations: 4096, variant: .sha256).calculate()
             let hashedStr = Data(bytes: hashed).toHexString()
             
             return hashedStr

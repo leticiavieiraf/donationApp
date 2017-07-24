@@ -34,7 +34,7 @@ class InstitutionProfileViewController: UIViewController {
             SVProgressHUD.setDefaultStyle(.dark)
             SVProgressHUD.show()
             
-            refInstitutionUsers.child(userUID).observeSingleEvent(of: .value, with: { (snapshot) in
+            refInstitutionUsers.child(userUID.lowercased()).observeSingleEvent(of: .value, with: { (snapshot) in
                 self.institutionUser = InstitutionUser(snapshot: snapshot)
                 
                 self.nameLabel.text = self.institutionUser.name

@@ -83,10 +83,10 @@ class LoginInstitutionViewController: UIViewController {
     func sha256SaltHash(_ password: String, salt: String) -> String {
         
         let bytesPass: Array<UInt8> = Array(password.utf8);
-        let salt: Array<UInt8> = Array(salt.utf8)
+        let byteSalt: Array<UInt8> = Array(salt.utf8)
         
         do {
-            let hashed = try PKCS5.PBKDF2(password: bytesPass, salt: salt, iterations: 4096, variant: .sha256).calculate()
+            let hashed = try PKCS5.PBKDF2(password: bytesPass, salt: byteSalt, iterations: 4096, variant: .sha256).calculate()
             let hashedStr = Data(bytes: hashed).toHexString()
             
             return hashedStr

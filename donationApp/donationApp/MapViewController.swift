@@ -14,7 +14,7 @@ import FacebookLogin
 import FacebookCore
 import SVProgressHUD
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     
     // outlets
     @IBOutlet weak var mapView: MKMapView!
@@ -46,6 +46,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.locationManager.delegate = self
             self.locationManager.requestWhenInUseAuthorization()
             
+            let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnMapView))
+            doubleTapGesture.delegate = self
+            doubleTapGesture.numberOfTapsRequired = 2
+            self.mapView.addGestureRecognizer(doubleTapGesture)
+            
             // Busca Instituições
             SVProgressHUD.setDefaultStyle(.dark)
             SVProgressHUD.show()
@@ -56,7 +61,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 for item in snapshot.children {
                     let institution = Institution(snapshot: item as! DataSnapshot)
                     
-                    if institution.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
+                    //if institution.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
+                    if institution.email == "iscmps.sor@terra.com.br" {
                         
                         let adress = institution.address + " " + institution.district + ", " + institution.city + " - " + institution.state
                         self.geolocalisation(fromAddress: adress, onSuccess: { location in
@@ -69,17 +75,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                             
                             //Set initial location
                             if count == 0 {
-                                let initialLocation = self.mapView.userLocation.location != nil ? self.mapView.userLocation.location :
-                                    CLLocation(latitude: institution.coordinate.latitude, longitude: institution.coordinate.longitude)
+                                let initialLocation : CLLocation?
                                 
-                                self.centerMapOnLocation(location: initialLocation!)
+                                if (self.mapView.userLocation.location != nil) {
+                                    initialLocation = self.mapView.userLocation.location
+                                } else {
+                                    initialLocation = CLLocation(latitude: institution.coordinate.latitude, longitude: institution.coordinate.longitude)
+                                }
+                                
+                                self.centerMapOnLocation(coordinate: initialLocation!.coordinate, regionRadius: 2000)
                                 count += 1
-                                
-                                /*
-                                 let region : MKCoordinateRegion = MKCoordinateRegionMakeWithDistance (self.mapView.userLocation.location!.coordinate, 50, 50);
-                                 let adjustedRegion = self.mapView.regionThatFits(region)
-                                 self.mapView.setRegion(adjustedRegion, animated:true)
-                                 */
                             }
                         }) { error in
                             print(error)
@@ -106,14 +111,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         checkLocationAuthorizationStatus()
     }
     
-    
     func geolocalisation(fromAddress address: String, onSuccess: @escaping (_ location: CLLocation) -> (), onFailure: @escaping (_ error: Error) -> ())  {
-        
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarksOptional, error) -> Void in
             
             if let placemarks = placemarksOptional {
-                //print("placemark| \(placemarks.first)")
                 if let location = placemarks.first?.location {
                     onSuccess(location)
                 }
@@ -123,11 +125,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    let regionRadius: CLLocationDistance = 1000
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                  regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
+    func handleTapOnMapView() {
+        hideDetails()
+    }
+    
+    func centerMapOnLocation(coordinate: CLLocationCoordinate2D, regionRadius: CLLocationDistance) {
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
+        let adjustedRegion = self.mapView.regionThatFits(region)
+        mapView.setRegion(adjustedRegion, animated: true)
+    }
+    
+    func showDetails() {
+        containerHeightConstraint.constant = UIScreen.main.bounds.height * 0.66;
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func hideDetails() {
+        containerHeightConstraint.constant = 0;
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
     
     // MARK:Navigation
@@ -137,7 +158,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let detailVC = segue.destination as! DetailViewController
             self.detailViewController = detailVC
         }
-        
     }
     
     // MARK: - location manager to authorize user location for Maps app
@@ -151,14 +171,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // Mark: MKMapViewDelegate
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
         if let annotation = view.annotation as? Institution {
             print("Your annotation title: \(annotation.title)");
         }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        
+        hideDetails()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -184,13 +203,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         if let tappedInstitution = view.annotation as? Institution {
             self.detailViewController.institution = tappedInstitution
-            
-            containerHeightConstraint.constant = 340;
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.layoutIfNeeded()
-            })
-            
-            self.detailViewController.tableView.reloadData()
+            showDetails()
+            centerMapOnLocation(coordinate: tappedInstitution.coordinate, regionRadius: 100)
+            self.detailViewController.loadData()
             
             /*
             let detailVC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "detailPopUp") as! DetailInstitutionViewController
@@ -199,7 +214,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             detailVC.view.frame = self.view.frame
             self.view.addSubview(detailVC.view)
             detailVC.didMove(toParentViewController: self)
-             
              //print("Your annotation title: \(annotation.title)");
             */
         }

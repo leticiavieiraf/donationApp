@@ -61,7 +61,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
-        refInstitutionUsers.child(userUID!).observeSingleEvent(of: .value, with: { (snapshot) in
+        refInstitutionUsers.child(userUID!.lowercased()).observeSingleEvent(of: .value, with: { (snapshot) in
             
             SVProgressHUD.dismiss()
             

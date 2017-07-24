@@ -39,12 +39,20 @@ struct DonatorUser {
     
     init(snapshot: DataSnapshot) {
         key = snapshot.key
-        let snapshotValue = snapshot.value as! [String: AnyObject]
-        uid = snapshotValue["uid"] as! String
-        email = snapshotValue["email"] as! String
-        name = snapshotValue["name"] as! String
-        photoUrl = snapshotValue["photoUrl"] as! String
-        ref = snapshot.ref
+        if !(snapshot.value is NSNull) {
+            let snapshotValue = snapshot.value as! [String: AnyObject]
+            uid = snapshotValue["uid"] as! String
+            email = snapshotValue["email"] as! String
+            name = snapshotValue["name"] as! String
+            photoUrl = snapshotValue["photoUrl"] as! String
+            ref = snapshot.ref
+        } else {
+            uid = "Erro"
+            email = "Erro"
+            name = "Erro"
+            photoUrl = "Erro"
+            ref = nil
+        }
     }
     
     func toAnyObject() -> Any {

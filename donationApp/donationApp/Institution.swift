@@ -90,23 +90,42 @@ class Institution : NSObject, MKAnnotation {
     
     init(snapshot: DataSnapshot) {
         key = snapshot.key
-        let snapshotValue = snapshot.value as! [String: AnyObject]
-        name = snapshotValue["Name"] as! String
-        info = snapshotValue["description"] as! String
-        email = snapshotValue["e_mail"] as! String
-        contact = snapshotValue["contato"] as! String
-        phone = snapshotValue["telefone"] as! String
-        bank = snapshotValue["banco"] as! String
-        agency = snapshotValue["agencia"] as! String
-        accountNumber = snapshotValue["conta"] as! String
-        address = snapshotValue["endereco"] as! String
-        district = snapshotValue["bairro"] as! String
-        city = snapshotValue["cidade"] as! String
-        state = snapshotValue["estado"] as! String
-        zipCode = snapshotValue["cep"] as! String
-        group = snapshotValue["IDSetor"] as! String
-        coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        ref = snapshot.ref
+        if !(snapshot.value is NSNull) {
+            let snapshotValue = snapshot.value as! [String: AnyObject]
+            name = snapshotValue["Name"] as! String
+            info = snapshotValue["description"] as! String
+            email = snapshotValue["e_mail"] as! String
+            contact = snapshotValue["contato"] as! String
+            phone = snapshotValue["telefone"] as! String
+            bank = snapshotValue["banco"] as! String
+            agency = snapshotValue["agencia"] as! String
+            accountNumber = snapshotValue["conta"] as! String
+            address = snapshotValue["endereco"] as! String
+            district = snapshotValue["bairro"] as! String
+            city = snapshotValue["cidade"] as! String
+            state = snapshotValue["estado"] as! String
+            zipCode = snapshotValue["cep"] as! String
+            group = snapshotValue["IDSetor"] as! String
+            coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+            ref = snapshot.ref
+        } else {
+            name = "Erro"
+            info = "Erro"
+            email = "Erro"
+            contact = "Erro"
+            phone = "Erro"
+            bank = "Erro"
+            agency = "Erro"
+            accountNumber = "Erro"
+            address = "Erro"
+            district = "Erro"
+            city = "Erro"
+            state = "Erro"
+            zipCode = "Erro"
+            group = "Erro"
+            coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+            ref = nil
+        }
     }
     
     

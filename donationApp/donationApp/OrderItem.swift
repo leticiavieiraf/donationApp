@@ -33,14 +33,24 @@ struct OrderItem {
     
     init(snapshot: DataSnapshot) {
         key = snapshot.key
-        let snapshotValue = snapshot.value as! [String: AnyObject]
-        name = snapshotValue["name"] as! String
-        addedByUser = snapshotValue["addedByUser"] as! String
-        userUid = snapshotValue["userUid"] as! String
-        userEmail = snapshotValue["userEmail"] as! String
-        userPhotoUrl = snapshotValue["userPhotoUrl"] as! String
-        publishDate = snapshotValue["publishDate"] as! String
-        ref = snapshot.ref
+        if !(snapshot.value is NSNull) {
+            let snapshotValue = snapshot.value as! [String: AnyObject]
+            name = snapshotValue["name"] as! String
+            addedByUser = snapshotValue["addedByUser"] as! String
+            userUid = snapshotValue["userUid"] as! String
+            userEmail = snapshotValue["userEmail"] as! String
+            userPhotoUrl = snapshotValue["userPhotoUrl"] as! String
+            publishDate = snapshotValue["publishDate"] as! String
+            ref = snapshot.ref
+        } else {
+            name = "Erro"
+            addedByUser = "Erro"
+            userUid = "Erro"
+            userEmail = "Erro"
+            userPhotoUrl = "Erro"
+            publishDate = "Erro"
+            ref = nil
+        }
     }
     
     func toAnyObject() -> Any {

@@ -22,7 +22,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     
     // variables
     var institution = Institution()
-    var institutionUser = InstitutionUser()
+    var institutionUser : InstitutionUser?
     var items: [OrderItem] = []
     
     // firebase refs
@@ -41,19 +41,20 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.window?.rootViewController = loginNav
             
-        } else {
-
-            self.nameLabel.text = self.institution.name
-            self.emailLabel.text = self.institution.email
-            self.addressLabel.text = self.institution.address + ", " + self.institution.district + ", " + self.institution.city + " - " + self.institution.state + ". Cep: " + self.institution.zipCode
-            self.infoLabel.text = self.institution.group
-            self.phoneLabel.text = self.institution.phone
-            
-            getInstitutionUser(institution)
         }
     }
 
-    func getInstitutionUser(_ institution: Institution) {
+    func loadData() {
+        self.nameLabel.text = self.institution.name
+        self.emailLabel.text = self.institution.email
+        self.addressLabel.text = self.institution.address + ", " + self.institution.district + ", " + self.institution.city + " - " + self.institution.state + ". Cep: " + self.institution.zipCode
+        self.infoLabel.text = self.institution.group
+        self.phoneLabel.text = self.institution.phone
+        
+        getInstitutionUser()
+    }
+    
+    func getInstitutionUser() {
         
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
@@ -65,8 +66,13 @@ class DetailViewController: UIViewController, UITableViewDataSource {
                  
                 if self.institution.email == user.email  {
                     self.institutionUser = user
-                    self.loadOrdersFrom(self.institutionUser.uid)
                 }
+            }
+            
+            if let foundUser = self.institutionUser {
+                self.loadOrdersFrom(foundUser.uid)
+            } else {
+                SVProgressHUD.dismiss()
             }
         })
     }
@@ -74,6 +80,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     func loadOrdersFrom(_ userUID: String) {
         
         refOrderItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { (snapshot) in
+            SVProgressHUD.dismiss()
             
             var userItems: [OrderItem] = []
             
@@ -84,8 +91,6 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             
             self.items = userItems
             self.tableView.reloadData()
-            
-            SVProgressHUD.dismiss()
         })
     }
     
