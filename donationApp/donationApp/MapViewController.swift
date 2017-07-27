@@ -136,7 +136,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func showDetails() {
-        containerHeightConstraint.constant = UIScreen.main.bounds.height * 0.66;
+        containerHeightConstraint.constant = UIScreen.main.bounds.height * 0.6;
         
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
@@ -204,7 +204,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let tappedInstitution = view.annotation as? Institution {
             self.detailViewController.institution = tappedInstitution
             showDetails()
-            centerMapOnLocation(coordinate: tappedInstitution.coordinate, regionRadius: 100)
+            centerMapOnLocation(coordinate: tappedInstitution.coordinate, regionRadius: 200)
             self.detailViewController.loadData()
             
             /*
