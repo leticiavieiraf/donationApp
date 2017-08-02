@@ -133,12 +133,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
         let adjustedRegion = self.mapView.regionThatFits(region)
         mapView.setRegion(adjustedRegion, animated: true)
+        
+        let eyeCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: (coordinate.longitude + 4.7729562215302312))
+        mapView.setCamera(MKMapCamera(lookingAtCenter: coordinate, fromEyeCoordinate: eyeCoordinate, eyeAltitude: 0.1), animated: true)
     }
     
     func showDetails() {
         containerHeightConstraint.constant = UIScreen.main.bounds.height * 0.6;
         
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.6, animations: {
             self.view.layoutIfNeeded()
         })
     }

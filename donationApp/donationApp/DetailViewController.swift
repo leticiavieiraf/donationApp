@@ -29,6 +29,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     let refOrderItems = Database.database().reference(withPath: "order-items")
     let refInstitutionsUsers = Database.database().reference(withPath: "institution-users")
     
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +45,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         }
     }
 
+    // MARK: Firebase methods
     func loadData() {
         self.nameLabel.text = self.institution.name
         self.emailLabel.text = self.institution.email
@@ -94,6 +96,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         })
     }
     
+    // MARK: Setup method
     func imageNameForItem(_ itemName: String) -> String {
         switch itemName {
         case Constants.kSweaters:
@@ -109,6 +112,16 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         default:
             return "higiene"
         }
+    }
+    
+    // MARK: Action methods
+    @IBAction func hideDetails(_ sender: Any) {
+        let mapViewController = parent as! MapViewController
+        mapViewController.containerHeightConstraint.constant = 0;
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            mapViewController.view.layoutIfNeeded()
+        })
     }
     
     // MARK: UITableViewDataSource
