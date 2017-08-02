@@ -26,7 +26,11 @@ class NewOrderViewController: UIViewController , UIPickerViewDelegate, UIPickerV
         self.picker.delegate = self
         self.picker.dataSource = self
         
-        pickerData = ["Agasalhos", "Alimentos não-perecíveis", "Calçados", "Produtos de Higiene", "Roupas"]
+        pickerData = [Constants.kSweaters,
+                      Constants.kFood,
+                      Constants.kShoes,
+                      Constants.kHygiene,
+                      Constants.kClothes]
     }
     
     

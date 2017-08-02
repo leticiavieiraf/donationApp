@@ -116,6 +116,8 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         let newDonationVC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "sbPopUpID") as! NewDonationViewController
         newDonationVC.delegate = self
         
+        self.view.layoutIfNeeded()
+        
         self.addChildViewController(newDonationVC)
         newDonationVC.view.frame = self.view.frame
         self.view.addSubview(newDonationVC.view)

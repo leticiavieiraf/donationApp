@@ -100,7 +100,7 @@ class LoginInstitutionViewController: UIViewController {
     
     // MARK: Keychain Access method
     func loadSalt() -> String {
-        return kGeneral
+        return Constants.kGeneral
         
 //        // Reading data from the keychain
 //        if let saltDictionary = Locksmith.loadDataForUserAccount(userAccount: self.emailField.text!) {

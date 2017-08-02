@@ -11,8 +11,6 @@ import FacebookCore
 import FBSDKLoginKit
 import Firebase
 
-let kGeneral = "YW8urJCkA6wMqkoQNoFM6oT6GFOhA"
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

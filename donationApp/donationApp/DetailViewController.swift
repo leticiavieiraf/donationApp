@@ -94,8 +94,21 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         })
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    func imageNameForItem(_ itemName: String) -> String {
+        switch itemName {
+        case Constants.kSweaters:
+            return "agasalhos"
+        case Constants.kFood:
+            return "alimentos"
+        case Constants.kShoes:
+            return "calcados"
+        case Constants.kHygiene:
+            return "higiene"
+        case Constants.kClothes:
+            return "roupas"
+        default:
+            return "higiene"
+        }
     }
     
     // MARK: UITableViewDataSource
@@ -108,9 +121,14 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailOrderCell", for: indexPath) as! MyItemsTableViewCell
         let orderItem = items[indexPath.row]
         
+        cell.imageViewIcon.image = UIImage(named: imageNameForItem(orderItem.name))
         cell.labelTitle?.text = orderItem.name
         cell.labelSubtitle?.text = "Publicado em " + orderItem.publishDate
         
         return cell
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
 }

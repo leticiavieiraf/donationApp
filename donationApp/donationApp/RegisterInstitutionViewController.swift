@@ -78,7 +78,7 @@ class RegisterInstitutionViewController: UIViewController {
     func register(_ institution : Institution) {
         
         // Criptografia segura e ideal Hash SHA-256 (PBKDF2)
-        salt = kGeneral //randomString()
+        salt = Constants.kGeneral //randomString()
         let saltAndPassword = salt + self.passwordField.text!
         password_sha256 = sha256SaltHash(saltAndPassword, salt: salt)
         

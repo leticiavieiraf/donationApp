@@ -40,6 +40,7 @@
 		D42330E36DCE15B61119A381 /* Pods_donationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B78C679E15418255774C854 /* Pods_donationApp.framework */; };
 		F31A1D8F1F22871C00EE4FBF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */; };
 		F31A1D911F22A63F00EE4FBF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */; };
+		F326542A1F3271D400885F14 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32654291F3271D400885F14 /* Constants.swift */; };
 		F348F4D11F215E3F0049227E /* MyItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */; };
 		F3881F391F1FD189003A8925 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3881F381F1FD189003A8925 /* LaunchScreenViewController.swift */; };
 		F3881F3B1F1FE933003A8925 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = F3881F3A1F1FE933003A8925 /* loading.gif */; };
@@ -84,6 +85,7 @@
 		A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionDelegate.swift; sourceTree = "<group>"; };
 		F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		F32654291F3271D400885F14 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyItemsTableViewCell.swift; sourceTree = "<group>"; };
 		F3881F381F1FD189003A8925 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		F3881F3A1F1FE933003A8925 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */,
 				A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */,
 				A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */,
+				F32654291F3271D400885F14 /* Constants.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				A41C92651EA14A830078FE9A /* DonationsViewController.swift in Sources */,
 				A42AC3E61E7792FA00E4B512 /* DetailInstitutionViewController.swift in Sources */,
 				A4A1D44E1E74492600349AF9 /* DonatorProfileViewController.swift in Sources */,
+				F326542A1F3271D400885F14 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
