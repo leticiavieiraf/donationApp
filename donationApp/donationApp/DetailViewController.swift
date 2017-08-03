@@ -20,6 +20,9 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    //constraints
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    
     // variables
     var institution = Institution()
     var institutionUser : InstitutionUser?
@@ -41,22 +44,21 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.window?.rootViewController = loginNav
-            
+        }
+    }
+    
+    // MARK: Data Source methods
+    func loadData() {
+        if let institutionUser = self.institutionUser {
+            setupDetailsBox(institutionUser)
+            loadOrdersFrom(institutionUser.uid)
+        } else {
+            getInstitutionUserAndLoadOrders()
         }
     }
 
     // MARK: Firebase methods
-    func loadData() {
-        self.nameLabel.text = self.institution.name
-        self.emailLabel.text = self.institution.email
-        self.addressLabel.text = self.institution.address + ", " + self.institution.district + ", " + self.institution.city + " - " + self.institution.state + ". Cep: " + self.institution.zipCode
-        self.infoLabel.text = self.institution.group
-        self.phoneLabel.text = self.institution.phone
-        
-        getInstitutionUser()
-    }
-    
-    func getInstitutionUser() {
+    func getInstitutionUserAndLoadOrders() {
         
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
@@ -72,6 +74,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             }
             
             if let foundUser = self.institutionUser {
+                self.setupDetailsBox(foundUser)
                 self.loadOrdersFrom(foundUser.uid)
             } else {
                 SVProgressHUD.dismiss()
@@ -82,7 +85,6 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     func loadOrdersFrom(_ userUID: String) {
         
         refOrderItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { (snapshot) in
-            SVProgressHUD.dismiss()
             
             var userItems: [OrderItem] = []
             
@@ -92,11 +94,28 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             }
             
             self.items = userItems
-            self.tableView.reloadData()
+            self.setupTableView()
+            
+            SVProgressHUD.dismiss()
         })
     }
     
-    // MARK: Setup method
+    // MARK: Setup methods
+    func setupDetailsBox(_ institution: InstitutionUser) {
+        self.nameLabel.text = institution.name
+        self.emailLabel.text = institution.email
+        self.addressLabel.text = institution.address + ", " + institution.district + ", " + institution.city + " - " + institution.state + ". Cep: " + institution.zipCode
+        self.infoLabel.text = institution.group
+        self.phoneLabel.text = institution.phone
+    }
+    
+    func setupTableView() {
+        self.tableViewHeight.constant = CGFloat(55 * self.items.count)
+        self.view.layoutIfNeeded()
+        
+        self.tableView.reloadData()
+    }
+    
     func imageNameForItem(_ itemName: String) -> String {
         switch itemName {
         case Constants.kSweaters:
@@ -115,7 +134,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     }
     
     // MARK: Action methods
-    @IBAction func hideDetails(_ sender: Any) {
+    @IBAction func collapseDetails(_ sender: Any) {
         let mapViewController = parent as! MapViewController
         mapViewController.containerHeightConstraint.constant = 0;
         

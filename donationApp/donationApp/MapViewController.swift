@@ -23,6 +23,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // variables
     var detailViewController : DetailViewController = DetailViewController()
     var selectedInstitution = Institution()
+    var selectedInstitutionUser : InstitutionUser?
     
     let ref = Database.database().reference(withPath: "features")
     var institutions : [Institution] =  [Institution]()
@@ -85,6 +86,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                                 
                                 self.centerMapOnLocation(coordinate: initialLocation!.coordinate, regionRadius: 2000)
                                 count += 1
+                                
+                                
+                                if (self.selectedInstitutionUser != nil) {
+                                    self.detailViewController.institutionUser = self.selectedInstitutionUser
+                                    self.expandDetails()
+                                    self.centerMapOnLocation(coordinate: institution.coordinate, regionRadius: 200)
+                                    self.detailViewController.loadData()
+                                    
+                                }
                             }
                         }) { error in
                             print(error)
@@ -126,7 +136,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func handleTapOnMapView() {
-        hideDetails()
+        collapseDetails()
     }
     
     func centerMapOnLocation(coordinate: CLLocationCoordinate2D, regionRadius: CLLocationDistance) {
@@ -134,19 +144,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let adjustedRegion = self.mapView.regionThatFits(region)
         mapView.setRegion(adjustedRegion, animated: true)
         
-        let eyeCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: (coordinate.longitude + 4.7729562215302312))
-        mapView.setCamera(MKMapCamera(lookingAtCenter: coordinate, fromEyeCoordinate: eyeCoordinate, eyeAltitude: 0.1), animated: true)
+        let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: 300, pitch: 30, heading: 90)
+        mapView.setCamera(camera, animated: true)
     }
     
-    func showDetails() {
-        containerHeightConstraint.constant = UIScreen.main.bounds.height * 0.6;
+    func expandDetails() {
+        containerHeightConstraint.constant = UIScreen.main.bounds.height * 0.55;
         
         UIView.animate(withDuration: 0.6, animations: {
             self.view.layoutIfNeeded()
         })
     }
     
-    func hideDetails() {
+    func collapseDetails() {
         containerHeightConstraint.constant = 0;
         
         UIView.animate(withDuration: 0.5, animations: {
@@ -157,7 +167,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK:Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "showDetails" {
+        if segue.identifier == "expandDetails" {
             let detailVC = segue.destination as! DetailViewController
             self.detailViewController = detailVC
         }
@@ -172,7 +182,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // Mark: MKMapViewDelegate
+    // MARK: MKMapViewDelegate
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotation = view.annotation as? Institution {
             print("Your annotation title: \(annotation.title)");
@@ -180,7 +190,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        hideDetails()
+        collapseDetails()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -206,7 +216,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         if let tappedInstitution = view.annotation as? Institution {
             self.detailViewController.institution = tappedInstitution
-            showDetails()
+            expandDetails()
             centerMapOnLocation(coordinate: tappedInstitution.coordinate, regionRadius: 200)
             self.detailViewController.loadData()
             

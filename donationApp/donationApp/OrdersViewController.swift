@@ -13,12 +13,16 @@ import FacebookLogin
 import FacebookCore
 import SVProgressHUD
 
-class OrdersViewController: UIViewController, UITableViewDataSource {
+class OrdersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    //outlets
     @IBOutlet weak var tableView: UITableView!
     
+    // variables
     var items: [OrderItem] = []
+    var selectedItem : OrderItem?
     let refOrderItems = Database.database().reference(withPath: "order-items")
+    let refInstitutionUsers = Database.database().reference(withPath: "institution-users")
     
     // MARK: Life Cycle methods
     override func viewDidLoad() {
@@ -80,13 +84,33 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
         })
     }
     
+    func getInstitutionUserForSelectedOrder(_ orderItem: OrderItem) {
+        
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        let userUID = orderItem.userUid
+        
+        refInstitutionUsers.child(userUID.lowercased()).observeSingleEvent(of: .value, with: { (snapshot) in
+            SVProgressHUD.dismiss()
+            
+            let user = InstitutionUser(snapshot: snapshot)
+            
+            if let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewControllerID") as? MapViewController {
+                mapVC.selectedInstitutionUser = user
+                if let navigator = self.navigationController {
+                    navigator.pushViewController(mapVC, animated: true)
+                }
+            }
+        })
+    }
+    
     // MARK: UITableViewDataSource
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "orderPostCell", for: indexPath) as! ItemsTableViewCell
         let orderItem = items[indexPath.row]
         
@@ -98,6 +122,20 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
         
         return cell
     }
+    
+    // MARK: UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let orderItem = items[indexPath.row];
+        getInstitutionUserForSelectedOrder(orderItem)
+        
+//        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewsDetailsVCID") as? NewsDetailsViewController {
+//            viewController.newsObj = newsObj
+//            if let navigator = navigationController {
+//                navigator.pushViewController(viewController, animated: true)
+//            }
+//        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

@@ -56,13 +56,12 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     // MARK: Firebase methods
     func getUserAndLoadOrders() {
         
-        let userUID = Auth.auth().currentUser?.uid
-        
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
+        let userUID = Auth.auth().currentUser?.uid
+        
         refInstitutionUsers.child(userUID!.lowercased()).observeSingleEvent(of: .value, with: { (snapshot) in
-            
             SVProgressHUD.dismiss()
             
             self.institutionUser = InstitutionUser(snapshot: snapshot)
@@ -113,7 +112,6 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     // MARK: Popup New Order
     func showNewOrderPopUp() {
-        
         let newOrderVC = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "sbPopUpID") as! NewOrderViewController
         newOrderVC.delegate = self
         

@@ -61,7 +61,9 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
             
             SVProgressHUD.dismiss()
             
-            guard let user = user else { return }
+            guard let user = user else {
+                return
+            }
             
             if AccessToken.current != nil {
                 self.donatorUser = DonatorUser(authData: user)
