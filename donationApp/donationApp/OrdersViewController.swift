@@ -127,13 +127,6 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let orderItem = items[indexPath.row];
         getInstitutionUserForSelectedOrder(orderItem)
-        
-//        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewsDetailsVCID") as? NewsDetailsViewController {
-//            viewController.newsObj = newsObj
-//            if let navigator = navigationController {
-//                navigator.pushViewController(viewController, animated: true)
-//            }
-//        }
     }
     
     override func didReceiveMemoryWarning() {

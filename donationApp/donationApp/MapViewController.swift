@@ -26,7 +26,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var selectedInstitutionUser : InstitutionUser?
     
     let ref = Database.database().reference(withPath: "features")
-    var institutions : [Institution] =  [Institution]()
+    var institutions : [Institution] = [Institution]()
     var locationManager = CLLocationManager()
 
     override func viewDidLoad() {
@@ -42,70 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             appDelegate.window?.rootViewController = loginNav
             
         } else {
-            
-            self.mapView.delegate = self
-            self.locationManager.delegate = self
-            self.locationManager.requestWhenInUseAuthorization()
-            
-            let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnMapView))
-            doubleTapGesture.delegate = self
-            doubleTapGesture.numberOfTapsRequired = 2
-            self.mapView.addGestureRecognizer(doubleTapGesture)
-            
-            // Busca Instituições
-            SVProgressHUD.setDefaultStyle(.dark)
-            SVProgressHUD.show()
-            
-            ref.observe(.value, with: { snapshot in
-                
-                var count = 0
-                for item in snapshot.children {
-                    let institution = Institution(snapshot: item as! DataSnapshot)
-                    
-                    //if institution.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
-                    if institution.email == "iscmps.sor@terra.com.br" {
-                        
-                        let adress = institution.address + " " + institution.district + ", " + institution.city + " - " + institution.state
-                        self.geolocalisation(fromAddress: adress, onSuccess: { location in
-                            
-                            institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
-                                                                            longitude: location.coordinate.longitude)
-                            
-                            self.mapView.addAnnotation(institution)
-                            
-                            
-                            //Set initial location
-                            if count == 0 {
-                                let initialLocation : CLLocation?
-                                
-                                if (self.mapView.userLocation.location != nil) {
-                                    initialLocation = self.mapView.userLocation.location
-                                } else {
-                                    initialLocation = CLLocation(latitude: institution.coordinate.latitude, longitude: institution.coordinate.longitude)
-                                }
-                                
-                                self.centerMapOnLocation(coordinate: initialLocation!.coordinate, regionRadius: 2000)
-                                count += 1
-                                
-                                
-                                if (self.selectedInstitutionUser != nil) {
-                                    self.detailViewController.institutionUser = self.selectedInstitutionUser
-                                    self.expandDetails()
-                                    self.centerMapOnLocation(coordinate: institution.coordinate, regionRadius: 200)
-                                    self.detailViewController.loadData()
-                                    
-                                }
-                            }
-                        }) { error in
-                            print(error)
-                        }
-                    }
-                    
-                    self.institutions.append(institution)
-                }
-                
-                SVProgressHUD.dismiss()
-            })
+            loadMap()
         }
     }
     
@@ -121,7 +58,83 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         checkLocationAuthorizationStatus()
     }
     
-    func geolocalisation(fromAddress address: String, onSuccess: @escaping (_ location: CLLocation) -> (), onFailure: @escaping (_ error: Error) -> ())  {
+    func loadMap() {
+        self.mapView.delegate = self
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        addTapGestureRecognizerToMapView();
+        
+        
+        
+        // Busca Instituições
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        ref.observe(.value, with: { snapshot in
+            var count = 0
+            
+            for item in snapshot.children {
+                let institution = Institution(snapshot: item as! DataSnapshot)
+                
+                if let userLocation = self.mapView.userLocation.location {
+                    self.getUserLocationCity(userLocation, onSuccess: { userLocationCity in
+                        <#code#>
+                    }, onFailure: {error in
+                        print(error)
+                    })
+                    
+                } else {
+                    
+                }
+                
+                
+                //if institution.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
+                if institution.email == "iscmps.sor@terra.com.br" {
+                    
+                    let adress = institution.address + " " + institution.district + ", " + institution.city + " - " + institution.state
+                    self.geolocalisation(adress, onSuccess: { location in
+                        
+                        institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                                                                        longitude: location.coordinate.longitude)
+                        
+                        self.mapView.addAnnotation(institution)
+                        
+                        
+                        //Set initial location
+                        if count == 0 {
+                            let initialLocation : CLLocation?
+                            
+                            if (self.mapView.userLocation.location != nil) {
+                                initialLocation = self.mapView.userLocation.location
+                            } else {
+                                initialLocation = CLLocation(latitude: institution.coordinate.latitude, longitude: institution.coordinate.longitude)
+                            }
+                            
+                            self.centerMapOnLocation(coordinate: initialLocation!.coordinate, regionRadius: 2000)
+                            count += 1
+                            
+                            if (self.selectedInstitutionUser != nil) {
+                                self.detailViewController.institutionUser = self.selectedInstitutionUser
+                                self.expandDetails()
+                                self.centerMapOnLocation(coordinate: institution.coordinate, regionRadius: 200)
+                                self.detailViewController.loadData()
+                            }
+                        }
+                    }, onFailure: {error in
+                        print(error)
+                    })
+                    
+                }
+                
+                self.institutions.append(institution)
+            }
+            
+            SVProgressHUD.dismiss()
+        })
+    }
+    
+    func geolocalisation(_ address : String, onSuccess: @escaping (_ location: CLLocation) -> (), onFailure: @escaping (_ error: Error) -> ())  {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarksOptional, error) -> Void in
             
@@ -135,6 +148,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    func getUserLocationCity(_ location: CLLocation, onSuccess: @escaping (_ userLocationCity: String?) -> (), onFailure: @escaping (_ error: Error) -> ()) {
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarksOptional, error) in
+            
+            if let placemarks = placemarksOptional {
+                if let placemark = placemarks.first {
+                    onSuccess(placemark.locality)
+                }
+            } else {
+                onFailure(error!)
+            }
+        }
+    }
+    
+    func addTapGestureRecognizerToMapView() {
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnMapView))
+        doubleTapGesture.delegate = self
+        doubleTapGesture.numberOfTapsRequired = 2
+        self.mapView.addGestureRecognizer(doubleTapGesture)
+    }
     func handleTapOnMapView() {
         collapseDetails()
     }
@@ -143,7 +176,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
         let adjustedRegion = self.mapView.regionThatFits(region)
         mapView.setRegion(adjustedRegion, animated: true)
-        
+    }
+    
+    func setupMapCamera(coordinate: CLLocationCoordinate2D) {
         let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: 300, pitch: 30, heading: 90)
         mapView.setCamera(camera, animated: true)
     }
@@ -215,10 +250,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if let tappedInstitution = view.annotation as? Institution {
-            self.detailViewController.institution = tappedInstitution
+            detailViewController.institution = tappedInstitution
             expandDetails()
             centerMapOnLocation(coordinate: tappedInstitution.coordinate, regionRadius: 200)
-            self.detailViewController.loadData()
+            setupMapCamera(coordinate: tappedInstitution.coordinate);
+            detailViewController.loadData()
             
             /*
             let detailVC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "detailPopUp") as! DetailInstitutionViewController
