@@ -42,7 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             appDelegate.window?.rootViewController = loginNav
             
         } else {
-            loadMap()
+            getInstitutionsAndLoadMap()
         }
     }
     
@@ -58,14 +58,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         checkLocationAuthorizationStatus()
     }
     
-    func loadMap() {
+    func getInstitutionsAndLoadMap() {
         self.mapView.delegate = self
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
         
         addTapGestureRecognizerToMapView();
-        
-        
         
         // Busca Instituições
         SVProgressHUD.setDefaultStyle(.dark)
@@ -79,58 +77,63 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 if let userLocation = self.mapView.userLocation.location {
                     self.getUserLocationCity(userLocation, onSuccess: { userLocationCity in
-                        <#code#>
+                       
+                        self.drawInstitutionPinsForCity(userLocationCity, institution)
+                    
                     }, onFailure: {error in
                         print(error)
                     })
-                    
                 } else {
-                    
+                    self.drawInstitutionPinsForCity("Belo Horizonte", institution)
                 }
                 
                 
-                //if institution.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
-                if institution.email == "iscmps.sor@terra.com.br" {
+                
+                //Set initial location
+                if count == 0 {
+                    let initialLocation : CLLocation?
                     
-                    let adress = institution.address + " " + institution.district + ", " + institution.city + " - " + institution.state
-                    self.geolocalisation(adress, onSuccess: { location in
-                        
-                        institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
-                                                                        longitude: location.coordinate.longitude)
-                        
-                        self.mapView.addAnnotation(institution)
-                        
-                        
-                        //Set initial location
-                        if count == 0 {
-                            let initialLocation : CLLocation?
-                            
-                            if (self.mapView.userLocation.location != nil) {
-                                initialLocation = self.mapView.userLocation.location
-                            } else {
-                                initialLocation = CLLocation(latitude: institution.coordinate.latitude, longitude: institution.coordinate.longitude)
-                            }
-                            
-                            self.centerMapOnLocation(coordinate: initialLocation!.coordinate, regionRadius: 2000)
-                            count += 1
-                            
-                            if (self.selectedInstitutionUser != nil) {
-                                self.detailViewController.institutionUser = self.selectedInstitutionUser
-                                self.expandDetails()
-                                self.centerMapOnLocation(coordinate: institution.coordinate, regionRadius: 200)
-                                self.detailViewController.loadData()
-                            }
-                        }
-                    }, onFailure: {error in
-                        print(error)
-                    })
+                    if (self.mapView.userLocation.location != nil) {
+                        initialLocation = self.mapView.userLocation.location
+                    } else {
+                        initialLocation = CLLocation(latitude: institution.coordinate.latitude, longitude: institution.coordinate.longitude)
+                    }
                     
+                    self.centerMapOnLocation(coordinate: initialLocation!.coordinate, regionRadius: 2000)
+                    count += 1
+                    
+                    if (self.selectedInstitutionUser != nil) {
+                        self.detailViewController.institutionUser = self.selectedInstitutionUser
+                        self.expandDetails()
+                        self.centerMapOnLocation(coordinate: institution.coordinate, regionRadius: 200)
+                        self.detailViewController.loadData()
+                    }
                 }
+                
+                
+                
                 
                 self.institutions.append(institution)
             }
             
             SVProgressHUD.dismiss()
+        })
+    }
+    
+    func getInstitutions(onSuccess: @escaping (_ institutions: [Institution]) -> (), onFailure: @escaping (_ error: Error) -> ()) {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        ref.observe(.value, with: { snapshot in
+            
+            for item in snapshot.children {
+                let institution = Institution(snapshot: item as! DataSnapshot)
+                self.institutions.append(institution)
+                
+            }
+            SVProgressHUD.dismiss()
+            
+            onSuccess(self.institutions)
         })
     }
     
@@ -159,6 +162,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             } else {
                 onFailure(error!)
             }
+        }
+    }
+    
+    func drawInstitutionPinsForCity(_ city: String?, _ institution: Institution) {
+        //if institution.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
+        if institution.email == city {
+            let adress = institution.address + " " + institution.district + ", " + institution.city + " - " + institution.state
+            self.geolocalisation(adress, onSuccess: { location in
+                
+                institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                                                                longitude: location.coordinate.longitude)
+                
+                self.mapView.addAnnotation(institution)
+            }, onFailure: {error in
+                print(error)
+            })
+            
         }
     }
     
