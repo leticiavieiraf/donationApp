@@ -20,7 +20,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    //constraints
+    // constraints
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     // variables
@@ -50,7 +50,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     // MARK: Data Source methods
     func loadData() {
         if let institutionUser = self.institutionUser {
-            setupDetailsBox(institutionUser)
+            setupDetailBox(institutionUser, nil)
             loadOrdersFrom(institutionUser.uid)
         } else {
             getInstitutionUserAndLoadOrders()
@@ -74,9 +74,10 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             }
             
             if let foundUser = self.institutionUser {
-                self.setupDetailsBox(foundUser)
+                self.setupDetailBox(foundUser, nil)
                 self.loadOrdersFrom(foundUser.uid)
             } else {
+                self.setupDetailBox(nil, self.institution)
                 SVProgressHUD.dismiss()
             }
         })
@@ -101,12 +102,24 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     }
     
     // MARK: Setup methods
-    func setupDetailsBox(_ institution: InstitutionUser) {
-        self.nameLabel.text = institution.name
-        self.emailLabel.text = institution.email
-        self.addressLabel.text = institution.address + ", " + institution.district + ", " + institution.city + " - " + institution.state + ". Cep: " + institution.zipCode
-        self.infoLabel.text = institution.group
-        self.phoneLabel.text = institution.phone
+    func setupDetailBox(_ institutionUser: InstitutionUser?, _ institution: Institution?) {
+        
+        if let institution = institution {
+            self.nameLabel.text = institution.name
+            self.emailLabel.text = institution.email
+            self.addressLabel.text = institution.address + ", " + institution.district + ", " + institution.city + " - " + institution.state + ". Cep: " + institution.zipCode
+            self.infoLabel.text = institution.group
+            self.phoneLabel.text = institution.phone
+            
+        } else {
+            if let institution = institutionUser {
+                self.nameLabel.text = institution.name
+                self.emailLabel.text = institution.email
+                self.addressLabel.text = institution.address + ", " + institution.district + ", " + institution.city + " - " + institution.state + ". Cep: " + institution.zipCode
+                self.infoLabel.text = institution.group
+                self.phoneLabel.text = institution.phone
+            }
+        }
     }
     
     func setupTableView() {
@@ -145,19 +158,27 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return items.count == 0 ? 1 : items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailOrderCell", for: indexPath) as! MyItemsTableViewCell
-        let orderItem = items[indexPath.row]
-        
-        cell.imageViewIcon.image = UIImage(named: imageNameForItem(orderItem.name))
-        cell.labelTitle?.text = orderItem.name
-        cell.labelSubtitle?.text = "Publicado em " + orderItem.publishDate
-        
-        return cell
+    
+        if items.count > 0 {
+            let orderItem = items[indexPath.row]
+            
+            cell.imageViewIcon.image = UIImage(named: imageNameForItem(orderItem.name))
+            cell.labelTitle?.text = orderItem.name
+            cell.labelSubtitle?.text = "Publicado em " + orderItem.publishDate
+            
+            return cell
+        } else {
+            cell.labelTitle?.text = "Não existem pedidos cadastrados."
+            cell.labelSubtitle?.text = ""
+            
+            return cell
+        }
     }
     
     override func didReceiveMemoryWarning() {

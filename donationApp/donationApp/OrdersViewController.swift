@@ -84,7 +84,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
-    func getInstitutionUserForSelectedOrder(_ orderItem: OrderItem) {
+    func getInstitutionUserForSelectedOrderAndShowDetails(_ orderItem: OrderItem) {
         
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
@@ -126,7 +126,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     // MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let orderItem = items[indexPath.row];
-        getInstitutionUserForSelectedOrder(orderItem)
+        getInstitutionUserForSelectedOrderAndShowDetails(orderItem)
     }
     
     override func didReceiveMemoryWarning() {

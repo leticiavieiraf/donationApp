@@ -53,20 +53,7 @@ class RegisterInstitutionViewController: UIViewController {
             return
         }
         else {
-            // Busca Instituições
-            SVProgressHUD.setDefaultStyle(.dark)
-            SVProgressHUD.show()
-            
-            refInstitutions.observe(.value, with: { snapshot in
-                
-                if let institution = self.findInstitutionInResults(snapshot) {
-                    self.register(institution)
-                }
-                else {
-                    SVProgressHUD.dismiss()
-                    self.showAlert(withTitle: "Atenção!", message: "\n Não foi possível realizar o cadastro.\n\n Este e-mail não foi encontrado na base de Instituições reconhecidas.")
-                }
-            })
+            self.validateAndRegister()
         }
     }
     
@@ -117,18 +104,22 @@ class RegisterInstitutionViewController: UIViewController {
         }
     }
     
-    func findInstitutionInResults(_ snapshot : DataSnapshot) -> Institution? {
+    func getInstitutions(onSuccess: @escaping (_ institutions: [Institution]) -> (), onFailure: @escaping (_ error: Error) -> ()) {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
         
-        var foundInstitution : Institution? = nil
-        
-        for item in snapshot.children {
-            let institution = Institution(snapshot: item as! DataSnapshot)
+        refInstitutions.observe(.value, with: { snapshot in
+            var institutions = [Institution()]
             
-            if self.emailField.text == institution.email  {
-                foundInstitution = institution
+             for item in snapshot.children {
+                let institution = Institution(snapshot: item as! DataSnapshot)
+                institutions.append(institution)
+                
             }
-        }
-        return foundInstitution
+            SVProgressHUD.dismiss()
+            
+            onSuccess(institutions)
+        })
     }
     
     //Save registered user in database
@@ -161,6 +152,97 @@ class RegisterInstitutionViewController: UIViewController {
         userInstitutionRef.setValue(userInstitution.toAnyObject())
         
         SVProgressHUD.dismiss()
+    }
+    
+    //MARK: Validation methods {
+    func isEmptyFields() -> Bool {
+        
+        var isEmpty : Bool = false;
+        
+        if let email = self.emailField.text, email.isEmpty {
+            self.emailErrorImage.isHidden = false;
+            isEmpty = true;
+        } else {
+            self.emailErrorImage.isHidden = true;
+        }
+        
+        if let password = self.passwordField.text, password.isEmpty {
+            self.passwordErrorImage.isHidden = false;
+            isEmpty = true;
+        } else {
+            self.passwordErrorImage.isHidden = true;
+        }
+        
+        if let confirmPassword = self.confirmPasswordField.text, confirmPassword.isEmpty {
+            self.confirmPaswordErrorImage.isHidden = false;
+            isEmpty = true;
+        } else {
+            self.confirmPaswordErrorImage.isHidden = true;
+        }
+        
+        return isEmpty
+    }
+    
+    func isMatchPasswords() -> Bool {
+        
+        var  isMatch : Bool = true;
+        
+        if self.passwordField.text != self.confirmPasswordField.text {
+            isMatch = false
+        }
+        
+        return isMatch
+    }
+    
+    func isShortPassword() -> Bool {
+        
+        var  isShortPassword : Bool = false;
+        
+        if (self.passwordField.text?.characters.count)! < 6 {
+            isShortPassword = true
+        }
+        
+        return isShortPassword
+    }
+    
+    func showAlert(withTitle: String, message: String) {
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok",
+                                     style: .default)
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func validateAndRegister() {
+        self.getInstitutions(onSuccess: { (institutions) in
+            
+            if let validInstitution = self.findInstitutionInResults(institutions) {
+                self.register(validInstitution)
+            }
+            else {
+                SVProgressHUD.dismiss()
+                self.showAlert(withTitle: "Atenção!", message: "\n Não foi possível realizar o cadastro.\n\n Este e-mail não foi encontrado na base de Instituições reconhecidas.")
+            }
+        }, onFailure: { (error) in
+            
+        })
+    }
+    
+    func findInstitutionInResults(_ institutions : [Institution]) -> Institution? {
+        
+        var foundInstitution : Institution? = nil
+        
+        for institution in institutions {
+            if self.emailField.text == institution.email  {
+                foundInstitution = institution
+            }
+        }
+        return foundInstitution
     }
     
     // MARK: Encryption method
@@ -228,69 +310,5 @@ class RegisterInstitutionViewController: UIViewController {
     
     func dismissKeyboard() {
         view.endEditing(true)
-    }
-    
-    // MARK: Validation methods
-    func isEmptyFields() -> Bool {
-        
-        var isEmpty : Bool = false;
-        
-        if let email = self.emailField.text, email.isEmpty {
-            self.emailErrorImage.isHidden = false;
-            isEmpty = true;
-        } else {
-            self.emailErrorImage.isHidden = true;
-        }
-        
-        if let password = self.passwordField.text, password.isEmpty {
-            self.passwordErrorImage.isHidden = false;
-            isEmpty = true;
-        } else {
-            self.passwordErrorImage.isHidden = true;
-        }
-        
-        if let confirmPassword = self.confirmPasswordField.text, confirmPassword.isEmpty {
-            self.confirmPaswordErrorImage.isHidden = false;
-            isEmpty = true;
-        } else {
-            self.confirmPaswordErrorImage.isHidden = true;
-        }
-        
-        return isEmpty
-    }
-    
-    func isMatchPasswords() -> Bool {
-        
-        var  isMatch : Bool = true;
-        
-        if self.passwordField.text != self.confirmPasswordField.text {
-            isMatch = false
-        }
-        
-        return isMatch
-    }
-    
-    func isShortPassword() -> Bool {
-        
-        var  isShortPassword : Bool = false;
-        
-        if (self.passwordField.text?.characters.count)! < 6 {
-            isShortPassword = true
-        }
-        
-        return isShortPassword
-    }
-    
-    func showAlert(withTitle: String, message: String) {
-        
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "Ok",
-                                     style: .default)
-        
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
     }
 }

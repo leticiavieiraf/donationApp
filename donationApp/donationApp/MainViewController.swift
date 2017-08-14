@@ -16,6 +16,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
 
     @IBOutlet weak var loginBtn: FBSDKLoginButton!
     
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +39,8 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.window?.rootViewController = institutionsNavigationController
             }
+        } else {
+            logOut()
         }
         
         loginBtn.delegate = self
@@ -46,6 +49,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
         loginBtn.layer.cornerRadius = 4.0
      }
     
+    // MARK: Login methods
     // Login com Facebook
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
@@ -104,19 +108,52 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
         }
     }
     
-    public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+    // MARK: LogOut methods
+    func logOut() {
+        // Logout Facebook
+        if AccessToken.current != nil {
+            let loginManager = LoginManager()
+            loginManager.logOut()
+        }
         
-        //Não vai entrar aqui!
-        print("Facebook: User Logged out Successfully!")
-        
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Firebase: Error signing out: %@", signOutError)
+        // Logout Firebase
+        if Auth.auth().currentUser != nil {
+            
+            let firebaseAuth = Auth.auth()
+            do {
+                
+                SVProgressHUD.setDefaultStyle(.dark)
+                SVProgressHUD.show()
+                
+                try firebaseAuth.signOut()
+                
+                SVProgressHUD.dismiss()
+                print("Firebase: User Logged out Successfully!")
+                
+            } catch let signOutError as NSError {
+                
+                print ("Firebase: Error signing out: %@", signOutError)
+                
+                // Show alert
+                let errorMsg = "Erro ao realizar logout no Firebase: " + signOutError.localizedDescription
+                let alert = UIAlertController(title: "Erro",
+                                              message: errorMsg,
+                                              preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: "Ok",
+                                             style: .default)
+                
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
     
+    public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("Facebook: User Logged out Successfully!")
+    }
+    
+    // MARK: Alert methods
     func showAlert(withTitle: String, message: String) {
         
         let alert = UIAlertController(title: title,

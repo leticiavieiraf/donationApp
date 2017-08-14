@@ -27,8 +27,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     let ref = Database.database().reference(withPath: "features")
     var institutions : [Institution] = [Institution]()
+    var pins = [Institution]()
     var locationManager = CLLocationManager()
 
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +44,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             appDelegate.window?.rootViewController = loginNav
             
         } else {
+            setupDelegates()
+            addTapGestureRecognizerToMapView();
             getInstitutionsAndLoadMap()
         }
     }
@@ -58,69 +62,84 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         checkLocationAuthorizationStatus()
     }
     
+    // MARK:Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "expandDetails" {
+            let detailVC = segue.destination as! DetailViewController
+            self.detailViewController = detailVC
+        }
+    }
+    
+    // MARK: Firebase methods
+//    func getInstitutionsAndLoadMap() {
+//        self.mapView.delegate = self
+//        self.locationManager.delegate = self
+//        self.locationManager.requestWhenInUseAuthorization()
+//        
+//        addTapGestureRecognizerToMapView();
+//        
+//        // Busca Instituições
+//        SVProgressHUD.setDefaultStyle(.dark)
+//        SVProgressHUD.show()
+//        
+//        ref.observe(.value, with: { snapshot in
+//            var count = 0
+//            
+//            for item in snapshot.children {
+//                let institution = Institution(snapshot: item as! DataSnapshot)
+//                
+//                if let userLocation = self.mapView.userLocation.location {
+//                    self.getUserLocationCity(userLocation, onSuccess: { userLocationCity in
+//                       
+//                        self.drawInstitutionPinsForCity(userLocationCity, institution)
+//                    
+//                    }, onFailure: {error in
+//                        self.drawInstitutionPinsForCity("Belo Horizonte", institution)
+//                    })
+//                } else {
+//                    self.drawInstitutionPinsForCity("Belo Horizonte", institution)
+//                }
+//                
+//                //Set initial location
+//                if count == 0 {
+//                    self.setInitialMapLocation(institution)
+//                    count += 1
+//                    
+//                    if (self.selectedInstitutionUser != nil) {
+//                        self.detailViewController.institutionUser = self.selectedInstitutionUser
+//                        self.expandDetails()
+//                        self.centerMapAtLocation(coordinate: institution.coordinate, regionRadius: 200)
+//                        self.detailViewController.loadData()
+//                    }
+//                }
+//                
+//                self.institutions.append(institution)
+//            }
+//            
+//            SVProgressHUD.dismiss()
+//        })
+//    }
     func getInstitutionsAndLoadMap() {
-        self.mapView.delegate = self
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
         
-        addTapGestureRecognizerToMapView();
-        
-        // Busca Instituições
-        SVProgressHUD.setDefaultStyle(.dark)
-        SVProgressHUD.show()
-        
-        ref.observe(.value, with: { snapshot in
-            var count = 0
-            
-            for item in snapshot.children {
-                let institution = Institution(snapshot: item as! DataSnapshot)
+        self.getInstitutions(onSuccess: { (institutions) in
+          
+            if let userLocation = self.mapView.userLocation.location {
                 
-                if let userLocation = self.mapView.userLocation.location {
-                    self.getUserLocationCity(userLocation, onSuccess: { userLocationCity in
-                       
-                        self.drawInstitutionPinsForCity(userLocationCity, institution)
+                self.getUserLocationCity(userLocation, onSuccess: { userLocationCity in
+                    self.drawInstitutionPinsForCity(userLocationCity, institutions)
                     
-                    }, onFailure: {error in
-                        print(error)
-                    })
-                } else {
-                    self.drawInstitutionPinsForCity("Belo Horizonte", institution)
-                }
+                }, onFailure: {error in
+                    self.drawInstitutionPinsForCity("Belo Horizonte", institutions)
+                })
                 
-                
-                
-                //Set initial location
-                if count == 0 {
-                    let initialLocation : CLLocation?
-                    
-                    if (self.mapView.userLocation.location != nil) {
-                        initialLocation = self.mapView.userLocation.location
-                    } else {
-                        initialLocation = CLLocation(latitude: institution.coordinate.latitude, longitude: institution.coordinate.longitude)
-                    }
-                    
-                    self.centerMapOnLocation(coordinate: initialLocation!.coordinate, regionRadius: 2000)
-                    count += 1
-                    
-                    if (self.selectedInstitutionUser != nil) {
-                        self.detailViewController.institutionUser = self.selectedInstitutionUser
-                        self.expandDetails()
-                        self.centerMapOnLocation(coordinate: institution.coordinate, regionRadius: 200)
-                        self.detailViewController.loadData()
-                    }
-                }
-                
-                
-                
-                
-                self.institutions.append(institution)
+            } else {
+                self.drawInstitutionPinsForCity("Belo Horizonte", institutions)
             }
-            
-            SVProgressHUD.dismiss()
         })
     }
     
-    func getInstitutions(onSuccess: @escaping (_ institutions: [Institution]) -> (), onFailure: @escaping (_ error: Error) -> ()) {
+    func getInstitutions(onSuccess: @escaping (_ institutions: [Institution]) -> ()) {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
@@ -131,23 +150,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.institutions.append(institution)
                 
             }
-            SVProgressHUD.dismiss()
             
             onSuccess(self.institutions)
         })
     }
     
-    func geolocalisation(_ address : String, onSuccess: @escaping (_ location: CLLocation) -> (), onFailure: @escaping (_ error: Error) -> ())  {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(address) { (placemarksOptional, error) -> Void in
-            
-            if let placemarks = placemarksOptional {
-                if let location = placemarks.first?.location {
-                    onSuccess(location)
-                }
-            } else {
-                onFailure(error!)
-            }
+    // MARK: Location methods
+    func checkLocationAuthorizationStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            mapView.showsUserLocation = true
+        } else {
+            locationManager.requestWhenInUseAuthorization()
         }
     }
     
@@ -165,34 +178,40 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    func drawInstitutionPinsForCity(_ city: String?, _ institution: Institution) {
-        //if institution.city == "Rio de Janeiro"/*Belo Horizonte"*/ {
-        if institution.email == city {
-            let adress = institution.address + " " + institution.district + ", " + institution.city + " - " + institution.state
-            self.geolocalisation(adress, onSuccess: { location in
-                
-                institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
-                                                                longitude: location.coordinate.longitude)
-                
-                self.mapView.addAnnotation(institution)
-            }, onFailure: {error in
-                print(error)
-            })
+    func getGeolocation(_ address : String, onSuccess: @escaping (_ location: CLLocation) -> (), onFailure: @escaping (_ error: Error) -> ())  {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { (placemarksOptional, error) -> Void in
             
+            if let placemarks = placemarksOptional {
+                if let location = placemarks.first?.location {
+                    onSuccess(location)
+                }
+            } else {
+                onFailure(error!)
+            }
         }
     }
     
-    func addTapGestureRecognizerToMapView() {
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnMapView))
-        doubleTapGesture.delegate = self
-        doubleTapGesture.numberOfTapsRequired = 2
-        self.mapView.addGestureRecognizer(doubleTapGesture)
-    }
-    func handleTapOnMapView() {
-        collapseDetails()
+    // MARK: Setup methods
+    func setupDelegates() {
+        self.mapView.delegate = self
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
     }
     
-    func centerMapOnLocation(coordinate: CLLocationCoordinate2D, regionRadius: CLLocationDistance) {
+    func setInitialMapLocation(_ firstInstitution: Institution) {
+        let initialLocation : CLLocation?
+        
+        if (self.mapView.userLocation.location != nil) {
+            initialLocation = self.mapView.userLocation.location
+        } else {
+            initialLocation = CLLocation(latitude: firstInstitution.coordinate.latitude, longitude: firstInstitution.coordinate.longitude)
+        }
+        
+        self.centerMapAtLocation(coordinate: initialLocation!.coordinate, regionRadius: 2000)
+    }
+    
+    func centerMapAtLocation(coordinate: CLLocationCoordinate2D, regionRadius: CLLocationDistance) {
         let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
         let adjustedRegion = self.mapView.regionThatFits(region)
         mapView.setRegion(adjustedRegion, animated: true)
@@ -201,6 +220,105 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func setupMapCamera(coordinate: CLLocationCoordinate2D) {
         let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: 300, pitch: 30, heading: 90)
         mapView.setCamera(camera, animated: true)
+    }
+    
+    func drawInstitutionPinsForCity(_ city: String?, _ institutions: [Institution]) {
+        var count = 0
+        
+        for institution in institutions {
+            if institution.city == city {
+                
+                let address = institution.address + " " + institution.district + ", " + institution.city + " - " + institution.state
+                self.getGeolocation(address, onSuccess: { location in
+                    
+                    institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                                                                    longitude: location.coordinate.longitude)
+                    self.mapView.addAnnotation(institution)
+                    self.pins.append(institution)
+                    
+                    //Set initial location
+                    if count == 0 {
+                        self.setInitialMapLocation(institution)
+                        
+                        if let selectedInstitutionUser = self.selectedInstitutionUser {
+                            self.showDetailsFor(selectedInstitutionUser)
+                        }
+                        
+                        count += 1
+                    }
+                    
+                    SVProgressHUD.dismiss()
+                    
+                }, onFailure: {error in
+                    print(error)
+                })
+            }
+        }
+    }
+    
+    func drawInstitutionPinIfNeeded(_ pinCoordinate: CLLocationCoordinate2D, _ institutionUser : InstitutionUser) {
+        var pinExists = false
+        for pin in self.pins {
+            if (pin.coordinate.latitude == pinCoordinate.latitude && pin.coordinate.longitude == pinCoordinate.longitude) {
+                pinExists = true
+            }
+        }
+        
+        if pinExists == false {
+            let selectedInstitution = Institution(name: institutionUser.name,
+                                                  info: institutionUser.info,
+                                                  email: institutionUser.email,
+                                                  contact: institutionUser.contact,
+                                                  phone: institutionUser.phone,
+                                                  bank: institutionUser.bank,
+                                                  agency: institutionUser.agency,
+                                                  accountNumber: institutionUser.accountNumber,
+                                                  address: institutionUser.address,
+                                                  district: institutionUser.district,
+                                                  city: institutionUser.city,
+                                                  state: institutionUser.state,
+                                                  zipCode: institutionUser.zipCode,
+                                                  group: institutionUser.group,
+                                                  coordinate: pinCoordinate)
+            self.mapView.addAnnotation(selectedInstitution)
+            self.pins.append(selectedInstitution)
+        }
+    }
+    
+    // MARK: Detail Container methods
+    func addTapGestureRecognizerToMapView() {
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTapOnMapView))
+        doubleTapGesture.delegate = self
+        doubleTapGesture.numberOfTapsRequired = 2
+        self.mapView.addGestureRecognizer(doubleTapGesture)
+    }
+    
+    func handleDoubleTapOnMapView() {
+        collapseDetails()
+    }
+    
+    func showDetailsFor(_ selectedInstitutionUser: InstitutionUser) {
+        self.expandDetails()
+        
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        let address = selectedInstitutionUser.address + " " + selectedInstitutionUser.district + ", " + selectedInstitutionUser.city + " - " + selectedInstitutionUser.state
+        self.getGeolocation(address, onSuccess: { location in
+            SVProgressHUD.dismiss()
+            
+            let selectedInstitutionCoordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                                                                       longitude: location.coordinate.longitude)
+            
+            self.drawInstitutionPinIfNeeded(selectedInstitutionCoordinate, selectedInstitutionUser)
+            self.centerMapAtLocation(coordinate: selectedInstitutionCoordinate, regionRadius: 200)
+            self.detailViewController.institutionUser = selectedInstitutionUser
+            self.detailViewController.loadData()
+            
+        }, onFailure: {error in
+            print(error)
+            SVProgressHUD.dismiss()
+        })
     }
     
     func expandDetails() {
@@ -219,29 +337,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
     }
     
-    // MARK:Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "expandDetails" {
-            let detailVC = segue.destination as! DetailViewController
-            self.detailViewController = detailVC
-        }
-    }
-    
-    // MARK: - location manager to authorize user location for Maps app
-    func checkLocationAuthorizationStatus() {
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            mapView.showsUserLocation = true
-        } else {
-            locationManager.requestWhenInUseAuthorization()
-        }
-    }
-    
     // MARK: MKMapViewDelegate
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let annotation = view.annotation as? Institution {
-            print("Your annotation title: \(annotation.title)");
-        }
+        //if let annotation = view.annotation as? Institution {
+            //print("Your annotation title: \(annotation.title)");
+        //}
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
@@ -252,14 +352,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let annotation = annotation as? Institution {
             let identifier = "pin"
             var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-                as? MKPinAnnotationView {
+            
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             } else {
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 view.canShowCallout = true
-                view.calloutOffset = CGPoint(x: -5, y: 5)
+                view.calloutOffset = CGPoint(x: -5, y: 8)
                 view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
             }
             return view
@@ -270,10 +370,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if let tappedInstitution = view.annotation as? Institution {
-            detailViewController.institution = tappedInstitution
             expandDetails()
-            centerMapOnLocation(coordinate: tappedInstitution.coordinate, regionRadius: 200)
+            
+            centerMapAtLocation(coordinate: tappedInstitution.coordinate, regionRadius: 200)
             setupMapCamera(coordinate: tappedInstitution.coordinate);
+            
+            detailViewController.institution = tappedInstitution
             detailViewController.loadData()
             
             /*

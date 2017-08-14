@@ -10,7 +10,6 @@ import Foundation
 import Firebase
 import MapKit
 
-
 class Institution : NSObject, MKAnnotation {
     
     var key: String
@@ -53,7 +52,6 @@ class Institution : NSObject, MKAnnotation {
         
         super.init()
     }
-    
     
     init(name: String, info: String, email: String, contact: String, phone: String,
          bank: String, agency: String, accountNumber: String, address: String, district: String,
