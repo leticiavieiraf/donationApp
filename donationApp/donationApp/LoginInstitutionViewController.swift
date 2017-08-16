@@ -62,19 +62,14 @@ class LoginInstitutionViewController: UIViewController {
             //Error
             if let error = error {
                 print("Firebase: Login Error!")
-                self.showAlert(withTitle: "Erro", message: "Erro ao realizar login: " + error.localizedDescription)
+                self.showAlert(title: "Erro", message: "Erro ao realizar login: " + error.localizedDescription)
                 return
             }
             
             //Success
             if let user = user {
                 print("Firebase: Login successfull")
-                
-                // Redireciona para o storyboard de Instituição
-                let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
-                let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.window?.rootViewController = institutionsNavigationController
+                self.redirectToInstitutionsStoryboard()
             }
         }
     }
@@ -134,7 +129,15 @@ class LoginInstitutionViewController: UIViewController {
         return isEmpty
     }
     
-    func showAlert(withTitle: String, message: String) {
+    // MARK: Redirect methods
+    func redirectToInstitutionsStoryboard() {
+        let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+        let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = institutionsNavigationController
+    }
+    
+    func showAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title,
                                       message: message,

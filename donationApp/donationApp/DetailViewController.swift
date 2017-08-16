@@ -78,52 +78,61 @@ class DetailViewController: UIViewController, UITableViewDataSource {
                 self.loadOrdersFrom(foundUser.uid)
             } else {
                 self.setupDetailBox(nil, self.institution)
+                self.loadOrdersFrom(nil)
                 SVProgressHUD.dismiss()
             }
         })
     }
     
-    func loadOrdersFrom(_ userUID: String) {
+    func loadOrdersFrom(_ userUID: String?) {
         
-        refOrderItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { (snapshot) in
-            
-            var userItems: [OrderItem] = []
-            
-            for item in snapshot.children.allObjects {
-                let orderItem = OrderItem(snapshot: item as! DataSnapshot)
-                userItems.append(orderItem)
-            }
-            
-            self.items = userItems
-            self.setupTableView()
-            
-            SVProgressHUD.dismiss()
-        })
+        if let userUID = userUID {
+            refOrderItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { (snapshot) in
+                
+                var userItems: [OrderItem] = []
+                
+                for item in snapshot.children.allObjects {
+                    let orderItem = OrderItem(snapshot: item as! DataSnapshot)
+                    userItems.append(orderItem)
+                }
+                
+                self.items = userItems
+                self.setupTableViewHeight()
+                
+                SVProgressHUD.dismiss()
+            })
+        } else {
+            self.items = []
+            self.setupTableViewHeight()
+        }
     }
     
     // MARK: Setup methods
     func setupDetailBox(_ institutionUser: InstitutionUser?, _ institution: Institution?) {
         
         if let institution = institution {
-            self.nameLabel.text = institution.name
-            self.emailLabel.text = institution.email
+            self.nameLabel.text = institution.name != "" ? institution.name : "-"
+            self.emailLabel.text = institution.email != "" ? institution.email : "-"
             self.addressLabel.text = institution.address + ", " + institution.district + ", " + institution.city + " - " + institution.state + ". Cep: " + institution.zipCode
-            self.infoLabel.text = institution.group
-            self.phoneLabel.text = institution.phone
+            self.infoLabel.text = institution.group != "" ? institution.group : "-"
+            self.phoneLabel.text = institution.phone != "" ? institution.phone : "-"
             
-        } else {
-            if let institution = institutionUser {
-                self.nameLabel.text = institution.name
-                self.emailLabel.text = institution.email
+        } else if let institution = institutionUser {
+                self.nameLabel.text = institution.name != "" ? institution.name : "-"
+                self.emailLabel.text = institution.email != "" ? institution.email : "-"
                 self.addressLabel.text = institution.address + ", " + institution.district + ", " + institution.city + " - " + institution.state + ". Cep: " + institution.zipCode
-                self.infoLabel.text = institution.group
-                self.phoneLabel.text = institution.phone
+                self.infoLabel.text = institution.group != "" ? institution.group : "-"
+                self.phoneLabel.text = institution.phone != "" ? institution.phone : "-"
             }
-        }
     }
     
-    func setupTableView() {
-        self.tableViewHeight.constant = CGFloat(55 * self.items.count)
+    func setupTableViewHeight() {
+        var height : CGFloat = 55
+        
+        if self.items.count > 0 {
+            height =  CGFloat(55 * self.items.count)
+        }
+        self.tableViewHeight.constant = height
         self.view.layoutIfNeeded()
         
         self.tableView.reloadData()
@@ -142,12 +151,14 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         case Constants.kClothes:
             return "roupas"
         default:
-            return "higiene"
+            return "empty"
         }
     }
     
     // MARK: Action methods
     @IBAction func collapseDetails(_ sender: Any) {
+        self.institutionUser = nil
+        
         let mapViewController = parent as! MapViewController
         mapViewController.containerHeightConstraint.constant = 0;
         
@@ -158,7 +169,13 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count == 0 ? 1 : items.count
+        var numberOfRows = 1
+        
+        if items.count > 0 {
+            numberOfRows = items.count
+        }
+        
+        return numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -174,6 +191,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             
             return cell
         } else {
+            cell.imageViewIcon.image = UIImage(named: imageNameForItem(""))
             cell.labelTitle?.text = "Não existem pedidos cadastrados."
             cell.labelSubtitle?.text = ""
             

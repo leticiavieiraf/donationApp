@@ -72,54 +72,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     // MARK: Firebase methods
-//    func getInstitutionsAndLoadMap() {
-//        self.mapView.delegate = self
-//        self.locationManager.delegate = self
-//        self.locationManager.requestWhenInUseAuthorization()
-//        
-//        addTapGestureRecognizerToMapView();
-//        
-//        // Busca Instituições
-//        SVProgressHUD.setDefaultStyle(.dark)
-//        SVProgressHUD.show()
-//        
-//        ref.observe(.value, with: { snapshot in
-//            var count = 0
-//            
-//            for item in snapshot.children {
-//                let institution = Institution(snapshot: item as! DataSnapshot)
-//                
-//                if let userLocation = self.mapView.userLocation.location {
-//                    self.getUserLocationCity(userLocation, onSuccess: { userLocationCity in
-//                       
-//                        self.drawInstitutionPinsForCity(userLocationCity, institution)
-//                    
-//                    }, onFailure: {error in
-//                        self.drawInstitutionPinsForCity("Belo Horizonte", institution)
-//                    })
-//                } else {
-//                    self.drawInstitutionPinsForCity("Belo Horizonte", institution)
-//                }
-//                
-//                //Set initial location
-//                if count == 0 {
-//                    self.setInitialMapLocation(institution)
-//                    count += 1
-//                    
-//                    if (self.selectedInstitutionUser != nil) {
-//                        self.detailViewController.institutionUser = self.selectedInstitutionUser
-//                        self.expandDetails()
-//                        self.centerMapAtLocation(coordinate: institution.coordinate, regionRadius: 200)
-//                        self.detailViewController.loadData()
-//                    }
-//                }
-//                
-//                self.institutions.append(institution)
-//            }
-//            
-//            SVProgressHUD.dismiss()
-//        })
-//    }
     func getInstitutionsAndLoadMap() {
         
         self.getInstitutions(onSuccess: { (institutions) in
@@ -150,7 +102,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.institutions.append(institution)
                 
             }
-            
             onSuccess(self.institutions)
         })
     }
@@ -247,13 +198,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         count += 1
                     }
                     
-                    SVProgressHUD.dismiss()
-                    
                 }, onFailure: {error in
                     print(error)
                 })
             }
         }
+        SVProgressHUD.dismiss()
     }
     
     func drawInstitutionPinIfNeeded(_ pinCoordinate: CLLocationCoordinate2D, _ institutionUser : InstitutionUser) {
@@ -311,13 +261,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                                                                        longitude: location.coordinate.longitude)
             
             self.drawInstitutionPinIfNeeded(selectedInstitutionCoordinate, selectedInstitutionUser)
+            
             self.centerMapAtLocation(coordinate: selectedInstitutionCoordinate, regionRadius: 200)
+            self.setupMapCamera(coordinate: selectedInstitutionCoordinate)
+            
             self.detailViewController.institutionUser = selectedInstitutionUser
             self.detailViewController.loadData()
             
         }, onFailure: {error in
             print(error)
             SVProgressHUD.dismiss()
+            self.showAlert(title: "Ops..", message: "Algo errado aconteceu, tente novamente.")
         })
     }
     
@@ -330,6 +284,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func collapseDetails() {
+        detailViewController.institutionUser = nil
+        
         containerHeightConstraint.constant = 0;
         
         UIView.animate(withDuration: 0.5, animations: {
@@ -375,6 +331,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             centerMapAtLocation(coordinate: tappedInstitution.coordinate, regionRadius: 200)
             setupMapCamera(coordinate: tappedInstitution.coordinate);
             
+            detailViewController.institutionUser = nil
             detailViewController.institution = tappedInstitution
             detailViewController.loadData()
             
@@ -388,5 +345,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
              //print("Your annotation title: \(annotation.title)");
             */
         }
+    }
+    
+    // MARK: Alert methods
+    func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok",
+                                     style: .default)
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }

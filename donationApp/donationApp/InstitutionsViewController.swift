@@ -6,6 +6,7 @@
 //  Copyright © 2017 PUC. All rights reserved.
 //
 
+/*
 import UIKit
 import MapKit
 import FirebaseAuth
@@ -212,3 +213,4 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
     
     
 }
+ */

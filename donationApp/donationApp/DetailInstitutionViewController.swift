@@ -6,6 +6,7 @@
 //  Copyright © 2017 PUC. All rights reserved.
 //
 
+/*
 import UIKit
 import MapKit
 
@@ -70,3 +71,4 @@ class DetailInstitutionViewController: UIViewController {
     }
 
 }
+ */

@@ -42,8 +42,6 @@
 		F31A1D911F22A63F00EE4FBF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */; };
 		F326542A1F3271D400885F14 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32654291F3271D400885F14 /* Constants.swift */; };
 		F348F4D11F215E3F0049227E /* MyItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */; };
-		F3881F391F1FD189003A8925 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3881F381F1FD189003A8925 /* LaunchScreenViewController.swift */; };
-		F3881F3B1F1FE933003A8925 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = F3881F3A1F1FE933003A8925 /* loading.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,8 +85,6 @@
 		F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F32654291F3271D400885F14 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyItemsTableViewCell.swift; sourceTree = "<group>"; };
-		F3881F381F1FD189003A8925 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
-		F3881F3A1F1FE933003A8925 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +104,6 @@
 		8E6CE25D1E7C2C4100443C10 /* Main (Login) */ = {
 			isa = PBXGroup;
 			children = (
-				F3881F381F1FD189003A8925 /* LaunchScreenViewController.swift */,
 				A46ABF361E70FC950066764C /* MainViewController.swift */,
 				A41C926C1EA1618A0078FE9A /* LoginInstitutionViewController.swift */,
 				A41C926E1EA18CE40078FE9A /* RegisterInstitutionViewController.swift */,
@@ -116,12 +111,12 @@
 			name = "Main (Login)";
 			sourceTree = "<group>";
 		};
-		8E72BCB81E76EA9A00CB6CB4 /* Component */ = {
+		8E72BCB81E76EA9A00CB6CB4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				8E72BCB91E76EAA700CB6CB4 /* DAButton */,
 			);
-			name = Component;
+			name = Components;
 			sourceTree = "<group>";
 		};
 		8E72BCB91E76EAA700CB6CB4 /* DAButton */ = {
@@ -154,17 +149,15 @@
 			isa = PBXGroup;
 			children = (
 				8E62BC751E719F08004FE7F1 /* donationApp.entitlements */,
-				8E72BCB81E76EA9A00CB6CB4 /* Component */,
+				8E72BCB81E76EA9A00CB6CB4 /* Components */,
 				A46ABF351E70F6AA0066764C /* Storyboards */,
 				A46ABF331E70F6800066764C /* Models */,
 				A46ABF341E70F68A0066764C /* ViewControllers */,
-				A4A1D45C1E74B65300349AF9 /* Protocol */,
+				A4A1D45C1E74B65300349AF9 /* Protocols */,
 				8E9DE4431E70AF4600A0449D /* AppDelegate.swift */,
 				8E9DE44A1E70AF4700A0449D /* Assets.xcassets */,
-				8E9DE44C1E70AF4700A0449D /* LaunchScreen.storyboard */,
 				8E9DE44F1E70AF4700A0449D /* Info.plist */,
 				8E3305E11E72F6DE00F7DCA9 /* GoogleService-Info.plist */,
-				F3881F3A1F1FE933003A8925 /* loading.gif */,
 			);
 			path = donationApp;
 			sourceTree = "<group>";
@@ -175,9 +168,8 @@
 				F348F4CD1F2014790049227E /* Cells */,
 				F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */,
 				F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */,
-				A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */,
-				A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */,
 				F32654291F3271D400885F14 /* Constants.swift */,
+				A49D1B941F43F10C001BDBBE /* Garbage */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -214,8 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				8E6CE25D1E7C2C4100443C10 /* Main (Login) */,
-				A4A1D4501E74493A00349AF9 /* Donator */,
-				A4A1D44F1E74493600349AF9 /* Institution */,
+				A4A1D4501E74493A00349AF9 /* Donators */,
+				A4A1D44F1E74493600349AF9 /* Institutions */,
 				A4370F661EA2CEF1000A20E5 /* Common */,
 			);
 			name = ViewControllers;
@@ -224,6 +216,7 @@
 		A46ABF351E70F6AA0066764C /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				8E9DE44C1E70AF4700A0449D /* LaunchScreen.storyboard */,
 				8E9DE4471E70AF4700A0449D /* Main.storyboard */,
 				8E62BC761E71DAF9004FE7F1 /* Donators.storyboard */,
 				8E62BC781E71DB0D004FE7F1 /* Institutions.storyboard */,
@@ -231,7 +224,16 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		A4A1D44F1E74493600349AF9 /* Institution */ = {
+		A49D1B941F43F10C001BDBBE /* Garbage */ = {
+			isa = PBXGroup;
+			children = (
+				A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */,
+				A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */,
+			);
+			name = Garbage;
+			sourceTree = "<group>";
+		};
+		A4A1D44F1E74493600349AF9 /* Institutions */ = {
 			isa = PBXGroup;
 			children = (
 				A41C92641EA14A830078FE9A /* DonationsViewController.swift */,
@@ -239,10 +241,10 @@
 				A41C92681EA14AB40078FE9A /* NewOrderViewController.swift */,
 				A41C926A1EA14AF10078FE9A /* InstitutionProfileViewController.swift */,
 			);
-			name = Institution;
+			name = Institutions;
 			sourceTree = "<group>";
 		};
-		A4A1D4501E74493A00349AF9 /* Donator */ = {
+		A4A1D4501E74493A00349AF9 /* Donators */ = {
 			isa = PBXGroup;
 			children = (
 				A41C92621EA149800078FE9A /* OrdersViewController.swift */,
@@ -250,15 +252,15 @@
 				A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */,
 				A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */,
 			);
-			name = Donator;
+			name = Donators;
 			sourceTree = "<group>";
 		};
-		A4A1D45C1E74B65300349AF9 /* Protocol */ = {
+		A4A1D45C1E74B65300349AF9 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */,
 			);
-			name = Protocol;
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		C05A245FECEE3C037F4420C0 /* Pods */ = {
@@ -361,7 +363,6 @@
 				8E62BC771E71DAF9004FE7F1 /* Donators.storyboard in Resources */,
 				8E9DE44E1E70AF4700A0449D /* LaunchScreen.storyboard in Resources */,
 				8E9DE44B1E70AF4700A0449D /* Assets.xcassets in Resources */,
-				F3881F3B1F1FE933003A8925 /* loading.gif in Resources */,
 				8E9DE4491E70AF4700A0449D /* Main.storyboard in Resources */,
 				8E3305E21E72F6DE00F7DCA9 /* GoogleService-Info.plist in Resources */,
 			);
@@ -423,7 +424,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E3578A11E73279C0047D42C /* Institution.swift in Sources */,
-				F3881F391F1FD189003A8925 /* LaunchScreenViewController.swift in Sources */,
 				A46ABF371E70FC950066764C /* MainViewController.swift in Sources */,
 				A41C92711EA1F0460078FE9A /* OrderItem.swift in Sources */,
 				A4A1D45B1E74A02100349AF9 /* InstitutionUser.swift in Sources */,
