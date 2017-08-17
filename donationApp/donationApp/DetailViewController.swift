@@ -32,7 +32,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     let refOrderItems = Database.database().reference(withPath: "order-items")
     let refInstitutionsUsers = Database.database().reference(withPath: "institution-users")
     
-    // MARK: Life Cycle methods
+    // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +47,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-    // MARK: Data Source methods
+    // MARK: - Data Source methods
     func loadData() {
         if let institutionUser = self.institutionUser {
             setupDetailBox(institutionUser, nil)
@@ -57,7 +57,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         }
     }
 
-    // MARK: Firebase methods
+    // MARK: - Firebase methods
     func getInstitutionUserAndLoadOrders() {
         
         SVProgressHUD.setDefaultStyle(.dark)
@@ -107,7 +107,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-    // MARK: Setup methods
+    // MARK: - Setup methods
     func setupDetailBox(_ institutionUser: InstitutionUser?, _ institution: Institution?) {
         
         if let institution = institution {
@@ -146,7 +146,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             return "alimentos"
         case Constants.kShoes:
             return "calcados"
-        case Constants.kHygiene:
+        case Constants.kHygieneProducts:
             return "higiene"
         case Constants.kClothes:
             return "roupas"
@@ -155,7 +155,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-    // MARK: Action methods
+    // MARK: - Action methods
     @IBAction func collapseDetails(_ sender: Any) {
         self.institutionUser = nil
         
@@ -167,7 +167,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         })
     }
     
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRows = 1
         

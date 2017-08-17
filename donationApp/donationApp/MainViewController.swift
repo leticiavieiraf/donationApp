@@ -16,7 +16,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
 
     @IBOutlet weak var loginBtn: FBSDKLoginButton!
     
-    // MARK: Life Cycle methods
+    // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +32,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
         loginBtn.layer.cornerRadius = 4.0
      }
     
-    // MARK: Login methods
+    // MARK: - Login methods
     // Login com Facebook
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
@@ -86,7 +86,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
         }
     }
     
-    // MARK: LogOut methods
+    // MARK: - LogOut methods
     func logOutFromFacebook() {
         if AccessToken.current != nil {
             let loginManager = LoginManager()
@@ -98,7 +98,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
         print("Facebook: User Logged out Successfully!")
     }
     
-    // MARK: Redirect methods
+    // MARK: - Redirect methods
     func redirectToDonatorsStoryboard() {
         let donatorsTabBarController = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
         let donatorsNavigationController = UINavigationController(rootViewController: donatorsTabBarController)
@@ -113,7 +113,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
         appDelegate.window?.rootViewController = institutionsNavigationController
     }
     
-    // MARK: Alert methods
+    // MARK: - Alert methods
     func showAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title,

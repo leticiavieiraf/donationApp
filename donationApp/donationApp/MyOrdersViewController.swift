@@ -20,7 +20,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     let refOrderItems = Database.database().reference(withPath: "order-items")
     let refInstitutionUsers = Database.database().reference(withPath: "institution-users")
     
-    // MARK: Life Cycle methods
+    // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -53,7 +53,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         
     }
     
-    // MARK: Firebase methods
+    // MARK: - Firebase methods
     func getUserAndLoadOrders() {
         
         SVProgressHUD.setDefaultStyle(.dark)
@@ -110,7 +110,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         orderItemRef.setValue(orderItem.toAnyObject())
     }
     
-    // MARK: Popup New Order
+    // MARK: - Popup New Order
     func showNewOrderPopUp() {
         let newOrderVC = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "sbPopUpID") as! NewOrderViewController
         newOrderVC.delegate = self
@@ -125,7 +125,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         insert(order:item)
     }
     
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }

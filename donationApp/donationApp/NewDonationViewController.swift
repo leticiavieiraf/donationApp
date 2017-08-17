@@ -29,12 +29,12 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
         pickerData = [Constants.kSweaters,
                       Constants.kFood,
                       Constants.kShoes,
-                      Constants.kHygiene,
+                      Constants.kHygieneProducts,
                       Constants.kClothes]
     }
     
     
-    // MARK: UIPickerViewDataSource
+    // MARK: - UIPickerViewDataSource
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -43,7 +43,7 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
         return pickerData.count
     }
 
-    // MARK: UIPickerViewDelegate
+    // MARK: - UIPickerViewDelegate
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
@@ -52,7 +52,7 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
         selectedItem = pickerData[row]
     }
     
-    // MARK: Save Button
+    // MARK: - Save Button
     @IBAction func save(_ sender: Any) {
         selectedItem = selectedItem == "" ? pickerData[0] : selectedItem
 
@@ -60,12 +60,12 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.delegate?.didPressSaveWithSelectItem(selectedItem)
     }
     
-    // MARK: Cancel Button
+    // MARK: - Cancel Button
     @IBAction func cancel(_ sender: Any) {
         self.removeAnimate()
     }
     
-    // MARK: New Donation's Popup
+    // MARK: - New Donation's Popup
     func showAnimate()
     {
         self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
@@ -89,7 +89,6 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
         });
     }
     
-    // MARK:
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

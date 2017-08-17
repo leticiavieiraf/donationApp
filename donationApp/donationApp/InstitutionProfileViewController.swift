@@ -23,7 +23,7 @@ class InstitutionProfileViewController: UIViewController {
     let refInstitutionUsers = Database.database().reference(withPath: "institution-users")
 
     
-    // MARK: Lyfe Cycle methods
+    // MARK: - Lyfe Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,7 +55,7 @@ class InstitutionProfileViewController: UIViewController {
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
-    // MARK: Firebase method
+    // MARK: - Firebase method
     @IBAction func logout(_ sender: Any) {
         
         if Auth.auth().currentUser != nil {

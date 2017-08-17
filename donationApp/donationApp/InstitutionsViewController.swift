@@ -134,7 +134,7 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         }
     }
     
-    // Mark: MKMapViewDelegate
+    // MARK: - MKMapViewDelegate
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         if let annotation = view.annotation as? Institution {

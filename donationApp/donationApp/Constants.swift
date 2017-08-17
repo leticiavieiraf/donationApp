@@ -15,7 +15,7 @@ class Constants {
     static let kSweaters = "Agasalhos"
     static let kFood = "Alimentos não-perecíveis"
     static let kShoes = "Calçados"
-    static let kHygiene = "Produtos de Higiene"
+    static let kHygieneProducts = "Produtos de Higiene"
     static let kClothes = "Roupas"
     
 }
