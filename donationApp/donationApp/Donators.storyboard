@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VKG-Yr-WrN">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VKG-Yr-WrN">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Pedidos-->
+        <!--Navigation Pedidos-->
         <scene sceneID="tzo-Qk-xwP">
             <objects>
-                <navigationController id="tlG-fv-ht6" sceneMemberID="viewController">
+                <navigationController id="tlG-fv-ht6" userLabel="Navigation Pedidos" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Pedidos" image="orders-donations" id="GQB-ig-Yx7">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="-2453" y="825"/>
         </scene>
-        <!--Navigation-->
+        <!--Navigation Map-->
         <scene sceneID="aeI-rQ-2fk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0EM-II-cF7" userLabel="Navigation" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0EM-II-cF7" userLabel="Navigation Map" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Instituições" image="pin" id="bpw-f1-DVc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ySg-2s-Fyg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -46,10 +46,10 @@
             </objects>
             <point key="canvasLocation" x="-1538" y="825"/>
         </scene>
-        <!--InstituiçõesOld-->
+        <!--_Old Instituições-->
         <scene sceneID="IL2-gO-UgF">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gjn-iO-Cf0" userLabel="InstituiçõesOld" customClass="InstitutionsViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gjn-iO-Cf0" userLabel="_Old Instituições" customClass="InstitutionsViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Pm-qy-QFg"/>
                         <viewControllerLayoutGuide type="bottom" id="fvb-li-0X9"/>
@@ -206,10 +206,10 @@
             </objects>
             <point key="canvasLocation" x="-628" y="1631"/>
         </scene>
-        <!--Detail Institution View Controller-->
+        <!--_Old Detalhes da Instituição-->
         <scene sceneID="1xW-f8-MK1">
             <objects>
-                <viewController storyboardIdentifier="detailPopUp" id="Jd3-Xw-ORJ" customClass="DetailInstitutionViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailPopUp" id="Jd3-Xw-ORJ" userLabel="_Old Detalhes da Instituição" customClass="DetailInstitutionViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ToR-1H-wLd"/>
                         <viewControllerLayoutGuide type="bottom" id="yja-cA-7cA"/>
@@ -367,10 +367,10 @@
             </objects>
             <point key="canvasLocation" x="-3579" y="2449"/>
         </scene>
-        <!--New Donation View Controller-->
+        <!--Nova Doação-->
         <scene sceneID="zcJ-8S-KzT">
             <objects>
-                <viewController storyboardIdentifier="sbPopUpID" automaticallyAdjustsScrollViewInsets="NO" id="M46-Ch-V4t" customClass="NewDonationViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sbPopUpID" automaticallyAdjustsScrollViewInsets="NO" id="M46-Ch-V4t" userLabel="Nova Doação" customClass="NewDonationViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gxn-3p-ZA2"/>
                         <viewControllerLayoutGuide type="bottom" id="3pw-Wb-yEA"/>
@@ -711,7 +711,7 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publicado em" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6n-dh-GIA">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="há 3 dias" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6n-dh-GIA">
                                                             <rect key="frame" x="86" y="66" width="216" height="12"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -785,10 +785,10 @@
             </objects>
             <point key="canvasLocation" x="-2451" y="1631"/>
         </scene>
-        <!--Instituições-->
+        <!--Map-->
         <scene sceneID="b8z-pQ-yOh">
             <objects>
-                <viewController storyboardIdentifier="MapViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="W71-E9-ak3" customClass="MapViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewControllerID" automaticallyAdjustsScrollViewInsets="NO" id="W71-E9-ak3" userLabel="Map" customClass="MapViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0ce-X0-vvk"/>
                         <viewControllerLayoutGuide type="bottom" id="fyV-Ie-1RT"/>
@@ -844,10 +844,10 @@
             </objects>
             <point key="canvasLocation" x="-1539" y="1631"/>
         </scene>
-        <!--Detalhes-->
+        <!--Container Detalhes da Instituição-->
         <scene sceneID="mc7-0e-UVO">
             <objects>
-                <viewController id="sqY-LH-dDE" userLabel="Detalhes" customClass="DetailViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sqY-LH-dDE" userLabel="Container Detalhes da Instituição" customClass="DetailViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u2X-Yx-ZfI"/>
                         <viewControllerLayoutGuide type="bottom" id="1KW-u1-Evc"/>
@@ -1026,8 +1026,8 @@
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publicado em" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Tw-cK-oGC">
-                                                                    <rect key="frame" x="68" y="28.5" width="70.5" height="13.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="há 3 dias" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Tw-cK-oGC">
+                                                                    <rect key="frame" x="68" y="28.5" width="47" height="13.5"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -1117,10 +1117,10 @@
             </objects>
             <point key="canvasLocation" x="-1539.375" y="2340.8450704225352"/>
         </scene>
-        <!--Minhas doações-->
+        <!--Navigation Minhas Doações-->
         <scene sceneID="qXK-EP-k6Y">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eyZ-w3-98a" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eyZ-w3-98a" userLabel="Navigation Minhas Doações" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Minhas doações" image="add" id="5HW-lX-eKt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="C7r-eL-KKn">
@@ -1136,10 +1136,10 @@
             </objects>
             <point key="canvasLocation" x="-628" y="825"/>
         </scene>
-        <!--Perfil-->
+        <!--Navigation Perfil-->
         <scene sceneID="OFU-A4-mCZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rwb-ms-jxW" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rwb-ms-jxW" userLabel="Navigation Perfil" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Perfil" image="profile" id="JOr-u5-UgU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Jy5-ED-QmO">

@@ -207,7 +207,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         cell.userNameLabel.text = orderItem.addedByUser
         cell.userEmailLabel.text = orderItem.userEmail
         let publishDate = Helper.dateFrom(string: orderItem.publishDate, format: "dd/MM/yyyy HH:mm")
-        cell.publishDateLabel.text = "" + Helper.periodBetween(date1: publishDate, date2: Date())
+        cell.publishDateLabel.text = Helper.periodBetween(date1: publishDate, date2: Date())
         
         return cell
     }

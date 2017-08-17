@@ -136,7 +136,8 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         let orderItem = items[indexPath.row]
         
         cell.labelTitle?.text = orderItem.name
-        cell.labelSubtitle?.text = "Publicado em " + orderItem.publishDate
+        let publishDate = Helper.dateFrom(string: orderItem.publishDate, format: "dd/MM/yyyy HH:mm")
+        cell.labelSubtitle?.text = Helper.periodBetween(date1: publishDate, date2: Date())
         
         return cell
     }

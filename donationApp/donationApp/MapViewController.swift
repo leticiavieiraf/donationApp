@@ -271,7 +271,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }, onFailure: {error in
             print(error)
             SVProgressHUD.dismiss()
-            self.showAlert(title: "Ops..", message: "Algo errado aconteceu, tente novamente.")
+            Helper.showAlert(title: "Ops..", message: "Algo errado aconteceu, tente novamente.", viewController: self)
         })
     }
     
@@ -345,19 +345,5 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
              //print("Your annotation title: \(annotation.title)");
             */
         }
-    }
-    
-    // MARK: - Alert methods
-    func showAlert(title: String, message: String) {
-        
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "Ok",
-                                     style: .default)
-        
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
     }
 }

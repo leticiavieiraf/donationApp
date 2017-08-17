@@ -62,12 +62,12 @@ class LoginInstitutionViewController: UIViewController {
             //Error
             if let error = error {
                 print("Firebase: Login Error!")
-                self.showAlert(title: "Erro", message: "Erro ao realizar login: " + error.localizedDescription)
+                Helper.showAlert(title: "Erro", message: "Erro ao realizar login: " + error.localizedDescription, viewController: self)
                 return
             }
             
             //Success
-            if let user = user {
+            if user != nil {
                 print("Firebase: Login successfull")
                 self.redirectToInstitutionsStoryboard()
             }
@@ -135,20 +135,6 @@ class LoginInstitutionViewController: UIViewController {
         }
         
         return isEmpty
-    }
-    
-    // MARK: Alert methods
-    func showAlert(title: String, message: String) {
-        
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "Ok",
-                                     style: .default)
-        
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

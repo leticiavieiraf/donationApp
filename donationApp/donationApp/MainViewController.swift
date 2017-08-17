@@ -11,8 +11,9 @@ import FBSDKLoginKit
 import FacebookCore
 import FirebaseAuth
 import SVProgressHUD
+import SafariServices
 
-class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
+class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariViewControllerDelegate  {
 
     @IBOutlet weak var loginBtn: FBSDKLoginButton!
     
@@ -33,30 +34,28 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
      }
     
     // MARK: - Login methods
+    
     // Login com Facebook
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
         //Error
-        if(error != nil)
-        {
+        if(error != nil) {
             print("Facebook: Login Error!")
-            self.showAlert(title: "Erro", message: "Erro ao realizar login no Facebook: " + error.localizedDescription)
+            Helper.showAlert(title: "Erro", message: "Erro ao realizar login no Facebook: " + error.localizedDescription, viewController: self)
             return
         }
         
         //Canceled
         if (result.isCancelled) {
             print("Facebook: User cancelled login.")
-            self.showAlert(title: "Atenção", message: "O login foi cancelado.")
+            Helper.showAlert(title: "Ops...", message: "O login foi cancelado.", viewController: self)
             return
         }
         
         //Success
-        if let userToken = result.token
-        {
+        if (result.token != nil) {
             print("Facebook: User Logged in Successfully!")
             logInWithFirebase()
-            
         }
     }
     
@@ -74,12 +73,12 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
             //Error
             if let error = error {
                 print("Firebase: Login Error!")
-                self.showAlert(title: "Erro", message: "Erro ao realizar login no Firebase: " + error.localizedDescription)
+                Helper.showAlert(title: "Erro", message: "Erro ao realizar login no Firebase: " + error.localizedDescription, viewController: self)
                 return
             }
             
             //Success
-            if let user = user {
+            if user != nil {
                 print("Firebase: Login successfull")
                 self.redirectToDonatorsStoryboard()
             }
@@ -101,29 +100,28 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate  {
     // MARK: - Redirect methods
     func redirectToDonatorsStoryboard() {
         let donatorsTabBarController = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+        
         let donatorsNavigationController = UINavigationController(rootViewController: donatorsTabBarController)
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = donatorsNavigationController
     }
     
     func redirectToInstitutionsStoryboard() {
         let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+        
         let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = institutionsNavigationController
     }
     
-    // MARK: - Alert methods
-    func showAlert(title: String, message: String) {
+    // MARK: - SFSafariViewControllerDelegate
+    func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
         
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "Ok",
-                                     style: .default)
-        
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
+        if (!didLoadSuccessfully) {
+            Helper.showAlert(title: "Ops...", message: "Não foi possível completar a operação, tente novamente.", viewController: self)
+        }
     }
 }

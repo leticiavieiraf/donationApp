@@ -187,7 +187,8 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             
             cell.imageViewIcon.image = UIImage(named: imageNameForItem(orderItem.name))
             cell.labelTitle?.text = orderItem.name
-            cell.labelSubtitle?.text = "Publicado em " + orderItem.publishDate
+            let publishDate = Helper.dateFrom(string: orderItem.publishDate, format: "dd/MM/yyyy HH:mm")
+            cell.labelSubtitle.text = Helper.periodBetween(date1: publishDate, date2: Date())
             
             return cell
         } else {

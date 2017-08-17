@@ -88,4 +88,16 @@ class Helper: NSObject {
         return string
     }
     
+    static func showAlert(title: String, message: String, viewController: UIViewController) {
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok",
+                                     style: .default)
+        
+        alert.addAction(okAction)
+        viewController.present(alert, animated: true, completion: nil)
+    }
 }

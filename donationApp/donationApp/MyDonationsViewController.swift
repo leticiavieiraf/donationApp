@@ -141,7 +141,8 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         let donationItem = items[indexPath.row]
         
         cell.labelTitle.text = donationItem.name
-        cell.labelSubtitle?.text = "Publicado em " + donationItem.publishDate
+        let publishDate = Helper.dateFrom(string: donationItem.publishDate, format: "dd/MM/yyyy HH:mm")
+        cell.labelSubtitle?.text = Helper.periodBetween(date1: publishDate, date2: Date())
         
         return cell
     }

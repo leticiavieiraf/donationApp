@@ -38,18 +38,17 @@ class RegisterInstitutionViewController: UIViewController {
 
     // MARK: - Actions
     @IBAction func registerAction(_ sender: Any) {
-        
         if isEmptyFields() {
             return
         }
         
         if !isMatchPasswords() {
-            self.showAlert(title: "Atenção!", message: "As senhas digitadas não correspondem.")
+            Helper.showAlert(title: "Atenção!", message: "As senhas digitadas não correspondem.", viewController: self)
             return
         }
            
         if isShortPassword() {
-            self.showAlert(title: "Atenção!", message: "A senha deve ter no mínimo 6 caracteres.")
+            Helper.showAlert(title: "Atenção!", message: "A senha deve ter no mínimo 6 caracteres.", viewController: self)
             return
         }
         else {
@@ -124,7 +123,6 @@ class RegisterInstitutionViewController: UIViewController {
     
     //Save registered user in database
     func insertRegisteredUser(_ institution: Institution, uid: String) {
-    
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
@@ -156,7 +154,6 @@ class RegisterInstitutionViewController: UIViewController {
     
     //MARK: Validation methods {
     func isEmptyFields() -> Bool {
-        
         var isEmpty : Bool = false;
         
         if let email = self.emailField.text, email.isEmpty {
@@ -184,7 +181,6 @@ class RegisterInstitutionViewController: UIViewController {
     }
     
     func isMatchPasswords() -> Bool {
-        
         var  isMatch : Bool = true;
         
         if self.passwordField.text != self.confirmPasswordField.text {
@@ -195,7 +191,6 @@ class RegisterInstitutionViewController: UIViewController {
     }
     
     func isShortPassword() -> Bool {
-        
         var  isShortPassword : Bool = false;
         
         if (self.passwordField.text?.characters.count)! < 6 {
@@ -203,19 +198,6 @@ class RegisterInstitutionViewController: UIViewController {
         }
         
         return isShortPassword
-    }
-    
-    func showAlert(title: String, message: String) {
-        
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "Ok",
-                                     style: .default)
-        
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
     }
     
     func validateAndRegister() {
@@ -226,7 +208,7 @@ class RegisterInstitutionViewController: UIViewController {
             }
             else {
                 SVProgressHUD.dismiss()
-                self.showAlert(title: "Atenção!", message: "\n Não foi possível realizar o cadastro.\n\n Este e-mail não foi encontrado na base de Instituições reconhecidas.")
+                Helper.showAlert(title: "Atenção!", message: "\n Não foi possível realizar o cadastro.\n\n Este e-mail não foi encontrado na base de Instituições reconhecidas.", viewController: self)
             }
         }, onFailure: { (error) in
             

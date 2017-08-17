@@ -14,9 +14,19 @@ import AVFoundation
 
 class DonationsViewController: UIViewController, UITableViewDataSource {
     
+    // outlets
     @IBOutlet weak var tableView: UITableView!
     
-    var items: [DonationItem] = []
+    // variables
+    var allDonations: [DonationItem] = []
+    var sweaters: [DonationItem] = []
+    var food: [DonationItem] = []
+    var shoes: [DonationItem] = []
+    var hygieneProducts: [DonationItem] = []
+    var clothes: [DonationItem] = []
+    var sections: [String] = []
+    
+    // firebase variables
     let refDonationItems = Database.database().reference(withPath: "donation-items")
 
     // MARK: - Life Cycle methods
@@ -70,38 +80,108 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
                     
                     count += 1
                     if count == userIdKeys.count {
-                        self.items = donations
-                        self.tableView.reloadData()
+                        self.allDonations = donations
+                        self.setupDataSource()
+                        
                         SVProgressHUD.dismiss()
                     }
                 })
             }
         })
     }
-
+    
+    // MARK: - DataSource methods
+    func setupDataSource() {
+        sections =  [Constants.kSweaters,
+                     Constants.kFood,
+                     Constants.kShoes,
+                     Constants.kHygieneProducts,
+                     Constants.kClothes]
+        
+        for donation in allDonations {
+            switch donation.name {
+            case Constants.kSweaters:
+                sweaters.append(donation)
+            case Constants.kFood:
+                food.append(donation)
+            case Constants.kShoes:
+                shoes.append(donation)
+            case Constants.kHygieneProducts:
+                hygieneProducts.append(donation)
+            case Constants.kClothes:
+                clothes.append(donation)
+            default:
+                allDonations.append(donation)
+            }
+        }
+        self.tableView.reloadData()
+    }
+    
+    func getNumberOfRowsForSection(_ sectionTitle: String) -> Int {
+        switch sectionTitle {
+        case Constants.kSweaters:
+            return sweaters.count
+        case Constants.kFood:
+            return food.count
+        case Constants.kShoes:
+            return shoes.count
+        case Constants.kHygieneProducts:
+            return hygieneProducts.count
+        case Constants.kClothes:
+            return clothes.count
+        default:
+            return allDonations.count
+        }
+    }
+    
+    func getDonationForRowAtIndexPath(_ indexPath: IndexPath) -> DonationItem {
+        let sectionTitle = sections[indexPath.section]
+        var donationItem: DonationItem
+        
+        switch sectionTitle {
+        case Constants.kSweaters:
+            donationItem = sweaters[indexPath.row]
+        case Constants.kFood:
+            donationItem = food[indexPath.row]
+        case Constants.kShoes:
+            donationItem = shoes[indexPath.row]
+        case Constants.kHygieneProducts:
+            donationItem = hygieneProducts[indexPath.row]
+        case Constants.kClothes:
+            donationItem = clothes[indexPath.row]
+        default:
+            donationItem = allDonations[indexPath.row]
+        }
+        return donationItem
+    }
+    
     // MARK: - UITableViewDataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        let sectionTitle = sections[section]
+        let numberOfRows = getNumberOfRowsForSection(sectionTitle)
+        
+        return numberOfRows
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "donationPostCell", for: indexPath) as! ItemsTableViewCell
-        let donationItem = items[indexPath.row]
+        let donationItem = getDonationForRowAtIndexPath(indexPath)
         
         cell.itemNameLabel.text = donationItem.name
         cell.userNameLabel.text = donationItem.addedByUser
         cell.userEmailLabel.text = donationItem.userEmail
-        cell.publishDateLabel.text = "Publicado em " + donationItem.publishDate
+        let publishDate = Helper.dateFrom(string: donationItem.publishDate, format: "dd/MM/yyyy HH:mm")
+        cell.publishDateLabel.text = Helper.periodBetween(date1: publishDate, date2: Date())
         cell.loadImageWith(donationItem.userPhotoUrl)
-        
-//        do {
-//            try cell.loadImageWith(donationItem.userPhotoUrl)
-//        
-//        } catch let loadingImageError as NSError {
-//            print(loadingImageError.localizedDescription)
-//            cell.profileImageView.image = UIImage(named: "user-big")
-//        }
         
         return cell
     }
