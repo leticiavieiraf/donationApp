@@ -19,10 +19,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var tooltip: UIView!
     
     // variables
     var detailViewController : DetailViewController = DetailViewController()
-    var selectedInstitution = Institution()
     var selectedInstitutionUser : InstitutionUser?
     
     let ref = Database.database().reference(withPath: "features")
@@ -46,6 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         } else {
             setupDelegates()
             addTapGestureRecognizerToMapView();
+            verifiyIfWasOrderSelection();
             getInstitutionsAndLoadMap()
         }
     }
@@ -73,6 +74,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // MARK: - Firebase methods
     func getInstitutionsAndLoadMap() {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        SVProgressHUD.dismiss(withDelay: 9.0)
         
         self.getInstitutions(onSuccess: { (institutions) in
           
@@ -92,9 +97,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func getInstitutions(onSuccess: @escaping (_ institutions: [Institution]) -> ()) {
-        SVProgressHUD.setDefaultStyle(.dark)
-        SVProgressHUD.show()
-        
         ref.observe(.value, with: { snapshot in
             
             for item in snapshot.children {
@@ -150,6 +152,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.locationManager.requestWhenInUseAuthorization()
     }
     
+    // MARK: GestureRecognizer
+    func addTapGestureRecognizerToMapView() {
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTapOnMapView))
+        doubleTapGesture.delegate = self
+        doubleTapGesture.numberOfTapsRequired = 2
+        self.mapView.addGestureRecognizer(doubleTapGesture)
+    }
+    
+    func handleDoubleTapOnMapView() {
+        collapseDetails()
+    }
+    
+    // MARK: Map Setup
     func setInitialMapLocation(_ firstInstitution: Institution) {
         let initialLocation : CLLocation?
         
@@ -175,11 +190,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func drawInstitutionPinsForCity(_ city: String?, _ institutions: [Institution]) {
         var count = 0
+        var errorCount = 0
         
         for institution in institutions {
             if institution.city == city {
                 
-                let address = institution.address + " " + institution.district + ", " + institution.city + " - " + institution.state
+                let address = Helper.institutionAddress(institution)
                 self.getGeolocation(address, onSuccess: { location in
                     
                     institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
@@ -187,23 +203,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     self.mapView.addAnnotation(institution)
                     self.pins.append(institution)
                     
-                    //Set initial location
-                    if count == 0 {
+                    if (count == 0) {
                         self.setInitialMapLocation(institution)
-                        
-                        if let selectedInstitutionUser = self.selectedInstitutionUser {
-                            self.showDetailsFor(selectedInstitutionUser)
-                        }
-                        
                         count += 1
                     }
                     
                 }, onFailure: {error in
-                    print(error)
+                    if (errorCount == 0) {
+                        self.presentToolTip()
+                        errorCount += 1
+                    }
+                    print("GEOLOCATION ERROR: " + error.localizedDescription)
                 })
             }
         }
-        SVProgressHUD.dismiss()
     }
     
     func drawInstitutionPinIfNeeded(_ pinCoordinate: CLLocationCoordinate2D, _ institutionUser : InstitutionUser) {
@@ -236,43 +249,47 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     // MARK: - Detail Container methods
-    func addTapGestureRecognizerToMapView() {
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTapOnMapView))
-        doubleTapGesture.delegate = self
-        doubleTapGesture.numberOfTapsRequired = 2
-        self.mapView.addGestureRecognizer(doubleTapGesture)
-    }
-    
-    func handleDoubleTapOnMapView() {
-        collapseDetails()
+    func verifiyIfWasOrderSelection() {
+        if let selectedInstitutionUser = self.selectedInstitutionUser {
+            //self.tabBarController?.selectedIndex = 1
+            showDetailsFor(selectedInstitutionUser)
+        }
     }
     
     func showDetailsFor(_ selectedInstitutionUser: InstitutionUser) {
-        self.expandDetails()
-        
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
-        let address = selectedInstitutionUser.address + " " + selectedInstitutionUser.district + ", " + selectedInstitutionUser.city + " - " + selectedInstitutionUser.state
-        self.getGeolocation(address, onSuccess: { location in
-            SVProgressHUD.dismiss()
-            
-            let selectedInstitutionCoordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
-                                                                       longitude: location.coordinate.longitude)
-            
-            self.drawInstitutionPinIfNeeded(selectedInstitutionCoordinate, selectedInstitutionUser)
-            
-            self.centerMapAtLocation(coordinate: selectedInstitutionCoordinate, regionRadius: 200)
-            self.setupMapCamera(coordinate: selectedInstitutionCoordinate)
-            
-            self.detailViewController.institutionUser = selectedInstitutionUser
-            self.detailViewController.loadData()
-            
-        }, onFailure: {error in
-            print(error)
-            SVProgressHUD.dismiss()
-            Helper.showAlert(title: "Ops..", message: "Algo errado aconteceu, tente novamente.", viewController: self)
-        })
+        let address = Helper.institutionUserAddress(selectedInstitutionUser)
+        if (address != "-") {
+            self.getGeolocation(address, onSuccess: { location in
+                SVProgressHUD.dismiss()
+                
+                let selectedInstitutionCoordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                                                                           longitude: location.coordinate.longitude)
+                self.drawInstitutionPinIfNeeded(selectedInstitutionCoordinate, selectedInstitutionUser)
+                
+                self.expandDetails()
+                
+                self.centerMapAtLocation(coordinate: selectedInstitutionCoordinate, regionRadius: 200)
+                self.setupMapCamera(coordinate: selectedInstitutionCoordinate)
+                
+                self.detailViewController.institutionUser = selectedInstitutionUser
+                self.detailViewController.loadData()
+                
+            }, onFailure: {error in
+                print(error.localizedDescription)
+                SVProgressHUD.dismiss()
+                
+                self.showAlert(title: "Ops..", message: "Algo errado aconteceu, tente novamente.", handler: { () in
+
+                                if let orderViewController = self.navigationController?.viewControllers.first {
+                                    self.navigationController?.setViewControllers([orderViewController], animated: true)
+                                }
+                                //self.tabBarController?.selectedIndex = 0
+                })
+            })
+        }
     }
     
     func expandDetails() {
@@ -290,6 +307,40 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
+        })
+    }
+    
+    //MARK: Tooltip methods
+    func presentToolTip() {
+        let xPosition: CGFloat = self.mapView.frame.size.width/2
+        let yPosition: CGFloat = self.mapView.frame.origin.y + 350
+        
+        tooltip.frame = CGRect(x: xPosition,
+                               y: yPosition,
+                               width: tooltip.frame.size.width,
+                               height: tooltip.frame.size.height)
+        tooltip.center = CGPoint(x: self.mapView.center.x , y:self.mapView.center.y)
+        tooltip.alpha = 0
+        
+        self.mapView.addSubview(tooltip)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.tooltip.alpha = 1
+        }) { (finished) in
+            if finished {
+                self.removeTooltip()
+            }
+        }
+    }
+    
+    func removeTooltip() {
+        let when = DispatchTime.now() + 8
+        DispatchQueue.main.asyncAfter(deadline: when, execute: {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.tooltip.alpha = 0
+            }) { (finished) in
+                self.tooltip.removeFromSuperview()
+            };
         })
     }
     

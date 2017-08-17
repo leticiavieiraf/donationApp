@@ -113,14 +113,14 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         if let institution = institution {
             self.nameLabel.text = institution.name != "" ? institution.name : "-"
             self.emailLabel.text = institution.email != "" ? institution.email : "-"
-            self.addressLabel.text = institution.address + ", " + institution.district + ", " + institution.city + " - " + institution.state + ". Cep: " + institution.zipCode
+            self.addressLabel.text = Helper.institutionAddress(institution)
             self.infoLabel.text = institution.group != "" ? institution.group : "-"
             self.phoneLabel.text = institution.phone != "" ? institution.phone : "-"
             
         } else if let institution = institutionUser {
                 self.nameLabel.text = institution.name != "" ? institution.name : "-"
                 self.emailLabel.text = institution.email != "" ? institution.email : "-"
-                self.addressLabel.text = institution.address + ", " + institution.district + ", " + institution.city + " - " + institution.state + ". Cep: " + institution.zipCode
+                self.addressLabel.text = Helper.institutionUserAddress(institution)
                 self.infoLabel.text = institution.group != "" ? institution.group : "-"
                 self.phoneLabel.text = institution.phone != "" ? institution.phone : "-"
             }

@@ -39,7 +39,7 @@ class InstitutionProfileViewController: UIViewController {
                 
                 self.nameLabel.text = self.institutionUser.name != "" ? self.institutionUser.name : "-"
                 self.emailLabel.text = self.institutionUser.email != "" ? self.institutionUser.email : "-"
-                self.addressLabel.text = self.institutionUser.address + ", " + self.institutionUser.district + ", " + self.institutionUser.city + " - " + self.institutionUser.state + ". Cep: " + self.institutionUser.zipCode
+                self.addressLabel.text = Helper.institutionUserAddress(self.institutionUser)
                 self.infoLabel.text = self.institutionUser.group != "" ? self.institutionUser.group : "-"
                 self.phoneLabel.text = self.institutionUser.phone != "" ? self.institutionUser.phone : "-"
                 

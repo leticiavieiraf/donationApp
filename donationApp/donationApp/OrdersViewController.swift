@@ -108,17 +108,19 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     
     // MARK: - Redirect methods
     func redirectToMapViewController(_ institutionUser: InstitutionUser) {
-        if let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewControllerID") as? MapViewController {
-            mapVC.selectedInstitutionUser = institutionUser
+        if let mapViewController = self.storyboard?.instantiateViewController(withIdentifier: "MapViewControllerID") as? MapViewController {
+            mapViewController.selectedInstitutionUser = institutionUser
             
             if let navigation = self.navigationController {
-                navigation.pushViewController(mapVC, animated: true)
+                navigation.pushViewController(mapViewController, animated: true)
             }
         }
     }
     
-    // MARK: - DataSource methods
+    // MARK: - Setup Data Source methods
     func setupDataSource() {
+        resetDataSource()
+        
         sections =  [Constants.kSweaters,
                      Constants.kFood,
                      Constants.kShoes,
@@ -144,6 +146,16 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.reloadData()
     }
     
+    func resetDataSource() {
+        sections.removeAll()
+        sweaters.removeAll()
+        food.removeAll()
+        shoes.removeAll()
+        hygieneProducts.removeAll()
+        clothes.removeAll()
+    }
+    
+    // MARK: Setup TableView methods
     func getNumberOfRowsForSection(_ sectionTitle: String) -> Int {
         switch sectionTitle {
             case Constants.kSweaters:

@@ -41,14 +41,14 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         //Error
         if(error != nil) {
             print("Facebook: Login Error!")
-            Helper.showAlert(title: "Erro", message: "Erro ao realizar login no Facebook: " + error.localizedDescription, viewController: self)
+            self.showAlert(title: "Erro", message: "Erro ao realizar login no Facebook: " + error.localizedDescription, handler: nil)
             return
         }
         
         //Canceled
         if (result.isCancelled) {
             print("Facebook: User cancelled login.")
-            Helper.showAlert(title: "Ops...", message: "O login foi cancelado.", viewController: self)
+            self.showAlert(title: "Ops...", message: "O login foi cancelado.", handler: nil)
             return
         }
         
@@ -73,7 +73,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
             //Error
             if let error = error {
                 print("Firebase: Login Error!")
-                Helper.showAlert(title: "Erro", message: "Erro ao realizar login no Firebase: " + error.localizedDescription, viewController: self)
+                self.showAlert(title: "Erro", message: "Erro ao realizar login no Firebase: " + error.localizedDescription, handler: nil)
                 return
             }
             
@@ -121,7 +121,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         
         controller.dismiss(animated: true, completion: nil)
         if (!didLoadSuccessfully) {
-            Helper.showAlert(title: "Ops...", message: "Não foi possível completar a operação, tente novamente.", viewController: self)
+            self.showAlert(title: "Ops...", message: "Não foi possível completar a operação, tente novamente.", handler: nil)
         }
     }
 }

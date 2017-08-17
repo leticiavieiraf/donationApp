@@ -225,39 +225,14 @@
                                     <outlet property="delegate" destination="3iv-Xr-aU3" id="BfX-AL-9CS"/>
                                 </connections>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wp-ks-Rbq" userLabel="NoDonationsView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você não possui doações cadastradas." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pv4-ZL-auW">
-                                        <rect key="frame" x="38" y="266.5" width="298" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="Pv4-ZL-auW" firstAttribute="centerX" secondItem="2wp-ks-Rbq" secondAttribute="centerX" id="KFD-eb-kOb"/>
-                                    <constraint firstItem="Pv4-ZL-auW" firstAttribute="centerY" secondItem="2wp-ks-Rbq" secondAttribute="centerY" id="NEc-M1-rAd"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.95176770740000005" green="0.95176770740000005" blue="0.95176770740000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bx1-gG-FhO" firstAttribute="leading" secondItem="iio-OC-U8q" secondAttribute="leading" id="DLf-a7-ZzS"/>
                             <constraint firstItem="QCA-6f-5Eb" firstAttribute="top" secondItem="bx1-gG-FhO" secondAttribute="bottom" id="OUr-GT-ly2"/>
-                            <constraint firstAttribute="trailing" secondItem="2wp-ks-Rbq" secondAttribute="trailing" id="Rpc-7h-NUu"/>
-                            <constraint firstItem="2wp-ks-Rbq" firstAttribute="top" secondItem="hbD-zc-Jb1" secondAttribute="bottom" id="T4b-jT-JP3"/>
-                            <constraint firstItem="QCA-6f-5Eb" firstAttribute="top" secondItem="2wp-ks-Rbq" secondAttribute="bottom" id="ULL-Z3-rtC"/>
                             <constraint firstAttribute="trailing" secondItem="bx1-gG-FhO" secondAttribute="trailing" id="a8f-f3-IdG"/>
-                            <constraint firstItem="2wp-ks-Rbq" firstAttribute="leading" secondItem="iio-OC-U8q" secondAttribute="leading" id="rJS-lE-u9C"/>
                             <constraint firstItem="bx1-gG-FhO" firstAttribute="top" secondItem="hbD-zc-Jb1" secondAttribute="bottom" id="wes-el-3f2"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="2wp-ks-Rbq"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Meus pedidos" id="Ees-sc-smm">
                         <barButtonItem key="backBarButtonItem" title="VOLTAR" id="DZR-ry-1uR"/>
@@ -267,6 +242,23 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kdm-vX-8dg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="2wp-ks-Rbq" userLabel="NoDonationsView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você não possui doações cadastradas." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pv4-ZL-auW">
+                            <rect key="frame" x="10.5" y="39.5" width="298" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.17100000000000001" blue="0.219" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="Pv4-ZL-auW" firstAttribute="centerX" secondItem="2wp-ks-Rbq" secondAttribute="centerX" id="KFD-eb-kOb"/>
+                        <constraint firstItem="Pv4-ZL-auW" firstAttribute="centerY" secondItem="2wp-ks-Rbq" secondAttribute="centerY" id="NEc-M1-rAd"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="-1269" y="1609"/>
         </scene>

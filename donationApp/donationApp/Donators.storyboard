@@ -49,7 +49,7 @@
         <!--_Old Instituições-->
         <scene sceneID="IL2-gO-UgF">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gjn-iO-Cf0" userLabel="_Old Instituições" customClass="InstitutionsViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gjn-iO-Cf0" userLabel="_Old Instituições" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Pm-qy-QFg"/>
                         <viewControllerLayoutGuide type="bottom" id="fvb-li-0X9"/>
@@ -90,7 +90,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SiJ-Fc-REj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4249" y="2449"/>
+            <point key="canvasLocation" x="-4074" y="2403"/>
         </scene>
         <!--Minhas doações-->
         <scene sceneID="Crd-Rw-Lzz">
@@ -161,39 +161,14 @@
                                     <outlet property="delegate" destination="oQr-J0-qbt" id="V9g-4f-8LB"/>
                                 </connections>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4O-MB-FIB" userLabel="NoDonationsView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você não possui doações cadastradas." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lA3-A1-MbQ">
-                                        <rect key="frame" x="38" y="266.5" width="298" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="lA3-A1-MbQ" firstAttribute="centerX" secondItem="X4O-MB-FIB" secondAttribute="centerX" id="iYY-nn-GJ2"/>
-                                    <constraint firstItem="lA3-A1-MbQ" firstAttribute="centerY" secondItem="X4O-MB-FIB" secondAttribute="centerY" id="kv3-MI-Zo7"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.95176770740000005" green="0.95176770740000005" blue="0.95176770740000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="X4O-MB-FIB" firstAttribute="leading" secondItem="EPb-Z4-Lbk" secondAttribute="leading" id="3J1-zD-SSZ"/>
-                            <constraint firstAttribute="trailing" secondItem="X4O-MB-FIB" secondAttribute="trailing" id="7h3-bd-sXb"/>
-                            <constraint firstItem="eMp-PD-5BV" firstAttribute="top" secondItem="X4O-MB-FIB" secondAttribute="bottom" id="9OE-y0-MEE"/>
                             <constraint firstItem="eMp-PD-5BV" firstAttribute="top" secondItem="XCf-vY-QbK" secondAttribute="bottom" id="CgT-cF-xSs"/>
                             <constraint firstAttribute="trailing" secondItem="XCf-vY-QbK" secondAttribute="trailing" id="KvL-N5-nrr"/>
                             <constraint firstItem="XCf-vY-QbK" firstAttribute="leading" secondItem="EPb-Z4-Lbk" secondAttribute="leading" id="Qlk-2w-oa7"/>
-                            <constraint firstItem="X4O-MB-FIB" firstAttribute="top" secondItem="his-3T-eJo" secondAttribute="bottom" id="cf5-Om-PeD"/>
                             <constraint firstItem="XCf-vY-QbK" firstAttribute="top" secondItem="his-3T-eJo" secondAttribute="bottom" id="hT7-bL-DJC"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="X4O-MB-FIB"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Minhas doações" id="HpI-f8-01K">
                         <barButtonItem key="backBarButtonItem" title="VOLTARR" id="jHC-mP-zvL"/>
@@ -209,7 +184,7 @@
         <!--_Old Detalhes da Instituição-->
         <scene sceneID="1xW-f8-MK1">
             <objects>
-                <viewController storyboardIdentifier="detailPopUp" id="Jd3-Xw-ORJ" userLabel="_Old Detalhes da Instituição" customClass="DetailInstitutionViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailPopUp" id="Jd3-Xw-ORJ" userLabel="_Old Detalhes da Instituição" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ToR-1H-wLd"/>
                         <viewControllerLayoutGuide type="bottom" id="yja-cA-7cA"/>
@@ -365,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bk-tc-szv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3579" y="2449"/>
+            <point key="canvasLocation" x="-3396" y="2404"/>
         </scene>
         <!--Nova Doação-->
         <scene sceneID="zcJ-8S-KzT">
@@ -838,9 +813,36 @@
                     <connections>
                         <outlet property="containerHeightConstraint" destination="9R3-yO-a5z" id="pnE-Hd-vIa"/>
                         <outlet property="mapView" destination="AWk-o4-ny9" id="SQ6-fK-6Yg"/>
+                        <outlet property="tooltip" destination="eVR-75-QgL" id="URr-5p-3CT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ii-Or-oOi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="eVR-75-QgL" userLabel="tooltip">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="83"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="balao" translatesAutoresizingMaskIntoConstraints="NO" id="Hey-88-qnT">
+                            <rect key="frame" x="0.0" y="0.0" width="280" height="83"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ops... Não foi possível carregar todas as instituições corretamente." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKQ-mD-9hc">
+                            <rect key="frame" x="15" y="17" width="250" height="33"/>
+                            <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="14"/>
+                            <color key="textColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Hey-88-qnT" firstAttribute="leading" secondItem="eVR-75-QgL" secondAttribute="leading" id="6Z4-pX-JZB"/>
+                        <constraint firstItem="WKQ-mD-9hc" firstAttribute="top" secondItem="eVR-75-QgL" secondAttribute="top" constant="17" id="8VK-SG-e6r"/>
+                        <constraint firstAttribute="bottom" secondItem="Hey-88-qnT" secondAttribute="bottom" id="Aaz-WI-YGP"/>
+                        <constraint firstItem="WKQ-mD-9hc" firstAttribute="leading" secondItem="eVR-75-QgL" secondAttribute="leading" constant="15" id="GKI-bQ-uKO"/>
+                        <constraint firstItem="Hey-88-qnT" firstAttribute="top" secondItem="eVR-75-QgL" secondAttribute="top" id="JNW-5k-DJq"/>
+                        <constraint firstAttribute="trailing" secondItem="WKQ-mD-9hc" secondAttribute="trailing" constant="15" id="UeJ-dR-2D9"/>
+                        <constraint firstAttribute="trailing" secondItem="Hey-88-qnT" secondAttribute="trailing" id="W47-kB-ite"/>
+                        <constraint firstItem="WKQ-mD-9hc" firstAttribute="centerX" secondItem="eVR-75-QgL" secondAttribute="centerX" id="c96-ld-LxK"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="-1539" y="1631"/>
         </scene>
@@ -1159,6 +1161,7 @@
     <resources>
         <image name="add" width="25" height="25"/>
         <image name="arrow-down" width="22" height="13"/>
+        <image name="balao" width="280" height="87"/>
         <image name="empty" width="28" height="28"/>
         <image name="ic_email" width="18" height="13"/>
         <image name="ic_info" width="18" height="18"/>

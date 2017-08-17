@@ -62,7 +62,7 @@ class LoginInstitutionViewController: UIViewController {
             //Error
             if let error = error {
                 print("Firebase: Login Error!")
-                Helper.showAlert(title: "Erro", message: "Erro ao realizar login: " + error.localizedDescription, viewController: self)
+                self.showAlert(title: "Erro", message: "Erro ao realizar login: " + error.localizedDescription, handler: nil)
                 return
             }
             

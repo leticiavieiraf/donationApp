@@ -24,14 +24,14 @@
 		A41C926D1EA1618A0078FE9A /* LoginInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C926C1EA1618A0078FE9A /* LoginInstitutionViewController.swift */; };
 		A41C926F1EA18CE40078FE9A /* RegisterInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C926E1EA18CE40078FE9A /* RegisterInstitutionViewController.swift */; };
 		A41C92711EA1F0460078FE9A /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C92701EA1F0460078FE9A /* OrderItem.swift */; };
-		A42AC3E61E7792FA00E4B512 /* DetailInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */; };
+		A42AC3E61E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42AC3E51E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift */; };
 		A4370F681EA2CF53000A20E5 /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4370F671EA2CF53000A20E5 /* ItemsTableViewCell.swift */; };
 		A45EAE721EA467EC00E33DBE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45EAE711EA467EC00E33DBE /* CryptoSwift.framework */; };
 		A45EAE741EA467F600E33DBE /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45EAE731EA467F600E33DBE /* SVProgressHUD.framework */; };
 		A46ABF371E70FC950066764C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46ABF361E70FC950066764C /* MainViewController.swift */; };
 		A4A1D4481E7448AE00349AF9 /* MyDonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */; };
 		A4A1D44A1E7448C600349AF9 /* NewDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */; };
-		A4A1D44C1E7448EA00349AF9 /* InstitutionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */; };
+		A4A1D44C1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D44B1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift */; };
 		A4A1D44E1E74492600349AF9 /* DonatorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */; };
 		A4A1D4571E749FE800349AF9 /* DonationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4561E749FE800349AF9 /* DonationItem.swift */; };
 		A4A1D4591E74A00900349AF9 /* DonatorUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4581E74A00900349AF9 /* DonatorUser.swift */; };
@@ -43,6 +43,7 @@
 		F31A1D911F22A63F00EE4FBF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */; };
 		F326542A1F3271D400885F14 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32654291F3271D400885F14 /* Constants.swift */; };
 		F348F4D11F215E3F0049227E /* MyItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */; };
+		F3DE66141F46009100ABE64E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DE66131F46009100ABE64E /* UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,14 +70,14 @@
 		A41C926C1EA1618A0078FE9A /* LoginInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInstitutionViewController.swift; sourceTree = "<group>"; };
 		A41C926E1EA18CE40078FE9A /* RegisterInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInstitutionViewController.swift; sourceTree = "<group>"; };
 		A41C92701EA1F0460078FE9A /* OrderItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
-		A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInstitutionViewController.swift; sourceTree = "<group>"; };
+		A42AC3E51E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLD_DetailInstitutionViewController.swift; sourceTree = "<group>"; };
 		A4370F671EA2CF53000A20E5 /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
 		A45EAE711EA467EC00E33DBE /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/donationApp-dprygwyildkcdcbbxuwjsairrndr/Build/Products/Debug-iphonesimulator/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
 		A45EAE731EA467F600E33DBE /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = "Pods/../build/Debug-iphoneos/SVProgressHUD/SVProgressHUD.framework"; sourceTree = "<group>"; };
 		A46ABF361E70FC950066764C /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDonationViewController.swift; sourceTree = "<group>"; };
-		A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionsViewController.swift; sourceTree = "<group>"; };
+		A4A1D44B1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLD_InstitutionsViewController.swift; sourceTree = "<group>"; };
 		A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatorProfileViewController.swift; sourceTree = "<group>"; };
 		A4A1D4561E749FE800349AF9 /* DonationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationItem.swift; sourceTree = "<group>"; };
 		A4A1D4581E74A00900349AF9 /* DonatorUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatorUser.swift; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 		F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F32654291F3271D400885F14 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyItemsTableViewCell.swift; sourceTree = "<group>"; };
+		F3DE66131F46009100ABE64E /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		8E72BCB81E76EA9A00CB6CB4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F3DE660F1F45FF7B00ABE64E /* Extensions */,
 				8E72BCB91E76EAA700CB6CB4 /* DAButton */,
 			);
 			name = Components;
@@ -227,8 +230,8 @@
 		A49D1B941F43F10C001BDBBE /* Garbage */ = {
 			isa = PBXGroup;
 			children = (
-				A4A1D44B1E7448EA00349AF9 /* InstitutionsViewController.swift */,
-				A42AC3E51E7792FA00E4B512 /* DetailInstitutionViewController.swift */,
+				A4A1D44B1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift */,
+				A42AC3E51E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift */,
 			);
 			name = Garbage;
 			sourceTree = "<group>";
@@ -308,6 +311,14 @@
 				F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		F3DE660F1F45FF7B00ABE64E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F3DE66131F46009100ABE64E /* UIViewController.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,8 +465,9 @@
 				A4A1D45E1E74B6B300349AF9 /* ItemSelectionDelegate.swift in Sources */,
 				8E72BCBB1E76EB2100CB6CB4 /* DAButton.swift in Sources */,
 				A41C92691EA14AB40078FE9A /* NewOrderViewController.swift in Sources */,
-				A4A1D44C1E7448EA00349AF9 /* InstitutionsViewController.swift in Sources */,
+				A4A1D44C1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift in Sources */,
 				F31A1D911F22A63F00EE4FBF /* DetailViewController.swift in Sources */,
+				F3DE66141F46009100ABE64E /* UIViewController.swift in Sources */,
 				A4A1D4591E74A00900349AF9 /* DonatorUser.swift in Sources */,
 				A41C92631EA149800078FE9A /* OrdersViewController.swift in Sources */,
 				8E9DE4441E70AF4600A0449D /* AppDelegate.swift in Sources */,
@@ -466,7 +478,7 @@
 				A41C926F1EA18CE40078FE9A /* RegisterInstitutionViewController.swift in Sources */,
 				A4370F681EA2CF53000A20E5 /* ItemsTableViewCell.swift in Sources */,
 				A41C92651EA14A830078FE9A /* DonationsViewController.swift in Sources */,
-				A42AC3E61E7792FA00E4B512 /* DetailInstitutionViewController.swift in Sources */,
+				A42AC3E61E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift in Sources */,
 				A4A1D44E1E74492600349AF9 /* DonatorProfileViewController.swift in Sources */,
 				F326542A1F3271D400885F14 /* Constants.swift in Sources */,
 			);

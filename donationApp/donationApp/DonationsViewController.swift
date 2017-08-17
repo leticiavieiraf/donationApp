@@ -90,8 +90,10 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         })
     }
     
-    // MARK: - DataSource methods
+    // MARK: - Setup Data Source methods
     func setupDataSource() {
+        resetDataSource()
+        
         sections =  [Constants.kSweaters,
                      Constants.kFood,
                      Constants.kShoes,
@@ -117,6 +119,16 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         self.tableView.reloadData()
     }
     
+    func resetDataSource() {
+        sections.removeAll()
+        sweaters.removeAll()
+        food.removeAll()
+        shoes.removeAll()
+        hygieneProducts.removeAll()
+        clothes.removeAll()
+    }
+    
+    // MARK: Setup TableView methods
     func getNumberOfRowsForSection(_ sectionTitle: String) -> Int {
         switch sectionTitle {
         case Constants.kSweaters:

@@ -43,12 +43,12 @@ class RegisterInstitutionViewController: UIViewController {
         }
         
         if !isMatchPasswords() {
-            Helper.showAlert(title: "Atenção!", message: "As senhas digitadas não correspondem.", viewController: self)
+            self.showAlert(title: "Atenção!", message: "As senhas digitadas não correspondem.", handler: nil)
             return
         }
            
         if isShortPassword() {
-            Helper.showAlert(title: "Atenção!", message: "A senha deve ter no mínimo 6 caracteres.", viewController: self)
+            self.showAlert(title: "Atenção!", message: "A senha deve ter no mínimo 6 caracteres.", handler: nil)
             return
         }
         else {
@@ -208,7 +208,7 @@ class RegisterInstitutionViewController: UIViewController {
             }
             else {
                 SVProgressHUD.dismiss()
-                Helper.showAlert(title: "Atenção!", message: "\n Não foi possível realizar o cadastro.\n\n Este e-mail não foi encontrado na base de Instituições reconhecidas.", viewController: self)
+                self.showAlert(title: "Atenção!", message: "\n Não foi possível realizar o cadastro.\n\n Este e-mail não foi encontrado na base de Instituições reconhecidas.", handler: nil)
             }
         }, onFailure: { (error) in
             
