@@ -299,8 +299,7 @@ class RegisterInstitutionViewController: UIViewController {
         return randomString
     }
     
-    func randomNumber() -> Int
-    {
+    func randomNumber() -> Int {
         let max : UInt32 = 20
         let min : UInt32 = 10
         

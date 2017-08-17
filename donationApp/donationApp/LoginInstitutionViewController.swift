@@ -25,7 +25,7 @@ class LoginInstitutionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tap)
     }
     
@@ -107,6 +107,14 @@ class LoginInstitutionViewController: UIViewController {
 //         return ""
     }
     
+    // MARK: Redirect methods
+    func redirectToInstitutionsStoryboard() {
+        let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+        let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = institutionsNavigationController
+    }
+    
     // MARK: Validation methods
     func isEmptyFields() -> Bool {
         
@@ -129,14 +137,7 @@ class LoginInstitutionViewController: UIViewController {
         return isEmpty
     }
     
-    // MARK: Redirect methods
-    func redirectToInstitutionsStoryboard() {
-        let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
-        let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = institutionsNavigationController
-    }
-    
+    // MARK: Alert methods
     func showAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title,
@@ -149,7 +150,7 @@ class LoginInstitutionViewController: UIViewController {
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
