@@ -28,7 +28,7 @@ class RegisterInstitutionViewController: UIViewController {
     var password_sha256 : String = "";
     var salt : String = "";
 
-    // MARK: Life Cycle methods
+    // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +36,7 @@ class RegisterInstitutionViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
     }
 
-    // MARK: Actions
+    // MARK: - Actions
     @IBAction func registerAction(_ sender: Any) {
         
         if isEmptyFields() {
@@ -61,7 +61,7 @@ class RegisterInstitutionViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Firebase methods
+    // MARK: - Firebase methods
     func register(_ institution : Institution) {
         
         // Criptografia segura e ideal Hash SHA-256 (PBKDF2)
@@ -245,7 +245,7 @@ class RegisterInstitutionViewController: UIViewController {
         return foundInstitution
     }
     
-    // MARK: Encryption method
+    // MARK: - Encryption method
     func sha256SaltHash(_ password: String, salt: String) -> String {
         
         let bytesPass: Array<UInt8> = Array(password.utf8);
@@ -264,7 +264,7 @@ class RegisterInstitutionViewController: UIViewController {
         return password
     }
     
-    // MARK: Keychain Access method
+    // MARK: - Keychain Access method
     func saveSalt() {
 //        do {
 //            // Writing data to the keychain
@@ -280,7 +280,7 @@ class RegisterInstitutionViewController: UIViewController {
 //        }
     }
     
-    // MARK: Private methods
+    // MARK: - Private methods
     func randomString() -> String {
         
         let length: Int = randomNumber()

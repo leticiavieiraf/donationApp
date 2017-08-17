@@ -21,7 +21,7 @@ class LoginInstitutionViewController: UIViewController {
     
     let ref = Database.database().reference(withPath: "features")
 
-    // MARK: Life Cycle methods
+    // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +33,7 @@ class LoginInstitutionViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     @IBAction func logIn(_ sender: Any) {
         
         if isEmptyFields() {
@@ -44,7 +44,7 @@ class LoginInstitutionViewController: UIViewController {
         }
     }
     
-    // MARK: Firebase methods
+    // MARK: - Firebase methods
     func loginWithFirebase() {
         
         SVProgressHUD.setDefaultStyle(.dark)
@@ -74,7 +74,7 @@ class LoginInstitutionViewController: UIViewController {
         }
     }
     
-    // MARK: Encryption methods
+    // MARK: - Encryption methods
     func sha256SaltHash(_ password: String, salt: String) -> String {
         
         let bytesPass: Array<UInt8> = Array(password.utf8);
@@ -93,7 +93,7 @@ class LoginInstitutionViewController: UIViewController {
         return password
     }
     
-    // MARK: Keychain Access method
+    // MARK: - Keychain Access method
     func loadSalt() -> String {
         return Constants.kGeneral
         
@@ -107,7 +107,7 @@ class LoginInstitutionViewController: UIViewController {
 //         return ""
     }
     
-    // MARK: Redirect methods
+    // MARK: - Redirect methods
     func redirectToInstitutionsStoryboard() {
         let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
         let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
@@ -115,7 +115,7 @@ class LoginInstitutionViewController: UIViewController {
         appDelegate.window?.rootViewController = institutionsNavigationController
     }
     
-    // MARK: Validation methods
+    // MARK: - Validation methods
     func isEmptyFields() -> Bool {
         
         var isEmpty: Bool = false;

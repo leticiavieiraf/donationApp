@@ -21,7 +21,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     var donatorUser : DonatorUser!
     let refDonationItems = Database.database().reference(withPath: "donation-items")
     
-    // MARK: Life Cycle methods
+    // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -51,7 +51,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         }
     }
     
-    // MARK: Firebase methods
+    // MARK: - Firebase methods
     func getUserAndLoadDonations() {
         
         SVProgressHUD.setDefaultStyle(.dark)
@@ -112,7 +112,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         donationItemRef.setValue(donationItem.toAnyObject())
     }
     
-    // MARK: Popup New Donation
+    // MARK: - Popup New Donation
     func showNewDonationPopUp() {
      
         let newDonationVC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "sbPopUpID") as! NewDonationViewController
@@ -130,7 +130,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         insert(donation:item)
     }
     
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }

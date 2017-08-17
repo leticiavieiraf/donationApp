@@ -30,7 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var pins = [Institution]()
     var locationManager = CLLocationManager()
 
-    // MARK: Life Cycle methods
+    // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,7 +62,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         checkLocationAuthorizationStatus()
     }
     
-    // MARK:Navigation
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "expandDetails" {
@@ -71,7 +71,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // MARK: Firebase methods
+    // MARK: - Firebase methods
     func getInstitutionsAndLoadMap() {
         
         self.getInstitutions(onSuccess: { (institutions) in
@@ -106,7 +106,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
     }
     
-    // MARK: Location methods
+    // MARK: - Location methods
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             mapView.showsUserLocation = true
@@ -143,7 +143,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // MARK: Setup methods
+    // MARK: - Setup methods
     func setupDelegates() {
         self.mapView.delegate = self
         self.locationManager.delegate = self
@@ -235,7 +235,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // MARK: Detail Container methods
+    // MARK: - Detail Container methods
     func addTapGestureRecognizerToMapView() {
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTapOnMapView))
         doubleTapGesture.delegate = self
@@ -293,7 +293,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
     }
     
-    // MARK: MKMapViewDelegate
+    // MARK: - MKMapViewDelegate
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         //if let annotation = view.annotation as? Institution {
             //print("Your annotation title: \(annotation.title)");
@@ -347,7 +347,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // MARK: Alert methods
+    // MARK: - Alert methods
     func showAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title,

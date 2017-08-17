@@ -37,6 +37,7 @@
 		A4A1D4591E74A00900349AF9 /* DonatorUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4581E74A00900349AF9 /* DonatorUser.swift */; };
 		A4A1D45B1E74A02100349AF9 /* InstitutionUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */; };
 		A4A1D45E1E74B6B300349AF9 /* ItemSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */; };
+		A4FE74BE1F454188005F28C7 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FE74BD1F454188005F28C7 /* Helper.swift */; };
 		D42330E36DCE15B61119A381 /* Pods_donationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B78C679E15418255774C854 /* Pods_donationApp.framework */; };
 		F31A1D8F1F22871C00EE4FBF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */; };
 		F31A1D911F22A63F00EE4FBF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */; };
@@ -81,6 +82,7 @@
 		A4A1D4581E74A00900349AF9 /* DonatorUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatorUser.swift; sourceTree = "<group>"; };
 		A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionUser.swift; sourceTree = "<group>"; };
 		A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionDelegate.swift; sourceTree = "<group>"; };
+		A4FE74BD1F454188005F28C7 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F32654291F3271D400885F14 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -101,14 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8E6CE25D1E7C2C4100443C10 /* Main (Login) */ = {
+		8E6CE25D1E7C2C4100443C10 /* Main - Login */ = {
 			isa = PBXGroup;
 			children = (
 				A46ABF361E70FC950066764C /* MainViewController.swift */,
 				A41C926C1EA1618A0078FE9A /* LoginInstitutionViewController.swift */,
 				A41C926E1EA18CE40078FE9A /* RegisterInstitutionViewController.swift */,
 			);
-			name = "Main (Login)";
+			name = "Main - Login";
 			sourceTree = "<group>";
 		};
 		8E72BCB81E76EA9A00CB6CB4 /* Components */ = {
@@ -149,15 +151,15 @@
 			isa = PBXGroup;
 			children = (
 				8E62BC751E719F08004FE7F1 /* donationApp.entitlements */,
+				8E9DE44A1E70AF4700A0449D /* Assets.xcassets */,
 				8E72BCB81E76EA9A00CB6CB4 /* Components */,
+				A4FE74BC1F4540F7005F28C7 /* Utils */,
 				A46ABF351E70F6AA0066764C /* Storyboards */,
+				F348F4CD1F2014790049227E /* Cells */,
 				A46ABF331E70F6800066764C /* Models */,
 				A46ABF341E70F68A0066764C /* ViewControllers */,
 				A4A1D45C1E74B65300349AF9 /* Protocols */,
-				8E9DE4431E70AF4600A0449D /* AppDelegate.swift */,
-				8E9DE44A1E70AF4700A0449D /* Assets.xcassets */,
-				8E9DE44F1E70AF4700A0449D /* Info.plist */,
-				8E3305E11E72F6DE00F7DCA9 /* GoogleService-Info.plist */,
+				A4FE74BB1F45402F005F28C7 /* Supporting Files */,
 			);
 			path = donationApp;
 			sourceTree = "<group>";
@@ -165,10 +167,8 @@
 		A4370F661EA2CEF1000A20E5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F348F4CD1F2014790049227E /* Cells */,
 				F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */,
 				F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */,
-				F32654291F3271D400885F14 /* Constants.swift */,
 				A49D1B941F43F10C001BDBBE /* Garbage */,
 			);
 			name = Common;
@@ -205,7 +205,7 @@
 		A46ABF341E70F68A0066764C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8E6CE25D1E7C2C4100443C10 /* Main (Login) */,
+				8E6CE25D1E7C2C4100443C10 /* Main - Login */,
 				A4A1D4501E74493A00349AF9 /* Donators */,
 				A4A1D44F1E74493600349AF9 /* Institutions */,
 				A4370F661EA2CEF1000A20E5 /* Common */,
@@ -261,6 +261,25 @@
 				A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		A4FE74BB1F45402F005F28C7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E9DE4431E70AF4600A0449D /* AppDelegate.swift */,
+				8E9DE44F1E70AF4700A0449D /* Info.plist */,
+				8E3305E11E72F6DE00F7DCA9 /* GoogleService-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A4FE74BC1F4540F7005F28C7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F32654291F3271D400885F14 /* Constants.swift */,
+				A4FE74BD1F454188005F28C7 /* Helper.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		C05A245FECEE3C037F4420C0 /* Pods */ = {
@@ -428,6 +447,7 @@
 				A41C92711EA1F0460078FE9A /* OrderItem.swift in Sources */,
 				A4A1D45B1E74A02100349AF9 /* InstitutionUser.swift in Sources */,
 				A41C926B1EA14AF10078FE9A /* InstitutionProfileViewController.swift in Sources */,
+				A4FE74BE1F454188005F28C7 /* Helper.swift in Sources */,
 				A4A1D4481E7448AE00349AF9 /* MyDonationsViewController.swift in Sources */,
 				A4A1D44A1E7448C600349AF9 /* NewDonationViewController.swift in Sources */,
 				F31A1D8F1F22871C00EE4FBF /* MapViewController.swift in Sources */,

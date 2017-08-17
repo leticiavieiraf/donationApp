@@ -19,7 +19,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     var items: [DonationItem] = []
     let refDonationItems = Database.database().reference(withPath: "donation-items")
 
-    // MARK: Life Cycle methods
+    // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -44,7 +44,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-    // MARK: Firebase methods
+    // MARK: - Firebase methods
     func loadDonations() {
         
         SVProgressHUD.setDefaultStyle(.dark)
@@ -79,7 +79,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         })
     }
 
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
