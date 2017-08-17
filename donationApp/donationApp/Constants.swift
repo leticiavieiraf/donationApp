@@ -9,7 +9,6 @@
 import UIKit
 
 class Constants {
-
     static let kGeneral = "YW8urJCkA6wMqkoQNoFM6oT6GFOhA"
     
     static let kSweaters = "Agasalhos"

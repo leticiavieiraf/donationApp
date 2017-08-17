@@ -202,11 +202,12 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "orderPostCell", for: indexPath) as! ItemsTableViewCell
         let orderItem = getOrderForRowAtIndexPath(indexPath)
         
+        cell.profileImageView.image = UIImage(named: "institution-big")
         cell.itemNameLabel.text = "Precisamos de " + orderItem.name.lowercased() + "!"
         cell.userNameLabel.text = orderItem.addedByUser
         cell.userEmailLabel.text = orderItem.userEmail
-        cell.publishDateLabel.text = "Publicado em " + orderItem.publishDate
-        cell.profileImageView.image = UIImage(named: "institution-big")
+        let publishDate = Helper.dateFrom(string: orderItem.publishDate, format: "dd/MM/yyyy HH:mm")
+        cell.publishDateLabel.text = "" + Helper.periodBetween(date1: publishDate, date2: Date())
         
         return cell
     }
