@@ -25,6 +25,17 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         verifyIfHasUserLoggedIn()
      }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupNavigationBar()
+    }
+    
+    // MARK: - Setup NavigationBar methods
+    func setupNavigationBar() {
+        self.navigationController?.navigationItem.leftBarButtonItem = nil
+        self.navigationController?.navigationItem.rightBarButtonItem = nil
+    }
+    
     // MARK: - Check Login methods
     func verifyIfHasUserLoggedIn() {
         let donatorUserLoggedIn = Helper.donatorUserLoggedIn()
@@ -47,7 +58,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
     
     // MARK: - Login methods
     
-    // Login com Facebook
+    // Facebook
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
         //Error

@@ -35,7 +35,7 @@ class RegisterInstitutionViewController: UIViewController {
         let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tap)
     }
-
+    
     // MARK: - Actions
     @IBAction func registerAction(_ sender: Any) {
         if isEmptyFields() {

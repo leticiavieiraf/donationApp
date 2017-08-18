@@ -169,7 +169,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         
                         if (count == 0) {
                             self.setInitialMapLocation(institution)
-                            self.setupMapCamera(coordinate: institution.coordinate, distance: 9000)
+                            self.setupMapCamera(institution.coordinate, distance: 9000, pitch: 35)
                             count += 1
                         }
                         
@@ -194,18 +194,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             initialLocation = CLLocation(latitude: firstInstitution.coordinate.latitude, longitude: firstInstitution.coordinate.longitude)
         }
         
-        self.centerMapAtLocation(coordinate: initialLocation!.coordinate, regionRadius: 2000)
+        self.centerMapAtLocation(initialLocation!.coordinate, regionRadius: 2000)
     }
     
-    func centerMapAtLocation(coordinate: CLLocationCoordinate2D, regionRadius: CLLocationDistance) {
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
-        let adjustedRegion = self.mapView.regionThatFits(region)
-        mapView.setRegion(adjustedRegion, animated: true)
+    func centerMapAtLocation(_ coordinate: CLLocationCoordinate2D, regionRadius: CLLocationDistance) {
+        if valid(coordinate) {
+            let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
+            let adjustedRegion = self.mapView.regionThatFits(region)
+            mapView.setRegion(adjustedRegion, animated: true)
+        }
     }
     
-    func setupMapCamera(coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) {
-        let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: distance, pitch: 35, heading: 45)
-        mapView.setCamera(camera, animated: true)
+    func setupMapCamera(_ coordinate: CLLocationCoordinate2D, distance: CLLocationDistance, pitch: CGFloat) {
+        if valid(coordinate) {
+            let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: distance, pitch: pitch, heading: 45)
+            mapView.setCamera(camera, animated: true)
+        }
     }
     
     func setupDelegates() {
@@ -232,8 +236,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 self.expandDetails()
                 
-                self.centerMapAtLocation(coordinate: institution.coordinate, regionRadius: 200)
-                self.setupMapCamera(coordinate: institution.coordinate, distance: 300)
+                self.centerMapAtLocation(institution.coordinate, regionRadius: 200)
+                self.setupMapCamera(institution.coordinate, distance: 300, pitch: 10)
                 
                 self.detailViewController.institutionUser = institutionUser
                 self.detailViewController.loadData()
@@ -257,7 +261,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             detailViewController.showButtonCollapseDetails()
         }
         
-        containerHeightConstraint.constant = UIScreen.main.bounds.height * 0.55;
+        containerHeightConstraint.constant = UIScreen.main.bounds.height * 0.56;
         
         UIView.animate(withDuration: 0.6, animations: {
             self.view.layoutIfNeeded()
@@ -271,7 +275,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             UIView.animate(withDuration: 0.5, animations: {
                 self.view.layoutIfNeeded()
             })
-            setupMapCamera(coordinate: detailViewController.institution.coordinate, distance: 9000)
+            setupMapCamera(detailViewController.institution.coordinate, distance: 9000, pitch: 35)
         }
     }
     
@@ -310,6 +314,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 onFailure(error!)
             }
         }
+    }
+    
+    func valid(_ coordinate: CLLocationCoordinate2D) -> Bool {
+        var isValid = true
+        
+        if (coordinate.latitude == 0 || coordinate.longitude == 0) {
+            isValid = false
+        }
+        return isValid
     }
     
     //MARK: - Tooltip
@@ -381,8 +394,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let tappedInstitution = view.annotation as? Institution {
             expandDetails()
             
-            centerMapAtLocation(coordinate: tappedInstitution.coordinate, regionRadius: 200)
-            setupMapCamera(coordinate: tappedInstitution.coordinate, distance: 300)
+            centerMapAtLocation(tappedInstitution.coordinate, regionRadius: 200)
+            setupMapCamera(tappedInstitution.coordinate, distance: 300, pitch: 10)
             
             detailViewController.institutionUser = nil
             detailViewController.institution = tappedInstitution

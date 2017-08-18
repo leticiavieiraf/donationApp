@@ -29,8 +29,36 @@ class LoginInstitutionViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupNavigationBar()
+    }
+    
     func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    // MARK: - Setup NavigationBar methods
+    func setupNavigationBar() {
+        let barButtonItem = UIBarButtonItem(image: UIImage(named: "arrow-back"),
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(goBack))
+        
+        self.navigationController?.navigationItem.leftBarButtonItem = barButtonItem
+        self.navigationController?.navigationItem.rightBarButtonItem = nil
+    }
+    
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: Redirect methods
+    func redirectToInstitutionsStoryboard() {
+        let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+        let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = institutionsNavigationController
     }
     
     // MARK: - Actions
@@ -104,14 +132,6 @@ class LoginInstitutionViewController: UIViewController {
 //        }
 //        
 //         return ""
-    }
-    
-    // MARK: - Redirect methods
-    func redirectToInstitutionsStoryboard() {
-        let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
-        let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = institutionsNavigationController
     }
     
     // MARK: - Validation methods

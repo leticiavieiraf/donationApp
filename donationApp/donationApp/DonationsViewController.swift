@@ -199,7 +199,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "donationPostCell", for: indexPath) as! ItemsTableViewCell
         let donationItem = getDonationForRowAtIndexPath(indexPath)
         
-        cell.itemNameLabel.text = donationItem.name
+        cell.itemNameLabel.text = "Quero doar " + donationItem.name.lowercased() + "!"
         cell.userNameLabel.text = donationItem.addedByUser
         cell.userEmailLabel.text = donationItem.userEmail
         let publishDate = Helper.dateFrom(string: donationItem.publishDate, format: "dd/MM/yyyy HH:mm")
