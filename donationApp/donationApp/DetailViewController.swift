@@ -26,7 +26,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     // variables
     var institution = Institution()
     var institutionUser : InstitutionUser?
-    var items: [OrderItem] = []
+    var orders: [OrderItem] = []
     
     // firebase refs
     let refOrderItems = Database.database().reference(withPath: "order-items")
@@ -50,7 +50,8 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     // MARK: - Data Source methods
     func loadData() {
         if let institutionUser = self.institutionUser {
-            setupDetailBox(institutionUser, nil)
+            institution = Helper.institution(from: institutionUser)
+            setupDetailBox()
             loadOrdersFrom(institutionUser.uid)
         } else {
             getInstitutionUserAndLoadOrders()
@@ -64,6 +65,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         SVProgressHUD.show()
         
         refInstitutionsUsers.observe(.value, with: { snapshot in
+            SVProgressHUD.dismiss()
             
             for item in snapshot.children {
                 let user = InstitutionUser(snapshot: item as! DataSnapshot)
@@ -74,68 +76,58 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             }
             
             if let foundUser = self.institutionUser {
-                self.setupDetailBox(foundUser, nil)
+                self.institution = Helper.institution(from: foundUser)
+                self.setupDetailBox()
                 self.loadOrdersFrom(foundUser.uid)
             } else {
-                self.setupDetailBox(nil, self.institution)
-                self.loadOrdersFrom(nil)
-                SVProgressHUD.dismiss()
+                self.setupDetailBox()
+                self.orders = []
+                self.reloadTableView()
             }
         })
     }
     
-    func loadOrdersFrom(_ userUID: String?) {
+    func loadOrdersFrom(_ userUID: String) {
+    
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
         
-        if let userUID = userUID {
-            refOrderItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { (snapshot) in
-                
-                var userItems: [OrderItem] = []
-                
-                for item in snapshot.children.allObjects {
-                    let orderItem = OrderItem(snapshot: item as! DataSnapshot)
-                    userItems.append(orderItem)
-                }
-                
-                self.items = userItems
-                self.setupTableViewHeight()
-                
-                SVProgressHUD.dismiss()
-            })
-        } else {
-            self.items = []
-            self.setupTableViewHeight()
-        }
+        refOrderItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { (snapshot) in
+            SVProgressHUD.dismiss()
+            var userItems: [OrderItem] = []
+            
+            for item in snapshot.children.allObjects {
+                let orderItem = OrderItem(snapshot: item as! DataSnapshot)
+                userItems.append(orderItem)
+            }
+            
+            self.orders = userItems
+            self.reloadTableView()
+        })
     }
     
     // MARK: - Setup methods
-    func setupDetailBox(_ institutionUser: InstitutionUser?, _ institution: Institution?) {
-        
-        if let institution = institution {
-            self.nameLabel.text = institution.name != "" ? institution.name : "-"
-            self.emailLabel.text = institution.email != "" ? institution.email : "-"
-            self.addressLabel.text = Helper.institutionAddress(institution)
-            self.infoLabel.text = institution.group != "" ? institution.group : "-"
-            self.phoneLabel.text = institution.phone != "" ? institution.phone : "-"
-            
-        } else if let institution = institutionUser {
-                self.nameLabel.text = institution.name != "" ? institution.name : "-"
-                self.emailLabel.text = institution.email != "" ? institution.email : "-"
-                self.addressLabel.text = Helper.institutionUserAddress(institution)
-                self.infoLabel.text = institution.group != "" ? institution.group : "-"
-                self.phoneLabel.text = institution.phone != "" ? institution.phone : "-"
-            }
+    func setupDetailBox() {
+        self.nameLabel.text = institution.name != "" ? institution.name : "-"
+        self.emailLabel.text = institution.email != "" ? institution.email : "-"
+        self.addressLabel.text = Helper.institutionAddress(institution)
+        self.infoLabel.text = institution.group != "" ? institution.group : "-"
+        self.phoneLabel.text = institution.phone != "" ? institution.phone : "-"
+    }
+    
+    func reloadTableView() {
+        self.setupTableViewHeight()
+        self.tableView.reloadData()
     }
     
     func setupTableViewHeight() {
         var height : CGFloat = 55
         
-        if self.items.count > 0 {
-            height =  CGFloat(55 * self.items.count)
+        if self.orders.count > 0 {
+            height =  CGFloat(55 * self.orders.count)
         }
         self.tableViewHeight.constant = height
         self.view.layoutIfNeeded()
-        
-        self.tableView.reloadData()
     }
     
     func imageNameForItem(_ itemName: String) -> String {
@@ -160,19 +152,15 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         self.institutionUser = nil
         
         let mapViewController = parent as! MapViewController
-        mapViewController.containerHeightConstraint.constant = 0;
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            mapViewController.view.layoutIfNeeded()
-        })
+        mapViewController.collapseDetails()
     }
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRows = 1
         
-        if items.count > 0 {
-            numberOfRows = items.count
+        if orders.count > 0 {
+            numberOfRows = orders.count
         }
         
         return numberOfRows
@@ -182,8 +170,8 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailOrderCell", for: indexPath) as! MyItemsTableViewCell
     
-        if items.count > 0 {
-            let orderItem = items[indexPath.row]
+        if orders.count > 0 {
+            let orderItem = orders[indexPath.row]
             
             cell.imageViewIcon.image = UIImage(named: imageNameForItem(orderItem.name))
             cell.labelTitle?.text = orderItem.name

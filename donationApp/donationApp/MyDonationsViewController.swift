@@ -78,7 +78,6 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         SVProgressHUD.show()
         
         refDonationItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { snapshot in
-            
             SVProgressHUD.dismiss()
             
             var userItems: [DonationItem] = []

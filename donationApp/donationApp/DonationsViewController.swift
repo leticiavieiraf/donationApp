@@ -62,8 +62,8 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         
         refDonationItems.child("users-uid").observe(.value, with: { (snapshot) in
             var count = 0
-            var userIdKeys = [String]()
-            var donations : [DonationItem] = []
+            var userIdKeys: [String] = []
+            var donations: [DonationItem] = []
             
             for item in snapshot.children.allObjects {
                 let userId = item as! DataSnapshot

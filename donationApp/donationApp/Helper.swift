@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 typealias SelectedBlock = (Int) -> Void
 
@@ -74,9 +75,13 @@ class Helper: NSObject {
     
     // MARK: - String helpers
     static func institutionAddress(_ institution: Institution) -> String {
-        let address = institution.address + ", " + institution.district + ", " + institution.city + " - " + institution.state + ". Cep: " + institution.zipCode
+        let address = institution.address + ", " +
+                    institution.district + ", " +
+                    institution.city + " - " +
+                    institution.state + ". Cep: " +
+                    institution.zipCode
         
-        if address != "" && address != ", ,  - . Cep: "{
+        if (address != "" && address != ", ,  - . Cep: ") {
             return address
         } else {
             return "-"
@@ -84,12 +89,36 @@ class Helper: NSObject {
     }
     
     static func institutionUserAddress(_ institutionUser: InstitutionUser) -> String {
-        let address = institutionUser.address + ", " + institutionUser.district + ", " + institutionUser.city + " - " + institutionUser.state + ". Cep: " + institutionUser.zipCode
+        let address = institutionUser.address + ", " +
+                    institutionUser.district + ", " +
+                    institutionUser.city + " - " +
+                    institutionUser.state + ". Cep: " +
+                    institutionUser.zipCode
         
-        if address != "" && address != ", ,  - . Cep: "{
+        if (address != "" && address != ", ,  - . Cep: ") {
             return address
         } else {
             return "-"
         }
+    }
+    
+    // MARK: Institution helper
+    static func institution(from institutionUser: InstitutionUser) -> Institution {
+        let institution = Institution(name: institutionUser.name,
+                                      info: institutionUser.info,
+                                      email: institutionUser.email,
+                                      contact: institutionUser.contact,
+                                      phone: institutionUser.phone,
+                                      bank: institutionUser.bank,
+                                      agency: institutionUser.agency,
+                                      accountNumber: institutionUser.accountNumber,
+                                      address: institutionUser.address,
+                                      district: institutionUser.district,
+                                      city: institutionUser.city,
+                                      state: institutionUser.state,
+                                      zipCode: institutionUser.zipCode,
+                                      group: institutionUser.group,
+                                      coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+        return institution
     }
 }

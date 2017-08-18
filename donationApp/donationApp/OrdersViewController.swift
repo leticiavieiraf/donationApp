@@ -65,8 +65,8 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         
         refOrderItems.child("users-uid").observe(.value, with: { (snapshot) in
             var count = 0
-            var userIdKeys = [String]()
-            var orders : [OrderItem] = []
+            var userIdKeys: [String] = []
+            var orders: [OrderItem] = []
             
             for item in snapshot.children.allObjects {
                 let userId = item as! DataSnapshot
