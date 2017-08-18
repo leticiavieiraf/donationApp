@@ -91,15 +91,13 @@ class RegisterInstitutionViewController: UIViewController {
                 self.insertRegisteredUser(institution, uid:user.uid)
             }
             
-            let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (okAction) in
-                if (error == nil) {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            })
-            
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: title,
+                           message: msg,
+                           handler: { () in
+                              if (error == nil) {
+                                self.dismiss(animated: true, completion: nil)
+                              }
+                           })
         }
     }
     

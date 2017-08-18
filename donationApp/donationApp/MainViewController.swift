@@ -21,17 +21,29 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (Auth.auth().currentUser != nil && AccessToken.current != nil) {
+        setupFacebookDelegate()
+        verifyIfHasUserLoggedIn()
+     }
+    
+    // MARK: - Check Login methods
+    func verifyIfHasUserLoggedIn() {
+        let donatorUserLoggedIn = Helper.donatorUserLoggedIn()
+        let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
+        
+        if donatorUserLoggedIn {
             redirectToDonatorsStoryboard()
-        } else if Auth.auth().currentUser != nil {
+        } else if institutionUserLoggedIn {
             redirectToInstitutionsStoryboard()
         }
-        
+    }
+    
+    // MARK: - Setup Delegate
+    func setupFacebookDelegate() {
         loginBtn.delegate = self
         loginBtn.readPermissions = ["public_profile", "email"]
         loginBtn.setTitle("Entrar com Facebook", for: .normal)
         loginBtn.layer.cornerRadius = 4.0
-     }
+    }
     
     // MARK: - Login methods
     

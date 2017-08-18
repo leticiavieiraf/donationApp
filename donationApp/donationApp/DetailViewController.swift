@@ -22,6 +22,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     
     // constraints
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var viewCollapseDetailsHeightConstraint: NSLayoutConstraint!
     
     // variables
     var institution = Institution()
@@ -35,19 +36,9 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if Auth.auth().currentUser == nil {
-            print("Facebook: User IS NOT logged in!")
-            print("Firebase: User IS NOT logged in!")
-            
-            // Redireciona para tela de login
-            let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = loginNav
-        }
     }
     
-    // MARK: - Data Source methods
+    // MARK: - Setup Data Source methods
     func loadData() {
         if let institutionUser = self.institutionUser {
             institution = Helper.institution(from: institutionUser)
@@ -55,6 +46,31 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             loadOrdersFrom(institutionUser.uid)
         } else {
             getInstitutionUserAndLoadOrders()
+        }
+    }
+    
+    func setupDetailBox() {
+        self.nameLabel.text = institution.name != "" ? institution.name : "-"
+        self.emailLabel.text = institution.email != "" ? institution.email : "-"
+        self.addressLabel.text = Helper.institutionAddress(institution)
+        self.infoLabel.text = institution.group != "" ? institution.group : "-"
+        self.phoneLabel.text = institution.phone != "" ? institution.phone : "-"
+    }
+
+    func imageNameForItem(_ itemName: String) -> String {
+        switch itemName {
+        case Constants.kSweaters:
+            return "agasalhos"
+        case Constants.kFood:
+            return "alimentos"
+        case Constants.kShoes:
+            return "calcados"
+        case Constants.kHygieneProducts:
+            return "higiene"
+        case Constants.kClothes:
+            return "roupas"
+        default:
+            return "empty"
         }
     }
 
@@ -106,20 +122,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         })
     }
     
-    // MARK: - Setup methods
-    func setupDetailBox() {
-        self.nameLabel.text = institution.name != "" ? institution.name : "-"
-        self.emailLabel.text = institution.email != "" ? institution.email : "-"
-        self.addressLabel.text = Helper.institutionAddress(institution)
-        self.infoLabel.text = institution.group != "" ? institution.group : "-"
-        self.phoneLabel.text = institution.phone != "" ? institution.phone : "-"
-    }
-    
-    func reloadTableView() {
-        self.setupTableViewHeight()
-        self.tableView.reloadData()
-    }
-    
+    // MARK: - Setup Layout methods
     func setupTableViewHeight() {
         var height : CGFloat = 55
         
@@ -130,21 +133,19 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         self.view.layoutIfNeeded()
     }
     
-    func imageNameForItem(_ itemName: String) -> String {
-        switch itemName {
-        case Constants.kSweaters:
-            return "agasalhos"
-        case Constants.kFood:
-            return "alimentos"
-        case Constants.kShoes:
-            return "calcados"
-        case Constants.kHygieneProducts:
-            return "higiene"
-        case Constants.kClothes:
-            return "roupas"
-        default:
-            return "empty"
-        }
+    func reloadTableView() {
+        self.setupTableViewHeight()
+        self.tableView.reloadData()
+    }
+    
+    func showButtonCollapseDetails() {
+        viewCollapseDetailsHeightConstraint.constant = 43.0
+        self.view.layoutIfNeeded()
+    }
+    
+    func hideButtonCollapseDetails() {
+        viewCollapseDetailsHeightConstraint.constant = 0
+        self.view.layoutIfNeeded()
     }
     
     // MARK: - Action methods

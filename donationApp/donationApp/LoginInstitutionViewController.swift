@@ -35,7 +35,6 @@ class LoginInstitutionViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func logIn(_ sender: Any) {
-        
         if isEmptyFields() {
             return
         }

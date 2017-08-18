@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import FirebaseAuth
+import FacebookCore
 
 typealias SelectedBlock = (Int) -> Void
 
@@ -100,6 +102,33 @@ class Helper: NSObject {
         } else {
             return "-"
         }
+    }
+    
+    // MARK: Redirect helpers
+    static func redirectToLogin() {
+        let loginNavigationController = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = loginNavigationController
+    }
+    
+    // MARK: Check Login helpers
+    static func institutionUserLoggedIn() -> Bool {
+        var isLogged = true
+        
+        if Auth.auth().currentUser == nil {
+            isLogged = false
+        }
+        return isLogged
+    }
+    
+    static func donatorUserLoggedIn() -> Bool {
+        var isLogged = true
+        
+        if AccessToken.current == nil || Auth.auth().currentUser == nil {
+            isLogged = false
+        }
+        return isLogged
     }
     
     // MARK: Institution helper

@@ -39,22 +39,34 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupTabBarController()
         
-        self.tabBarController?.title = "Pedidos"
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        if userLoggedIn() {
+            loadAllOrders()
+        } else {
+            Helper.redirectToLogin()
+        }
+    }
+    
+    // MARK: - Check Login method
+    func userLoggedIn() -> Bool {
+        let donatorUserLoggedIn = Helper.donatorUserLoggedIn()
+        var isLogged = true
         
-        if AccessToken.current == nil || Auth.auth().currentUser == nil {
+        if !donatorUserLoggedIn {
+            isLogged = false
             print("Facebook: User IS NOT logged in!")
             print("Firebase: User IS NOT logged in!")
-            
-            // Redireciona para tela de login
-            let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = loginNav
-            
-        } else {
-            loadAllOrders()
         }
+        return isLogged
+    }
+    
+    // MARK: - Setup TabBarController methods
+    func setupTabBarController() {
+        self.tabBarController?.title = "Pedidos"
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        self.tabBarController?.navigationItem.leftBarButtonItem = nil
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Firebase methods
@@ -108,12 +120,14 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     
     // MARK: - Redirect methods
     func redirectToMapViewController(_ institutionUser: InstitutionUser) {
-        if let mapViewController = self.storyboard?.instantiateViewController(withIdentifier: "MapViewControllerID") as? MapViewController {
-            mapViewController.selectedInstitutionUser = institutionUser
-            
-            if let navigation = self.navigationController {
-                navigation.pushViewController(mapViewController, animated: true)
-            }
+        self.performSegue(withIdentifier: "showMap", sender: institutionUser)
+    }
+    
+    // MARK: Navigation methods
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMap" {
+            let mapViewController = segue.destination as! MapViewController
+            mapViewController.selectedInstitutionUser = sender as? InstitutionUser
         }
     }
     
@@ -155,7 +169,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         clothes.removeAll()
     }
     
-    // MARK: Setup TableView methods
+    // MARK: - Setup TableView methods
     func getNumberOfRowsForSection(_ sectionTitle: String) -> Int {
         switch sectionTitle {
             case Constants.kSweaters:

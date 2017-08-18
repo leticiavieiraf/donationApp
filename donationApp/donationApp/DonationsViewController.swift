@@ -36,22 +36,33 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupTabBarController()
         
+        if userLoggedIn() {
+            loadDonations()
+        } else {
+            Helper.redirectToLogin()
+        }
+    }
+    
+    // MARK: - Check Login methods
+    func userLoggedIn() -> Bool {
+        let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
+        var isLogged = true
+        
+        if !institutionUserLoggedIn {
+            isLogged = false
+            print("Firebase: User IS NOT logged in!")
+        }
+        return isLogged
+    }
+    
+    // MARK: - Setup TabBarController methods
+    func setupTabBarController() {
         self.tabBarController?.title = "Doações"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
-    
-        if Auth.auth().currentUser == nil {
-            print("Facebook: User IS NOT logged in!")
-            print("Firebase: User IS NOT logged in!")
-            
-            // Redireciona para tela de login
-            let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = loginNav
-            
-        } else {
-            loadDonations()
-        }
+        self.tabBarController?.navigationItem.leftBarButtonItem = nil
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Firebase methods
@@ -90,7 +101,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         })
     }
     
-    // MARK: - Setup Data Source methods
+    // MARK: - Setup DataSource methods
     func setupDataSource() {
         resetDataSource()
         

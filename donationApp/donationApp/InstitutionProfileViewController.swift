@@ -21,70 +21,96 @@ class InstitutionProfileViewController: UIViewController {
     
     var institutionUser : InstitutionUser!
     let refInstitutionUsers = Database.database().reference(withPath: "institution-users")
-
     
     // MARK: - Lyfe Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if Auth.auth().currentUser != nil {
-            
-            let userUID = Auth.auth().currentUser!.uid
-
-            SVProgressHUD.setDefaultStyle(.dark)
-            SVProgressHUD.show()
-            
-            refInstitutionUsers.child(userUID.lowercased()).observeSingleEvent(of: .value, with: { (snapshot) in
-                self.institutionUser = InstitutionUser(snapshot: snapshot)
-                
-                self.nameLabel.text = self.institutionUser.name != "" ? self.institutionUser.name : "-"
-                self.emailLabel.text = self.institutionUser.email != "" ? self.institutionUser.email : "-"
-                self.addressLabel.text = Helper.institutionUserAddress(self.institutionUser)
-                self.infoLabel.text = self.institutionUser.group != "" ? self.institutionUser.group : "-"
-                self.phoneLabel.text = self.institutionUser.phone != "" ? self.institutionUser.phone : "-"
-                
-                SVProgressHUD.dismiss()
-            })
+        if userLoggedIn() {
+            displayUserInformation()
+        } else {
+            Helper.redirectToLogin()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.tabBarController?.title = "Perfil"
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        setupTabBarController()
     }
     
-    // MARK: - Firebase method
-    @IBAction func logout(_ sender: Any) {
+    // MARK: - Check Login methods
+    func userLoggedIn() -> Bool {
+        let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
+        var isLogged = true
         
-        if Auth.auth().currentUser != nil {
+        if !institutionUserLoggedIn {
+            isLogged = false
+            print("Firebase: User IS NOT logged in!")
+        }
+        return isLogged
+    }
+    
+    // MARK: - Setup TabBarController methods
+    func setupTabBarController() {
+        self.tabBarController?.title = "Perfil"
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        self.tabBarController?.navigationItem.leftBarButtonItem = nil
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    // MARK: - Firebase methods
+    func getInstitutionUser(onSuccess: @escaping (_ user: InstitutionUser) -> ()) {
+        
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        let userUID = Auth.auth().currentUser!.uid
+        refInstitutionUsers.child(userUID.lowercased()).observeSingleEvent(of: .value, with: { (snapshot) in
+            SVProgressHUD.dismiss()
             
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
-                
-                // Redireciona para tela de login
-                let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.window?.rootViewController = loginNav
-                
-            } catch let signOutError as NSError {
-                
-                // Show alert
-                let errorMsg = "Erro ao realizar logout: " + signOutError.localizedDescription
-                let alert = UIAlertController(title: "Erro",
-                                              message: errorMsg,
-                                              preferredStyle: .alert)
-                
-                let okAction = UIAlertAction(title: "Ok",
-                                             style: .default)
-                
-                alert.addAction(okAction)
-                self.present(alert, animated: true, completion: nil)
-            }
+            let user = InstitutionUser(snapshot: snapshot)
+            onSuccess(user)
+        })
+    }
+    
+    // MARK: - Setup DataSource methods
+    func displayUserInformation() {
+        
+        getInstitutionUser { (user) in
+            self.institutionUser = user
+            
+            self.nameLabel.text = self.institutionUser.name != "" ? self.institutionUser.name : "-"
+            self.emailLabel.text = self.institutionUser.email != "" ? self.institutionUser.email : "-"
+            self.addressLabel.text = Helper.institutionUserAddress(self.institutionUser)
+            self.infoLabel.text = self.institutionUser.group != "" ? self.institutionUser.group : "-"
+            self.phoneLabel.text = self.institutionUser.phone != "" ? self.institutionUser.phone : "-"
         }
     }
-
-
+    
+    // MARK: - Logout methods
+    func logoutFirebase() {
+        let firebaseAuth = Auth.auth()
+        do {
+            SVProgressHUD.setDefaultStyle(.dark)
+            SVProgressHUD.show()
+            
+            try firebaseAuth.signOut()
+            
+            SVProgressHUD.dismiss()
+            Helper.redirectToLogin()
+            
+        } catch let signOutError as NSError {
+            let errorMsg = "Erro ao realizar logout: " + signOutError.localizedDescription
+            self.showAlert(title: "Erro", message: errorMsg, handler: nil)
+        }
+    }
+    
+    // MARK: Action
+    @IBAction func logout(_ sender: Any) {
+        let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
+        
+        if institutionUserLoggedIn {
+            logoutFirebase()
+        }
+    }
 }

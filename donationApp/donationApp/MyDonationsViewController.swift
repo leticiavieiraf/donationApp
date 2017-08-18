@@ -28,27 +28,39 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupTabBarController()
         
-        self.tabBarController?.title = "Minhas Doações"
-        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
-        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
-        
-        if AccessToken.current == nil || Auth.auth().currentUser == nil {
-            print("Facebook: User IS NOT logged in!")
-            print("Firebase: User IS NOT logged in!")
-            
-            // Redireciona para tela de login
-            let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = loginNav
-            
-        } else {
+        if userLoggedIn() {
             if let currentUser = self.donatorUser {
                 loadDonationsFrom(currentUser.uid)
             } else {
                 getUserAndLoadDonations()
             }
+        } else {
+            Helper.redirectToLogin()
         }
+    }
+    
+    // MARK: - Check Login method
+    func userLoggedIn() -> Bool {
+        let donatorUserLoggedIn = Helper.donatorUserLoggedIn()
+        var isLogged = true
+        
+        if !donatorUserLoggedIn {
+            isLogged = false
+            print("Facebook: User IS NOT logged in!")
+            print("Firebase: User IS NOT logged in!")
+        }
+        return isLogged
+    }
+    
+    // MARK: - Setup TabBarController methods
+    func setupTabBarController() {
+        self.tabBarController?.title = "Minhas Doações"
+        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
+        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
+        self.tabBarController?.navigationItem.leftBarButtonItem = nil
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Firebase methods

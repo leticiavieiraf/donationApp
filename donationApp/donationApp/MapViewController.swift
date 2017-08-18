@@ -38,34 +38,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if Auth.auth().currentUser == nil {
-            print("Facebook: User IS NOT logged in!")
-            print("Firebase: User IS NOT logged in!")
-            
-            // Redireciona para tela de login
-            let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = loginNav
-            
+        setupDelegates()
+
+        if let selectedInstitutionUser = self.selectedInstitutionUser {
+            isShowingOrderDetail = true
+            showDetailsFor(selectedInstitutionUser)
         } else {
-            setupDelegates()
-            addTapGestureRecognizerToMapView();
-            
-            if let selectedInstitutionUser = self.selectedInstitutionUser {
-                isShowingOrderDetail = true
-                showDetailsFor(selectedInstitutionUser)
-            } else {
-                isShowingOrderDetail = false
-                getInstitutionsAndLoadMap()
-            }
+            isShowingOrderDetail = false
+            getInstitutionsAndLoadMap()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupTabBarController()
         
-        self.tabBarController?.title = "Instituições"
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        if !userLoggedIn() {
+            Helper.redirectToLogin()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,12 +63,49 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         checkLocationAuthorizationStatus()
     }
     
-    // MARK: - Navigation
+    // MARK: - Check Login methods
+    func userLoggedIn() -> Bool {
+        let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
+        var isLogged = true
+        
+        if !institutionUserLoggedIn {
+            isLogged = false
+            print("Firebase: User IS NOT logged in!")
+        }
+        return isLogged
+    }
+    
+    // MARK: - Setup TabBarController methods
+    func setupTabBarController() {
+        var barButtonItem: UIBarButtonItem? = UIBarButtonItem()
+        
+        if isShowingOrderDetail {
+            barButtonItem = UIBarButtonItem(image: UIImage(named: "arrow-back"),
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(goBackToOrders))
+            self.tabBarController?.tabBar.isHidden = true
+        } else {
+            barButtonItem = nil
+            self.tabBarController?.tabBar.isHidden = false
+        }
+        self.tabBarController?.title = "Instituições"
+        self.tabBarController?.navigationItem.leftBarButtonItem = barButtonItem
+        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+    }
+    
+    // MARK: - Navigation methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "expandDetails" {
             let detailVC = segue.destination as! DetailViewController
             self.detailViewController = detailVC
+        }
+    }
+    
+    func goBackToOrders() {
+        if let orderViewController = self.navigationController?.viewControllers.first {
+            self.navigationController?.setViewControllers([orderViewController], animated: true)
         }
     }
     
@@ -123,7 +150,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
     }
     
-    // MARK: Map Setup methods
+    // MARK: - Map Setup methods
     func drawPinsForCity(_ city: String?, _ institutions: [Institution]) {
         var count = 0
         var errorCount = 0
@@ -201,6 +228,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                 
                 self.mapView.addAnnotation(institution)
+                self.mapView.selectAnnotation(self.mapView.annotations.first!, animated: true)
                 
                 self.expandDetails()
                 
@@ -209,23 +237,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 self.detailViewController.institutionUser = institutionUser
                 self.detailViewController.loadData()
-                
             }, onFailure: {error in
                 print(error.localizedDescription)
                 SVProgressHUD.dismiss()
                 
-                self.showAlert(title: "Ops..", message: "Não foi possível localizar essa instituição no mapa, tente novamente.", handler: { () in
-                    
-                    if let orderViewController = self.navigationController?.viewControllers.first {
-                        self.navigationController?.setViewControllers([orderViewController], animated: true)
-                    }
-                    //self.tabBarController?.selectedIndex = 0
-                })
+                self.showAlert(title: "Ops..",
+                               message: "Não foi possível localizar essa instituição no mapa, tente novamente.",
+                               handler: { () in
+                                    self.goBackToOrders()
+                               })
             })
         }
     }
     
     func expandDetails() {
+        if isShowingOrderDetail {
+            detailViewController.hideButtonCollapseDetails()
+        } else {
+            detailViewController.showButtonCollapseDetails()
+        }
+        
         containerHeightConstraint.constant = UIScreen.main.bounds.height * 0.55;
         
         UIView.animate(withDuration: 0.6, animations: {
@@ -234,17 +265,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func collapseDetails() {
-        containerHeightConstraint.constant = 0;
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.view.layoutIfNeeded()
-        })
-        
-        if isShowingOrderDetail {
-            isShowingOrderDetail = false
-            getInstitutionsAndLoadMap()
-        } else {
-            self.setupMapCamera(coordinate: detailViewController.institution.coordinate, distance: 9000)
+        if !isShowingOrderDetail {
+            containerHeightConstraint.constant = 0;
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.layoutIfNeeded()
+            })
+            setupMapCamera(coordinate: detailViewController.institution.coordinate, distance: 9000)
         }
     }
     
@@ -285,19 +312,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // MARK: - MapGestureRecognizer
-    func addTapGestureRecognizerToMapView() {
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTapOnMapView))
-        doubleTapGesture.delegate = self
-        doubleTapGesture.numberOfTapsRequired = 2
-        self.mapView.addGestureRecognizer(doubleTapGesture)
-    }
-    
-    func handleDoubleTapOnMapView() {
-        collapseDetails()
-    }
-    
-    //MARK: Tooltip methods
+    //MARK: - Tooltip
     func presentToolTip() {
         let xPosition: CGFloat = self.mapView.frame.size.width/2
         let yPosition: CGFloat = self.mapView.frame.size.height/2
@@ -333,9 +348,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // MARK: - MKMapViewDelegate
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        //if let annotation = view.annotation as? Institution {
-            //print("Your annotation title: \(annotation.title)");
-        //}
+//        if let annotation = view.annotation as? Institution {
+//            print("Your annotation title: \(annotation.title)");
+//        }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {

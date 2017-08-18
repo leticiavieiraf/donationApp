@@ -27,30 +27,38 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupTabBarController()
         
-        self.tabBarController?.title = "Meus Pedidos"
-        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewOrderPopUp))
-        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
-        
-        
-        if Auth.auth().currentUser == nil {
-            print("Facebook: User IS NOT logged in!")
-            print("Firebase: User IS NOT logged in!")
-            
-            // Redireciona para tela de login
-            let loginNav = UIStoryboard(name: "Main", bundle:nil).instantiateInitialViewController()
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = loginNav
-            
-        } else {
-           
+        if userLoggedIn() {
             if let currentUser = self.institutionUser {
                 loadOrdersFrom(currentUser.uid)
             } else {
                 getUserAndLoadOrders()
             }
+        } else {
+            Helper.redirectToLogin()
         }
+    }
+    
+    // MARK: - Check Login methods
+    func userLoggedIn() -> Bool {
+        let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
+        var isLogged = true
         
+        if !institutionUserLoggedIn {
+            isLogged = false
+            print("Firebase: User IS NOT logged in!")
+        }
+        return isLogged
+    }
+    
+    // MARK: - Setup TabBarController methods
+    func setupTabBarController() {
+        self.tabBarController?.title = "Meus Pedidos"
+        let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewOrderPopUp))
+        self.tabBarController?.navigationItem.rightBarButtonItem = addButton
+        self.tabBarController?.navigationItem.leftBarButtonItem = nil
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Firebase methods
