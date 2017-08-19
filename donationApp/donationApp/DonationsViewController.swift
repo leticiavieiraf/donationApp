@@ -16,6 +16,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     
     // outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var emptyView: UIView!
     
     // variables
     var allDonations: [DonationItem] = []
@@ -39,7 +40,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         setupTabBarController()
         
         if userLoggedIn() {
-            loadDonations()
+            loadAllDonations()
         } else {
             Helper.redirectToLogin()
         }
@@ -66,39 +67,80 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     }
     
     // MARK: - Firebase methods
-    func loadDonations() {
+    func loadAllDonations() {
         
+        getUserIdKeys { (idKeys) in
+            if idKeys.count > 0 {
+                var allDonations: [DonationItem] = []
+                
+                for i in 1...idKeys.count {
+                    self.getUserDonations(userIdKey: idKeys[i - 1], onSuccess: { (userDonations) in
+                        allDonations.append(contentsOf: userDonations)
+                        
+                        if i == idKeys.count {
+                            self.allDonations = allDonations
+                            self.setupLayout()
+                        }
+                    })
+                }
+            } else {
+                self.allDonations = []
+                self.setupLayout()
+            }
+        }
+    }
+    
+    func getUserIdKeys(onSuccess: @escaping (_ idKeys: [String]) -> ()) {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
         refDonationItems.child("users-uid").observe(.value, with: { (snapshot) in
-            var count = 0
-            var userIdKeys: [String] = []
-            var donations: [DonationItem] = []
+            SVProgressHUD.dismiss()
+            var idKeys: [String] = []
             
             for item in snapshot.children.allObjects {
                 let userId = item as! DataSnapshot
-                userIdKeys.append(String(userId.key))
+                idKeys.append(String(userId.key))
             }
-            
-            for userIdKey in userIdKeys {
-                self.refDonationItems.child("users-uid").child(userIdKey.lowercased()).observe(.value, with: { (snapshot) in
-                    
-                    for item in snapshot.children.allObjects {
-                        let donationItem = DonationItem(snapshot: item as! DataSnapshot)
-                        donations.append(donationItem)
-                    }
-                    
-                    count += 1
-                    if count == userIdKeys.count {
-                        self.allDonations = donations
-                        self.setupDataSource()
-                        
-                        SVProgressHUD.dismiss()
-                    }
-                })
-            }
+            onSuccess(idKeys)
         })
+    }
+    
+    func getUserDonations(userIdKey: String, onSuccess: @escaping (_ userDonations: [DonationItem]) -> ()) {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        self.refDonationItems.child("users-uid").child(userIdKey.lowercased()).observe(.value, with: { (snapshot) in
+            SVProgressHUD.dismiss()
+            var userDonations: [DonationItem] = []
+            
+            for item in snapshot.children.allObjects {
+                let donationItem = DonationItem(snapshot: item as! DataSnapshot)
+                userDonations.append(donationItem)
+            }
+            onSuccess(userDonations)
+        })
+    }
+    
+    // MARK: - Setup Layout methods
+    func setupLayout() {
+        if allDonations.count == 0 {
+            presentEmptyView()
+        } else {
+            hideEmptyView()
+            setupDataSource()
+        }
+    }
+    
+    func presentEmptyView() {
+        emptyView.frame = view.frame
+        view.addSubview(emptyView)
+        view.layoutIfNeeded()
+    }
+    
+    func hideEmptyView() {
+        emptyView.removeFromSuperview()
+        view.layoutIfNeeded()
     }
     
     // MARK: - Setup DataSource methods

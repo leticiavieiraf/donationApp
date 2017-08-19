@@ -14,6 +14,7 @@ import SVProgressHUD
 class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelectionDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var emptyView: UIView!
     
     var items : [OrderItem] = []
     var institutionUser : InstitutionUser!
@@ -64,38 +65,46 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     // MARK: - Firebase methods
     func getUserAndLoadOrders() {
         
-        SVProgressHUD.setDefaultStyle(.dark)
-        SVProgressHUD.show()
-        
-        let userUID = Auth.auth().currentUser?.uid
-        
-        refInstitutionUsers.child(userUID!.lowercased()).observeSingleEvent(of: .value, with: { (snapshot) in
-            SVProgressHUD.dismiss()
-            
-            self.institutionUser = InstitutionUser(snapshot: snapshot)
+        getUser { (user) in
+            self.institutionUser = user
             self.loadOrdersFrom(self.institutionUser.uid)
-        })
-        
+        }
     }
     
     func loadOrdersFrom(_ userUID: String) {
         
+        getUserOrders(userUID) { (userOrders) in
+            self.items = userOrders
+            self.setupLayout()
+        }
+    }
+    
+    func getUser(onSuccess: @escaping (_ user: InstitutionUser) -> ()) {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
-        refOrderItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { (snapshot) in
-            
+        let userUID = Auth.auth().currentUser?.uid
+        refInstitutionUsers.child(userUID!.lowercased()).observeSingleEvent(of: .value, with: { (snapshot) in
             SVProgressHUD.dismiss()
-            
-            var userItems: [OrderItem] = []
+
+            let user = InstitutionUser(snapshot: snapshot)
+            onSuccess(user)
+        })
+    }
+    
+    func getUserOrders(_ userIdKey: String, onSuccess: @escaping (_ userOrders: [OrderItem]) -> ()) {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        refOrderItems.child("users-uid").child(userIdKey.lowercased()).observe(.value, with: { (snapshot) in
+            SVProgressHUD.dismiss()
+            var userOrders: [OrderItem] = []
             
             for item in snapshot.children.allObjects {
                 let orderItem = OrderItem(snapshot: item as! DataSnapshot)
-                userItems.append(orderItem)
+                userOrders.append(orderItem)
             }
-            
-            self.items = userItems
-            self.tableView.reloadData()
+            onSuccess(userOrders)
         })
     }
     
@@ -116,6 +125,27 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         
         let orderItemRef = refOrderItems.child("users-uid").child(orderItem.userUid.lowercased()).childByAutoId()
         orderItemRef.setValue(orderItem.toAnyObject())
+    }
+    
+    // MARK: - Setup Layout methods
+    func setupLayout() {
+        if items.count == 0 {
+            presentEmptyView()
+        } else {
+            hideEmptyView()
+            tableView.reloadData()
+        }
+    }
+    
+    func presentEmptyView() {
+        emptyView.frame = view.frame
+        view.addSubview(emptyView)
+        view.layoutIfNeeded()
+    }
+    
+    func hideEmptyView() {
+        emptyView.removeFromSuperview()
+        view.layoutIfNeeded()
     }
     
     // MARK: - Popup New Order

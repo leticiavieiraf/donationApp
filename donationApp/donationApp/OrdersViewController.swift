@@ -17,6 +17,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     
     //outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var emptyView: UIView!
     
     // variables
     var allOrders: [OrderItem] = []
@@ -69,39 +70,72 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: - Navigation methods
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMap" {
+            let mapViewController = segue.destination as! MapViewController
+            mapViewController.selectedInstitutionUser = sender as? InstitutionUser
+        }
+    }
+    
+    // MARK: Redirect methods
+    func redirectToMapViewController(_ institutionUser: InstitutionUser) {
+        self.performSegue(withIdentifier: "showMap", sender: institutionUser)
+    }
+    
     // MARK: - Firebase methods
     func loadAllOrders() {
         
+        getUserIdKeys { (idKeys) in
+            if idKeys.count > 0 {
+                var allOrders: [OrderItem] = []
+                
+                for i in 1...idKeys.count {
+                    self.getUserOrders(userIdKey: idKeys[i - 1], onSuccess: { (userOrders) in
+                        allOrders.append(contentsOf: userOrders)
+                        
+                        if i == idKeys.count {
+                            self.allOrders = allOrders
+                            self.setupLayout()
+                        }
+                    })
+                }
+            } else {
+                self.allOrders = []
+                self.setupLayout()
+            }
+        }
+    }
+    
+    func getUserIdKeys(onSuccess: @escaping (_ idKeys: [String]) -> ()) {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
         refOrderItems.child("users-uid").observe(.value, with: { (snapshot) in
-            var count = 0
-            var userIdKeys: [String] = []
-            var orders: [OrderItem] = []
+            SVProgressHUD.dismiss()
+            var idKeys: [String] = []
             
             for item in snapshot.children.allObjects {
                 let userId = item as! DataSnapshot
-                userIdKeys.append(String(userId.key))
+                idKeys.append(String(userId.key))
             }
+            onSuccess(idKeys)
+        })
+    }
+    
+    func getUserOrders(userIdKey: String, onSuccess: @escaping (_ userOrders: [OrderItem]) -> ()) {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        self.refOrderItems.child("users-uid").child(userIdKey.lowercased()).observe(.value, with: { (snapshot) in
+            SVProgressHUD.dismiss()
+            var userOrders: [OrderItem] = []
             
-            for userIdKey in userIdKeys {
-                self.refOrderItems.child("users-uid").child(userIdKey.lowercased()).observe(.value, with: { (snapshot) in
-                    
-                    for item in snapshot.children.allObjects {
-                        let orderItem = OrderItem(snapshot: item as! DataSnapshot)
-                        orders.append(orderItem)
-                    }
-                    
-                    count += 1
-                    if (count == userIdKeys.count) {
-                        self.allOrders = orders
-                        self.setupDataSource()
-                        
-                        SVProgressHUD.dismiss()
-                    }
-                })
+            for item in snapshot.children.allObjects {
+                let orderItem = OrderItem(snapshot: item as! DataSnapshot)
+                userOrders.append(orderItem)
             }
+            onSuccess(userOrders)
         })
     }
     
@@ -118,17 +152,25 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
-    // MARK: - Redirect methods
-    func redirectToMapViewController(_ institutionUser: InstitutionUser) {
-        self.performSegue(withIdentifier: "showMap", sender: institutionUser)
+    // MARK: - Setup Layout methods
+    func setupLayout() {
+        if allOrders.count == 0 {
+            presentEmptyView()
+        } else {
+            hideEmptyView()
+            setupDataSource()
+        }
     }
     
-    // MARK: Navigation methods
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMap" {
-            let mapViewController = segue.destination as! MapViewController
-            mapViewController.selectedInstitutionUser = sender as? InstitutionUser
-        }
+    func presentEmptyView() {
+        emptyView.frame = view.frame
+        view.addSubview(emptyView)
+        view.layoutIfNeeded()
+    }
+    
+    func hideEmptyView() {
+        emptyView.removeFromSuperview()
+        view.layoutIfNeeded()
     }
     
     // MARK: - Setup Data Source methods

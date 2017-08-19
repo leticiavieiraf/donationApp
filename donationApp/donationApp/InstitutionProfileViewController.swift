@@ -60,7 +60,6 @@ class InstitutionProfileViewController: UIViewController {
     
     // MARK: - Firebase methods
     func getInstitutionUser(onSuccess: @escaping (_ user: InstitutionUser) -> ()) {
-        
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
