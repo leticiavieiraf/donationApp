@@ -40,17 +40,19 @@ class LoginInstitutionViewController: UIViewController {
     
     // MARK: - Setup NavigationBar methods
     func setupNavigationBar() {
-        let barButtonItem = UIBarButtonItem(image: UIImage(named: "arrow-back"),
-                                            style: .plain,
-                                            target: self,
-                                            action: #selector(goBack))
+        let arrowImage = UIImage(named: "arrow-back")
+        let button = UIButton(type: .system)
+        button.setImage(arrowImage, for: .normal)
+        button.addTarget(self, action: #selector(goBack), for: UIControlEvents.touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: (arrowImage?.size.width)!, height: (arrowImage?.size.height)!)
+        let barButton = UIBarButtonItem(customView: button)
         
-        self.navigationController?.navigationItem.leftBarButtonItem = barButtonItem
-        self.navigationController?.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.leftBarButtonItem = barButton
+        self.navigationItem.rightBarButtonItem = nil
     }
     
     func goBack() {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: Redirect methods

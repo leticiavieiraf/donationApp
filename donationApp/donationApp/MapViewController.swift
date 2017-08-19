@@ -23,6 +23,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // variables
     var institutions: [Institution] = []
+    var locationManager = CLLocationManager()
     
     // detail container variables
     var detailViewController: DetailViewController = DetailViewController()
@@ -31,29 +32,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // firebase variable
     let ref = Database.database().reference(withPath: "features")
-
-    var locationManager = CLLocationManager()
     
     // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupDelegates()
-
-        if let selectedInstitutionUser = self.selectedInstitutionUser {
-            isShowingOrderDetail = true
-            showDetailsFor(selectedInstitutionUser)
-        } else {
-            isShowingOrderDetail = false
-            getInstitutionsAndLoadMap()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupTabBarController()
         
-        if !userLoggedIn() {
+        if userLoggedIn() {
+            if let selectedInstitutionUser = self.selectedInstitutionUser {
+                isShowingOrderDetail = true
+                showDetailsFor(selectedInstitutionUser)
+            } else {
+                isShowingOrderDetail = false
+                if (institutions.count > 0) {
+                    loadMap()
+                } else {
+                    getInstitutionsAndLoadMap()
+                }
+            }
+        } else {
             Helper.redirectToLogin()
         }
     }
@@ -104,36 +106,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func goBackToOrders() {
-        if let orderViewController = self.navigationController?.viewControllers.first {
-            self.navigationController?.setViewControllers([orderViewController], animated: true)
-        }
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Firebase methods
     func getInstitutionsAndLoadMap() {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
+        SVProgressHUD.dismiss(withDelay: 4.0)
         
-        SVProgressHUD.dismiss(withDelay: 5.0)
-        
-        self.getInstitutions(onSuccess: { (institutions) in
-          
-            if let userLocation = self.mapView.userLocation.location {
-                
-                self.getUserLocationCity(userLocation, onSuccess: { userLocationCity in
-                    self.drawPinsForCity(userLocationCity, institutions)
-                    
-                }, onFailure: {error in
-                    self.drawPinsForCity("Belo Horizonte", institutions)
-                })
-                
-            } else {
-                self.drawPinsForCity("Belo Horizonte", institutions)
-            }
+        self.getInstitutions(onSuccess: { () in
+            self.loadMap()
         })
     }
     
-    func getInstitutions(onSuccess: @escaping (_ institutions: [Institution]) -> ()) {
+    func getInstitutions(onSuccess: @escaping () -> ()) {
         ref.observe(.value, with: { snapshot in
             self.institutions.removeAll()
             
@@ -143,7 +130,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
             
             if self.institutions.count > 0 {
-                onSuccess(self.institutions)
+                onSuccess()
             } else {
                 self.showAlert(title: "Erro", message: "Não foi possível buscar as Instituições com sucesso.", handler: nil)
             }
@@ -151,6 +138,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     // MARK: - Map Setup methods
+    func loadMap() {
+        if let userLocation = self.mapView.userLocation.location {
+            self.getUserLocationCity(userLocation, onSuccess: { userLocationCity in
+                self.drawPinsForCity(userLocationCity, self.institutions)
+            
+            }, onFailure: {error in
+                self.drawPinsForCity("Belo Horizonte", self.institutions)
+            })
+        } else {
+            self.drawPinsForCity("Belo Horizonte", self.institutions)
+        }
+    }
+    
     func drawPinsForCity(_ city: String?, _ institutions: [Institution]) {
         var count = 0
         var errorCount = 0
@@ -349,7 +349,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func removeTooltip() {
-        let when = DispatchTime.now() + 8
+        let when = DispatchTime.now() + 4
         DispatchQueue.main.asyncAfter(deadline: when, execute: {
             UIView.animate(withDuration: 0.5, animations: {
                 self.tooltip.alpha = 0

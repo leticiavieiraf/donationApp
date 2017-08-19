@@ -172,38 +172,52 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     // MARK: - Setup TableView methods
     func getNumberOfRowsForSection(_ sectionTitle: String) -> Int {
         switch sectionTitle {
-            case Constants.kSweaters:
-                return sweaters.count
-            case Constants.kFood:
-                return food.count
-            case Constants.kShoes:
-                return shoes.count
-            case Constants.kHygieneProducts:
-                return hygieneProducts.count
-            case Constants.kClothes:
-                return clothes.count
-            default:
-                return allOrders.count
+        case Constants.kSweaters:
+        return sweaters.count
+        
+        case Constants.kFood:
+        return food.count
+        
+        case Constants.kShoes:
+        return shoes.count
+        
+        case Constants.kHygieneProducts:
+        return hygieneProducts.count
+        
+        case Constants.kClothes:
+        return clothes.count
+        
+        default:
+        return allOrders.count
         }
     }
     
-    func getOrderForRowAtIndexPath(_ indexPath: IndexPath) -> OrderItem {
-        let sectionTitle = sections[indexPath.section]
-        var orderItem: OrderItem
+    func getOrderForRowAtIndexPath(_ indexPath: IndexPath) -> OrderItem? {
+        var orderItem: OrderItem? = nil
         
-        switch sectionTitle {
+        let sectionTitle = sections[indexPath.section]
+        let rowsForSection = getNumberOfRowsForSection(sectionTitle)
+        
+        if rowsForSection > 0 {
+            switch sectionTitle {
             case Constants.kSweaters:
-                orderItem = sweaters[indexPath.row]
+            orderItem = sweaters[indexPath.row]
+            
             case Constants.kFood:
-                orderItem = food[indexPath.row]
+            orderItem = food[indexPath.row]
+            
             case Constants.kShoes:
-                orderItem = shoes[indexPath.row]
+            orderItem = shoes[indexPath.row]
+                
             case Constants.kHygieneProducts:
-                orderItem = hygieneProducts[indexPath.row]
+            orderItem = hygieneProducts[indexPath.row]
+            
             case Constants.kClothes:
-                orderItem = clothes[indexPath.row]
+            orderItem = clothes[indexPath.row]
+            
             default:
-                orderItem = allOrders[indexPath.row]
+            orderItem = allOrders[indexPath.row]
+            }
         }
         return orderItem
     }
@@ -219,29 +233,37 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionTitle = sections[section]
-        let numberOfRows = getNumberOfRowsForSection(sectionTitle)
+        let rowsForSection = getNumberOfRowsForSection(sectionTitle)
         
-        return numberOfRows
+        return rowsForSection > 0 ? rowsForSection : 1
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "orderPostCell", for: indexPath) as! ItemsTableViewCell
-        let orderItem = getOrderForRowAtIndexPath(indexPath)
         
-        cell.profileImageView.image = UIImage(named: "institution-big")
-        cell.itemNameLabel.text = "Precisamos de " + orderItem.name.lowercased() + "!"
-        cell.userNameLabel.text = orderItem.addedByUser
-        cell.userEmailLabel.text = orderItem.userEmail
-        let publishDate = Helper.dateFrom(string: orderItem.publishDate, format: "dd/MM/yyyy HH:mm")
-        cell.publishDateLabel.text = Helper.periodBetween(date1: publishDate, date2: Date())
+        if let orderItem = getOrderForRowAtIndexPath(indexPath) {
+            cell.profileImageView.image = UIImage(named: "institution-big")
+            cell.itemNameLabel.text = "Precisamos de " + orderItem.name.lowercased() + "!"
+            cell.userNameLabel.text = orderItem.addedByUser
+            cell.userEmailLabel.text = orderItem.userEmail
+            let publishDate = Helper.dateFrom(string: orderItem.publishDate, format: "dd/MM/yyyy HH:mm")
+            cell.publishDateLabel.text = Helper.periodBetween(date1: publishDate, date2: Date())
+        } else {
+            cell.itemNameLabel.text = "Não existem pedidos deste item."
+            cell.userNameLabel.text = "-"
+            cell.userEmailLabel.text = "-"
+            cell.publishDateLabel.text  = "Agora"
+            cell.profileImageView.image = UIImage(named: "empty")
+        }
         
         return cell
     }
     
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let orderItem = getOrderForRowAtIndexPath(indexPath);
-        getInstitutionUserForSelectedOrderAndShowDetails(orderItem)
+        if let orderItem = getOrderForRowAtIndexPath(indexPath) {
+            getInstitutionUserForSelectedOrderAndShowDetails(orderItem)
+        }
     }
     
     override func didReceiveMemoryWarning() {

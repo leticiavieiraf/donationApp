@@ -22,7 +22,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         super.viewDidLoad()
         
         setupFacebookDelegate()
-        verifyIfHasUserLoggedIn()
+        verifyIfUserIsLoggedIn()
      }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,7 +37,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
     }
     
     // MARK: - Check Login methods
-    func verifyIfHasUserLoggedIn() {
+    func verifyIfUserIsLoggedIn() {
         let donatorUserLoggedIn = Helper.donatorUserLoggedIn()
         let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
         

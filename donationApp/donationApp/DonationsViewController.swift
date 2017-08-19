@@ -143,37 +143,51 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     func getNumberOfRowsForSection(_ sectionTitle: String) -> Int {
         switch sectionTitle {
         case Constants.kSweaters:
-            return sweaters.count
+        return sweaters.count
+            
         case Constants.kFood:
-            return food.count
+        return food.count
+        
         case Constants.kShoes:
-            return shoes.count
+        return shoes.count
+        
         case Constants.kHygieneProducts:
-            return hygieneProducts.count
+        return hygieneProducts.count
+        
         case Constants.kClothes:
-            return clothes.count
+        return clothes.count
+        
         default:
-            return allDonations.count
+        return allDonations.count
         }
     }
     
-    func getDonationForRowAtIndexPath(_ indexPath: IndexPath) -> DonationItem {
-        let sectionTitle = sections[indexPath.section]
-        var donationItem: DonationItem
+    func getDonationForRowAtIndexPath(_ indexPath: IndexPath) -> DonationItem? {
+        var donationItem: DonationItem? = nil
         
-        switch sectionTitle {
-        case Constants.kSweaters:
+        let sectionTitle = sections[indexPath.section]
+        let rowsForSection = getNumberOfRowsForSection(sectionTitle)
+        
+        if rowsForSection > 0 {
+            switch sectionTitle {
+            case Constants.kSweaters:
             donationItem = sweaters[indexPath.row]
-        case Constants.kFood:
+                
+            case Constants.kFood:
             donationItem = food[indexPath.row]
-        case Constants.kShoes:
+                
+            case Constants.kShoes:
             donationItem = shoes[indexPath.row]
-        case Constants.kHygieneProducts:
+                
+            case Constants.kHygieneProducts:
             donationItem = hygieneProducts[indexPath.row]
-        case Constants.kClothes:
+                
+            case Constants.kClothes:
             donationItem = clothes[indexPath.row]
-        default:
+                
+            default:
             donationItem = allDonations[indexPath.row]
+            }
         }
         return donationItem
     }
@@ -189,23 +203,30 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionTitle = sections[section]
-        let numberOfRows = getNumberOfRowsForSection(sectionTitle)
+        let rowsForSection = getNumberOfRowsForSection(sectionTitle)
         
-        return numberOfRows
+        return rowsForSection > 0 ? rowsForSection : 1
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "donationPostCell", for: indexPath) as! ItemsTableViewCell
-        let donationItem = getDonationForRowAtIndexPath(indexPath)
         
-        cell.itemNameLabel.text = "Quero doar " + donationItem.name.lowercased() + "!"
-        cell.userNameLabel.text = donationItem.addedByUser
-        cell.userEmailLabel.text = donationItem.userEmail
-        let publishDate = Helper.dateFrom(string: donationItem.publishDate, format: "dd/MM/yyyy HH:mm")
-        cell.publishDateLabel.text = Helper.periodBetween(date1: publishDate, date2: Date())
-        cell.loadImageWith(donationItem.userPhotoUrl)
-        
+        if let donationItem = getDonationForRowAtIndexPath(indexPath) {
+            cell.itemNameLabel.text = "Quero doar " + donationItem.name.lowercased() + "!"
+            cell.userNameLabel.text = donationItem.addedByUser
+            cell.userEmailLabel.text = donationItem.userEmail
+            let publishDate = Helper.dateFrom(string: donationItem.publishDate, format: "dd/MM/yyyy HH:mm")
+            cell.publishDateLabel.text = Helper.periodBetween(date1: publishDate, date2: Date())
+            cell.loadImageWith(donationItem.userPhotoUrl)
+        } else {
+            cell.itemNameLabel.text = "Não existem doadores deste item."
+            cell.userNameLabel.text = "-"
+            cell.userEmailLabel.text = "-"
+            cell.publishDateLabel.text  = "Agora"
+            cell.profileImageView.image = UIImage(named: "empty")
+        }
+    
         return cell
     }
     
