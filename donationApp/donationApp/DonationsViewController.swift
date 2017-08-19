@@ -37,7 +37,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTabBarController()
+        setupTabBar()
         
         if userLoggedIn() {
             loadAllDonations()
@@ -59,7 +59,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     }
     
     // MARK: - Setup TabBarController methods
-    func setupTabBarController() {
+    func setupTabBar() {
         self.tabBarController?.title = "Doações"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
         self.tabBarController?.navigationItem.leftBarButtonItem = nil
@@ -262,10 +262,10 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
             cell.publishDateLabel.text = Helper.periodBetween(date1: publishDate, date2: Date())
             cell.loadImageWith(donationItem.userPhotoUrl)
         } else {
-            cell.itemNameLabel.text = "Não existem doadores deste item."
+            cell.itemNameLabel.text = "Não há doações."
             cell.userNameLabel.text = "-"
             cell.userEmailLabel.text = "-"
-            cell.publishDateLabel.text  = "Agora"
+            cell.publishDateLabel.text  = "-"
             cell.profileImageView.image = UIImage(named: "empty")
         }
     

@@ -84,8 +84,8 @@ class RegisterInstitutionViewController: UIViewController {
             //Success
             if let user = user {
                 print("Firebase: Register successfull")
-                title = "Sucesso"
-                msg = "Cadastro realizado com sucesso. "
+                title = ""
+                msg = "Cadastro realizado com sucesso!"
                 
                 //self.saveSalt()
                 self.insertRegisteredUser(institution, uid:user.uid)

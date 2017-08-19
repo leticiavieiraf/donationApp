@@ -41,7 +41,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTabBarController()
         
         if userLoggedIn() {
             if let selectedInstitutionUser = self.selectedInstitutionUser {
@@ -55,6 +54,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     getInstitutionsAndLoadMap()
                 }
             }
+            setupTabBar()
         } else {
             Helper.redirectToLogin()
         }
@@ -78,7 +78,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     // MARK: - Setup TabBarController methods
-    func setupTabBarController() {
+    func setupTabBar() {
         var barButtonItem: UIBarButtonItem? = UIBarButtonItem()
         
         if isShowingOrderDetail {
@@ -113,7 +113,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func getInstitutionsAndLoadMap() {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
-        SVProgressHUD.dismiss(withDelay: 4.0)
+        SVProgressHUD.dismiss(withDelay: 5.0)
         
         self.getInstitutions(onSuccess: { () in
             self.loadMap()
@@ -132,7 +132,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if self.institutions.count > 0 {
                 onSuccess()
             } else {
-                self.showAlert(title: "Erro", message: "Não foi possível buscar as Instituições com sucesso.", handler: nil)
+                self.showAlert(title: "Ops...", message: "Não foi possível buscar as Instituições com sucesso.", handler: nil)
             }
         })
     }

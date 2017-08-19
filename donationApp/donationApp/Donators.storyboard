@@ -175,12 +175,31 @@
                         <barButtonItem key="backBarButtonItem" id="jHC-mP-zvL"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="emptyView" destination="Zv8-ij-LT0" id="nzu-KH-Np0"/>
                         <outlet property="tableView" destination="XCf-vY-QbK" id="zT4-Ti-PsB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Cf-mF-uUb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Zv8-ij-LT0" userLabel="emptyView">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Não há doações cadastradas no momento. Cadastre agora no botão acima!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-4c-M0x">
+                            <rect key="frame" x="15" y="35" width="210" height="58"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="BPT-4c-M0x" firstAttribute="leading" secondItem="Zv8-ij-LT0" secondAttribute="leading" constant="15" id="44Y-fk-bGb"/>
+                        <constraint firstItem="BPT-4c-M0x" firstAttribute="centerY" secondItem="Zv8-ij-LT0" secondAttribute="centerY" id="Odd-gF-KQt"/>
+                        <constraint firstAttribute="trailing" secondItem="BPT-4c-M0x" secondAttribute="trailing" constant="15" id="pZv-id-jSt"/>
+                    </constraints>
+                </view>
             </objects>
-            <point key="canvasLocation" x="-628" y="1707"/>
+            <point key="canvasLocation" x="-628" y="1706"/>
         </scene>
         <!--_Old Detalhes da Instituição-->
         <scene sceneID="1xW-f8-MK1">
@@ -461,7 +480,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-mR-apv" userLabel="ContainerView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="502.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="odT-Pt-9PZ" userLabel="ProfilePic">
                                                 <rect key="frame" x="110" y="80" width="100" height="100"/>
@@ -516,9 +535,10 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBs-Xf-Jbc" customClass="DAButton" customModule="donationApp" customModuleProvider="target">
-                                                <rect key="frame" x="85" y="324.5" width="150" height="30"/>
+                                                <rect key="frame" x="85" y="324.5" width="150" height="28"/>
                                                 <color key="backgroundColor" red="0.2274509804" green="0.69411764710000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" constant="28" id="3Il-Vo-5lA"/>
                                                     <constraint firstAttribute="width" constant="150" id="RwA-SV-PFo"/>
                                                 </constraints>
                                                 <state key="normal" title="Logout">
@@ -540,7 +560,7 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoverde" translatesAutoresizingMaskIntoConstraints="NO" id="60k-od-HzJ">
-                                                <rect key="frame" x="125" y="394.5" width="70" height="80"/>
+                                                <rect key="frame" x="125" y="392.5" width="70" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="rrG-01-0AL"/>
                                                     <constraint firstAttribute="width" constant="70" id="xOQ-O5-qNJ"/>
@@ -733,7 +753,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Não há publicacões no momento." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zw-bI-Kac" userLabel="Label">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Não há pedidos no momento." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zw-bI-Kac" userLabel="Label">
                             <rect key="frame" x="15" y="44" width="210" height="41"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -748,7 +768,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-2454" y="1709"/>
+            <point key="canvasLocation" x="-2454" y="1706"/>
         </scene>
         <!--Map-->
         <scene sceneID="b8z-pQ-yOh">
@@ -834,7 +854,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-1539" y="1708"/>
+            <point key="canvasLocation" x="-1539" y="1706"/>
         </scene>
         <!--Container Detalhes da Instituição-->
         <scene sceneID="mc7-0e-UVO">

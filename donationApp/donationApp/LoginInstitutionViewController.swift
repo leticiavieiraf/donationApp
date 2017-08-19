@@ -31,7 +31,7 @@ class LoginInstitutionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupNavigationBar()
+        setupNavBar()
     }
     
     func dismissKeyboard() {
@@ -39,7 +39,7 @@ class LoginInstitutionViewController: UIViewController {
     }
     
     // MARK: - Setup NavigationBar methods
-    func setupNavigationBar() {
+    func setupNavBar() {
         let arrowImage = UIImage(named: "arrow-back")
         let button = UIButton(type: .system)
         button.setImage(arrowImage, for: .normal)
@@ -91,7 +91,7 @@ class LoginInstitutionViewController: UIViewController {
             //Error
             if let error = error {
                 print("Firebase: Login Error!")
-                self.showAlert(title: "Erro", message: "Erro ao realizar login: " + error.localizedDescription, handler: nil)
+                self.showAlert(title: "Ops...", message: "Erro ao realizar login: " + error.localizedDescription, handler: nil)
                 return
             }
             

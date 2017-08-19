@@ -28,7 +28,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTabBarController()
+        setupTabBar()
         
         if userLoggedIn() {
             if let currentUser = self.institutionUser {
@@ -54,7 +54,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     }
     
     // MARK: - Setup TabBarController methods
-    func setupTabBarController() {
+    func setupTabBar() {
         self.tabBarController?.title = "Meus Pedidos"
         let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewOrderPopUp))
         self.tabBarController?.navigationItem.rightBarButtonItem = addButton

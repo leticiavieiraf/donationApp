@@ -20,18 +20,17 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
     // MARK: - Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupFacebookDelegate()
-        verifyIfUserIsLoggedIn()
      }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupNavigationBar()
+        setupNavBar()
+        verifyIfUserIsLoggedIn()
     }
     
     // MARK: - Setup NavigationBar methods
-    func setupNavigationBar() {
+    func setupNavBar() {
         self.navigationController?.navigationItem.leftBarButtonItem = nil
         self.navigationController?.navigationItem.rightBarButtonItem = nil
     }
@@ -58,20 +57,18 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
     
     // MARK: - Login methods
     
-    // Facebook
+    // MARK: Facebook
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        
         //Error
         if(error != nil) {
             print("Facebook: Login Error!")
-            self.showAlert(title: "Erro", message: "Erro ao realizar login no Facebook: " + error.localizedDescription, handler: nil)
+            self.showAlert(title: "Ops...", message: "Erro ao realizar login no Facebook: " + error.localizedDescription, handler: nil)
             return
         }
         
         //Canceled
         if (result.isCancelled) {
             print("Facebook: User cancelled login.")
-            self.showAlert(title: "Ops...", message: "O login foi cancelado.", handler: nil)
             return
         }
         
@@ -82,21 +79,19 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         }
     }
     
-    // Login no Firebase com o Token do Facebook
+    // MARK: Firebase (Token do Facebook)
     func logInWithFirebase() {
-        
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         Auth.auth().signIn(with: credential) { (user, error) in
-            
             SVProgressHUD.dismiss()
             
             //Error
             if let error = error {
                 print("Firebase: Login Error!")
-                self.showAlert(title: "Erro", message: "Erro ao realizar login no Firebase: " + error.localizedDescription, handler: nil)
+                self.showAlert(title: "Ops...", message: "Erro ao realizar login no Firebase: " + error.localizedDescription, handler: nil)
                 return
             }
             

@@ -40,7 +40,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTabBarController()
+        setupTabBar()
         
         if userLoggedIn() {
             loadAllOrders()
@@ -63,7 +63,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // MARK: - Setup TabBarController methods
-    func setupTabBarController() {
+    func setupTabBar() {
         self.tabBarController?.title = "Pedidos"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
         self.tabBarController?.navigationItem.leftBarButtonItem = nil
@@ -291,10 +291,10 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
             let publishDate = Helper.dateFrom(string: orderItem.publishDate, format: "dd/MM/yyyy HH:mm")
             cell.publishDateLabel.text = Helper.periodBetween(date1: publishDate, date2: Date())
         } else {
-            cell.itemNameLabel.text = "Não existem pedidos deste item."
+            cell.itemNameLabel.text = "Não há pedidos."
             cell.userNameLabel.text = "-"
             cell.userEmailLabel.text = "-"
-            cell.publishDateLabel.text  = "Agora"
+            cell.publishDateLabel.text  = "-"
             cell.profileImageView.image = UIImage(named: "empty")
         }
         

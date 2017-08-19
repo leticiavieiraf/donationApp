@@ -31,7 +31,7 @@ class DonatorProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTabBarController()
+        setupTabBar()
     }
     
     // MARK: - Check Login method
@@ -48,7 +48,7 @@ class DonatorProfileViewController: UIViewController {
     }
     
     // MARK: - Setup TabBarController methods
-    func setupTabBarController() {
+    func setupTabBar() {
         self.tabBarController?.title = "Perfil"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
         self.tabBarController?.navigationItem.leftBarButtonItem = nil
@@ -87,7 +87,7 @@ class DonatorProfileViewController: UIViewController {
             
         } catch let signOutError as NSError {
             let errorMsg = "Erro ao realizar logout no Firebase: " + signOutError.localizedDescription
-            self.showAlert(title: "Erro", message: errorMsg, handler: nil)
+            self.showAlert(title: "Ops...", message: errorMsg, handler: nil)
         }
     }
     

@@ -16,6 +16,7 @@ import SVProgressHUD
 class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSelectionDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var emptyView: UIView!
     
     var items : [DonationItem] = []
     var donatorUser : DonatorUser!
@@ -28,7 +29,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTabBarController()
+        setupTabBar()
         
         if userLoggedIn() {
             if let currentUser = self.donatorUser {
@@ -55,7 +56,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     }
     
     // MARK: - Setup TabBarController methods
-    func setupTabBarController() {
+    func setupTabBar() {
         self.tabBarController?.title = "Minhas Doações"
         let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
         self.tabBarController?.navigationItem.rightBarButtonItem = addButton
@@ -66,18 +67,8 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     // MARK: - Firebase methods
     func getUserAndLoadDonations() {
         
-        SVProgressHUD.setDefaultStyle(.dark)
-        SVProgressHUD.show()
-        
-        Auth.auth().addStateDidChangeListener { auth, user in
-            
-            SVProgressHUD.dismiss()
-            
-            guard let user = user else {
-                return
-            }
-            
-            if AccessToken.current != nil {
+        getUser { (user) in
+            if self.userLoggedIn() {
                 self.donatorUser = DonatorUser(authData: user)
                 self.loadDonationsFrom(self.donatorUser.uid)
             }
@@ -86,21 +77,40 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     
     func loadDonationsFrom(_ userUID: String) {
        
+        getUserDonations(userUID) { (userDonations) in
+            self.items = userDonations
+            self.setupLayout()
+        }
+    }
+    
+    func getUser(onSuccess: @escaping (_ user: User) -> ()) {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
-        refDonationItems.child("users-uid").child(userUID.lowercased()).observe(.value, with: { snapshot in
+        Auth.auth().addStateDidChangeListener { auth, user in
             SVProgressHUD.dismiss()
             
-            var userItems: [DonationItem] = []
+            if let user = user {
+                onSuccess(user)
+            } else {
+                return
+            }
+        }
+    }
+    
+    func getUserDonations(_ userIdKey: String, onSuccess: @escaping (_ userDonations: [DonationItem]) -> ()) {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show()
+        
+        refDonationItems.child("users-uid").child(userIdKey.lowercased()).observe(.value, with: { snapshot in
+            SVProgressHUD.dismiss()
+            var userDonations: [DonationItem] = []
             
             for item in snapshot.children.allObjects {
                 let donationItem = DonationItem(snapshot: item as! DataSnapshot)
-                userItems.append(donationItem)
+                userDonations.append(donationItem)
             }
-            
-            self.items = userItems
-            self.tableView.reloadData()
+            onSuccess(userDonations)
         })
     }
     
@@ -121,6 +131,27 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         
         let donationItemRef = refDonationItems.child("users-uid").child(donationItem.userUid.lowercased()).childByAutoId()
         donationItemRef.setValue(donationItem.toAnyObject())
+    }
+    
+    // MARK: - Setup Layout methods
+    func setupLayout() {
+        if items.count == 0 {
+            presentEmptyView()
+        } else {
+            hideEmptyView()
+            tableView.reloadData()
+        }
+    }
+    
+    func presentEmptyView() {
+        emptyView.frame = view.frame
+        view.addSubview(emptyView)
+        view.layoutIfNeeded()
+    }
+    
+    func hideEmptyView() {
+        emptyView.removeFromSuperview()
+        view.layoutIfNeeded()
     }
     
     // MARK: - Popup New Donation

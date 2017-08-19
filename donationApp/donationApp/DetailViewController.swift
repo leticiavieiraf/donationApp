@@ -182,7 +182,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
             return cell
         } else {
             cell.imageViewIcon.image = UIImage(named: imageNameForItem(""))
-            cell.labelTitle?.text = "Não existem pedidos cadastrados."
+            cell.labelTitle?.text = "Não há pedidos cadastrados."
             cell.labelSubtitle?.text = ""
             
             return cell
