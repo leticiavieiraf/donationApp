@@ -279,8 +279,8 @@
 		A4FE74BC1F4540F7005F28C7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				F32654291F3271D400885F14 /* Constants.swift */,
 				A4FE74BD1F454188005F28C7 /* Helper.swift */,
+				F32654291F3271D400885F14 /* Constants.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
