@@ -51,6 +51,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
     func setupFacebookDelegate() {
         loginBtn.delegate = self
         loginBtn.readPermissions = ["public_profile", "email"]
+        loginBtn.loginBehavior = .web
         loginBtn.layer.cornerRadius = 4.0
     }
     
