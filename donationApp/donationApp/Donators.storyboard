@@ -17,6 +17,8 @@
                     <tabBarItem key="tabBarItem" title="Pedidos" image="orders-donations" id="GQB-ig-Yx7">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="200"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="tE5-EC-6tZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -27,13 +29,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQ0-D5-jWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2453" y="825"/>
+            <point key="canvasLocation" x="-2158" y="525"/>
         </scene>
         <!--Navigation Map-->
         <scene sceneID="aeI-rQ-2fk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="0EM-II-cF7" userLabel="Navigation Map" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Instituições" image="pin" id="bpw-f1-DVc"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="200"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ySg-2s-Fyg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -44,7 +48,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ev7-ch-NON" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1538" y="825"/>
+            <point key="canvasLocation" x="-1433" y="525"/>
         </scene>
         <!--_Old Instituições-->
         <scene sceneID="IL2-gO-UgF">
@@ -90,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SiJ-Fc-REj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4569" y="2731"/>
+            <point key="canvasLocation" x="-5529" y="2853"/>
         </scene>
         <!--Minhas doações-->
         <scene sceneID="Crd-Rw-Lzz">
@@ -101,11 +105,11 @@
                         <viewControllerLayoutGuide type="bottom" id="eMp-PD-5BV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EPb-Z4-Lbk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="62" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XCf-vY-QbK">
-                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="431"/>
                                 <color key="backgroundColor" red="0.95176770740000005" green="0.95176770740000005" blue="0.95176770740000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.95176770740000005" green="0.95176770740000005" blue="0.95176770740000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -174,6 +178,8 @@
                     <navigationItem key="navigationItem" title="Minhas doações" id="HpI-f8-01K">
                         <barButtonItem key="backBarButtonItem" id="jHC-mP-zvL"/>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="500"/>
                     <connections>
                         <outlet property="emptyView" destination="Zv8-ij-LT0" id="nzu-KH-Np0"/>
                         <outlet property="tableView" destination="XCf-vY-QbK" id="zT4-Ti-PsB"/>
@@ -185,7 +191,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Não há doações cadastradas no momento. Cadastre agora no botão acima!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-4c-M0x">
-                            <rect key="frame" x="15" y="35" width="210" height="58"/>
+                            <rect key="frame" x="15" y="35.5" width="210" height="57.5"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -199,7 +205,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-628" y="1706"/>
+            <point key="canvasLocation" x="-699" y="1148"/>
         </scene>
         <!--_Old Detalhes da Instituição-->
         <scene sceneID="1xW-f8-MK1">
@@ -360,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bk-tc-szv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3893" y="2732"/>
+            <point key="canvasLocation" x="-4841" y="2852"/>
         </scene>
         <!--Nova Doação-->
         <scene sceneID="zcJ-8S-KzT">
@@ -371,11 +377,11 @@
                         <viewControllerLayoutGuide type="bottom" id="3pw-Wb-yEA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tp1-qC-AmE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ma2-Rc-c5x">
-                                <rect key="frame" x="5" y="177.5" width="310" height="213"/>
+                                <rect key="frame" x="5" y="18.5" width="310" height="213"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Nova doação" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJu-sT-zbb">
                                         <rect key="frame" x="103.5" y="15" width="103.5" height="20.5"/>
@@ -456,13 +462,15 @@
                             <constraint firstItem="ma2-Rc-c5x" firstAttribute="centerX" secondItem="tp1-qC-AmE" secondAttribute="centerX" id="rSw-ss-LcN"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="250"/>
                     <connections>
                         <outlet property="picker" destination="AJ4-v5-iTE" id="MSf-5m-Yjz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PN4-4S-YIq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-628" y="2485"/>
+            <point key="canvasLocation" x="-699" y="1649"/>
         </scene>
         <!--Perfil-->
         <scene sceneID="cFu-4J-dIP">
@@ -473,11 +481,11 @@
                         <viewControllerLayoutGuide type="bottom" id="KQf-40-aol"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mig-rI-H1G">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AqQ-LO-PPO">
-                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="431"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-mR-apv" userLabel="ContainerView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="502.5"/>
@@ -601,6 +609,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Perfil" image="profile" id="T5Z-Lq-s5G"/>
                     <navigationItem key="navigationItem" title="Perfil" id="x9y-qj-N9s"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="500"/>
                     <connections>
                         <outlet property="emailLabel" destination="slh-sc-jba" id="TOa-XA-KJt"/>
                         <outlet property="nameLabel" destination="Mmv-FV-XNP" id="hX2-qm-w9b"/>
@@ -609,13 +619,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eS-IG-GDE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="278" y="1706"/>
+            <point key="canvasLocation" x="32" y="1146"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="g59-yI-kb2">
             <objects>
                 <tabBarController storyboardIdentifier="tabBarControllerID" automaticallyAdjustsScrollViewInsets="NO" id="VKG-Yr-WrN" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="450"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Alt-Pi-h1Y">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -630,7 +642,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uub-ku-gY3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1095" y="-48.591549295774648"/>
+            <point key="canvasLocation" x="-1058" y="-37"/>
         </scene>
         <!--Pedidos-->
         <scene sceneID="Dum-kw-1Zc">
@@ -641,11 +653,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ra5-Og-pfL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="edv-Gx-6Dj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="88" sectionHeaderHeight="36" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KB2-ts-ynV">
-                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="431"/>
                                 <color key="backgroundColor" red="0.95176770740000005" green="0.95176770740000005" blue="0.95176770740000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.95176770740000005" green="0.95176770740000005" blue="0.95176770740000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -742,6 +754,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Pedidos" image="orders-donations" id="1Bc-h9-oji"/>
                     <navigationItem key="navigationItem" title="Pedidos" id="i12-PU-AKP"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="500"/>
                     <connections>
                         <outlet property="emptyView" destination="R9R-MV-Vyc" id="BH9-Tc-A91"/>
                         <outlet property="tableView" destination="KB2-ts-ynV" id="3m0-fu-vP4"/>
@@ -768,7 +782,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-2454" y="1706"/>
+            <point key="canvasLocation" x="-2158" y="1147"/>
         </scene>
         <!--Map-->
         <scene sceneID="b8z-pQ-yOh">
@@ -779,17 +793,17 @@
                         <viewControllerLayoutGuide type="bottom" id="fyV-Ie-1RT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MtI-Rz-WZX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdi-F1-5og">
-                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="431"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AWk-o4-ny9">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="499"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                                     </mapView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agq-k6-EHH">
-                                        <rect key="frame" x="0.0" y="499" width="320" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="431" width="320" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="9R3-yO-a5z"/>
                                         </constraints>
@@ -820,6 +834,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Instituições" image="pin" id="M6d-ad-iHM"/>
                     <navigationItem key="navigationItem" title="Instituições" id="zhN-lS-vdn"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="500"/>
                     <connections>
                         <outlet property="containerHeightConstraint" destination="9R3-yO-a5z" id="pnE-Hd-vIa"/>
                         <outlet property="mapView" destination="AWk-o4-ny9" id="SQ6-fK-6Yg"/>
@@ -854,7 +870,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-1539" y="1706"/>
+            <point key="canvasLocation" x="-1434" y="1148"/>
         </scene>
         <!--Container Detalhes da Instituição-->
         <scene sceneID="mc7-0e-UVO">
@@ -1140,7 +1156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wXS-B7-5N0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1539" y="2449"/>
+            <point key="canvasLocation" x="-1434" y="1782"/>
         </scene>
         <!--Navigation Minhas Doações-->
         <scene sceneID="qXK-EP-k6Y">
@@ -1148,6 +1164,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eyZ-w3-98a" userLabel="Navigation Minhas Doações" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Minhas doações" image="add" id="5HW-lX-eKt"/>
                     <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="200"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="C7r-eL-KKn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1159,7 +1177,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wxp-TY-M5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-628" y="825"/>
+            <point key="canvasLocation" x="-699" y="525"/>
         </scene>
         <!--Navigation Perfil-->
         <scene sceneID="OFU-A4-mCZ">
@@ -1167,6 +1185,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="rwb-ms-jxW" userLabel="Navigation Perfil" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Perfil" image="profile" id="JOr-u5-UgU"/>
                     <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="200"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Jy5-ED-QmO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1178,7 +1198,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NiS-di-aZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="278" y="825"/>
+            <point key="canvasLocation" x="32" y="525"/>
         </scene>
     </scenes>
     <resources>
