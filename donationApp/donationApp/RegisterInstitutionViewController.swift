@@ -41,12 +41,10 @@ class RegisterInstitutionViewController: UIViewController {
         if isEmptyFields() {
             return
         }
-        
         if !isMatchPasswords() {
             self.showAlert(title: "Atenção!", message: "As senhas digitadas não correspondem.", handler: nil)
             return
         }
-           
         if isShortPassword() {
             self.showAlert(title: "Atenção!", message: "A senha deve ter no mínimo 6 caracteres.", handler: nil)
             return
@@ -64,14 +62,14 @@ class RegisterInstitutionViewController: UIViewController {
     func register(_ institution : Institution) {
         
         // Criptografia segura e ideal Hash SHA-256 (PBKDF2)
-        salt = Constants.kGeneral //randomString()
+        salt = Constants.kGeneral
         let saltAndPassword = salt + self.passwordField.text!
         password_sha256 = sha256SaltHash(saltAndPassword, salt: salt)
         
         Auth.auth().createUser(withEmail: self.emailField.text!, password: password_sha256) { (user, error) in
             
-            var title : String = ""
-            var msg : String = ""
+            var title = ""
+            var msg = ""
             
             //Error
             if let error = error {
@@ -87,13 +85,11 @@ class RegisterInstitutionViewController: UIViewController {
                 title = ""
                 msg = "Cadastro realizado com sucesso!"
                 
-                //self.saveSalt()
+                // Insere usuário no banco de dados do Firebase
                 self.insertRegisteredUser(institution, uid:user.uid)
             }
             
-            self.showAlert(title: title,
-                           message: msg,
-                           handler: { () in
+            self.showAlert(title: title, message: msg, handler: { () in
                               if (error == nil) {
                                 self.dismiss(animated: true, completion: nil)
                               }
@@ -101,7 +97,9 @@ class RegisterInstitutionViewController: UIViewController {
         }
     }
     
-    func getInstitutions(onSuccess: @escaping (_ institutions: [Institution]) -> (), onFailure: @escaping (_ error: Error) -> ()) {
+    func getInstitutions(onSuccess: @escaping (_ institutions: [Institution]) -> (),
+                         onFailure: @escaping (_ error: Error) -> ()) {
+        
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
@@ -209,7 +207,7 @@ class RegisterInstitutionViewController: UIViewController {
                 self.showAlert(title: "Atenção!", message: "\n Não foi possível realizar o cadastro.\n\n Este e-mail não foi encontrado na base de Instituições reconhecidas.", handler: nil)
             }
         }, onFailure: { (error) in
-            
+            self.showAlert(title: "Ops...", message: "Não foi possível validar o e-mail. Tente novamente mais tarde.", handler: nil)
         })
     }
     
@@ -245,20 +243,20 @@ class RegisterInstitutionViewController: UIViewController {
     }
     
     // MARK: - Keychain Access method
-    func saveSalt() {
+//    func saveSalt() {
 //        do {
 //            // Writing data to the keychain
 //            try Locksmith.saveData(data: ["userSalt": self.salt], forUserAccount: self.emailField.text!)
 //            
 //            // Saving data in UserDefaults
-////            let preferences = UserDefaults.standard
-////            preferences.setValue(self.salt, forKey: "userSalt")
-////            preferences.synchronize()
+//            let preferences = UserDefaults.standard
+//            preferences.setValue(self.salt, forKey: "userSalt")
+//            preferences.synchronize()
 //          
 //        } catch {
 //            print(error)
 //        }
-    }
+//    }
     
     // MARK: - Private methods
     func randomString() -> String {
