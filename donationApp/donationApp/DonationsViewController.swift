@@ -251,7 +251,6 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "donationPostCell", for: indexPath) as! ItemsTableViewCell
         
         if let donationItem = getDonationForRowAtIndexPath(indexPath) {
@@ -268,7 +267,6 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
             cell.publishDateLabel.text  = "-"
             cell.profileImageView.image = UIImage(named: "empty")
         }
-    
         return cell
     }
     

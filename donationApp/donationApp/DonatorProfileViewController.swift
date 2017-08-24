@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FacebookLogin
+import FBSDKLoginKit
 import FacebookCore
 import SVProgressHUD
 import Kingfisher
@@ -63,7 +64,8 @@ class DonatorProfileViewController: UIViewController {
     }
     
     func loadImageProfile() {
-        let url: URL = URL(string: (Auth.auth().currentUser?.photoURL?.absoluteString)!)!
+        let accessToken = FBSDKAccessToken.current().tokenString
+        let url = URL(string: "https://graph.facebook.com/me/picture?type=normal&return_ssl_resources=1&access_token="+accessToken!)
         let defaultImage = UIImage(named: "ico-default")
         self.profileImageView.kf.setImage(with: url, placeholder: defaultImage)
     }

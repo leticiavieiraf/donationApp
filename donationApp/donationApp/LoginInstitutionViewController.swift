@@ -58,6 +58,7 @@ class LoginInstitutionViewController: UIViewController {
     // MARK: Redirect methods
     func redirectToInstitutionsStoryboard() {
         let institutionsTabBarController = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
+        
         let institutionsNavigationController = UINavigationController(rootViewController: institutionsTabBarController)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = institutionsNavigationController
@@ -79,8 +80,8 @@ class LoginInstitutionViewController: UIViewController {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
 
-        // Criptografia segura e ideal Hash SHA-256 (PBKDF2)
-        let salt = loadSalt()
+        // Criptografia Hash SHA-256 (PBKDF2)
+        let salt = Constants.kGeneral
         let saltAndPassword = salt + self.passwordField.text!
         let password_sha256 = sha256SaltHash(saltAndPassword, salt: salt)
         
@@ -104,22 +105,22 @@ class LoginInstitutionViewController: UIViewController {
     }
     
     // MARK: - Encryption methods
-    func sha256SaltHash(_ password: String, salt: String) -> String {
+    func sha256SaltHash(_ saltAndPassword: String, salt: String) -> String {
         
-        let bytesPass: Array<UInt8> = Array(password.utf8);
+        let byteSaltAndPass: Array<UInt8> = Array(saltAndPassword.utf8);
         let byteSalt: Array<UInt8> = Array(salt.utf8)
         
         do {
-            let hashed = try PKCS5.PBKDF2(password: bytesPass, salt: byteSalt, iterations: 4096, variant: .sha256).calculate()
-            let hashedStr = Data(bytes: hashed).toHexString()
+            let hash = try PKCS5.PBKDF2(password: byteSaltAndPass, salt: byteSalt, iterations: 4096, variant: .sha256).calculate()
+            let hashStr = Data(bytes: hash).toHexString()
             
-            return hashedStr
+            return hashStr
             
         } catch {
-            print (error)
+            print(error)
         }
         
-        return password
+        return saltAndPassword
     }
     
     // MARK: - Keychain Access method

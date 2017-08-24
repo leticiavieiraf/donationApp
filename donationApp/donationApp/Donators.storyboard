@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VKG-Yr-WrN">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VKG-Yr-WrN">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -488,17 +488,17 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="431"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-mR-apv" userLabel="ContainerView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="502.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="517.5"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="odT-Pt-9PZ" userLabel="ProfilePic">
-                                                <rect key="frame" x="110" y="80" width="100" height="100"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="odT-Pt-9PZ" userLabel="ProfilePic">
+                                                <rect key="frame" x="110" y="80" width="100" height="115"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="OSf-xi-mxx"/>
-                                                    <constraint firstAttribute="height" constant="100" id="yQM-fr-x0m"/>
+                                                    <constraint firstAttribute="height" constant="115" id="yQM-fr-x0m"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRm-aG-WiV" userLabel="Container">
-                                                <rect key="frame" x="20" y="220" width="280" height="64.5"/>
+                                                <rect key="frame" x="20" y="235" width="280" height="64.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="4gJ-zU-gDf" userLabel="iconName">
                                                         <rect key="frame" x="15" y="11.5" width="18" height="18"/>
@@ -543,7 +543,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBs-Xf-Jbc" customClass="DAButton" customModule="donationApp" customModuleProvider="target">
-                                                <rect key="frame" x="85" y="324.5" width="150" height="28"/>
+                                                <rect key="frame" x="85" y="339.5" width="150" height="28"/>
                                                 <color key="backgroundColor" red="0.2274509804" green="0.69411764710000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="3Il-Vo-5lA"/>
@@ -568,7 +568,7 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoverde" translatesAutoresizingMaskIntoConstraints="NO" id="60k-od-HzJ">
-                                                <rect key="frame" x="125" y="392.5" width="70" height="80"/>
+                                                <rect key="frame" x="125" y="407.5" width="70" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="rrG-01-0AL"/>
                                                     <constraint firstAttribute="width" constant="70" id="xOQ-O5-qNJ"/>
@@ -676,7 +676,7 @@
                                                         <constraint firstAttribute="height" constant="1" id="YyB-Wg-VUI"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-FA-JAm">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-FA-JAm">
                                                     <rect key="frame" x="21" y="19" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="MsO-7H-wG3"/>

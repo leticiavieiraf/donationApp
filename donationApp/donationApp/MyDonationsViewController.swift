@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import FBSDKLoginKit
 import FacebookLogin
 import FacebookCore
 import SVProgressHUD
@@ -123,11 +124,14 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         formatter.dateFormat = "dd/MM/yyyy HH:mm"
         let dateStr = formatter.string(from: date)
         
+        let accessToken = FBSDKAccessToken.current().tokenString
+        let userPhotoUrl = "https://graph.facebook.com/me/picture?type=square&return_ssl_resources=1&access_token="+accessToken!
+        
         let donationItem = DonationItem(name: donation,
                                         addedByUser: donatorUser.name,
                                         userUid: donatorUser.uid,
                                         userEmail: donatorUser.email,
-                                        userPhotoUrl: donatorUser.photoUrl,
+                                        userPhotoUrl: userPhotoUrl,
                                         publishDate: dateStr)
         
         let donationItemRef = refDonationItems.child("users-uid")
