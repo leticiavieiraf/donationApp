@@ -84,6 +84,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     }
     
     func getUser(onSuccess: @escaping (_ user: User) -> ()) {
+        
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
@@ -99,6 +100,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     }
     
     func getUserDonations(_ userIdKey: String, onSuccess: @escaping (_ userDonations: [DonationItem]) -> ()) {
+        
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
         
@@ -121,7 +123,6 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         formatter.dateFormat = "dd/MM/yyyy HH:mm"
         let dateStr = formatter.string(from: date)
         
-        
         let donationItem = DonationItem(name: donation,
                                         addedByUser: donatorUser.name,
                                         userUid: donatorUser.uid,
@@ -129,7 +130,9 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
                                         userPhotoUrl: donatorUser.photoUrl,
                                         publishDate: dateStr)
         
-        let donationItemRef = refDonationItems.child("users-uid").child(donationItem.userUid.lowercased()).childByAutoId()
+        let donationItemRef = refDonationItems.child("users-uid")
+                            .child(donationItem.userUid.lowercased())
+                            .childByAutoId()
         donationItemRef.setValue(donationItem.toAnyObject())
     }
     

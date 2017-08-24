@@ -84,6 +84,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         SVProgressHUD.show()
         
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        
         Auth.auth().signIn(with: credential) { (user, error) in
             SVProgressHUD.dismiss()
             
