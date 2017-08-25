@@ -172,7 +172,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                             self.setupMapCamera(institution.coordinate, distance: 9000, pitch: 35)
                             count += 1
                         }
-                        
                     }, onFailure: {error in
                         if (errorCount == 0) {
                             self.presentToolTip()
@@ -229,7 +228,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 SVProgressHUD.dismiss()
                 
                 let institution = Helper.institution(from: institutionUser)
-                institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                institution.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                                                                longitude: location.coordinate.longitude)
                 
                 self.mapView.addAnnotation(institution)
                 self.mapView.selectAnnotation(self.mapView.annotations.first!, animated: true)
@@ -275,7 +275,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             UIView.animate(withDuration: 0.5, animations: {
                 self.view.layoutIfNeeded()
             })
-            setupMapCamera(detailViewController.institution.coordinate, distance: 9000, pitch: 35)
+            
+            setupMapCamera(detailViewController.institution.coordinate,
+                           distance: 9000, pitch: 35)
         }
     }
     
@@ -302,7 +304,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    func getGeolocation(_ address : String, onSuccess: @escaping (_ location: CLLocation) -> (), onFailure: @escaping (_ error: Error) -> ())  {
+    func getGeolocation(_ address: String,
+                        onSuccess: @escaping (_ location: CLLocation) -> (),
+                        onFailure: @escaping (_ error: Error) -> ())  {
+        
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarksOptional, error) -> Void in
             
@@ -400,16 +405,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             detailViewController.institutionUser = nil
             detailViewController.institution = tappedInstitution
             detailViewController.loadData()
-            
-            /*
-            let detailVC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "detailPopUp") as! DetailInstitutionViewController
-            detailVC.institution = annotation
-            self.addChildViewController(detailVC)
-            detailVC.view.frame = self.view.frame
-            self.view.addSubview(detailVC.view)
-            detailVC.didMove(toParentViewController: self)
-             //print("Your annotation title: \(annotation.title)");
-            */
-        }
     }
+}
+
+
+    /*
+     let detailVC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "detailPopUp") as! DetailInstitutionViewController
+     detailVC.institution = annotation
+     self.addChildViewController(detailVC)
+     detailVC.view.frame = self.view.frame
+     self.view.addSubview(detailVC.view)
+     detailVC.didMove(toParentViewController: self)
+     //print("Your annotation title: \(annotation.title)");
+     */
 }

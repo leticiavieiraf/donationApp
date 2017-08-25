@@ -84,7 +84,9 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         SVProgressHUD.show()
         
         let userUID = Auth.auth().currentUser?.uid
+        
         refInstitutionUsers.child(userUID!.lowercased()).observeSingleEvent(of: .value, with: { (snapshot) in
+            
             SVProgressHUD.dismiss()
 
             let user = InstitutionUser(snapshot: snapshot)
@@ -114,7 +116,6 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy HH:mm"
         let dateStr = formatter.string(from: date)
-        
         
         let orderItem = OrderItem(name: order,
                                      addedByUser: institutionUser.name,
