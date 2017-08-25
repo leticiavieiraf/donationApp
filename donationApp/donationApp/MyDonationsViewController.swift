@@ -177,6 +177,8 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     
     func didPressSaveWithSelectItem(_ item: String) {
         insert(donation:item)
+        
+        self.showAlert(title: "", message: "Muito obrigada, sua doação foi publicada! Em breve alguma instituição poderá entrar em contato por e-mail, fique atento!", handler: nil)
     }
     
     // MARK: - UITableViewDataSource

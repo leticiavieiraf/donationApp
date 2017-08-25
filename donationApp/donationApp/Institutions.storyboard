@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xKp-sO-jpo">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xKp-sO-jpo">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -267,10 +267,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ba9-Pi-FZm">
                                 <rect key="frame" x="5" y="178" width="310" height="213"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Novo pedido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc6-df-TSx">
-                                        <rect key="frame" x="105" y="15" width="100.5" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="O que você gostaria de pedir?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc6-df-TSx">
+                                        <rect key="frame" x="36.5" y="15" width="238" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qlg-eB-jfp">
@@ -287,18 +287,8 @@
                                             <constraint firstAttribute="height" constant="1" id="Ucj-C7-nfO"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qjg-GK-cqC">
-                                        <rect key="frame" x="0.0" y="177" width="155" height="36"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="155" id="Sqm-V6-vVb"/>
-                                        </constraints>
-                                        <state key="normal" title="Salvar"/>
-                                        <connections>
-                                            <action selector="save:" destination="mTf-yj-dOb" eventType="touchUpInside" id="Wlk-YJ-ElL"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LK-yl-Rgl">
-                                        <rect key="frame" x="156" y="177" width="154" height="36"/>
+                                        <rect key="frame" x="0.0" y="177" width="154" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="154" id="mWH-9s-EBf"/>
                                         </constraints>
@@ -308,32 +298,42 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jkA-zd-C13" userLabel="Vertical Line">
-                                        <rect key="frame" x="155" y="177" width="1" height="36"/>
+                                        <rect key="frame" x="154" y="177" width="1" height="36"/>
                                         <color key="backgroundColor" red="0.77264670589999995" green="0.77264670589999995" blue="0.77264670589999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1" id="KlI-rs-1Sr"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qjg-GK-cqC">
+                                        <rect key="frame" x="155" y="177" width="155" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="155" id="Sqm-V6-vVb"/>
+                                        </constraints>
+                                        <state key="normal" title="Salvar"/>
+                                        <connections>
+                                            <action selector="save:" destination="mTf-yj-dOb" eventType="touchUpInside" id="Wlk-YJ-ElL"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="jkA-zd-C13" secondAttribute="bottom" id="1cw-fC-Rc2"/>
                                     <constraint firstAttribute="bottom" secondItem="5LK-yl-Rgl" secondAttribute="bottom" id="3QX-l0-ymR"/>
+                                    <constraint firstItem="jkA-zd-C13" firstAttribute="leading" secondItem="5LK-yl-Rgl" secondAttribute="trailing" id="7gF-4U-Qrs"/>
                                     <constraint firstItem="Qlg-eB-jfp" firstAttribute="leading" secondItem="ba9-Pi-FZm" secondAttribute="leading" id="EjK-15-ciA"/>
                                     <constraint firstItem="ge1-gp-jSF" firstAttribute="top" secondItem="Qlg-eB-jfp" secondAttribute="bottom" constant="10" id="Kar-fu-mSW"/>
                                     <constraint firstAttribute="width" constant="310" id="LX3-dS-pHQ"/>
-                                    <constraint firstItem="5LK-yl-Rgl" firstAttribute="leading" secondItem="jkA-zd-C13" secondAttribute="trailing" id="Nmd-AQ-ez9"/>
-                                    <constraint firstItem="Qjg-GK-cqC" firstAttribute="leading" secondItem="ba9-Pi-FZm" secondAttribute="leading" id="RRL-eE-EFA"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qjg-GK-cqC" secondAttribute="trailing" id="N70-d0-OMW"/>
                                     <constraint firstItem="zc6-df-TSx" firstAttribute="centerX" secondItem="ba9-Pi-FZm" secondAttribute="centerX" id="RTx-35-k8g"/>
                                     <constraint firstAttribute="height" constant="213" id="V8g-0M-h0p"/>
-                                    <constraint firstAttribute="trailing" secondItem="5LK-yl-Rgl" secondAttribute="trailing" id="bI1-9r-BNa"/>
+                                    <constraint firstItem="Qjg-GK-cqC" firstAttribute="leading" secondItem="jkA-zd-C13" secondAttribute="trailing" id="bZv-SG-oU3"/>
+                                    <constraint firstItem="5LK-yl-Rgl" firstAttribute="leading" secondItem="ba9-Pi-FZm" secondAttribute="leading" id="bmY-sd-eQp"/>
                                     <constraint firstAttribute="bottom" secondItem="Qjg-GK-cqC" secondAttribute="bottom" id="d0r-1P-f7h"/>
                                     <constraint firstAttribute="trailing" secondItem="Qlg-eB-jfp" secondAttribute="trailing" id="gdV-Tx-ec2"/>
                                     <constraint firstItem="Qjg-GK-cqC" firstAttribute="top" secondItem="ge1-gp-jSF" secondAttribute="bottom" id="hWT-MU-Bl3"/>
                                     <constraint firstItem="zc6-df-TSx" firstAttribute="top" secondItem="ba9-Pi-FZm" secondAttribute="top" constant="15" id="hyZ-yO-wOJ"/>
                                     <constraint firstAttribute="trailing" secondItem="ge1-gp-jSF" secondAttribute="trailing" id="jQ3-27-KvZ"/>
                                     <constraint firstItem="jkA-zd-C13" firstAttribute="top" secondItem="ge1-gp-jSF" secondAttribute="bottom" id="pTq-R3-WAe"/>
-                                    <constraint firstItem="jkA-zd-C13" firstAttribute="leading" secondItem="Qjg-GK-cqC" secondAttribute="trailing" id="q9K-aI-SPY"/>
                                     <constraint firstItem="5LK-yl-Rgl" firstAttribute="top" secondItem="ge1-gp-jSF" secondAttribute="bottom" id="rMu-ed-ptr"/>
                                     <constraint firstItem="ge1-gp-jSF" firstAttribute="leading" secondItem="ba9-Pi-FZm" secondAttribute="leading" id="u3R-9Q-o01"/>
                                     <constraint firstItem="Qlg-eB-jfp" firstAttribute="top" secondItem="zc6-df-TSx" secondAttribute="bottom" constant="10" id="xf5-en-xC2"/>
@@ -357,7 +357,7 @@
         <!--Perfil-->
         <scene sceneID="WRv-dU-d38">
             <objects>
-                <viewController title="Perfil" automaticallyAdjustsScrollViewInsets="NO" id="0hD-H8-6g5" customClass="InstitutionProfileViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Perfil" id="0hD-H8-6g5" customClass="InstitutionProfileViewController" customModule="donationApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Ni-WW-ukR"/>
                         <viewControllerLayoutGuide type="bottom" id="eGu-Vb-TZs"/>
@@ -377,38 +377,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="aSL-YL-lN2"/>
                                                     <constraint firstAttribute="height" constant="100" id="vSB-gI-Gcm"/>
-                                                </constraints>
-                                            </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yN-Yu-Mod" customClass="DAButton" customModule="donationApp" customModuleProvider="target">
-                                                <rect key="frame" x="85" y="382" width="150" height="28"/>
-                                                <color key="backgroundColor" red="0.2274509804" green="0.69411764710000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="28" id="0C5-uc-mnm"/>
-                                                    <constraint firstAttribute="width" constant="150" id="txq-ZF-Vbs"/>
-                                                </constraints>
-                                                <state key="normal" title="Logout">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="4"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" red="0.2274509804" green="0.69411764710000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="logout:" destination="0hD-H8-6g5" eventType="touchUpInside" id="FBI-IT-KWQ"/>
-                                                </connections>
-                                            </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoverde" translatesAutoresizingMaskIntoConstraints="NO" id="Y3d-TC-Wlp">
-                                                <rect key="frame" x="125" y="440" width="70" height="80"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="70" id="AEQ-l2-M9N"/>
-                                                    <constraint firstAttribute="height" constant="80" id="rMz-L1-Dle"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7g-LD-byQ" userLabel="ContainerBox">
@@ -510,6 +478,38 @@
                                                     <constraint firstItem="Qug-cA-SLP" firstAttribute="centerY" secondItem="lFq-La-xYy" secondAttribute="centerY" id="zUc-FV-JSs"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yN-Yu-Mod" customClass="DAButton" customModule="donationApp" customModuleProvider="target">
+                                                <rect key="frame" x="85" y="382" width="150" height="28"/>
+                                                <color key="backgroundColor" red="0.2274509804" green="0.69411764710000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="28" id="0C5-uc-mnm"/>
+                                                    <constraint firstAttribute="width" constant="150" id="txq-ZF-Vbs"/>
+                                                </constraints>
+                                                <state key="normal" title="Logout">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.2274509804" green="0.69411764710000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="logout:" destination="0hD-H8-6g5" eventType="touchUpInside" id="FBI-IT-KWQ"/>
+                                                </connections>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoverde" translatesAutoresizingMaskIntoConstraints="NO" id="Y3d-TC-Wlp">
+                                                <rect key="frame" x="125" y="440" width="70" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="AEQ-l2-M9N"/>
+                                                    <constraint firstAttribute="height" constant="80" id="rMz-L1-Dle"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.95176770740000005" green="0.95176770740000005" blue="0.95176770740000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -537,9 +537,9 @@
                         <color key="backgroundColor" red="0.95176770740000005" green="0.95176770740000005" blue="0.95176770740000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="IZf-ZN-XD0" secondAttribute="trailing" id="1OC-cc-apk"/>
+                            <constraint firstItem="eGu-Vb-TZs" firstAttribute="top" secondItem="IZf-ZN-XD0" secondAttribute="bottom" constant="-49" id="UZY-fg-Axj"/>
                             <constraint firstItem="IZf-ZN-XD0" firstAttribute="leading" secondItem="vYy-EE-X4l" secondAttribute="leading" id="b8l-Ni-0i3"/>
                             <constraint firstItem="IZf-ZN-XD0" firstAttribute="top" secondItem="7Ni-WW-ukR" secondAttribute="bottom" id="bHP-Of-kuQ"/>
-                            <constraint firstAttribute="bottom" secondItem="IZf-ZN-XD0" secondAttribute="bottom" id="fT5-iR-d81"/>
                             <constraint firstItem="FUU-gC-8GC" firstAttribute="width" secondItem="vYy-EE-X4l" secondAttribute="width" id="gYT-aS-PIV"/>
                         </constraints>
                     </view>

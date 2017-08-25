@@ -162,6 +162,8 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     
     func didPressSaveWithSelectItem(_ item: String) {
         insert(order:item)
+        
+        self.showAlert(title: "", message: "Seu pedido foi publicado! Em breve algum doador poderá entrar em contato, fique atento!", handler: nil)
     }
     
     // MARK: - UITableViewDataSource

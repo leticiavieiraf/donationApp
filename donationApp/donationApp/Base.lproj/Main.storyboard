@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rZz-3P-f4d" userLabel="Container">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="615"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="625"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoverde" translatesAutoresizingMaskIntoConstraints="NO" id="hmx-k3-axf">
                                                 <rect key="frame" x="122.5" y="75" width="130" height="141"/>
@@ -51,43 +51,38 @@
                                                     <constraint firstAttribute="width" constant="130" id="tTK-GU-f6x"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sou doador" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0Z-Ti-yGl">
-                                                <rect key="frame" x="128" y="286" width="120" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOADORES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0Z-Ti-yGl">
+                                                <rect key="frame" x="128" y="286" width="120" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="1tT-as-BXA"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="16"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Fy-oK-z5E" userLabel="loginBtnView" customClass="FBSDKLoginButton">
-                                                <rect key="frame" x="85" y="310" width="205" height="35"/>
+                                                <rect key="frame" x="85" y="320" width="205" height="35"/>
                                                 <color key="backgroundColor" red="0.15511087628154793" green="0.18262892789766333" blue="0.55063957253886009" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="205" id="RaS-3Y-mGE"/>
                                                     <constraint firstAttribute="height" constant="35" id="vac-2Y-eK2"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ou" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fg6-4Z-tZ7">
-                                                <rect key="frame" x="163" y="370" width="50" height="21"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="If6-eg-3rF">
+                                                <rect key="frame" x="30" y="385" width="315" height="1"/>
+                                                <color key="backgroundColor" red="0.79318310309999995" green="0.79318310309999995" blue="0.79318310309999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="faa-RA-ft8"/>
+                                                    <constraint firstAttribute="height" constant="1" id="6SE-aN-e3Y"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sou uma instituição social" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfz-TJ-GSC">
-                                                <rect key="frame" x="63" y="416" width="250" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="250" id="KqS-pd-dEW"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSTITUIÇÕES SOCIAIS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfz-TJ-GSC">
+                                                <rect key="frame" x="5" y="416" width="365" height="26"/>
+                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="16"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJk-aG-OsS" customClass="DAButton" customModule="donationApp" customModuleProvider="target">
-                                                <rect key="frame" x="85" y="440" width="205" height="28"/>
+                                                <rect key="frame" x="85" y="450" width="205" height="28"/>
                                                 <color key="backgroundColor" red="0.2274509804" green="0.69411764710000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="205" id="OhG-hY-1Sq"/>
@@ -111,17 +106,19 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.95176770740000005" green="0.95176770740000005" blue="0.95176770740000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Fg6-4Z-tZ7" firstAttribute="top" secondItem="4Fy-oK-z5E" secondAttribute="bottom" constant="25" id="2Ww-7z-rh7"/>
+                                            <constraint firstItem="hfz-TJ-GSC" firstAttribute="top" secondItem="If6-eg-3rF" secondAttribute="bottom" constant="30" id="2cC-BP-0ec"/>
+                                            <constraint firstAttribute="trailing" secondItem="If6-eg-3rF" secondAttribute="trailing" constant="30" id="6Ni-QR-4JD"/>
                                             <constraint firstItem="h0Z-Ti-yGl" firstAttribute="centerX" secondItem="rZz-3P-f4d" secondAttribute="centerX" id="6rd-mc-4xs"/>
+                                            <constraint firstItem="If6-eg-3rF" firstAttribute="top" secondItem="4Fy-oK-z5E" secondAttribute="bottom" constant="30" id="9DS-Ry-7MR"/>
                                             <constraint firstItem="vJk-aG-OsS" firstAttribute="centerX" secondItem="rZz-3P-f4d" secondAttribute="centerX" id="Ba1-aW-O4r"/>
-                                            <constraint firstItem="Fg6-4Z-tZ7" firstAttribute="centerX" secondItem="rZz-3P-f4d" secondAttribute="centerX" id="Cat-mt-1z5"/>
+                                            <constraint firstItem="If6-eg-3rF" firstAttribute="leading" secondItem="rZz-3P-f4d" secondAttribute="leading" constant="30" id="DRg-Ha-FhH"/>
                                             <constraint firstItem="hmx-k3-axf" firstAttribute="top" secondItem="rZz-3P-f4d" secondAttribute="top" constant="75" id="GD6-w6-L7a"/>
                                             <constraint firstItem="vJk-aG-OsS" firstAttribute="top" secondItem="hfz-TJ-GSC" secondAttribute="bottom" constant="8" id="IVg-gl-TP0"/>
-                                            <constraint firstItem="hfz-TJ-GSC" firstAttribute="centerX" secondItem="rZz-3P-f4d" secondAttribute="centerX" id="V3f-zO-vaQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="hfz-TJ-GSC" secondAttribute="trailing" constant="5" id="TNe-gv-mc8"/>
                                             <constraint firstAttribute="bottom" secondItem="vJk-aG-OsS" secondAttribute="bottom" constant="147" id="VK4-Z2-iMX"/>
                                             <constraint firstItem="4Fy-oK-z5E" firstAttribute="top" secondItem="h0Z-Ti-yGl" secondAttribute="bottom" constant="8" id="WZ9-0V-8e6"/>
-                                            <constraint firstItem="hfz-TJ-GSC" firstAttribute="top" secondItem="Fg6-4Z-tZ7" secondAttribute="bottom" constant="25" id="Y6S-HK-OiK"/>
                                             <constraint firstItem="4Fy-oK-z5E" firstAttribute="centerX" secondItem="rZz-3P-f4d" secondAttribute="centerX" id="azy-FT-QCB"/>
+                                            <constraint firstItem="hfz-TJ-GSC" firstAttribute="leading" secondItem="rZz-3P-f4d" secondAttribute="leading" constant="5" id="j8O-t3-hNn"/>
                                             <constraint firstItem="h0Z-Ti-yGl" firstAttribute="top" secondItem="hmx-k3-axf" secondAttribute="bottom" constant="70" id="n00-Bz-uBn"/>
                                             <constraint firstItem="hmx-k3-axf" firstAttribute="centerX" secondItem="rZz-3P-f4d" secondAttribute="centerX" id="oxQ-W4-xKg"/>
                                         </constraints>

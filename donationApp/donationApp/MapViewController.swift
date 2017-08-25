@@ -113,7 +113,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func getInstitutionsAndLoadMap() {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
-        SVProgressHUD.dismiss(withDelay: 5.0)
+        SVProgressHUD.dismiss(withDelay: 6.5)
         
         self.getInstitutions(onSuccess: { () in
             self.loadMap()
@@ -340,7 +340,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                                width: tooltip.frame.size.width,
                                height: tooltip.frame.size.height)
         
-        tooltip.center = CGPoint(x: self.mapView.center.x + 20, y:self.mapView.center.y - 170)
+        tooltip.center = CGPoint(x: self.mapView.center.x + 20, y:self.mapView.center.y - 120)
         tooltip.alpha = 0
         self.mapView.addSubview(tooltip)
         
