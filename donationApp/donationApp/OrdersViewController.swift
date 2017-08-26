@@ -183,19 +183,30 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
                      Constants.kHygieneProducts,
                      Constants.kClothes]
         
-        for order in allOrders {
+        for var order in allOrders {
             switch order.name {
                 case Constants.kSweaters:
+                    order.userPhotoUrl = "agasalhos"
                     sweaters.append(order)
+                
                 case Constants.kFood:
+                    order.userPhotoUrl = "alimentos"
                     food.append(order)
+                
                 case Constants.kShoes:
+                    order.userPhotoUrl = "calcados"
                     shoes.append(order)
+                
                 case Constants.kHygieneProducts:
+                    order.userPhotoUrl = "higiene"
                     hygieneProducts.append(order)
+                
                 case Constants.kClothes:
+                    order.userPhotoUrl = "roupas"
                     clothes.append(order)
+                
                 default:
+                    order.userPhotoUrl = "institution-big"
                     allOrders.append(order)
             }
         }
@@ -284,18 +295,20 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "orderPostCell", for: indexPath) as! ItemsTableViewCell
         
         if let orderItem = getOrderForRowAtIndexPath(indexPath) {
-            cell.profileImageView.image = UIImage(named: "institution-big")
+            cell.profileImageView.image = UIImage(named: orderItem.userPhotoUrl)
             cell.itemNameLabel.text = "Precisamos de " + orderItem.name.lowercased() + "!"
             cell.userNameLabel.text = orderItem.addedByUser
             cell.userEmailLabel.text = orderItem.userEmail
             let publishDate = Helper.dateFrom(string: orderItem.publishDate, format: "dd/MM/yyyy HH:mm")
             cell.publishDateLabel.text = Helper.periodBetween(date1: publishDate, date2: Date())
+            cell.accessoryType = .disclosureIndicator
         } else {
             cell.itemNameLabel.text = "Não há pedidos."
             cell.userNameLabel.text = "-"
             cell.userEmailLabel.text = "-"
             cell.publishDateLabel.text  = "-"
             cell.profileImageView.image = UIImage(named: "empty")
+            cell.accessoryType = .none
         }
         
         return cell
