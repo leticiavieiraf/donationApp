@@ -21,7 +21,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
     let refOrderItems = Database.database().reference(withPath: "order-items")
     let refInstitutionUsers = Database.database().reference(withPath: "institution-users")
     
-    // MARK: - Life Cycle methods
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -41,7 +41,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         }
     }
     
-    // MARK: - Check Login methods
+    // MARK: Check Login methods
     func userLoggedIn() -> Bool {
         let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
         var isLogged = true
@@ -53,7 +53,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         return isLogged
     }
     
-    // MARK: - Setup TabBarController methods
+    // MARK: Setup TabBarController methods
     func setupTabBar() {
         self.tabBarController?.title = "Meus Pedidos"
         let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewOrderPopUp))
@@ -62,7 +62,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    // MARK: - Firebase methods
+    // MARK: Firebase methods
     func getUserAndLoadOrders() {
         
         getUser { (user) in
@@ -128,7 +128,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         orderItemRef.setValue(orderItem.toAnyObject())
     }
     
-    // MARK: - Setup Layout methods
+    // MARK: Setup Layout methods
     func setupLayout() {
         if items.count == 0 {
             presentEmptyView()
@@ -149,7 +149,7 @@ class MyOrdersViewController: UIViewController, UITableViewDataSource, ItemSelec
         view.layoutIfNeeded()
     }
     
-    // MARK: - Popup New Order
+    // MARK: Popup New Order
     func showNewOrderPopUp() {
         let newOrderVC = UIStoryboard(name: "Institutions", bundle:nil).instantiateViewController(withIdentifier: "sbPopUpID") as! NewOrderViewController
         newOrderVC.delegate = self

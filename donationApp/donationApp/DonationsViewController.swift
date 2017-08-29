@@ -30,7 +30,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
     // firebase variables
     let refDonationItems = Database.database().reference(withPath: "donation-items")
 
-    // MARK: - Life Cycle methods
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -46,7 +46,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-    // MARK: - Check Login methods
+    // MARK: Check Login methods
     func userLoggedIn() -> Bool {
         let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
         var isLogged = true
@@ -58,7 +58,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         return isLogged
     }
     
-    // MARK: - Setup TabBarController methods
+    // MARK: Setup TabBarController methods
     func setupTabBar() {
         self.tabBarController?.title = "Doações"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
@@ -66,7 +66,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    // MARK: - Firebase methods
+    // MARK: Firebase methods
     func loadAllDonations() {
         
         getUserIdKeys { (idKeys) in
@@ -122,7 +122,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         })
     }
     
-    // MARK: - Setup Layout methods
+    // MARK: Setup Layout methods
     func setupLayout() {
         if allDonations.count == 0 {
             presentEmptyView()
@@ -143,7 +143,7 @@ class DonationsViewController: UIViewController, UITableViewDataSource {
         view.layoutIfNeeded()
     }
     
-    // MARK: - Setup DataSource methods
+    // MARK: Setup DataSource methods
     func setupDataSource() {
         resetDataSource()
         

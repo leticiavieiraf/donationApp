@@ -23,7 +23,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
     var donatorUser : DonatorUser!
     let refDonationItems = Database.database().reference(withPath: "donation-items")
     
-    // MARK: - Life Cycle methods
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -43,7 +43,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         }
     }
     
-    // MARK: - Check Login method
+    // MARK: Check Login method
     func userLoggedIn() -> Bool {
         let donatorUserLoggedIn = Helper.donatorUserLoggedIn()
         var isLogged = true
@@ -56,7 +56,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         return isLogged
     }
     
-    // MARK: - Setup TabBarController methods
+    // MARK: Setup TabBarController methods
     func setupTabBar() {
         self.tabBarController?.title = "Minhas Doações"
         let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(showNewDonationPopUp))
@@ -65,7 +65,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    // MARK: - Firebase methods
+    // MARK: Firebase methods
     func getUserAndLoadDonations() {
         
         getUser { (user) in
@@ -140,7 +140,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         donationItemRef.setValue(donationItem.toAnyObject())
     }
     
-    // MARK: - Setup Layout methods
+    // MARK: Setup Layout methods
     func setupLayout() {
         if items.count == 0 {
             presentEmptyView()
@@ -161,7 +161,7 @@ class MyDonationsViewController: UIViewController, UITableViewDataSource, ItemSe
         view.layoutIfNeeded()
     }
     
-    // MARK: - Popup New Donation
+    // MARK: Popup New Donation
     func showNewDonationPopUp() {
      
         let newDonationVC = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "sbPopUpID") as! NewDonationViewController

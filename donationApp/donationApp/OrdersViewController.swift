@@ -15,7 +15,7 @@ import SVProgressHUD
 
 class OrdersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    //outlets
+    // outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var emptyView: UIView!
     
@@ -33,7 +33,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
     let refOrderItems = Database.database().reference(withPath: "order-items")
     let refInstitutionUsers = Database.database().reference(withPath: "institution-users")
     
-    // MARK: - Life Cycle methods
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -49,7 +49,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    // MARK: - Check Login method
+    // MARK: Check Login method
     func userLoggedIn() -> Bool {
         let donatorUserLoggedIn = Helper.donatorUserLoggedIn()
         var isLogged = true
@@ -62,7 +62,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         return isLogged
     }
     
-    // MARK: - Setup TabBarController methods
+    // MARK: Setup TabBarController methods
     func setupTabBar() {
         self.tabBarController?.title = "Pedidos"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
@@ -70,7 +70,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    // MARK: - Navigation methods
+    // MARK: Navigation methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMap" {
             let mapViewController = segue.destination as! MapViewController
@@ -83,7 +83,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         self.performSegue(withIdentifier: "showMap", sender: institutionUser)
     }
     
-    // MARK: - Firebase methods
+    // MARK: Firebase methods
     func loadAllOrders() {
         
         getUserIdKeys { (idKeys) in
@@ -152,7 +152,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
-    // MARK: - Setup Layout methods
+    // MARK: Setup Layout methods
     func setupLayout() {
         if allOrders.count == 0 {
             presentEmptyView()
@@ -173,7 +173,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         view.layoutIfNeeded()
     }
     
-    // MARK: - Setup Data Source methods
+    // MARK: Setup Data Source methods
     func setupDataSource() {
         resetDataSource()
         
@@ -222,7 +222,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource, UITableView
         clothes.removeAll()
     }
     
-    // MARK: - Setup TableView methods
+    // MARK: Setup TableView methods
     func getNumberOfRowsForSection(_ sectionTitle: String) -> Int {
         switch sectionTitle {
         case Constants.kSweaters:

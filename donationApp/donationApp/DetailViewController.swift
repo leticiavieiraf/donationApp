@@ -33,12 +33,12 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     let refOrderItems = Database.database().reference(withPath: "order-items")
     let refInstitutionsUsers = Database.database().reference(withPath: "institution-users")
     
-    // MARK: - Life Cycle methods
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    // MARK: - Setup Data Source methods
+    // MARK: Setup Data Source methods
     func loadData() {
         if let institutionUser = self.institutionUser {
             institution = Helper.institution(from: institutionUser)
@@ -74,7 +74,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         }
     }
 
-    // MARK: - Firebase methods
+    // MARK: Firebase methods
     func getInstitutionUserAndLoadOrders() {
         
         SVProgressHUD.setDefaultStyle(.dark)
@@ -122,7 +122,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         })
     }
     
-    // MARK: - Setup Layout methods
+    // MARK: Setup Layout methods
     func setupTableViewHeight() {
         var height : CGFloat = 55
         
@@ -148,7 +148,7 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         self.view.layoutIfNeeded()
     }
     
-    // MARK: - Action methods
+    // MARK: Action methods
     @IBAction func collapseDetails(_ sender: Any) {
         self.institutionUser = nil
         

@@ -21,7 +21,7 @@ class LoginInstitutionViewController: UIViewController {
     
     let ref = Database.database().reference(withPath: "features")
 
-    // MARK: - Life Cycle methods
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +38,7 @@ class LoginInstitutionViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // MARK: - Setup NavigationBar methods
+    // MARK: Setup NavigationBar methods
     func setupNavBar() {
         let arrowImage = UIImage(named: "arrow-back")
         let button = UIButton(type: .system)
@@ -64,7 +64,7 @@ class LoginInstitutionViewController: UIViewController {
         appDelegate.window?.rootViewController = institutionsNavigationController
     }
     
-    // MARK: - Actions
+    // MARK: Actions
     @IBAction func logIn(_ sender: Any) {
         if isEmptyFields() {
             return
@@ -74,7 +74,7 @@ class LoginInstitutionViewController: UIViewController {
         }
     }
     
-    // MARK: - Firebase methods
+    // MARK: Firebase methods
     func loginWithFirebase() {
         
         SVProgressHUD.setDefaultStyle(.dark)
@@ -104,7 +104,7 @@ class LoginInstitutionViewController: UIViewController {
         }
     }
     
-    // MARK: - Encryption methods
+    // MARK: Encryption methods
     func sha256SaltHash(_ saltAndPassword: String, salt: String) -> String {
         
         let byteSaltAndPass: Array<UInt8> = Array(saltAndPassword.utf8);
@@ -123,7 +123,7 @@ class LoginInstitutionViewController: UIViewController {
         return saltAndPassword
     }
     
-    // MARK: - Keychain Access method
+    // MARK: Keychain Access method
     func loadSalt() -> String {
         return Constants.kGeneral
         
@@ -137,7 +137,7 @@ class LoginInstitutionViewController: UIViewController {
 //         return ""
     }
     
-    // MARK: - Validation methods
+    // MARK: Validation methods
     func isEmptyFields() -> Bool {
         
         var isEmpty: Bool = false;

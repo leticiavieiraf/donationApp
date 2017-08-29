@@ -17,7 +17,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
 
     @IBOutlet weak var loginBtn: FBSDKLoginButton!
     
-    // MARK: - Life Cycle methods
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFacebookDelegate()
@@ -29,13 +29,13 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         verifyIfUserIsLoggedIn()
     }
     
-    // MARK: - Setup NavigationBar methods
+    // MARK: Setup NavigationBar methods
     func setupNavBar() {
         self.navigationController?.navigationItem.leftBarButtonItem = nil
         self.navigationController?.navigationItem.rightBarButtonItem = nil
     }
     
-    // MARK: - Check Login methods
+    // MARK: Check Login methods
     func verifyIfUserIsLoggedIn() {
         let donatorUserLoggedIn = Helper.donatorUserLoggedIn()
         let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
@@ -47,7 +47,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         }
     }
     
-    // MARK: - Setup Delegate
+    // MARK: Setup Delegate
     func setupFacebookDelegate() {
         loginBtn.delegate = self
         loginBtn.readPermissions = ["public_profile", "email"]
@@ -55,7 +55,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         loginBtn.layer.cornerRadius = 4.0
     }
     
-    // MARK: - Login methods
+    // MARK: Login methods
     
     // MARK: Facebook
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -104,7 +104,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         }
     }
     
-    // MARK: - LogOut methods
+    // MARK: LogOut methods
     func logOutFromFacebook() {
         if AccessToken.current != nil {
             let loginManager = LoginManager()
@@ -116,7 +116,7 @@ class MainViewController: UIViewController, FBSDKLoginButtonDelegate, SFSafariVi
         print("Facebook: User Logged out Successfully!")
     }
     
-    // MARK: - Redirect methods
+    // MARK: Redirect methods
     func redirectToDonatorsStoryboard() {
         let donatorsTabBarController = UIStoryboard(name: "Donators", bundle:nil).instantiateViewController(withIdentifier: "tabBarControllerID") as! UITabBarController
         

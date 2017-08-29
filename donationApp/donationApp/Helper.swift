@@ -15,7 +15,7 @@ typealias SelectedBlock = (Int) -> Void
 
 class Helper: NSObject {
 
-    // MARK: - Date helpers
+    // MARK: Date helpers
     static func dateFrom(string: String, format: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
@@ -75,7 +75,7 @@ class Helper: NSObject {
         return "Agora"
     }
     
-    // MARK: - String helpers
+    // MARK: String helpers
     static func institutionAddress(_ institution: Institution) -> String {
         let address = institution.address + ", " +
                     institution.district + ", " +

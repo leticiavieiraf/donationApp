@@ -33,7 +33,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // firebase variable
     let ref = Database.database().reference(withPath: "features")
     
-    // MARK: - Life Cycle methods
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegates()
@@ -65,7 +65,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         checkLocationAuthorizationStatus()
     }
     
-    // MARK: - Check Login methods
+    // MARK: Check Login methods
     func userLoggedIn() -> Bool {
         let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
         var isLogged = true
@@ -77,7 +77,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return isLogged
     }
     
-    // MARK: - Setup TabBarController methods
+    // MARK: Setup TabBarController methods
     func setupTabBar() {
         var barButtonItem: UIBarButtonItem? = UIBarButtonItem()
         
@@ -96,7 +96,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
-    // MARK: - Navigation methods
+    // MARK: Navigation methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "expandDetails" {
@@ -109,7 +109,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - Firebase methods
+    // MARK: Firebase methods
     func getInstitutionsAndLoadMap() {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
@@ -137,7 +137,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
     }
     
-    // MARK: - Map Setup methods
+    // MARK: Map Setup methods
     func loadMap() {
         if let userLocation = self.mapView.userLocation.location {
             self.getUserLocationCity(userLocation, onSuccess: { userLocationCity in
@@ -217,7 +217,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.locationManager.requestWhenInUseAuthorization()
     }
     
-    // MARK: - Detail Container methods
+    // MARK: Detail Container methods
     func showDetailsFor(_ institutionUser: InstitutionUser) {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
@@ -281,7 +281,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // MARK: - Location methods
+    // MARK: Location methods
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             mapView.showsUserLocation = true

@@ -22,7 +22,7 @@ class InstitutionProfileViewController: UIViewController {
     var institutionUser : InstitutionUser!
     let refInstitutionUsers = Database.database().reference(withPath: "institution-users")
     
-    // MARK: - Lyfe Cycle methods
+    // MARK: Lyfe Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +38,7 @@ class InstitutionProfileViewController: UIViewController {
         setupTabBar()
     }
     
-    // MARK: - Check Login methods
+    // MARK: Check Login methods
     func userLoggedIn() -> Bool {
         let institutionUserLoggedIn = Helper.institutionUserLoggedIn()
         var isLogged = true
@@ -50,7 +50,7 @@ class InstitutionProfileViewController: UIViewController {
         return isLogged
     }
     
-    // MARK: - Setup TabBarController methods
+    // MARK: Setup TabBarController methods
     func setupTabBar() {
         self.tabBarController?.title = "Perfil"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
@@ -58,7 +58,7 @@ class InstitutionProfileViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    // MARK: - Firebase methods
+    // MARK: Firebase methods
     func getInstitutionUser(onSuccess: @escaping (_ user: InstitutionUser) -> ()) {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show()
@@ -72,7 +72,7 @@ class InstitutionProfileViewController: UIViewController {
         })
     }
     
-    // MARK: - Setup DataSource methods
+    // MARK: Setup DataSource methods
     func displayUserInformation() {
         
         getInstitutionUser { (user) in
@@ -86,7 +86,7 @@ class InstitutionProfileViewController: UIViewController {
         }
     }
     
-    // MARK: - Logout methods
+    // MARK: Logout methods
     func logoutFirebase() {
         let firebaseAuth = Auth.auth()
         do {

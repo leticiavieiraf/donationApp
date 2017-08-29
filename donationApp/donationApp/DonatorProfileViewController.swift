@@ -19,7 +19,7 @@ class DonatorProfileViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     
-    // MARK: - Life Cycle methods
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +35,7 @@ class DonatorProfileViewController: UIViewController {
         setupTabBar()
     }
     
-    // MARK: - Check Login method
+    // MARK: Check Login method
     func userLoggedIn() -> Bool {
         let donatorUserLoggedIn = Helper.donatorUserLoggedIn()
         var isLogged = true
@@ -48,7 +48,7 @@ class DonatorProfileViewController: UIViewController {
         return isLogged
     }
     
-    // MARK: - Setup TabBarController methods
+    // MARK: Setup TabBarController methods
     func setupTabBar() {
         self.tabBarController?.title = "Perfil"
         self.tabBarController?.navigationItem.rightBarButtonItem = nil
@@ -56,7 +56,7 @@ class DonatorProfileViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    // MARK: - Setup DataSource methods
+    // MARK: Setup DataSource methods
     func displayUserInformation() {
         self.nameLabel.text = Auth.auth().currentUser?.displayName
         self.emailLabel.text = Auth.auth().currentUser?.email
@@ -70,7 +70,7 @@ class DonatorProfileViewController: UIViewController {
         self.profileImageView.kf.setImage(with: url, placeholder: defaultImage)
     }
     
-    // MARK: - Logout methods
+    // MARK: Logout methods
     func logoutFacebook() {
         let loginManager = LoginManager()
         loginManager.logOut()

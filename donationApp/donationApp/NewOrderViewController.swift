@@ -52,7 +52,7 @@ class NewOrderViewController: UIViewController , UIPickerViewDelegate, UIPickerV
         selectedItem = pickerData[row]
     }
     
-    // MARK: - Save Button
+    // MARK: Save Button
     @IBAction func save(_ sender: Any) {
         selectedItem = selectedItem == "" ? pickerData[0] : selectedItem
         
@@ -60,12 +60,12 @@ class NewOrderViewController: UIViewController , UIPickerViewDelegate, UIPickerV
         self.delegate?.didPressSaveWithSelectItem(selectedItem)
     }
     
-    // MARK: - Cancel Button
+    // MARK: Cancel Button
     @IBAction func cancel(_ sender: Any) {
         self.removeAnimate()
     }
     
-    // MARK: - New Donation's Popup
+    // MARK: New Donation's Popup
     func showAnimate()
     {
         self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)

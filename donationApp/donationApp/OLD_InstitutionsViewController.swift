@@ -125,7 +125,7 @@ class InstitutionsViewController: UIViewController, MKMapViewDelegate, CLLocatio
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    // MARK: - location manager to authorize user location for Maps app
+    // MARK: location manager to authorize user location for Maps app
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             mapView.showsUserLocation = true

@@ -15,6 +15,7 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var selectedItem: String = String()
     var delegate : ItemSelectionDelegate?
     
+    // MARK: Life Cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,26 +34,11 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
                       Constants.kClothes]
     }
     
-    
-    // MARK: - UIPickerViewDataSource
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-
-    // MARK: - UIPickerViewDelegate
-    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
-    }
-    
-    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedItem = pickerData[row]
-    }
-    
-    // MARK: - Save Button
+    // MARK: Save Button
     @IBAction func save(_ sender: Any) {
         selectedItem = selectedItem == "" ? pickerData[0] : selectedItem
 
@@ -60,12 +46,12 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.delegate?.didPressSaveWithSelectItem(selectedItem)
     }
     
-    // MARK: - Cancel Button
+    // MARK: Cancel Button
     @IBAction func cancel(_ sender: Any) {
         self.removeAnimate()
     }
     
-    // MARK: - New Donation's Popup
+    // MARK: New Donation's Popup
     func showAnimate()
     {
         self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
@@ -89,7 +75,21 @@ class NewDonationViewController: UIViewController, UIPickerViewDelegate, UIPicke
         });
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    // MARK: - UIPickerViewDataSource
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // MARK: - UIPickerViewDelegate
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedItem = pickerData[row]
     }
 }
