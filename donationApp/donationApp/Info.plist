@@ -66,11 +66,20 @@
 		<string>fbshareextension</string>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>It&apos;s necessary to show the donator profile photo in his profile page and at the list of donations.&apos;</string>
+	<string>It&apos;s necessary to show the donator profile photo on it&apos;s profile page and at Donations page.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>tecstarstudio-developer.azurewebsites.net</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
 			<key>akamaihd.net</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
