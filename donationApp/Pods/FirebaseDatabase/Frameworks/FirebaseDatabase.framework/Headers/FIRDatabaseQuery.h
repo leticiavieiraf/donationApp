@@ -1,21 +1,32 @@
 /*
- * Copyright 2017 Google
+ * Firebase iOS Client Library
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Copyright © 2013 Firebase - All Rights Reserved
+ * https://www.firebase.com
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binaryform must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY FIREBASE AS IS AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ * EVENT SHALL FIREBASE BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #import <Foundation/Foundation.h>
-#import "FIRDatabaseSwiftNameSupport.h"
 #import "FIRDataEventType.h"
 #import "FIRDataSnapshot.h"
 
@@ -26,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  * are returned by observeEventType: and and can later be passed to removeObserverWithHandle: to
  * stop receiving updates.
  */
-typedef NSUInteger FIRDatabaseHandle FIR_SWIFT_NAME(DatabaseHandle);
+typedef NSUInteger FIRDatabaseHandle;
 
 /**
  * A FIRDatabaseQuery instance represents a query over the data at a particular location.
@@ -35,7 +46,6 @@ typedef NSUInteger FIRDatabaseHandle FIR_SWIFT_NAME(DatabaseHandle);
  * on a FIRDatabaseReference. The query methods can be chained to further specify the data you are interested in
  * observing
  */
-FIR_SWIFT_NAME(DatabaseQuery)
 @interface FIRDatabaseQuery : NSObject
 
 

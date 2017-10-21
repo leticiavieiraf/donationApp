@@ -7,14 +7,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FIRAuthSwiftNameSupport.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
     @brief Represents user data returned from an identity provider.
  */
-FIR_SWIFT_NAME(UserInfo)
 @protocol FIRUserInfo <NSObject>
 
 /** @property providerID
@@ -41,12 +38,6 @@ FIR_SWIFT_NAME(UserInfo)
     @brief The user's email address.
  */
 @property(nonatomic, copy, readonly, nullable) NSString *email;
-
-/** @property phoneNumber
-    @brief A phone number associated with the user.
-    @remarks This property is only available for users authenticated via phone number auth.
- */
-@property(nonatomic, readonly, nullable) NSString *phoneNumber;
 
 @end
 

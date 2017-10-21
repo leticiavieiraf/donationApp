@@ -8,49 +8,42 @@
 #import <Foundation/Foundation.h>
 
 #import "FIRAuth.h"
-#import "FIRAuthDataResult.h"
-#import "FIRAuthSwiftNameSupport.h"
 #import "FIRUserInfo.h"
 
-@class FIRPhoneAuthCredential;
 @class FIRUserProfileChangeRequest;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /** @typedef FIRAuthTokenCallback
     @brief The type of block called when a token is ready for use.
-    @see FIRUser.getIDTokenWithCompletion:
-    @see FIRUser.getIDTokenForcingRefresh:withCompletion:
+    @see FIRUser.getTokenWithCompletion:
+    @see FIRUser.getTokenForcingRefresh:withCompletion:
 
     @param token Optionally; an access token if the request was successful.
     @param error Optionally; the error which occurred - or nil if the request was successful.
 
     @remarks One of: @c token or @c error will always be non-nil.
  */
-typedef void (^FIRAuthTokenCallback)(NSString *_Nullable token, NSError *_Nullable error)
-    FIR_SWIFT_NAME(AuthTokenCallback);
+typedef void (^FIRAuthTokenCallback)(NSString *_Nullable token, NSError *_Nullable error);
 
 /** @typedef FIRUserProfileChangeCallback
     @brief The type of block called when a user profile change has finished.
 
     @param error Optionally; the error which occurred - or nil if the request was successful.
  */
-typedef void (^FIRUserProfileChangeCallback)(NSError *_Nullable error)
-    FIR_SWIFT_NAME(UserProfileChangeCallback);
+typedef void (^FIRUserProfileChangeCallback)(NSError *_Nullable error);
 
 /** @typedef FIRSendEmailVerificationCallback
     @brief The type of block called when a request to send an email verification has finished.
 
     @param error Optionally; the error which occurred - or nil if the request was successful.
  */
-typedef void (^FIRSendEmailVerificationCallback)(NSError *_Nullable error)
-    FIR_SWIFT_NAME(SendEmailVerificationCallback);
+typedef void (^FIRSendEmailVerificationCallback)(NSError *_Nullable error);
 
 /** @class FIRUser
     @brief Represents a user.
     @remarks This class is thread-safe.
  */
-FIR_SWIFT_NAME(User)
 @interface FIRUser : NSObject <FIRUserInfo>
 
 /** @property anonymous
@@ -117,8 +110,7 @@ FIR_SWIFT_NAME(User)
 
     @remarks See @c FIRAuthErrors for a list of error codes that are common to all FIRUser methods.
  */
-- (void)updateEmail:(NSString *)email completion:(nullable FIRUserProfileChangeCallback)completion
-    FIR_SWIFT_NAME(updateEmail(to:completion:));
+- (void)updateEmail:(NSString *)email completion:(nullable FIRUserProfileChangeCallback)completion;
 
 /** @fn updatePassword:completion:
     @brief Updates the password for the user. On success, the cached user profile data is updated.
@@ -146,32 +138,7 @@ FIR_SWIFT_NAME(User)
     @remarks See @c FIRAuthErrors for a list of error codes that are common to all FIRUser methods.
  */
 - (void)updatePassword:(NSString *)password
-            completion:(nullable FIRUserProfileChangeCallback)completion
-    FIR_SWIFT_NAME(updatePassword(to:completion:));
-
-/** @fn updatePhoneNumberCredential:completion:
-    @brief Updates the phone number for the user. On success, the cached user profile data is
-        updated.
-
-    @param phoneNumberCredential The new phone number credential corresponding to the phone number
-        to be added to the firebaes account, if a phone number is already linked to the account this
-        new phone number will replace it.
-    @param completion Optionally; the block invoked when the user profile change has finished.
-        Invoked asynchronously on the main thread in the future.
-
-    @remarks Possible error codes:
-    <ul>
-        <li>@c FIRAuthErrorCodeRequiresRecentLogin - Updating a user’s phone number is a security
-            sensitive operation that requires a recent login from the user. This error indicates
-            the user has not signed in recently enough. To resolve, reauthenticate the user by
-            invoking reauthenticateWithCredential:completion: on FIRUser.
-        </li>
-    </ul>
-
-    @remarks See @c FIRAuthErrors for a list of error codes that are common to all FIRUser methods.
- */
-- (void)updatePhoneNumberCredential:(FIRPhoneAuthCredential *)phoneNumberCredential
-                         completion:(nullable FIRUserProfileChangeCallback)completion;
+            completion:(nullable FIRUserProfileChangeCallback)completion;
 
 /** @fn profileChangeRequest
     @brief Creates an object which may be used to change the user's profile data.
@@ -181,7 +148,7 @@ FIR_SWIFT_NAME(User)
 
     @return An object which may be used to change the user's profile data atomically.
  */
-- (FIRUserProfileChangeRequest *)profileChangeRequest FIR_SWIFT_NAME(createProfileChangeRequest());
+- (FIRUserProfileChangeRequest *)profileChangeRequest;
 
 /** @fn reloadWithCompletion:
     @brief Reloads the user's profile data from the server.
@@ -198,15 +165,8 @@ FIR_SWIFT_NAME(User)
 - (void)reloadWithCompletion:(nullable FIRUserProfileChangeCallback)completion;
 
 /** @fn reauthenticateWithCredential:completion:
-    @brief Convenience method for @c reauthenticateAndRetrieveDataWithCredential:completion: This
-        method doesn't return additional identity provider data.
- */
-- (void)reauthenticateWithCredential:(FIRAuthCredential *)credential
-                          completion:(nullable FIRUserProfileChangeCallback)completion;
-
-/** @fn reauthenticateWithCredential:completion:
     @brief Renews the user's authentication tokens by validating a fresh set of credentials supplied
-        by the user  and returns additional identity provider data.
+        by the user.
 
     @param credential A user-supplied credential, which will be validated by the server. This can be
         a successful third-party identity provider sign-in, or an email address and password.
@@ -246,49 +206,21 @@ FIR_SWIFT_NAME(User)
     </ul>
     @remarks See @c FIRAuthErrors for a list of error codes that are common to all API methods.
  */
-- (void)reauthenticateAndRetrieveDataWithCredential:(FIRAuthCredential *) credential
-                                         completion:(nullable FIRAuthDataResultCallback) completion;
-
-/** @fn getIDTokenWithCompletion:
-    @brief Retrieves the Firebase authentication token, possibly refreshing it if it has expired.
-
-    @param completion Optionally; the block invoked when the token is available. Invoked
-        asynchronously on the main thread in the future.
-
-    @remarks See @c FIRAuthErrors for a list of error codes that are common to all API methods.
- */
-- (void)getIDTokenWithCompletion:(nullable FIRAuthTokenCallback)completion
-    FIR_SWIFT_NAME(getIDToken(completion:));
+- (void)reauthenticateWithCredential:(FIRAuthCredential *)credential
+                          completion:(nullable FIRUserProfileChangeCallback)completion;
 
 /** @fn getTokenWithCompletion:
-    @brief Please use @c getIDTokenWithCompletion: instead.
-
-    @param completion Optionally; the block invoked when the token is available. Invoked
-        asynchronously on the main thread in the future.
-
-    @remarks See @c FIRAuthErrors for a list of error codes that are common to all API methods.
- */
-- (void)getTokenWithCompletion:(nullable FIRAuthTokenCallback)completion
-    FIR_SWIFT_NAME(getToken(completion:)) __attribute__((deprecated));
-
-/** @fn getIDTokenForcingRefresh:completion:
     @brief Retrieves the Firebase authentication token, possibly refreshing it if it has expired.
 
-    @param forceRefresh Forces a token refresh. Useful if the token becomes invalid for some reason
-        other than an expiration.
     @param completion Optionally; the block invoked when the token is available. Invoked
         asynchronously on the main thread in the future.
 
-    @remarks The authentication token will be refreshed (by making a network request) if it has
-        expired, or if @c forceRefresh is YES.
-
     @remarks See @c FIRAuthErrors for a list of error codes that are common to all API methods.
  */
-- (void)getIDTokenForcingRefresh:(BOOL)forceRefresh
-                      completion:(nullable FIRAuthTokenCallback)completion;
+- (void)getTokenWithCompletion:(nullable FIRAuthTokenCallback)completion;
 
 /** @fn getTokenForcingRefresh:completion:
-    @brief Please use getIDTokenForcingRefresh:completion instead.
+    @brief Retrieves the Firebase authentication token, possibly refreshing it if it has expired.
 
     @param forceRefresh Forces a token refresh. Useful if the token becomes invalid for some reason
         other than an expiration.
@@ -301,19 +233,10 @@ FIR_SWIFT_NAME(User)
     @remarks See @c FIRAuthErrors for a list of error codes that are common to all API methods.
  */
 - (void)getTokenForcingRefresh:(BOOL)forceRefresh
-                    completion:(nullable FIRAuthTokenCallback)completion
-                        __attribute__((deprecated));
+                    completion:(nullable FIRAuthTokenCallback)completion;
 
 /** @fn linkWithCredential:completion:
-    @brief Convenience method for @c linkAndRetrieveDataWithCredential:completion: This method
-        doesn't return additional identity provider data.
- */
-- (void)linkWithCredential:(FIRAuthCredential *)credential
-                completion:(nullable FIRAuthResultCallback)completion;
-
-/** @fn linkAndRetrieveDataWithCredential:completion:
-    @brief Associates a user account from a third-party identity provider with this user and
-    returns additional identity provider data.
+    @brief Associates a user account from a third-party identity provider with this user.
 
     @param credential The credential for the identity provider.
     @param completion Optionally; the block invoked when the unlinking is complete, or fails.
@@ -339,8 +262,8 @@ FIR_SWIFT_NAME(User)
 
     @remarks See @c FIRAuthErrors for a list of error codes that are common to all FIRUser methods.
  */
-- (void)linkAndRetrieveDataWithCredential:(FIRAuthCredential *) credential
-                               completion:(nullable FIRAuthDataResultCallback) completion;
+- (void)linkWithCredential:(FIRAuthCredential *)credential
+                completion:(nullable FIRAuthResultCallback)completion;
 
 /** @fn unlinkFromProvider:completion:
     @brief Disassociates a user account from a third-party identity provider with this user.
@@ -417,7 +340,6 @@ FIR_SWIFT_NAME(User)
     @remarks Properties are marked as being part of a profile update when they are set. Setting a
         property value to nil is not the same as leaving the property unassigned.
  */
-FIR_SWIFT_NAME(UserProfileChangeRequest)
 @interface FIRUserProfileChangeRequest : NSObject
 
 /** @fn init

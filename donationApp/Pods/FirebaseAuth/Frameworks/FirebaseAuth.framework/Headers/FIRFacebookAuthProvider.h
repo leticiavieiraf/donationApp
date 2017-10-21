@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FIRAuthSwiftNameSupport.h"
-
 @class FIRAuthCredential;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,12 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
     @brief A string constant identifying the Facebook identity provider.
  */
-extern NSString *const FIRFacebookAuthProviderID FIR_SWIFT_NAME(FacebookAuthProviderID);
+extern NSString *const FIRFacebookAuthProviderID;
 
 /** @class FIRFacebookAuthProvider
     @brief Utility class for constructing Facebook credentials.
  */
-FIR_SWIFT_NAME(FacebookAuthProvider)
 @interface FIRFacebookAuthProvider : NSObject
 
 /** @fn credentialWithAccessToken:

@@ -2,8 +2,6 @@
 
 #import "FIRAnalytics.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 /**
  * Provides App Delegate handlers to be used in your App Delegate.
  *
@@ -31,14 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
  *     updated and a new snapshot can be taken.
  */
 + (void)handleEventsForBackgroundURLSession:(NSString *)identifier
-                          completionHandler:(nullable void (^)(void))completionHandler;
+                          completionHandler:(void (^)(void))completionHandler;
 
 /**
  * Handles the event when the app is launched by a URL.
  *
- * Call this method from [UIApplicationDelegate application:openURL:options:] &#40;on iOS 9.0 and
- * above&#41;, or [UIApplicationDelegate application:openURL:sourceApplication:annotation:] &#40;on
- * iOS 8.x and below&#41; in your app.
+ * Call this method from [UIApplicationDelegate application:openURL:options:] (on iOS 9.0 and
+ * above), or [UIApplicationDelegate application:openURL:sourceApplication:annotation:] (on iOS 8.x
+ * and below) in your app.
  *
  * @param url The URL resource to open. This resource can be a network resource or a file.
  */
@@ -57,6 +55,3 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)handleUserActivity:(id)userActivity;
 
 @end
-
-NS_ASSUME_NONNULL_END
-

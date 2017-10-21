@@ -1,0 +1,670 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E3305E21E72F6DE00F7DCA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E3305E11E72F6DE00F7DCA9 /* GoogleService-Info.plist */; };
+		8E3578A11E73279C0047D42C /* Institution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3578A01E73279C0047D42C /* Institution.swift */; };
+		8E62BC771E71DAF9004FE7F1 /* Donators.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E62BC761E71DAF9004FE7F1 /* Donators.storyboard */; };
+		8E62BC791E71DB0D004FE7F1 /* Institutions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E62BC781E71DB0D004FE7F1 /* Institutions.storyboard */; };
+		8E72BCBB1E76EB2100CB6CB4 /* DAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72BCBA1E76EB2100CB6CB4 /* DAButton.swift */; };
+		8E9DE4441E70AF4600A0449D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9DE4431E70AF4600A0449D /* AppDelegate.swift */; };
+		8E9DE4491E70AF4700A0449D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DE4471E70AF4700A0449D /* Main.storyboard */; };
+		8E9DE44B1E70AF4700A0449D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DE44A1E70AF4700A0449D /* Assets.xcassets */; };
+		8E9DE44E1E70AF4700A0449D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9DE44C1E70AF4700A0449D /* LaunchScreen.storyboard */; };
+		A41C92631EA149800078FE9A /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C92621EA149800078FE9A /* OrdersViewController.swift */; };
+		A41C92651EA14A830078FE9A /* DonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C92641EA14A830078FE9A /* DonationsViewController.swift */; };
+		A41C92671EA14AA60078FE9A /* MyOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C92661EA14AA60078FE9A /* MyOrdersViewController.swift */; };
+		A41C92691EA14AB40078FE9A /* NewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C92681EA14AB40078FE9A /* NewOrderViewController.swift */; };
+		A41C926B1EA14AF10078FE9A /* InstitutionProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C926A1EA14AF10078FE9A /* InstitutionProfileViewController.swift */; };
+		A41C926D1EA1618A0078FE9A /* LoginInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C926C1EA1618A0078FE9A /* LoginInstitutionViewController.swift */; };
+		A41C926F1EA18CE40078FE9A /* RegisterInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C926E1EA18CE40078FE9A /* RegisterInstitutionViewController.swift */; };
+		A41C92711EA1F0460078FE9A /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C92701EA1F0460078FE9A /* OrderItem.swift */; };
+		A42AC3E61E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42AC3E51E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift */; };
+		A4370F681EA2CF53000A20E5 /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4370F671EA2CF53000A20E5 /* ItemsTableViewCell.swift */; };
+		A45EAE721EA467EC00E33DBE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45EAE711EA467EC00E33DBE /* CryptoSwift.framework */; };
+		A45EAE741EA467F600E33DBE /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45EAE731EA467F600E33DBE /* SVProgressHUD.framework */; };
+		A46ABF371E70FC950066764C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46ABF361E70FC950066764C /* MainViewController.swift */; };
+		A4A1D4481E7448AE00349AF9 /* MyDonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */; };
+		A4A1D44A1E7448C600349AF9 /* NewDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */; };
+		A4A1D44C1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D44B1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift */; };
+		A4A1D44E1E74492600349AF9 /* DonatorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */; };
+		A4A1D4571E749FE800349AF9 /* DonationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4561E749FE800349AF9 /* DonationItem.swift */; };
+		A4A1D4591E74A00900349AF9 /* DonatorUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D4581E74A00900349AF9 /* DonatorUser.swift */; };
+		A4A1D45B1E74A02100349AF9 /* InstitutionUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */; };
+		A4A1D45E1E74B6B300349AF9 /* ItemSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */; };
+		A4FE74BE1F454188005F28C7 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FE74BD1F454188005F28C7 /* Helper.swift */; };
+		D42330E36DCE15B61119A381 /* Pods_donationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B78C679E15418255774C854 /* Pods_donationApp.framework */; };
+		F31A1D8F1F22871C00EE4FBF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */; };
+		F31A1D911F22A63F00EE4FBF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */; };
+		F326542A1F3271D400885F14 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32654291F3271D400885F14 /* Constants.swift */; };
+		F348F4D11F215E3F0049227E /* MyItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */; };
+		F3DE66181F47985600ABE64E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DE66171F47985600ABE64E /* UIViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2D31D09B8875ECBB09C657E0 /* Pods-donationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-donationApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-donationApp/Pods-donationApp.release.xcconfig"; sourceTree = "<group>"; };
+		3C8943B3B372EF8EECD134C9 /* Pods-donationApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-donationApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-donationApp/Pods-donationApp.debug.xcconfig"; sourceTree = "<group>"; };
+		6B78C679E15418255774C854 /* Pods_donationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_donationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E3305E11E72F6DE00F7DCA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8E3578A01E73279C0047D42C /* Institution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Institution.swift; sourceTree = "<group>"; };
+		8E62BC751E719F08004FE7F1 /* donationApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = donationApp.entitlements; sourceTree = "<group>"; };
+		8E62BC761E71DAF9004FE7F1 /* Donators.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Donators.storyboard; sourceTree = "<group>"; };
+		8E62BC781E71DB0D004FE7F1 /* Institutions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Institutions.storyboard; sourceTree = "<group>"; };
+		8E72BCBA1E76EB2100CB6CB4 /* DAButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAButton.swift; sourceTree = "<group>"; };
+		8E9DE4401E70AF4600A0449D /* donationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = donationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E9DE4431E70AF4600A0449D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8E9DE4481E70AF4700A0449D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8E9DE44A1E70AF4700A0449D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8E9DE44D1E70AF4700A0449D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8E9DE44F1E70AF4700A0449D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A41C92621EA149800078FE9A /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
+		A41C92641EA14A830078FE9A /* DonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationsViewController.swift; sourceTree = "<group>"; };
+		A41C92661EA14AA60078FE9A /* MyOrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyOrdersViewController.swift; sourceTree = "<group>"; };
+		A41C92681EA14AB40078FE9A /* NewOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOrderViewController.swift; sourceTree = "<group>"; };
+		A41C926A1EA14AF10078FE9A /* InstitutionProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionProfileViewController.swift; sourceTree = "<group>"; };
+		A41C926C1EA1618A0078FE9A /* LoginInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInstitutionViewController.swift; sourceTree = "<group>"; };
+		A41C926E1EA18CE40078FE9A /* RegisterInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInstitutionViewController.swift; sourceTree = "<group>"; };
+		A41C92701EA1F0460078FE9A /* OrderItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
+		A42AC3E51E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLD_DetailInstitutionViewController.swift; sourceTree = "<group>"; };
+		A4370F671EA2CF53000A20E5 /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
+		A45EAE711EA467EC00E33DBE /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/donationApp-dprygwyildkcdcbbxuwjsairrndr/Build/Products/Debug-iphonesimulator/CryptoSwift/CryptoSwift.framework"; sourceTree = "<group>"; };
+		A45EAE731EA467F600E33DBE /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = "Pods/../build/Debug-iphoneos/SVProgressHUD/SVProgressHUD.framework"; sourceTree = "<group>"; };
+		A46ABF361E70FC950066764C /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
+		A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDonationViewController.swift; sourceTree = "<group>"; };
+		A4A1D44B1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLD_InstitutionsViewController.swift; sourceTree = "<group>"; };
+		A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatorProfileViewController.swift; sourceTree = "<group>"; };
+		A4A1D4561E749FE800349AF9 /* DonationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationItem.swift; sourceTree = "<group>"; };
+		A4A1D4581E74A00900349AF9 /* DonatorUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatorUser.swift; sourceTree = "<group>"; };
+		A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstitutionUser.swift; sourceTree = "<group>"; };
+		A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionDelegate.swift; sourceTree = "<group>"; };
+		A4FE74BD1F454188005F28C7 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		F32654291F3271D400885F14 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyItemsTableViewCell.swift; sourceTree = "<group>"; };
+		F3DE66171F47985600ABE64E /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E9DE43D1E70AF4600A0449D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A45EAE741EA467F600E33DBE /* SVProgressHUD.framework in Frameworks */,
+				A45EAE721EA467EC00E33DBE /* CryptoSwift.framework in Frameworks */,
+				D42330E36DCE15B61119A381 /* Pods_donationApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E6CE25D1E7C2C4100443C10 /* Main - Login */ = {
+			isa = PBXGroup;
+			children = (
+				A46ABF361E70FC950066764C /* MainViewController.swift */,
+				A41C926C1EA1618A0078FE9A /* LoginInstitutionViewController.swift */,
+				A41C926E1EA18CE40078FE9A /* RegisterInstitutionViewController.swift */,
+			);
+			name = "Main - Login";
+			sourceTree = "<group>";
+		};
+		8E72BCB81E76EA9A00CB6CB4 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F3DE660F1F45FF7B00ABE64E /* Extensions */,
+				8E72BCB91E76EAA700CB6CB4 /* DAButton */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		8E72BCB91E76EAA700CB6CB4 /* DAButton */ = {
+			isa = PBXGroup;
+			children = (
+				8E72BCBA1E76EB2100CB6CB4 /* DAButton.swift */,
+			);
+			name = DAButton;
+			sourceTree = "<group>";
+		};
+		8E9DE4371E70AF4600A0449D = {
+			isa = PBXGroup;
+			children = (
+				8E9DE4421E70AF4600A0449D /* donationApp */,
+				8E9DE4411E70AF4600A0449D /* Products */,
+				C05A245FECEE3C037F4420C0 /* Pods */,
+				D3DB0CEE790B4FD6F255A4BE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8E9DE4411E70AF4600A0449D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E9DE4401E70AF4600A0449D /* donationApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E9DE4421E70AF4600A0449D /* donationApp */ = {
+			isa = PBXGroup;
+			children = (
+				8E62BC751E719F08004FE7F1 /* donationApp.entitlements */,
+				8E9DE44A1E70AF4700A0449D /* Assets.xcassets */,
+				8E72BCB81E76EA9A00CB6CB4 /* Components */,
+				A4FE74BC1F4540F7005F28C7 /* Utils */,
+				A46ABF351E70F6AA0066764C /* Storyboards */,
+				F348F4CD1F2014790049227E /* Cells */,
+				A46ABF331E70F6800066764C /* Models */,
+				A46ABF341E70F68A0066764C /* ViewControllers */,
+				A4A1D45C1E74B65300349AF9 /* Protocols */,
+				A4FE74BB1F45402F005F28C7 /* Supporting Files */,
+			);
+			path = donationApp;
+			sourceTree = "<group>";
+		};
+		A4370F661EA2CEF1000A20E5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F31A1D8E1F22871C00EE4FBF /* MapViewController.swift */,
+				F31A1D901F22A63F00EE4FBF /* DetailViewController.swift */,
+				A49D1B941F43F10C001BDBBE /* Garbage */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		A4370F691EA31007000A20E5 /* Institution */ = {
+			isa = PBXGroup;
+			children = (
+				8E3578A01E73279C0047D42C /* Institution.swift */,
+				A4A1D45A1E74A02100349AF9 /* InstitutionUser.swift */,
+				A41C92701EA1F0460078FE9A /* OrderItem.swift */,
+			);
+			name = Institution;
+			sourceTree = "<group>";
+		};
+		A4370F6A1EA31011000A20E5 /* Donator */ = {
+			isa = PBXGroup;
+			children = (
+				A4A1D4581E74A00900349AF9 /* DonatorUser.swift */,
+				A4A1D4561E749FE800349AF9 /* DonationItem.swift */,
+			);
+			name = Donator;
+			sourceTree = "<group>";
+		};
+		A46ABF331E70F6800066764C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A4370F6A1EA31011000A20E5 /* Donator */,
+				A4370F691EA31007000A20E5 /* Institution */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A46ABF341E70F68A0066764C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8E6CE25D1E7C2C4100443C10 /* Main - Login */,
+				A4A1D4501E74493A00349AF9 /* Donators */,
+				A4A1D44F1E74493600349AF9 /* Institutions */,
+				A4370F661EA2CEF1000A20E5 /* Common */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A46ABF351E70F6AA0066764C /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				8E9DE44C1E70AF4700A0449D /* LaunchScreen.storyboard */,
+				8E9DE4471E70AF4700A0449D /* Main.storyboard */,
+				8E62BC761E71DAF9004FE7F1 /* Donators.storyboard */,
+				8E62BC781E71DB0D004FE7F1 /* Institutions.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		A49D1B941F43F10C001BDBBE /* Garbage */ = {
+			isa = PBXGroup;
+			children = (
+				A4A1D44B1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift */,
+				A42AC3E51E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift */,
+			);
+			name = Garbage;
+			sourceTree = "<group>";
+		};
+		A4A1D44F1E74493600349AF9 /* Institutions */ = {
+			isa = PBXGroup;
+			children = (
+				A41C92641EA14A830078FE9A /* DonationsViewController.swift */,
+				A41C92661EA14AA60078FE9A /* MyOrdersViewController.swift */,
+				A41C92681EA14AB40078FE9A /* NewOrderViewController.swift */,
+				A41C926A1EA14AF10078FE9A /* InstitutionProfileViewController.swift */,
+			);
+			name = Institutions;
+			sourceTree = "<group>";
+		};
+		A4A1D4501E74493A00349AF9 /* Donators */ = {
+			isa = PBXGroup;
+			children = (
+				A41C92621EA149800078FE9A /* OrdersViewController.swift */,
+				A4A1D4471E7448AE00349AF9 /* MyDonationsViewController.swift */,
+				A4A1D4491E7448C600349AF9 /* NewDonationViewController.swift */,
+				A4A1D44D1E74492600349AF9 /* DonatorProfileViewController.swift */,
+			);
+			name = Donators;
+			sourceTree = "<group>";
+		};
+		A4A1D45C1E74B65300349AF9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A4A1D45D1E74B6B300349AF9 /* ItemSelectionDelegate.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		A4FE74BB1F45402F005F28C7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E9DE4431E70AF4600A0449D /* AppDelegate.swift */,
+				8E9DE44F1E70AF4700A0449D /* Info.plist */,
+				8E3305E11E72F6DE00F7DCA9 /* GoogleService-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A4FE74BC1F4540F7005F28C7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A4FE74BD1F454188005F28C7 /* Helper.swift */,
+				F32654291F3271D400885F14 /* Constants.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		C05A245FECEE3C037F4420C0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3C8943B3B372EF8EECD134C9 /* Pods-donationApp.debug.xcconfig */,
+				2D31D09B8875ECBB09C657E0 /* Pods-donationApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D3DB0CEE790B4FD6F255A4BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A45EAE731EA467F600E33DBE /* SVProgressHUD.framework */,
+				A45EAE711EA467EC00E33DBE /* CryptoSwift.framework */,
+				6B78C679E15418255774C854 /* Pods_donationApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F348F4CD1F2014790049227E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A4370F671EA2CF53000A20E5 /* ItemsTableViewCell.swift */,
+				F348F4D01F215E3F0049227E /* MyItemsTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		F3DE660F1F45FF7B00ABE64E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F3DE66171F47985600ABE64E /* UIViewController.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E9DE43F1E70AF4600A0449D /* donationApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E9DE4521E70AF4700A0449D /* Build configuration list for PBXNativeTarget "donationApp" */;
+			buildPhases = (
+				1307CA33A660462508B5BC5A /* [CP] Check Pods Manifest.lock */,
+				8E9DE43C1E70AF4600A0449D /* Sources */,
+				8E9DE43D1E70AF4600A0449D /* Frameworks */,
+				8E9DE43E1E70AF4600A0449D /* Resources */,
+				DFB5ADDD2DF89A0FAB1C7B2B /* [CP] Embed Pods Frameworks */,
+				38EDFE1BA481093EA07C6843 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = donationApp;
+			productName = donationApp;
+			productReference = 8E9DE4401E70AF4600A0449D /* donationApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E9DE4381E70AF4600A0449D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = PUC;
+				TargetAttributes = {
+					8E9DE43F1E70AF4600A0449D = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = X3L9YG9572;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 8E9DE43B1E70AF4600A0449D /* Build configuration list for PBXProject "donationApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8E9DE4371E70AF4600A0449D;
+			productRefGroup = 8E9DE4411E70AF4600A0449D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E9DE43F1E70AF4600A0449D /* donationApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E9DE43E1E70AF4600A0449D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E62BC791E71DB0D004FE7F1 /* Institutions.storyboard in Resources */,
+				8E62BC771E71DAF9004FE7F1 /* Donators.storyboard in Resources */,
+				8E9DE44E1E70AF4700A0449D /* LaunchScreen.storyboard in Resources */,
+				8E9DE44B1E70AF4700A0449D /* Assets.xcassets in Resources */,
+				8E9DE4491E70AF4700A0449D /* Main.storyboard in Resources */,
+				8E3305E21E72F6DE00F7DCA9 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1307CA33A660462508B5BC5A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		38EDFE1BA481093EA07C6843 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-donationApp/Pods-donationApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DFB5ADDD2DF89A0FAB1C7B2B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-donationApp/Pods-donationApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E9DE43C1E70AF4600A0449D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3DE66181F47985600ABE64E /* UIViewController.swift in Sources */,
+				8E3578A11E73279C0047D42C /* Institution.swift in Sources */,
+				A46ABF371E70FC950066764C /* MainViewController.swift in Sources */,
+				A41C92711EA1F0460078FE9A /* OrderItem.swift in Sources */,
+				A4A1D45B1E74A02100349AF9 /* InstitutionUser.swift in Sources */,
+				A41C926B1EA14AF10078FE9A /* InstitutionProfileViewController.swift in Sources */,
+				A4FE74BE1F454188005F28C7 /* Helper.swift in Sources */,
+				A4A1D4481E7448AE00349AF9 /* MyDonationsViewController.swift in Sources */,
+				A4A1D44A1E7448C600349AF9 /* NewDonationViewController.swift in Sources */,
+				F31A1D8F1F22871C00EE4FBF /* MapViewController.swift in Sources */,
+				A4A1D45E1E74B6B300349AF9 /* ItemSelectionDelegate.swift in Sources */,
+				8E72BCBB1E76EB2100CB6CB4 /* DAButton.swift in Sources */,
+				A41C92691EA14AB40078FE9A /* NewOrderViewController.swift in Sources */,
+				A4A1D44C1E7448EA00349AF9 /* OLD_InstitutionsViewController.swift in Sources */,
+				F31A1D911F22A63F00EE4FBF /* DetailViewController.swift in Sources */,
+				A4A1D4591E74A00900349AF9 /* DonatorUser.swift in Sources */,
+				A41C92631EA149800078FE9A /* OrdersViewController.swift in Sources */,
+				8E9DE4441E70AF4600A0449D /* AppDelegate.swift in Sources */,
+				F348F4D11F215E3F0049227E /* MyItemsTableViewCell.swift in Sources */,
+				A41C92671EA14AA60078FE9A /* MyOrdersViewController.swift in Sources */,
+				A4A1D4571E749FE800349AF9 /* DonationItem.swift in Sources */,
+				A41C926D1EA1618A0078FE9A /* LoginInstitutionViewController.swift in Sources */,
+				A41C926F1EA18CE40078FE9A /* RegisterInstitutionViewController.swift in Sources */,
+				A4370F681EA2CF53000A20E5 /* ItemsTableViewCell.swift in Sources */,
+				A41C92651EA14A830078FE9A /* DonationsViewController.swift in Sources */,
+				A42AC3E61E7792FA00E4B512 /* OLD_DetailInstitutionViewController.swift in Sources */,
+				A4A1D44E1E74492600349AF9 /* DonatorProfileViewController.swift in Sources */,
+				F326542A1F3271D400885F14 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8E9DE4471E70AF4700A0449D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E9DE4481E70AF4700A0449D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8E9DE44C1E70AF4700A0449D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E9DE44D1E70AF4700A0449D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8E9DE4501E70AF4700A0449D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8E9DE4511E70AF4700A0449D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8E9DE4531E70AF4700A0449D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C8943B3B372EF8EECD134C9 /* Pods-donationApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = donationApp/donationApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = X3L9YG9572;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SVProgressHUD",
+				);
+				INFOPLIST_FILE = donationApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pucminas.donationApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8E9DE4541E70AF4700A0449D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D31D09B8875ECBB09C657E0 /* Pods-donationApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = donationApp/donationApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = X3L9YG9572;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SVProgressHUD",
+				);
+				INFOPLIST_FILE = donationApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pucminas.donationApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E9DE43B1E70AF4600A0449D /* Build configuration list for PBXProject "donationApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9DE4501E70AF4700A0449D /* Debug */,
+				8E9DE4511E70AF4700A0449D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E9DE4521E70AF4700A0449D /* Build configuration list for PBXNativeTarget "donationApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9DE4531E70AF4700A0449D /* Debug */,
+				8E9DE4541E70AF4700A0449D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E9DE4381E70AF4600A0449D /* Project object */;
+}

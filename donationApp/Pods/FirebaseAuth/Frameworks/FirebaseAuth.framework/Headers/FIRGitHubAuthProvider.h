@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FIRAuthSwiftNameSupport.h"
-
 @class FIRAuthCredential;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,12 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
     @brief A string constant identifying the GitHub identity provider.
  */
-extern NSString *const FIRGitHubAuthProviderID FIR_SWIFT_NAME(GitHubAuthProviderID);
+extern NSString *const FIRGitHubAuthProviderID;
 
 /** @class FIRGitHubAuthProvider
     @brief Utility class for constructing GitHub credentials.
  */
-FIR_SWIFT_NAME(GitHubAuthProvider)
 @interface FIRGitHubAuthProvider : NSObject
 
 /** @fn credentialWithToken:

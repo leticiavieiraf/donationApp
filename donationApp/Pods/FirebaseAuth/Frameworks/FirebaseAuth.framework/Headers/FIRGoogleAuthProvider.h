@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FIRAuthSwiftNameSupport.h"
-
 @class FIRAuthCredential;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,12 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
     @brief A string constant identifying the Google identity provider.
  */
-extern NSString *const FIRGoogleAuthProviderID FIR_SWIFT_NAME(GoogleAuthProviderID);
+extern NSString *const FIRGoogleAuthProviderID;
 
 /** @class FIRGoogleAuthProvider
     @brief Utility class for constructing Google Sign In credentials.
  */
-FIR_SWIFT_NAME(GoogleAuthProvider)
 @interface FIRGoogleAuthProvider : NSObject
 
 /** @fn credentialWithIDToken:accessToken:
