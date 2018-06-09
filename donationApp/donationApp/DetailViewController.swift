@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
 import SVProgressHUD
 
 class DetailViewController: UIViewController, UITableViewDataSource {

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 import SVProgressHUD
 import CryptoSwift
 import Locksmith
@@ -66,7 +67,7 @@ class RegisterInstitutionViewController: UIViewController {
         let saltAndPassword = salt + self.passwordField.text!
         password_sha256 = sha256SaltHash(saltAndPassword, salt: salt)
         
-        Auth.auth().createUser(withEmail: self.emailField.text!, password: password_sha256) { (user, error) in
+        Auth.auth().createUser(withEmail: self.emailField.text!, password: password_sha256) { (authResult, error) in
             
             var title = ""
             var msg = ""
@@ -80,13 +81,13 @@ class RegisterInstitutionViewController: UIViewController {
             }
             
             //Success
-            if let user = user {
+            if let authResult = authResult {
                 print("Firebase: Register successfull")
                 title = ""
                 msg = "Cadastro realizado com sucesso!"
                 
                 // Insere usuário no banco de dados do Firebase
-                self.insertRegisteredUser(institution, uid:user.uid)
+                self.insertRegisteredUser(institution, uid: authResult.user.uid)
             }
             
             self.showAlert(title: title, message: msg, handler: { () in

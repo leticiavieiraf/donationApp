@@ -12,7 +12,7 @@ target 'donationApp' do
   pod 'R.swift'
   pod 'FacebookCore'
   pod 'FacebookLogin'
-  pod 'SwiftyUtils'
+  #pod 'SwiftyUtils'
   pod 'ReachabilitySwift', '~> 3'
   pod 'Firebase'
   pod 'Firebase/Core'
